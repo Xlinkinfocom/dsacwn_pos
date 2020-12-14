@@ -16,7 +16,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/dashboard', 'HomeController@dashboard');
 });
-
+Route::get('register/seller', 'Auth\RegisterController@sellerRegistrationForm')->name('seller_register');
 Route::group(['middleware' => ['auth', 'active']], function() {
 
 	Route::get('/', 'HomeController@index');

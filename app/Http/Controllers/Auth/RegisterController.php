@@ -83,4 +83,16 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sellerRegistrationForm()
+    {
+        $lims_role_list = \App\Roles::where('is_active',true)->get();
+        $lims_biller_list = \App\Biller::where('is_active',true)->get();
+        $lims_warehouse_list = \App\Warehouse::where('is_active',true)->get();
+        return view('register_seller', compact('lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
+    }
 }
