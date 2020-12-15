@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\Rule;
 
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 class RegisterController extends Controller
 {
     /*
@@ -84,6 +88,28 @@ class RegisterController extends Controller
         ]);
     }
      /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function createSeller(array $data)
+    {
+        //return $data;
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'company_name' => $data['company_name'],
+            'role_id' => $data['role_id'],
+           // 'biller_id' => $data['biller_id'],
+            //'warehouse_id' => $data['warehouse_id'],
+            'is_active' => false,
+            'is_deleted' => false,
+            'password' => bcrypt($data['password']),
+        ]);
+    }
+     /**
      * Show the application registration form.
      *
      * @return \Illuminate\Http\Response
@@ -94,5 +120,23 @@ class RegisterController extends Controller
         $lims_biller_list = \App\Biller::where('is_active',true)->get();
         $lims_warehouse_list = \App\Warehouse::where('is_active',true)->get();
         return view('register_seller', compact('lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
+    }
+
+     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function registerSeller(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 }

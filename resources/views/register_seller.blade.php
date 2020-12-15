@@ -54,7 +54,7 @@
         <div class="form-outer text-center d-flex align-items-center">
           <div class="form-inner">
             <div class="logo"><span>{{$general_setting->site_title}}</span></div>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('registerSeller') }}">
                 @csrf
               <div class="form-group-material">
                 <input id="register-username" type="text" name="name" required class="input-material">
