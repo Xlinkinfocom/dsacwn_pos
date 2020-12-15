@@ -91,20 +91,20 @@
                   @endforeach
                 </select>
               </div>
-              <div class="form-group-material" id="biller-id">
+              {{-- <div class="form-group-material" id="biller-id">
                 <select name="biller_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller*...">
                   @foreach($lims_biller_list as $biller)
                       <option value="{{$biller->id}}">{{$biller->name}} ({{$biller->phone_number}})</option>
                   @endforeach
                 </select>
-              </div>
-              <div class="form-group-material" id="warehouse-id">
+              </div> --}}
+              {{-- <div class="form-group-material" id="warehouse-id">
                 <select name="warehouse_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse*...">
                   @foreach($lims_warehouse_list as $warehouse)
                       <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                   @endforeach
                 </select>
-              </div>
+              </div> --}}
               <div class="form-group-material">
                 <input id="password" type="password" class="input-material" name="password" required>
                 <label for="passowrd" class="label-material">{{trans('file.Password')}} *</label>
