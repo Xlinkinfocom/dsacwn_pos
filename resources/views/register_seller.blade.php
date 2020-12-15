@@ -86,7 +86,7 @@
                 <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                   @foreach($lims_role_list as $role)
                   @if ($role->name =="Seller")
-                      <option value="{{$role->id}}">{{$role->name}}</option>
+                      <option selected value="{{$role->id}}">{{$role->name}}</option>
                    @endif
                   @endforeach
                 </select>
