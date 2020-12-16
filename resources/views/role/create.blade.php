@@ -28,8 +28,8 @@
             <tbody>
                 @foreach($lims_role_all as $key=>$role)
                 <tr>
-                    <td>{{$key}}{{$role_cred}}</td>
-                    <td>{{ $role->name }}</td>
+                    <td>{{$key}}</td>
+                    <td>{{ $role->name }}{{$role_cred}}</td>
                     <td>{{ $role->description }}</td>
                     <td>
                         <div class="btn-group">
