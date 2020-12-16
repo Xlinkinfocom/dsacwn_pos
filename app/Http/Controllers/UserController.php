@@ -22,6 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $role = Role::find(Auth::user()->role_id);
+        print_r($role); exit;
         if($role->hasPermissionTo('users-index')){
             $permissions = Role::findByName($role->name)->permissions;
             foreach ($permissions as $permission)

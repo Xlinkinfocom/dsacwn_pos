@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{trans('file.UserName')}} 0ii00</th>
+                    <th>{{trans('file.UserName')}}</th>
                     <th>{{trans('file.Email')}}</th>
                     <th>{{trans('file.Company Name')}}</th>
                     <th>{{trans('file.Phone Number')}}</th>
