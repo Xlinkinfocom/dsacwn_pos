@@ -1,4 +1,4 @@
-<h1>Sale Details</h1>
+<h1>Sale Details 1111</h1>
 <p><strong>Reference: </strong>{{$reference_no}}</p>
 <p>
 	<strong>Sale Status: 1</strong>
