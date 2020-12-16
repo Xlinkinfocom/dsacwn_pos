@@ -458,6 +458,10 @@
               <li id="user-create-menu"><a href="{{route('user.create')}}">{{trans('file.Add User')}}</a></li>
               @endif
               @endif
+
+              <li id="seller-list-menu"><a href="{{route('seller.index')}}">{{trans('file.Seller List')}}</a></li>
+              <li id="seller-create-menu"><a href="{{route('seller.create')}}">{{trans('file.Add Seller')}}</a></li>
+
               <?php
               $index_permission = DB::table('permissions')->where('name', 'customers-index')->first();
               $index_permission_active = DB::table('role_has_permissions')->where([

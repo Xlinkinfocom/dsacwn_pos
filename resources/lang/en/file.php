@@ -270,6 +270,8 @@ return [
 	'Add User' => 'Add User',
 	'Customer List' => 'Customer List',
 	'Add Customer' => 'Add Customer',
+	'Seller List' => 'Seller List',
+	'Add Seller' => 'Add Seller',
 	'Biller List' => 'Biller List',
 	'Add Biller' => 'Add Biller',
 	'Supplier List' => 'Supplier List',
