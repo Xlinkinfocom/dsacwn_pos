@@ -146,6 +146,6 @@ class RegisterController extends Controller
      */
     public function showSuperLoginForm()
     {
-        return view('auth.login');
+        return view('auth.supperAdminLogin');
     }
 }
