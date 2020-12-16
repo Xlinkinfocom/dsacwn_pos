@@ -27,7 +27,7 @@ class UserController extends Controller
             $permissions = Role::findByName($role->name)->permissions;
             foreach ($permissions as $permission)
                 $all_permission[] = $permission->name;
-            $lims_user_list = User::where('is_deleted', false)->where('is_superadmin', 0)->where('role_id','<>', 7)->get();
+            $lims_user_list = User::where('is_deleted', false)->where('is_supersdmin', 0)->where('role_id','<>', 7)->get();
             return view('user.index', compact('lims_user_list', 'all_permission'));
         }
         else
