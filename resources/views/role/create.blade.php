@@ -27,9 +27,10 @@
             </thead>
             <tbody>
                 @foreach($lims_role_all as $key=>$role)
+                @if($role_cred['name']=="Super Admin" && $role->name=="Super Admin")
                 <tr>
                     <td>{{$key}}</td>
-                    <td>{{ $role->name }}{{$role_cred['name']}}</td>
+                    <td>{{ $role->name}}</td>
                     <td>{{ $role->description }}</td>
                     <td>
                         <div class="btn-group">
@@ -57,6 +58,39 @@
                         </div>
                     </td>
                 </tr>
+                @else
+                <tr>
+                    <td>{{$key}}</td>
+                    <td>{{ $role->name}}</td>
+                    <td>{{ $role->description }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{trans('file.action')}}
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                <li>
+                                    <button type="button" data-id="{{$role->id}}" class="open-EditroleDialog btn btn-link" data-toggle="modal" data-target="#editModal"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}
+                                </button>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ route('role.permission', ['id' => $role->id]) }}" class="btn btn-link"><i class="dripicons-lock-open"></i> {{trans('file.Change Permission')}}</a>
+                                </li>
+                                @if($role->id > 2)
+                                {{ Form::open(['route' => ['role.destroy', $role->id], 'method' => 'DELETE'] ) }}
+                                <li>
+                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
+                                </li>
+                                {{ Form::close() }}
+                                @endif
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                @endif
+               
                 @endforeach
             </tbody>
         </table>
