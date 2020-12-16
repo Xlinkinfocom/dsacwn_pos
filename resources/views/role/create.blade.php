@@ -27,7 +27,8 @@
             </thead>
             <tbody>
                 @foreach($lims_role_all as $key=>$role)
-                @if($role_cred['name']=="Super Admin" && $role->name=="Super Admin")
+                @if($role->name=="Super Admin")
+                  @if($role_cred['name']=="Super Admin")
                 <tr>
                     <td>{{$key}}</td>
                     <td>{{ $role->name}}</td>
@@ -58,6 +59,7 @@
                         </div>
                     </td>
                 </tr>
+                @endif
                 @else
                 <tr>
                     <td>{{$key}}</td>
