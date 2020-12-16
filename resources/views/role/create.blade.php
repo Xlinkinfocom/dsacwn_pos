@@ -15,6 +15,7 @@
     <div class="container-fluid">
         <a href="#" data-toggle="modal" data-target="#createModal" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('file.Add Role')}} </a>
     </div>
+    adadadffffsddsd
     <div class="table-responsive">
         <table id="role-table" class="table table-hover">
             <thead>
