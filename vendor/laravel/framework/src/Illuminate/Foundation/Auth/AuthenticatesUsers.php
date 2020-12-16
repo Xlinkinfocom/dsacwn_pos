@@ -75,6 +75,8 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+
+        print_r(  $this->credentials($request), $request->filled('remember')); exit;
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
