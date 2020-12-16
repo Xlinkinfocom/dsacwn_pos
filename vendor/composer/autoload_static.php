@@ -514,7 +514,6 @@ class ComposerStaticInit518c4a18248cb2f43e7c768e2e95516a
         'App\\Http\\Controllers\\TransferController' => __DIR__ . '/../..' . '/app/Http/Controllers/TransferController.php',
         'App\\Http\\Controllers\\UnitController' => __DIR__ . '/../..' . '/app/Http/Controllers/UnitController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
-        'App\\Http\\Controllers\\SellerController' => __DIR__. '/../..' . '/app/Http/Controllers/SellerController.php',
         'App\\Http\\Controllers\\VariantController' => __DIR__ . '/../..' . '/app/Http/Controllers/VariantController.php',
         'App\\Http\\Controllers\\WarehouseController' => __DIR__ . '/../..' . '/app/Http/Controllers/WarehouseController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
