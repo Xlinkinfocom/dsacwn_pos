@@ -57,7 +57,7 @@
             @if(session()->has('delete_message'))
             <div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ session()->get('delete_message') }}</div> 
             @endif
-            <form method="POST" action="{{ route('login') }}" id="login-form">
+            <form method="POST" action="{{ route('superadminlogin') }}" id="login-form">
               @csrf
               <div class="form-group-material">
                 <input id="login-username" type="text" name="name" required class="input-material" value="">
