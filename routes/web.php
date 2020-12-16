@@ -17,6 +17,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/dashboard', 'HomeController@dashboard');
 });
 Route::get('register/seller', 'Auth\RegisterController@sellerRegistrationForm')->name('seller_register');
+Route::get('super/admin/login', 'Auth\RegisterController@showSuperLoginForm')->name('showSuperLoginForm');
+
 
 Route::post('register/seller', 'Auth\RegisterController@registerSeller')->name('registerSeller');
 Route::group(['middleware' => ['auth', 'active']], function() {

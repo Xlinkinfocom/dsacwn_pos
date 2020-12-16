@@ -139,4 +139,13 @@ class RegisterController extends Controller
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
+      /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showSuperLoginForm()
+    {
+        return view('auth.login');
+    }
 }
