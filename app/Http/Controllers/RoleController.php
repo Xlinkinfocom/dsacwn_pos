@@ -16,7 +16,7 @@ class RoleController extends Controller
     {
         $role_cred = Role::find(Auth::user()->role_id);
         $lims_role_all = Roles::where('is_active', true)->get();
-        return view('role.create', compact('lims_role_all,role_cred'));
+        return view('role.create', compact('lims_role_all','role_cred'));
     }
 
     
