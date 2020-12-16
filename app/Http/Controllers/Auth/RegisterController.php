@@ -106,6 +106,7 @@ class RegisterController extends Controller
             //'warehouse_id' => $data['warehouse_id'],
             'is_active' => false,
             'is_deleted' => false,
+            'seller_url'=>strtolower(preg_replace('/\s+/', '', $data['name'])),
             'password' => bcrypt($data['password']),
         ]);
     }
