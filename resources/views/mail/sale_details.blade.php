@@ -1,7 +1,7 @@
 <h1>Sale Details</h1>
 <p><strong>Reference: </strong>{{$reference_no}}</p>
 <p>
-	<strong>Sale Status: </strong>
+	<strong>Sale Status 1212: </strong>
 	@if($sale_status==1){{'Completed'}}
 	@elseif($sale_status==2){{'Pending'}}
 	@endif
