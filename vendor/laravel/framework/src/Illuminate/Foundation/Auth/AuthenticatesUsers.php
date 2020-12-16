@@ -76,9 +76,11 @@ trait AuthenticatesUsers
     protected function attemptLogin(Request $request)
     {
 
-        print_r(  $this->credentials($request)); exit;
+      
+        $data=  $this->credentials($request);
+        $data['is_supersdmin']=0;
         return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $data, $request->filled('remember')
         );
     }
 
