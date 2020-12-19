@@ -84,6 +84,11 @@ class SellerController extends Controller
         else
             return redirect('customer')->with('create_message', $message);
     }
+    public function generatePassword()
+    {
+        $id = Keygen::numeric(6)->generate();
+        return $id;
+    }
 
     public function edit($id)
     {
