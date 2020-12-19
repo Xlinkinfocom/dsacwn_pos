@@ -107,21 +107,34 @@ class SellerController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(!env('USER_VERIFIED'))
+            return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
+
         $this->validate($request, [
-            'phone_number' => [
+            'name' => [
                 'max:255',
-                    Rule::unique('customers')->ignore($id)->where(function ($query) {
-                    return $query->where('is_active', 1);
+                Rule::unique('users')->ignore($id)->where(function ($query) {
+                    return $query->where('is_deleted', false);
+                }),
+            ],
+            'email' => [
+                'email',
+                'max:255',
+                    Rule::unique('users')->ignore($id)->where(function ($query) {
+                    return $query->where('is_deleted', false);
                 }),
             ],
         ]);
 
-        $input = $request->all();
-        $lims_customer_data = Customer::find($id);
-        $lims_customer_data->update($input);
-        return redirect('customer')->with('edit_message', 'Data updated Successfully');
+        $input = $request->except('password');
+        if(!isset($input['is_active']))
+            $input['is_active'] = false;
+        if(!empty($request['password']))
+            $input['password'] = bcrypt($request['password']);
+        $lims_user_data = User::find($id);
+        $lims_user_data->update($input);
+        return redirect('seller')->with('message2', 'Data updated successfullly');
     }
-
     public function importCustomer(Request $request)
     {
         $role = Role::find(Auth::user()->role_id);
