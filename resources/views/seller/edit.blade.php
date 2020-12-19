@@ -20,9 +20,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Account Type')}} *</strong> </label>
+                                        <span>
                                         <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="business">&nbsp; Business &nbsp;&nbsp;
                                         <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="personal">&nbsp;Personal
-                                
+                                        </span>
                                         @if($errors->has('account_type'))
                                        <span>
                                            <strong>{{ $errors->first('account_type') }}</strong>
