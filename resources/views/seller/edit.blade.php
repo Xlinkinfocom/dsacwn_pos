@@ -104,17 +104,57 @@
                                           <option value="153">District One</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" id="zipcode-id">
-                                        <label><strong>{{trans('file.Zip/Postal Code')}}</strong></label>
-                                        <input type="hidden" name="zipcode_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="zipcode" id="zipcode" class="selectpicker form-control" data-live-search="true" 
-                                        data-live-search-style="begins" title="Select Zip/Postal Code...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">ZipCode One</option>
-                                        </select>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
+                                        <input type="text" name="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Citizen Number')}} </strong> </label>
+                                        <input type="text" name="citizennumber" required class="form-control" placeholder="Citizen Number" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.PAN Number')}} </strong> </label>
+                                        <input type="text" name="panno" required class="form-control" placeholder="PAN Number" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Vat Number')}} </strong> </label>
+                                        <input type="text" name="vatno" required class="form-control" placeholder="Vat Number" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.CST/GST Number')}} </strong> </label>
+                                        <input type="text" name="gstno" required class="form-control" placeholder="CST/GST Number" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.BANK ACCOUNT NAME')}} </strong> </label>
+                                        <input type="text" name="bankaccountname" required class="form-control" placeholder="BANK ACCOUNT NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.BANK NAME')}} </strong> </label>
+                                        <input type="text" name="bankname" required class="form-control" placeholder="BANK NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.ACCOUNT NUMBER')}} </strong> </label>
+                                        <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                  
+                                    
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
+                                        <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+
+
+
+
+
+
+
+
 
                                     <div class="form-group">
                                         @if($lims_user_data->is_active)
@@ -166,12 +206,12 @@
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" class="sameaddress"></label>                                     
-                                        <input type="text" name="baddress1" id="baddress1" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
                                     </div>
                                    
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BILLING ADDRESS 2')}} </strong></label>                                     
-                                        <input type="text" name="baddress2" id="baddress2" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="baddress2" id="baddress2" placeholder="Address Line 2" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
                                     </div>
                                     
                                 <div class="form-group" id="bcountry-id">
@@ -326,40 +366,7 @@
                         
                         <div class="row">
                             <div class="col-md-6"> 
-                                                                            <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">Citizen Number</span></div> 
-                                        <input class="form-control" type="text" name="citizennumber" value="" placeholder="" required=""> 
-                                    </div>
                                     <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">PAN Number</span></div> 
-                                        <input class="form-control" type="text" name="panno" id="panno" value="" placeholder="" required=""> 
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">Vat Number</span></div> 
-                                        <input class="form-control" type="text" name="vatno" value="" placeholder="" required=""> 
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">CST/GST Number</span></div> 
-                                        <input class="form-control" type="text" name="gstno" value="" placeholder="" required=""> 
-                                    </div> 
-                                 
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">BANK ACCOUNT NAME</span></div> 
-                                    <input class="form-control" type="text" name="bankaccountname" value="" placeholder="" required=""> 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">BANK NAME</span></div> 
-                                    <input class="form-control" type="text" name="bankname" id="bankname" value="" placeholder="" required=""> 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">ACCOUNT NUMBER </span></div> 
-                                    <input class="form-control" type="text" name="accountnumber" id="accountnumber" value="" placeholder="" required=""> 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">BRANCH NAME</span></div> 
-                                    <input class="form-control" type="text" name="branchname" value="" placeholder="" required=""> 
-                                </div>  
-                                <div class="input-group mb-3">
                                     <div class="input-group-prepend"><span class="input-group-text" id="">Status</span></div> 
                                     <select name="status" class="form-control ">
                                           <option value="1">Enable</option>
