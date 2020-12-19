@@ -541,7 +541,7 @@ class SaleController extends Controller
         {
             foreach ($sales as $key=>$sale)
             {
-                print_r($sale); exit;
+              //  print_r($sale); exit;
                 $nestedData['id'] = $sale->id;
                 $nestedData['key'] = $key;
                 $nestedData['date'] = date(config('date_format'), strtotime($sale->created_at->toDateString()));

@@ -31,7 +31,7 @@ class SellerController extends Controller
             foreach ($permissions as $permission)
                 $all_permission[] = $permission->name;
             $lims_user_list = User::where('is_deleted', false)->where('is_supersdmin', 0)->where('role_id', 7)->get();
-            return view('user.index', compact('lims_user_list', 'all_permission'));
+            return view('seller.index', compact('lims_user_list', 'all_permission'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

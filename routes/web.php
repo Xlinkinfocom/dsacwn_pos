@@ -287,6 +287,13 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('my-transactions/{year}/{month}', 'HomeController@myTransaction');
 
+	
+	Route::get('seller/profile/{id}', 'SellerController@profile')->name('seller.profile');
+	Route::put('seller/update_profile/{id}', 'SellerController@profileUpdate')->name('seller.profileUpdate');
+	Route::put('seller/changepass/{id}', 'SellerController@changePassword')->name('seller.password');
+	Route::get('seller/genpass', 'SellerController@generatePassword');
+	Route::post('seller/deletebyselection', 'SellerController@deleteBySelection');
+	
 	Route::resource('seller', 'SellerController');
 });
 
