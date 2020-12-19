@@ -73,6 +73,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="">
+                                        <label><strong>{{trans('file.Business Name')}}</strong></label>
+                                         <input type="text" name="business_name" class="form-control" value="{{--{{$lims_user_data->business_name}}--}}"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Seller Name')}}</strong></label>
+                                        <input type="text" name="seller_name" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                    </div> 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Company Name')}}</strong></label>
                                         <input type="text" name="company_name" class="form-control" value="{{$lims_user_data->company_name}}">
@@ -118,14 +126,9 @@
           
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Account Type</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </div>
+                              
                                 
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Seller Name</span></div>
-                                    <input type="text" name="suppliername" id="suppliername" value="" class="form-control" placeholder="Seller Name">
-                                </div> 
+                                
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend"><span class="input-group-text" id="">Email Id</span></div>
                                     <input type="text" name="emailid" id="emailid" value="" class="form-control" placeholder="Email Id">
@@ -146,10 +149,7 @@
                                 </div> 
                             </div> 
                             <div class="col-md-6">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Business Name</span></div>
-                                    <input type="text" name="brandname" id="brandname" value="" class="form-control" placeholder="Business Name">
-                                </div>  
+                               
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend"><span class="input-group-text" id="">Commission</span></div>
                                     <input type="text" name="commission" id="commission" value="" class="form-control" placeholder="Commission">
