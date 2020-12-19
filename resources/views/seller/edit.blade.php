@@ -73,7 +73,7 @@
                                           @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group" id="biller-id">
+                                    {{-- <div class="form-group" id="biller-id">
                                         <label><strong>{{trans('file.Biller')}} *</strong></label>
                                         <input type="hidden" name="biller_id_hidden" value="{{$lims_user_data->biller_id}}">
                                         <select name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
@@ -81,8 +81,8 @@
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach
                                         </select>
-                                    </div>
-                                    <div class="form-group" id="warehouseId">
+                                    </div> --}}
+                                    {{-- <div class="form-group" id="warehouseId">
                                         <label><strong>{{trans('file.Warehouse')}} *</strong></label>
                                         <input type="hidden" name="warehouse_id_hidden" value="{{$lims_user_data->warehouse_id}}">
                                         <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
@@ -90,7 +90,7 @@
                                               <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                                           @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>                              
                             </div>
                         {!! Form::close() !!}

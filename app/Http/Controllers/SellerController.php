@@ -91,8 +91,9 @@ class SellerController extends Controller
         if($role->hasPermissionTo('users-edit')){
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->get();
-            $lims_biller_list = Biller::where('is_active', true)->get();
-            $lims_warehouse_list = Warehouse::where('is_active', true)->get();
+        //    $lims_biller_list = Biller::where('is_active', true)->get();
+          //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
+            //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
             return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
         }
         else
