@@ -104,7 +104,7 @@
                                           <option value="153">District One</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" id="district-id">
+                                    <div class="form-group" id="zipcode-id">
                                         <label><strong>{{trans('file.Zip/Postal Code')}}</strong></label>
                                         <input type="hidden" name="zipcode_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="zipcode" id="zipcode" class="selectpicker form-control" data-live-search="true" 
@@ -115,6 +115,7 @@
                                           <option value="153">ZipCode One</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         @if($lims_user_data->is_active)
                                         <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
@@ -162,7 +163,66 @@
                                         <option value="Rollo Travels">Rollo Travels</option> 
                                         </select>
                                     </div>
-                                
+
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" class="sameaddress"></label>                                     
+                                        <input type="text" name="baddress1" id="baddress1" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.BILLING ADDRESS 2')}} </strong></label>                                     
+                                        <input type="text" name="baddress2" id="baddress2" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                    </div>
+                                    
+                                <div class="form-group" id="bcountry-id">
+                                        <label><strong>{{trans('file.Country')}}</strong></label>
+                                        <input type="hidden" name="bcountry_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="bcountry" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select country...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">Nepal</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="bstate-id">
+                                        <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                        <input type="hidden" name="bstate_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="bstate" id="bstate" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select state/province...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">State One</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="bdistrict-id">
+                                        <label><strong>{{trans('file.District')}}</strong></label>
+                                        <input type="hidden" name="bdistrict_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="bdistrict" id="bdistrict" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select district...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">District One</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="bzipcode-id">
+                                        <label><strong>{{trans('file.Zip/Postal Code')}}</strong></label>
+                                        <input type="hidden" name="bzipcode_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="bzipcode" id="bzipcode" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Zip/Postal Code...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">ZipCode One</option>
+                                        </select>
+                                    </div>
+                                    
+
+
+
+
                                     {{-- <div class="form-group" id="biller-id">
                                         <label><strong>{{trans('file.Biller')}} *</strong></label>
                                         <input type="hidden" name="biller_id_hidden" value="{{$lims_user_data->biller_id}}">
@@ -218,23 +278,11 @@
                                
                             </div>
                             <div class="col-md-6" style="padding-left:0px;padding-right:0px;">
-                                <label class="container-checkbox">Billing Address (Same as Pick Address) 
-                                    <input type="checkbox" name="add" class="sameaddress">
+                                <label class="container-checkbox">Billing Address  
+                                   
                                     <span class="checkmark"></span>
                                 </label>
                                 <br>
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">BILLING ADDRESS 1</span></div>  
-                                        <input type="text" class="form-control" name="baddress1" id="baddress1" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">BILLING ADDRESS 2</span></div>  
-                                        <input type="text" class="form-control" name="baddress2" id="baddress2" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div> 
                                 <br>
                                 <div class="col-md-12"> 
                                     <div class="input-group mb-3">
