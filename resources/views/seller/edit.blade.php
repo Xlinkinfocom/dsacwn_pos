@@ -63,9 +63,58 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
-                                        <input type="text" name="address1" required class="form-control" placeholder="Address 1" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
-                                   
+
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Address Line 2')}} *</strong> </label>
+                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+
+                                    <div class="form-group" id="country-id">
+                                        <label><strong>{{trans('file.Country')}}</strong></label>
+                                        <input type="hidden" name="country_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="country" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select country...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">Nepal</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="state-id">
+                                        <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                        <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select state/province...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">State One</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="district-id">
+                                        <label><strong>{{trans('file.District')}}</strong></label>
+                                        <input type="hidden" name="district_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="district" id="district" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select district...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">District One</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="district-id">
+                                        <label><strong>{{trans('file.Zip/Postal Code')}}</strong></label>
+                                        <input type="hidden" name="zipcode_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="zipcode" id="zipcode" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Zip/Postal Code...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="153">ZipCode One</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         @if($lims_user_data->is_active)
                                         <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
@@ -100,7 +149,7 @@
                                           @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group" id="biller-id">
+                                    <div class="form-group" id="areaofinterest-id">
                                         <label><strong>{{trans('file.Business area of interest')}}</strong></label>
                                         <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
                                         <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
@@ -166,57 +215,7 @@
                         <div class="row"> 
                             <div class="col-md-6" style="padding-left:0px;padding-right:0px;"> 
                                 <div class="col-md-12"> <p style="font-size: 18px;text-align: left;">&nbsp;</p> </div>
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">ADDRESS 1</span></div>  
-                                        <input type="text" class="form-control" name="address1" id="address1" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">ADDRESS 2</span></div>  
-                                        <input type="text" class="form-control" name="address2" id="address2" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div>
-                                
-                                <br>
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">Country</span></div>  
-                                        <select id="country" name="country" class="form-control country"> 
-                                            <optgroup label="Please select state"> 
-                                                 
-                                                <option value="">Select</option>
-                                                                                                        <option value="153">Nepal</option>
-                                                                                                    </optgroup> 
-                                        </select>  
-                                    </div> 
-                                </div>  
-                                <div class="col-md-12"> 
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">State/Province</span></div>  
-                                        <select id="state" name="state" class="form-control state"> 
-                                            <optgroup label="Please select state"> 
-                                                                                                    </optgroup> 
-                                        </select>  
-                                    </div> 
-                                </div> 
-                                <div class="col-md-12"> 
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">District</span></div>  
-                                        <select id="city" name="city" class="form-control city"> 
-                                            <optgroup label="Please select city"> 
-                                                                                                </optgroup> 
-                                        </select>   
-                                    </div> 
-                                </div> 
-                                 
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Zip/Postal Code</span></div>  
-                                    <input type="text" class="form-control" name="zipcode" id="zipcode" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div> 
+                               
                             </div>
                             <div class="col-md-6" style="padding-left:0px;padding-right:0px;">
                                 <label class="container-checkbox">Billing Address (Same as Pick Address) 
