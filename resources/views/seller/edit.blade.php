@@ -20,7 +20,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Account Type')}} *</strong> </label>
-                                        <span>
+                                        <span style="display: block">
                                         <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="business">&nbsp; Business &nbsp;&nbsp;
                                         <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="personal">&nbsp;Personal
                                         </span>
@@ -62,6 +62,11 @@
                                         <input type="text" name="phone" required class="form-control" value="{{$lims_user_data->phone}}">
                                     </div>
                                     <div class="form-group">
+                                        <label><strong>{{trans('file.Address')}} *</strong> </label>
+                                        <input type="text" name="address1" required class="form-control" placeholder="Address 1" value="{{--{{$lims_user_data->name}} --}}">
+                                    </div>
+                                   
+                                    <div class="form-group">
                                         @if($lims_user_data->is_active)
                                         <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
                                         @else
@@ -95,6 +100,20 @@
                                           @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group" id="biller-id">
+                                        <label><strong>{{trans('file.Business area of interest')}}</strong></label>
+                                        <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
+                                        <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Business area of interest...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}
+                                          <option value="Wholesale Selling to Rollo">Wholesale Selling to Rollo</option>
+                                        <option value="Rollo Marketplace">Rollo Marketplace</option>
+                                        <option value="Rollo Travels">Rollo Travels</option> 
+                                        </select>
+                                    </div>
+                                
                                     {{-- <div class="form-group" id="biller-id">
                                         <label><strong>{{trans('file.Biller')}} *</strong></label>
                                         <input type="hidden" name="biller_id_hidden" value="{{$lims_user_data->biller_id}}">
@@ -130,41 +149,15 @@
                               
                                 
                                 
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Email Id</span></div>
-                                    <input type="text" name="emailid" id="emailid" value="" class="form-control" placeholder="Email Id">
-                                </div>  
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Mobile No</span></div>
-                                    <input type="text" name="phone" id="phone" value="" class="form-control" placeholder="Mobile No">
-                                </div>  
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Password</span></div>
-                                    <input type="text" name="password" id="password" value="" class="form-control" placeholder="Password">
-                                </div>  
                                 
                                  
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Address</span></div>
-                                    <input type="text" name="address1" id="address1" value="" class="form-control" placeholder="Address 1">
-                                </div> 
+                               
                             </div> 
                             <div class="col-md-6">
                                
+                               
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Commission</span></div>
-                                    <input type="text" name="commission" id="commission" value="" class="form-control" placeholder="Commission">
-                                </div> 
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Business area of interest</span></div> 
-                                    <select id="areaofinterest" name="areaofinterest" class="form-control"> 
-                                        <optgroup>
-                                        <option value="">Please Select</option>
-                                        <option value="Wholesale Selling to Rollo">Wholesale Selling to Rollo</option>
-                                        <option value="Rollo Marketplace">Rollo Marketplace</option>
-                                        <option value="Rollo Travels">Rollo Travels</option> 
-                                        </optgroup> 
-                                    </select>
+                                   
                                 </div> 
                           
                             </div>
