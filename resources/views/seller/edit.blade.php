@@ -13,9 +13,22 @@
                     </div>{!! Form::open(['route' => ['seller.update', $lims_user_data->id], 'method' => 'put', 'files' => true]) !!}
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
-                        
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="account_type" id="account_type" value="">
+                       
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Account Type')}} *</strong> </label>
+                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="business">&nbsp; Business &nbsp;&nbsp;
+                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="personal">&nbsp;Personal
+                                
+                                        @if($errors->has('account_type'))
+                                       <span>
+                                           <strong>{{ $errors->first('account_type') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.UserName')}} *</strong> </label>
                                         <input type="text" name="name" required class="form-control" value="{{$lims_user_data->name}}">
@@ -96,8 +109,6 @@
                         
                     </div>
                     <div class="card-body"> 
-                        <input type="hidden" name="id" value="">
-                        <input type="hidden" name="account_type" id="account_type" value="">
                         <div class="col-md-3"> 
                             <span id="message"> </span>
                         </div>
@@ -109,9 +120,7 @@
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend"><span class="input-group-text" id="">Account Type</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="business">&nbsp; Business &nbsp;&nbsp;
-                                    <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="personal">&nbsp;Personal
-                                </div>
+                                    </div>
                                 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend"><span class="input-group-text" id="">Seller Name</span></div>

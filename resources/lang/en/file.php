@@ -549,6 +549,8 @@ return [
 	"From Account" => "From Account",
 	"To Account" => "To Account",
 	"Update Money Transfer" => "Update Money Transfer",
+
+	"Account Type"=>"Account Type",
 	
 ];
 ?>
