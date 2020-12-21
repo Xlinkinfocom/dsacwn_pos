@@ -301,75 +301,9 @@
                         </div>
                         <div class="clearfix"></div>
           
-                        <div class="row">
-                            <div class="col-md-6">
-                              
-                                
-                                
-                                
-                                 
-                               
-                            </div> 
-                            <div class="col-md-6">
-                               
-                               
-                                <div class="input-group mb-3">
-                                   
-                                </div> 
-                          
-                            </div>
-                        </div>
+                       
                      
-                        <div class="row"> 
-                            <div class="col-md-6" style="padding-left:0px;padding-right:0px;"> 
-                                <div class="col-md-12"> <p style="font-size: 18px;text-align: left;">&nbsp;</p> </div>
-                               
-                            </div>
-                            <div class="col-md-6" style="padding-left:0px;padding-right:0px;">
-                                <label class="container-checkbox">Billing Address  
-                                   
-                                    <span class="checkmark"></span>
-                                </label>
-                                <br>
-                                <br>
-                                <div class="col-md-12"> 
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">Country</span></div>  
-                                        <select id="bcountry" name="bcountry" class="form-control bcountry"> 
-                                            <optgroup label="Please select state"> 
-                                                 
-                                                <option value="">Select</option>
-                                                                                                        <option value="153">Nepal</option>
-                                                                                                    </optgroup> 
-                                        </select>  
-                                    </div> 
-                                </div>  
-                                <div class="col-md-12"> 
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">State/Province</span></div>  
-                                    <select id="bstate" name="bstate" class="form-control bstate"> 
-                                        <optgroup label="Please select state"> 
-                                                                                            </optgroup> 
-                                    </select>  
-                                    </div>  
-                                </div>  
-                                <div class="col-md-12">
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">District</span></div>  
-                                    <select id="bcity" name="bcity" class="form-control bcity"> 
-                                        <optgroup label="Please select city"> 
-                                                                                        </optgroup> 
-                                    </select>  
-                                    </div>  
-                                </div> 
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Zip/Postal Code </span></div>  
-                                    <input type="text" class="form-control" name="bzipcode" id="bzipcode" value="" placeholder="" required=""> 
-                                    </div> 
-                                </div>
-                            </div>
-                        </div> 
+                       
                                      
                         
                         <div class="row">
