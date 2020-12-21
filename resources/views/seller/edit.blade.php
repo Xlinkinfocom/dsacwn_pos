@@ -255,21 +255,34 @@
                                           <option value="153">District One</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" id="bzipcode-id">
-                                        <label><strong>{{trans('file.Zip/Postal Code')}}</strong></label>
-                                        <input type="hidden" name="bzipcode_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="bzipcode" id="bzipcode" class="selectpicker form-control" data-live-search="true" 
-                                        data-live-search-style="begins" title="Select Zip/Postal Code...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">ZipCode One</option>
-                                        </select>
+                                  
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Zip/Postal Code')}} </strong></label>                                     
+                                        <input type="text" name="bzipcode" id="bzipcode" placeholder="Zip/Postal Code" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
                                     </div>
-                                    
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
+                                        <input class="form-control" type="file" name="panno_image[]" placeholder="">  
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Upload Citizenship')}} </strong></label>                                     
+                                        <input class="form-control" type="file" name="citizenship_document" placeholder="">  
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Upload Passport Size Photo')}} </strong></label>                                     
+                                        <input class="form-control" type="file" name="passportsizephoto" placeholder="">  
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Upload GST')}} </strong></label>                                     
+                                        <input class="form-control" type="file" name="gst_document" placeholder="">  
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.UPLOAD CANCELLED CHEQUE')}} </strong></label>                                     
+                                        <input class="form-control" type="file" name="check_image" placeholder="">  
+                                    </div>
 
                                     {{-- <div class="form-group" id="biller-id">
                                         <label><strong>{{trans('file.Biller')}} *</strong></label>
@@ -291,61 +304,7 @@
                                     </div> --}}
                                 </div>                              
                             </div>
-                        
-                    </div>
-                    <div class="card-body"> 
-                        <div class="col-md-3"> 
-                            <span id="message"> </span>
                         </div>
-                        <div class="col-md-9"> 
-                        </div>
-                        <div class="clearfix"></div>
-          
-                       
-                     
-                       
-                                     
-                        
-                        <div class="row">
-                          
-                            <div class="col-md-6">
-                                                                        
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id=""> Upload Outlet Logo</span></div> 
-                                        <input class="form-control" type="file" name="outlet_logo" placeholder=""> 
-                                    </div>
-                                                                                <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id="">Upload PAN Card</span></div>  
-                                        <input class="form-control" type="file" name="panno_image[]" placeholder="">  
-                                    </div>
-                                    
-                                    
-                                                                                
-                                    
-                                                                                                                                                                                                                                    
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id=""> Upload Citizenship</span></div> 
-                                        <input class="form-control" type="file" name="citizenship_document" placeholder="">  
-                                    </div>
-                                                                                <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id=""> Upload Passport Size Photo</span></div> 
-                                        <input class="form-control" type="file" name="passportsizephoto" placeholder="">  
-                                    </div>
-                                                                                <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id=""> Upload GST</span></div> 
-                                        <input class="form-control" type="file" name="gst_document" placeholder="">  
-                                    </div> 
-                                                                                                                            
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend"><span class="input-group-text" id=""> UPLOAD CANCELLED CHEQUE </span></div> 
-                                        <input class="form-control" type="file" name="check_image" placeholder="">  
-                                    </div> 
-                                                                        </div>  
-                        </div> 
-                        
-                        
-                        <button type="submit" class="seller btn w-sm mb-1 btn-success" style="float: right; margin-right: 12px;">SAVE</button>
-                    </div> 
                     {!! Form::close() !!}
                 </div>
             </div>
