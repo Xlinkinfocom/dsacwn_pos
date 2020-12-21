@@ -296,6 +296,6 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	
 	Route::resource('seller', 'SellerController');
 
-	Route::resource('seller', 'PackageController.php');
+	Route::resource('package', 'PackageController');
 });
 
