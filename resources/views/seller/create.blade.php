@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.UserName')}} *</strong> </label>
-                                        <input type="text" name="name" required class="form-control" value="{{$lims_user_data->name}}">
+                                        <input type="text" name="name" required class="form-control" value="">
                                         @if($errors->has('name'))
                                        <span>
                                            <strong>{{ $errors->first('name') }}</strong>
@@ -49,7 +49,8 @@
                                     </div>
                                     <div class="form-group mt-3">
                                         <label><strong>{{trans('file.Email')}} *</strong></label>
-                                        <input type="email" name="email" placeholder="example@example.com" required class="form-control" value="{{$lims_user_data->email}}">
+                                        <input type="email" name="email" placeholder="example@example.com" required class="form-control" 
+                                        value="">
                                         @if($errors->has('email'))
                                        <span>
                                            <strong>{{ $errors->first('email') }}</strong>
@@ -58,7 +59,7 @@
                                     </div>
                                     <div class="form-group mt-3">
                                         <label><strong>{{trans('file.Phone Number')}} *</strong></label>
-                                        <input type="text" name="phone" required class="form-control" value="{{$lims_user_data->phone}}">
+                                        <input type="text" name="phone" required class="form-control" value="">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
@@ -145,19 +146,12 @@
                                         <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
                                     <div class="form-group">
-                                        @if($lims_user_data->is_active)
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1" checked>
-                                        @else
+                                       
                                         <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1">
-                                        @endif
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
-                                    <div class="form-group">
-                                        @if($lims_user_data->is_active)
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
-                                        @else
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1">
-                                        @endif
+                                    <div class="form-group">                                        
+                                        <input class="mt-2" type="checkbox" name="is_active" value="1" >                                       
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
                                     <div class="form-group">
@@ -175,11 +169,11 @@
                                     </div> 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Company Name')}}</strong></label>
-                                        <input type="text" name="company_name" class="form-control" value="{{$lims_user_data->company_name}}">
+                                        <input type="text" name="company_name" class="form-control" value="">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Role')}} *</strong></label>
-                                        <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
+                                        <input type="hidden" name="role_id_hidden" value="">
                                         <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                                           @foreach($lims_role_list as $role)
                                               <option value="{{$role->id}}">{{$role->name}}</option>
@@ -188,7 +182,7 @@
                                     </div>
                                     <div class="form-group" id="areaofinterest-id">
                                         <label><strong>{{trans('file.Business area of interest')}}</strong></label>
-                                        <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
+                                        <input type="hidden" name="areaofinterest_hidden" value="">
                                         <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Business area of interest...">
                                           {{-- @foreach($lims_biller_list as $biller)
