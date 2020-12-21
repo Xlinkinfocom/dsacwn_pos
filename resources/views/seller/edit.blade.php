@@ -150,10 +150,18 @@
 
 
 
+                                   
 
 
 
-
+                                    <div class="form-group">
+                                        @if($lims_user_data->is_active)
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1" checked>
+                                        @else
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1">
+                                        @endif
+                                        <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
+                                    </div>
 
 
                                     <div class="form-group">
