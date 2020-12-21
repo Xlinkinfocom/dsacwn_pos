@@ -63,7 +63,7 @@ class PackageController extends Controller
     {
         try {
             $credit_package = CreditPackageMst::findOrFail($id);
-            return view('package.index',compact('credit_package'));
+            return view('package.edit',compact('credit_package'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }

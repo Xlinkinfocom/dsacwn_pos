@@ -28,7 +28,7 @@
                             <td>{{$credit_package->face_value}}</td>
                             <th>{{$credit_package->cost}}</th>
                             <td>
-                                <a href="{{ route('package.index', $credit_package->credit_package_id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
+                                <a href="{{ route('package.edit', $credit_package->credit_package_id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
                                 {{-- <form action="{{ route('admin.credit.destroy', $credit_package->credit_package_id) }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE">
