@@ -11,7 +11,7 @@
 
 			<h5 style="margin-bottom: 2em;">Update Credit Package</h5>
 
-            <form class="form-horizontal" action="{{route('admin.credit.update', $credit_package->credit_package_id )}}" method="POST" enctype="multipart/form-data" role="form">
+            <form class="form-horizontal" action="{{route('package.update', $credit_package->credit_package_id )}}" method="POST" enctype="multipart/form-data" role="form">
             	{{csrf_field()}}
             	<input type="hidden" name="_method" value="PATCH">
 				<div class="form-group row">
