@@ -8,9 +8,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h4>{{trans('file.Add Customer')}}</h4>
+                        <h4>{{trans('file.Add Seller')}}</h4>
                     </div>
-                    {!! Form::open(['route' => 'customer.store', 'method' => 'post', 'files' => true]) !!}                    
+                    {!! Form::open(['route' => 'seller.store', 'method' => 'post', 'files' => true]) !!}                    
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         <input type="hidden" name="id" value="">
