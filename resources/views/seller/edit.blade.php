@@ -373,27 +373,7 @@
                                      
                         
                         <div class="row">
-                            <div class="col-md-6"> 
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text" id="">Status</span></div> 
-                                    <select name="status" class="form-control ">
-                                          <option value="1">Enable</option>
-                                        <option value="0">Disable</option> 
-                                    </select>
-                                </div> 
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="">Show on fashion outlet</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="checkbox" style="margin-top: 5px;" class="show_on_fashion_outlet" name="show_on_fashion_outlet" value="1">&nbsp;   &nbsp;&nbsp; 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="">Lock Account</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="checkbox" style="margin-top: 5px;" class="is_lock" name="is_lock" value="1">&nbsp;   &nbsp;&nbsp; 
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="">Verify Kyc</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="checkbox" style="margin-top: 5px;" class="is_kyc_verified" name="is_kyc_verified" value="1">&nbsp;   &nbsp;&nbsp; 
-                                </div>
-                            </div>  
+                          
                             <div class="col-md-6">
                                                                         
                                     <div class="input-group mb-3">
