@@ -295,5 +295,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('seller/deletebyselection', 'SellerController@deleteBySelection');
 	
 	Route::resource('seller', 'SellerController');
+
+	Route::resource('seller', 'PackageController.php');
 });
 
