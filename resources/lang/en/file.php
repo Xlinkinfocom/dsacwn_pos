@@ -551,6 +551,33 @@ return [
 	"Update Money Transfer" => "Update Money Transfer",
 
 	"Account Type"=>"Account Type",
+	"Verify Kyc"=>"Verify Kyc",
+	"BRANCH NAME"=>"BRANCH NAME",
+	"ACCOUNT NUMBER"=>"ACCOUNT NUMBER",
+
+	"BANK NAME"=>"BANK NAME",
+	"BANK ACCOUNT NAME"=>"BANK ACCOUNT NAME",
+	"CST/GST Number"=>"CST/GST Number",
+	"Vat Number"=>"Vat Number",
+	"PAN Number"=>"PAN Number",
+	"Citizen Number"=>"Citizen Number",
+	"Zip/Postal Code"=>"Zip/Postal Code",
+	"District"=>"District",
+	"State/Province"=>"State/Province",
+
+	"Address Line 2"=>"Address Line 2",
+	"Business Name"=>"Business Name",
+	"Seller Name"=>"Seller Name",
+	"Business area of interest"=>"Business area of interest",
+	"BILLING ADDRESS"=>"BILLING ADDRESS",
+
+	"BILLING ADDRESS 2"=>"BILLING ADDRESS 2",
+	"Upload PAN Card"=>"Upload PAN Card",
+	"Upload Citizenship"=>"Upload Citizenship",
+	"Upload Passport Size Photo"=>"Upload Passport Size Photo",
+
+	"Upload GST"=>"Upload GST",
+	"UPLOAD CANCELLED CHEQUE"=>"UPLOAD CANCELLED CHEQUE",
 	
 ];
 ?>

@@ -67,7 +67,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Address Line 2')}} *</strong> </label>
+                                        <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
                                         <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
 
