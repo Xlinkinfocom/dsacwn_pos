@@ -40,9 +40,11 @@ class SellerController extends Controller
     public function create()
     {
         $role = Role::find(Auth::user()->role_id);
-        if($role->hasPermissionTo('customers-add')){
-            $lims_customer_group_all = CustomerGroup::where('is_active',true)->get();
-            return view('customer.create', compact('lims_customer_group_all'));
+        if($role->hasPermissionTo('users-add')){
+            $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
+            //$lims_biller_list = Biller::where('is_active', true)->get();
+            //$lims_warehouse_list = Warehouse::where('is_active', true)->get();
+            return view('seller.create', compact('lims_role_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
