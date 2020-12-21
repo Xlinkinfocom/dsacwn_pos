@@ -7,7 +7,7 @@
 <div class="content-area py-1">
     <div class="container-fluid">
     	<div class="box box-block bg-white">
-    	    <a href="{{ route('admin.credit.index') }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> Back</a>
+    	    <a href="{{ route('credit.index') }}" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> Back</a>
 
 			<h5 style="margin-bottom: 2em;">Update Credit Package</h5>
 
@@ -39,7 +39,7 @@
 					<label for="zipcode" class="col-xs-2 col-form-label"></label>
 					<div class="col-xs-10">
 						<button type="submit" class="btn btn-primary">Update Credit Package</button>
-						<a href="{{route('admin.credit.index')}}" class="btn btn-default">Cancel</a>
+						<a href="{{route('credit.index')}}" class="btn btn-default">Cancel</a>
 					</div>
 				</div>
 			</form>

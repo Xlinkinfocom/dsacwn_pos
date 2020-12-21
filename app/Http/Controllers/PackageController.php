@@ -96,7 +96,7 @@ class PackageController extends Controller
                     'face_value'            => $request->no_of_credit,
                     'cost'                  => $request->price,
                 ]);
-            return redirect()->route('admin.credit.index')->with('flash_success', 'Credit Package Updated Successfully');    
+            return redirect()->route('credit.index')->with('flash_success', 'Credit Package Updated Successfully');    
         } 
 
         catch (Exception $e) {
