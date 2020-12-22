@@ -64,7 +64,7 @@
             </div>
         {{-- @endif --}}
         <div class="table-responsive">
-            <table id="user-table" class="table">
+            <table id="user-table" class="table sale-list dataTable">
                 <thead>
                     <tr>
                        
