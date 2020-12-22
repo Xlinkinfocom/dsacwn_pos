@@ -67,7 +67,7 @@
             <table id="user-table" class="table">
                 <thead>
                     <tr>
-                        <th class="not-exported"></th>
+                       
                         <th>S.No</th>
                         <th>Name</th>
                         <th>Description</th>
