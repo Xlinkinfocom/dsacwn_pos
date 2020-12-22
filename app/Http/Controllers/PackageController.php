@@ -135,7 +135,7 @@ class PackageController extends Controller
                     'description'            => $request->description,
                     'cost'                  => $request->no_of_credit,
                 ]);
-            return redirect()->route('package.index')->with('flash_success', 'Credit Package Updated Successfully');    
+            return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Updated Successfully');    
         } 
 
         catch (Exception $e) {
@@ -153,6 +153,8 @@ class PackageController extends Controller
     public function destroy(Request $request, $id)
     {
         //
+        CreditPackageMst::where('credit_package_id',$id)->delete();
+        return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
         echo $id; exit;
     }
 }
