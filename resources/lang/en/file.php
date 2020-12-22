@@ -585,7 +585,8 @@ return [
 	"Add Plan"=>"Add Plan",
 	"Manage Subscription"=>"Manage Subscription",
 	"Add Subscription Plan"=>"Add Subscription Plan",
-	"Subscription List"=>"Subscription List"
+	"Subscription List"=>"Subscription List",
+	"Subscription Add"=>"Subscription Add"
 	
 ];
 ?>
