@@ -7,6 +7,8 @@ use App\CustomerGroup;
 use App\Customer;
 use App\Deposit;
 use App\User;
+use App\State;
+use App\District;
 use Illuminate\Validation\Rule;
 use Auth;
 use Spatie\Permission\Models\Role;
@@ -19,6 +21,7 @@ use App\Biller;
 use App\Warehouse;
 use Hash;
 use Keygen;
+
 
 class SellerController extends Controller
 {
@@ -44,7 +47,10 @@ class SellerController extends Controller
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             //$lims_biller_list = Biller::where('is_active', true)->get();
             //$lims_warehouse_list = Warehouse::where('is_active', true)->get();
-            return view('seller.create', compact('lims_role_list'));
+
+            $states = State::select('id', 'name')->orderBy('name')->get();
+
+            return view('seller.create', compact('lims_role_list', 'states'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

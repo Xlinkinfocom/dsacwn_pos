@@ -86,11 +86,10 @@
                                         <label><strong>{{trans('file.State/Province')}}</strong></label>
                                         <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
-                                        data-live-search-style="begins" title="Select state/province...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">State One</option>
+                                        data-live-search-style="begins" title="Select state/province...">                                       
+                                          @foreach($states as $state)
+                                              <option value="{{$state->id}}">{{$state->name}}</option>
+                                          @endforeach                                          
                                         </select>
                                     </div>
                                     <div class="form-group" id="district-id">
