@@ -153,5 +153,6 @@ class PackageController extends Controller
     public function destroy($id)
     {
         //
+        echo $id;
     }
 }
