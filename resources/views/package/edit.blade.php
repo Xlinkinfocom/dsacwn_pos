@@ -36,20 +36,13 @@
                                         @endif
                                     </div>                                         
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Email')}} *</strong></label>
-                                        <input type="text" value="{{ $credit_package->name }}" name="name" id="name" placeholder="Name" required class="form-control">
-                                        @if($errors->has('email'))
+                                        <label><strong>{{trans('file.Plan Value Per Month')}} *</strong></label>
+                                        <input type="text" value="{{ $credit_package->face_value  }}" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
+                                        @if($errors->has('no_of_credit'))
                                        <span>
-                                           <strong>{{ $errors->first('email') }}</strong>
+                                           <strong>{{ $errors->first('no_of_credit') }}</strong>
                                         </span>
                                         @endif
-                                        <div class="form-group row">
-                                            <label for="no_of_credit" class="col-xs-2 col-form-label">No. of Credit</label>
-                                            <div class="col-xs-10">
-                                                <input class="form-control" type="text" value="{{ $credit_package->face_value }}" name="no_of_credit"  id="no_of_credit" placeholder="No. of Credit">
-                                            </div>
-                                        </div>
-
                                     </div>
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>

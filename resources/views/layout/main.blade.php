@@ -400,16 +400,7 @@
             <ul id="subscription" class="collapse list-unstyled ">
               @if($index_permission_active)
               <li id="subscription-list-menu"><a href="{{route('package.index')}}">{{trans('file.Subscription List')}}</a></li>
-              <li><a id="add-account" href="">{{trans('file.Add Subscription')}}</a></li>
-              @endif
-              @if($money_transfer_permission_active)
-              <li id="money-transfer-menu"><a href="{{route('money-transfers.index')}}">{{trans('file.Money Transfer')}}</a></li>
-              @endif
-              @if($balance_sheet_permission_active)
-              <li id="balance-sheet-menu"><a href="{{route('accounts.balancesheet')}}">{{trans('file.Balance Sheet')}}</a></li>
-              @endif
-              @if($account_statement_permission_active)
-              <li id="account-statement-menu"><a id="account-statement" href="">{{trans('file.Account Statement')}}</a></li>
+              <li id="subscription-list-menu"><a href="{{route('package.create')}}">{{trans('file.Subscription Add')}}</a></li>
               @endif
             </ul>
           </li>
