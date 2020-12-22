@@ -82,7 +82,7 @@
                             <td>{{$index + 1}}</td>
                             <td>{{$credit_package->name}}</td>
                             <td>{{$credit_package->description}}</td>
-                            <th>{{$credit_package->cost}}</th>
+                            <td>{{$credit_package->cost}}</td>
                         @if($credit_package->is_active)
                         <td><div class="badge badge-success">Active</div></td>
                         @else
