@@ -68,7 +68,7 @@ class PackageController extends Controller
             $credit_package->description= $request->description;
             $credit_package->face_value= $request->no_of_credit;
             $credit_package->cost= $request->no_of_credit;
-            $credit_package->credit_package_log_id= $request->credit_package_log_id;
+            $credit_package->credit_package_log_id= $credit_package_log->credit_package_log_id;
             $credit_package->save();
             return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Create Successfully');    
         } 
