@@ -580,7 +580,9 @@ return [
 	"UPLOAD CANCELLED CHEQUE"=>"UPLOAD CANCELLED CHEQUE",
 	"Plan Value Per Month"=>"Plan Value Per Month",
 	"Plan Description"=>"Plan Description",
-	"Plan Name"=>"Plan Name"
+	"Plan Name"=>"Plan Name",
+	"Edit Subscription Plan"=>"Edit Subscription Plan",
+	"Add Plan"=>"Add Plan"
 	
 ];
 ?>
