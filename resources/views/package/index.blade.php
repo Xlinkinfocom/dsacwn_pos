@@ -15,7 +15,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name</th>
-                            <th>No. of Credit</th>
+                            <th>Description</th>
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
@@ -25,7 +25,7 @@
                         <tr>
                             <td>{{$index + 1}}</td>
                             <td>{{$credit_package->name}}</td>
-                            <td>{{$credit_package->face_value}}</td>
+                            <td>{{$credit_package->description}}</td>
                             <th>{{$credit_package->cost}}</th>
                             <td>
                                 <a href="{{ route('package.edit', $credit_package->credit_package_id) }}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
