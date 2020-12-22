@@ -297,5 +297,6 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::resource('seller', 'SellerController');
 
 	Route::resource('package', 'PackageController');
+	Route::post('package/update/{id}', 'PackageController@update')->name('package.update');
 });
 
