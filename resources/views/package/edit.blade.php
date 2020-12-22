@@ -47,7 +47,7 @@
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>
                                         <div class="col-xs-10">
-                                            <button type="submit" class="btn btn-primary">Update Credit Package</button>
+                                            <button type="submit" class="btn btn-primary">Update Subscription Plan</button>
                                             <a href="{{route('package.index')}}" class="btn btn-default">Cancel</a>
                                         </div>
                                     </div>
