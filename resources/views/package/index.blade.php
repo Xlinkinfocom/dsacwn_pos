@@ -107,7 +107,7 @@
                                         <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
                                     </li>
                                     {{ Form::close() }}
-                                    @endif
+                                    {{-- @endif --}}
                                 </ul>
                             </div>
                         </td>
