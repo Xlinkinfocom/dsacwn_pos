@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Plan Name')}} *</strong> </label>
-										<input type="text" value="{{ $credit_package->name }}" name="name" id="name" placeholder="Name" required class="form-control">
+										<input type="text" value="" name="name" id="name" placeholder="Name" required class="form-control">
 										@if($errors->has('name'))
                                        <span>
                                            <strong>{{ $errors->first('name') }}</strong>
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Plan Description')}} *</strong> </label>
-										<input type="text" value="{{ $credit_package->description }}" name="description" id="description" placeholder="Plan Description" required class="form-control">
+										<input type="text" value="" name="description" id="description" placeholder="Plan Description" required class="form-control">
 										@if($errors->has('description'))
                                        <span>
                                            <strong>{{ $errors->first('description') }}</strong>
@@ -37,7 +37,7 @@
                                     </div>                                         
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Plan Value Per Month')}} *</strong></label>
-                                        <input type="text" value="{{ $credit_package->face_value  }}" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
+                                        <input type="text" value="" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
                                         @if($errors->has('no_of_credit'))
                                        <span>
                                            <strong>{{ $errors->first('no_of_credit') }}</strong>
@@ -47,7 +47,7 @@
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>
                                         <div class="col-xs-10">
-                                            <button type="submit" class="btn btn-primary">Update Subscription Plan</button>
+                                            <button type="submit" class="btn btn-primary">Add Subscription Plan</button>
                                             <a href="{{route('package.index')}}" class="btn btn-default">Cancel</a>
                                         </div>
                                     </div>
