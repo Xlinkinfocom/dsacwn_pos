@@ -311,7 +311,7 @@
                    if(response.length >= 1)
                    {
                     //console.log(response);
-                    $('#district_id').find('option').remove();
+                    $('#district').find('option').remove();
                     //$("#chapter_id").remove();
                     var html_option = "";
                     html_option += '<option value="">Select a District</option>';
@@ -322,7 +322,7 @@
 
                             html_option += '<option value="'+id+'">'+name+'</option>';
                        }
-                       $("#district_id").append(html_option);
+                       $("#district").append(html_option);
                    }
                }
            });
