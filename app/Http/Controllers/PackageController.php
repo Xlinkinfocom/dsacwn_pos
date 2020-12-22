@@ -79,22 +79,24 @@ class PackageController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'no_of_credit' => 'required|integer',
-            'price'        => 'required|numeric'
+            'no_of_credit' => 'required|numeric',
+           // 'price'        => 'required|numeric'
         ]);
 
         try {
             $credit_package_log = new CreditPackageLog;
             $credit_package_log->name = $request->name;
+            $credit_package_log->description = $request->description;
             $credit_package_log->face_value = $request->no_of_credit;
-            $credit_package_log->cost = $request->price;
+            $credit_package_log->cost = $request->no_of_credit;
             $credit_package_log->expiry_inDays = 0;
             $credit_package_log->save();
 
             CreditPackageMst::where('credit_package_id',$id)->update([
                     'credit_package_log_id' =>  $credit_package_log->credit_package_log_id,
                     'face_value'            => $request->no_of_credit,
-                    'cost'                  => $request->price,
+                    'description'            => $request->description,
+                    'cost'                  => $request->no_of_credit,
                 ]);
             return redirect()->route('package.index')->with('flash_success', 'Credit Package Updated Successfully');    
         } 
