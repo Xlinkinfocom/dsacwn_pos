@@ -582,7 +582,8 @@ return [
 	"Plan Description"=>"Plan Description",
 	"Plan Name"=>"Plan Name",
 	"Edit Subscription Plan"=>"Edit Subscription Plan",
-	"Add Plan"=>"Add Plan"
+	"Add Plan"=>"Add Plan",
+	"Manage Subscription"=>"Manage Subscription"
 	
 ];
 ?>
