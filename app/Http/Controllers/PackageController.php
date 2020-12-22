@@ -26,9 +26,16 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        try {
+          //  $credit_package = CreditPackageMst::findOrFail($id);
+            return view('package.add');
+        } catch (ModelNotFoundException $e) {
+            return $e;
+        }
+       
     }
 
     /**
@@ -40,6 +47,36 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'no_of_credit' => 'required|numeric',
+           // 'price'        => 'required|numeric'
+        ]);
+
+        try {
+           
+           
+            $credit_package_log = new CreditPackageLog;
+            $credit_package_log->name = $request->name;
+            $credit_package_log->description = $request->description;
+            $credit_package_log->face_value = $request->no_of_credit;
+            $credit_package_log->cost = $request->no_of_credit;
+            $credit_package_log->expiry_inDays = 0;
+            $credit_package_log->save();
+
+            $credit_package=new CreditPackageMst;
+            $credit_package->name= $request->name;
+            $credit_package->description= $request->description;
+            $credit_package->face_value= $request->no_of_credit;
+            $credit_package->cost= $request->no_of_credit;
+            $credit_package->credit_package_log_id= $request->credit_package_log_id;
+            $credit_package->save();
+            return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Create Successfully');    
+        } 
+
+        catch (Exception $e) {
+            return back()->with('flash_error', 'Subscription Plan Not Found');
+        }
+
     }
 
     /**

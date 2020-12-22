@@ -298,5 +298,8 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 
 	Route::resource('package', 'PackageController');
 	Route::post('package/update/{id}', 'PackageController@update')->name('package.update');
+	Route::get('package/add', 'PackageController@create')->name('package.add');
+	Route::post('package/create', 'PackageController@store')->name('package.create');
+	
 });
 
