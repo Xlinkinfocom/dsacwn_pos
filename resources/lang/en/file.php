@@ -578,6 +578,9 @@ return [
 
 	"Upload GST"=>"Upload GST",
 	"UPLOAD CANCELLED CHEQUE"=>"UPLOAD CANCELLED CHEQUE",
+	"Plan Value Per Month"=>"Plan Value Per Month",
+	"Plan Description"=>"Plan Description",
+	"Plan Name"=>"Plan Name"
 	
 ];
 ?>

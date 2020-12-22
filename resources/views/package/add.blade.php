@@ -44,6 +44,11 @@
                                         </span>
                                         @endif
                                     </div>
+                                    <div class="form-group">                                        
+                                        <input class="mt-2" type="checkbox" name="is_active" value="1" >                                       
+                                        <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
+                                    </div>
+                                   
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>
                                         <div class="col-xs-10">
