@@ -219,10 +219,9 @@
                                         <input type="hidden" name="bstate_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bstate" id="bstate" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">State One</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                        @endforeach                                         
                                         </select>
                                     </div>
                                     <div class="form-group" id="bdistrict-id">
@@ -297,5 +296,37 @@
     $("ul#people").siblings('a').attr('aria-expanded','true');
     $("ul#people").addClass("show");
     $("ul#people #customer-create-menu").addClass("active");
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('#state').on('change', function() {
+           var state_id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('get-districts') }}",
+               type: "GET",
+               data: { state_id: state_id },
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#district_id').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";
+                    html_option += '<option value="">Select a District</option>';
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#district_id").append(html_option);
+                   }
+               }
+           });
+       });
+   });
 </script>
 @endsection

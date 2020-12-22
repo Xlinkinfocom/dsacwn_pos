@@ -56,6 +56,17 @@ class SellerController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
 
+    public function getDistricts(Request $request)
+    {
+        $state_id = $request->state_id;
+
+        $districts = District::select('id', 'name')
+                    ->where('state_id', $state_id)
+                    ->orderBy('name')
+                    ->get();
+        return response()->json($districts);
+    }
+
     public function store(Request $request)
     {
 
