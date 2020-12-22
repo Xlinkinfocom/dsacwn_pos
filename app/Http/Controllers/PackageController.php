@@ -62,13 +62,18 @@ class PackageController extends Controller
             $credit_package_log->cost = $request->no_of_credit;
             $credit_package_log->expiry_inDays = 0;
             $credit_package_log->save();
-
+            $is_active=0;
+            if(isset($request->is_active)){
+                $is_active=(int)$request->is_active;
+            }
+          
             $credit_package=new CreditPackageMst;
             $credit_package->name= $request->name;
             $credit_package->description= $request->description;
             $credit_package->face_value= $request->no_of_credit;
             $credit_package->cost= $request->no_of_credit;
             $credit_package->credit_package_log_id= $credit_package_log->credit_package_log_id;
+            $credit_package->is_active=$is_active;
             $credit_package->save();
             return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Create Successfully');    
         } 
@@ -128,12 +133,16 @@ class PackageController extends Controller
             $credit_package_log->cost = $request->no_of_credit;
             $credit_package_log->expiry_inDays = 0;
             $credit_package_log->save();
-
+            $is_active=0;
+            if(isset($request->is_active)){
+                $is_active=(int)$request->is_active;
+            }
             CreditPackageMst::where('credit_package_id',$id)->update([
-                    'credit_package_log_id' =>  $credit_package_log->credit_package_log_id,
+                    'credit_package_log_id' =>  (int)$credit_package_log->credit_package_log_id,
                     'face_value'            => $request->no_of_credit,
                     'description'            => $request->description,
                     'cost'                  => $request->no_of_credit,
+                    'is_active'=>$is_active,
                 ]);
             return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Updated Successfully');    
         } 
@@ -153,7 +162,7 @@ class PackageController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        CreditPackageMst::where('credit_package_id',$id)->delete();
+        CreditPackageMst::where('credit_package_id',(int)$id)->delete();
         return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
         echo $id; exit;
     }
