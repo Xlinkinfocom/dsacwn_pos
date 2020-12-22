@@ -310,7 +310,7 @@
                    if(response.length >= 1)
                    {
                     //console.log(response);
-                    $('#district').find('option').remove();
+                    //$('#district').find('option').remove();
                     //$("#chapter_id").remove();
                     var html_option = "";                    
                        for(var i=0; i<response.length; i++)
