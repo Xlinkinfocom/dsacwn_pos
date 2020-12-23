@@ -293,6 +293,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::put('seller/changepass/{id}', 'SellerController@changePassword')->name('seller.password');
 	Route::get('seller/genpass', 'SellerController@generatePassword');
 	Route::post('seller/deletebyselection', 'SellerController@deleteBySelection');
+	Route::get('seller/get-district', ['uses'=> 'SellerController@getDistricts', 'as' => 'get-districts']);
 	
 	Route::resource('seller', 'SellerController');
 
