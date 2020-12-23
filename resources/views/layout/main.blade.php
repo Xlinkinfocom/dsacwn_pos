@@ -404,8 +404,8 @@
               @endif
             </ul>
           </li>
-          <li class=""><a href="#subscription" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>Manage Seller</span></a>
-            <ul id="subscription" class="collapse list-unstyled ">
+          <li class=""><a href="#seller" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>Manage Seller</span></a>
+            <ul id="seller" class="collapse list-unstyled ">
               <li id="seller-list-menu"><a href="{{route('seller.index')}}">{{trans('file.Seller List')}}</a></li>
           <li id="seller-create-menu"><a href="{{route('seller.create')}}">{{trans('file.Add Seller')}}</a></li>
 
