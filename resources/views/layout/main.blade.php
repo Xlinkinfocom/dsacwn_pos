@@ -404,12 +404,19 @@
               @endif
             </ul>
           </li>
+          <li class=""><a href="#subscription" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>Manage Seller</span></a>
+            <ul id="subscription" class="collapse list-unstyled ">
+              <li id="seller-list-menu"><a href="{{route('seller.index')}}">{{trans('file.Seller List')}}</a></li>
+          <li id="seller-create-menu"><a href="{{route('seller.create')}}">{{trans('file.Add Seller')}}</a></li>
+
+
+            </ul>
+          </li>
 
 
 
 
-
-
+         
           <?php
           $department = DB::table('permissions')->where('name', 'department')->first();
           $department_active = DB::table('role_has_permissions')->where([
