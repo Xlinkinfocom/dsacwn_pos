@@ -321,6 +321,7 @@
                             html_option += '<option value="'+id+'">'+name+'</option>';
                        }
                        $("#district").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
                    }
                }
            });
