@@ -210,7 +210,7 @@
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach --}}
-                                          <option value="153">Nepal</option>
+                                          <option value="1">India</option>                                          
                                         </select>
                                     </div>
                                     <div class="form-group" id="bstate-id">
@@ -299,6 +299,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
        $('#state').on('change', function() {
            var state_id = $(this).val();
             var html_district = "";
@@ -326,6 +327,38 @@
                }
            });
        });
+
+
+       $('#bstate').on('change', function() {
+           var state_id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('get-districts') }}",
+               type: "GET",
+               data: { state_id: state_id },
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#bdistrict').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#bdistrict").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                   }
+               }
+           });
+       });
+
+
+
    });
 </script>
 @endsection
