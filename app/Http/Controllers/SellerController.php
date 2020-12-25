@@ -70,7 +70,7 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         dd($request);
-        
+        exit;
         $lims_customer_data = $request->all();
         if($lims_customer_data['phone_number']){
             $this->validate($request, [
