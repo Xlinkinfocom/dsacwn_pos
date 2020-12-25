@@ -300,6 +300,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#genbutton').on("click", function(){
+            $.get('genpass', function(data){
+                $("input[name='password']").val(data);
+            });
+        });
+
        $('#state').on('change', function() {
            var state_id = $(this).val();
             var html_district = "";
