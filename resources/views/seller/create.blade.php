@@ -368,11 +368,11 @@
 
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
            {
-               $('#baddress1').value($('#address1').value());
-               $('#address2').value($('#address2').value());
-               $('#country')value($('#bcountry').value());
-               $('#state').value($('#bstate').value());
-               $('#district').value($('#bdistrict').value());
+               $('#baddress1').val($('#address1').val());
+               $('#address2').val($('#address2').val());
+               $('#country').val($('#bcountry').val());
+               $('#state').val($('#bstate').val());
+               $('#district').val($('#bdistrict').val());
            }
        });
 
