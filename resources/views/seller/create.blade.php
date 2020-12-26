@@ -370,7 +370,7 @@
            {
                $('#baddress1').val($('#address1').val());
                $('#address2').val($('#address2').val());
-               $('#bcountry').prop($("#country").prop('selectedIndex'));               
+               $('#bcountry option:selected').val($('#country option:selected').val());               
                $('#bstate').val($('#state').val());
                $('#bdistrict').val($('#district').val());
                $('.selectpicker').selectpicker('refresh');
