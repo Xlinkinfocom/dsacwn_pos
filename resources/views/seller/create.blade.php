@@ -63,18 +63,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
-                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="address1" id="address1" required class="form-control" placeholder="Address Line 1" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
-                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="address2" id="address2" required class="form-control" placeholder="Address Line 2" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
 
                                     <div class="form-group" id="country-id">
                                         <label><strong>{{trans('file.Country')}}</strong></label>
                                         <input type="hidden" name="country_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="country" class="selectpicker form-control" data-live-search="true" 
+                                        <select name="country" id="country" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
@@ -206,7 +206,7 @@
                                 <div class="form-group" id="bcountry-id">
                                         <label><strong>{{trans('file.Country')}}</strong></label>
                                         <input type="hidden" name="bcountry_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="bcountry" class="selectpicker form-control" data-live-search="true" 
+                                        <select name="bcountry" id="bcountry" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
@@ -368,7 +368,11 @@
 
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
            {
-               alert('test');
+               $('#baddress1').value($('#address1').value());
+               $('#address2').value($('#address2').value());
+               $('#country')value($('#bcountry').value());
+               $('#state').value($('#bstate').value());
+               $('#district').value($('#bdistrict').value());
            }
        });
 
