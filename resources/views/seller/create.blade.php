@@ -193,7 +193,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" class="sameaddress"></label>                                     
+                                        <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>
+                                            (Same as Pick Address) <input type="checkbox" name="add" id="chkAdd" class="sameaddress"></label>                                     
                                         <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
                                     </div>
                                    
@@ -241,7 +242,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
-                                        <input class="form-control" type="file" name="panno_image[]" placeholder="">  
+                                        <input class="form-control" type="file" name="panno_image" placeholder="">  
                                     </div>
 
                                     <div class="form-group">
@@ -361,6 +362,14 @@
                    }
                }
            });
+       });
+
+       $('#chkAdd').on('click', function() {
+
+           if($this.prop('checked') === true)
+           {
+               alert('test');
+           }
        });
 
 

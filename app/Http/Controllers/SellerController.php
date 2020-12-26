@@ -69,6 +69,14 @@ class SellerController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+
+            'name' => 'required',
+            'phone' => 'required|digits:10|unique:sellers',
+            'email' => 'required|email|unique:sellers'
+
+        ]);
+
         dd($request);
         exit;
         $lims_customer_data = $request->all();

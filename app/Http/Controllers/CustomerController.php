@@ -51,7 +51,7 @@ class CustomerController extends Controller
             $this->validate($request, [
                 'phone_number' => [
                     'max:255',
-                        Rule::unique('customers')->where(function ($query) {
+                        Rule::unique('sellers')->where(function ($query) {
                         return $query->where('is_active', 1);
                     }),
                 ],
