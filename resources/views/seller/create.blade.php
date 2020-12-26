@@ -370,9 +370,9 @@
            {
                $('#baddress1').val($('#address1').val());
                $('#address2').val($('#address2').val());
-               $('#country').val($('#bcountry').val());               
-               $('#state').val($('#bstate').val());
-               $('#district').val($('#bdistrict').val());
+               $('#bcountry').val($('#country').val());               
+               $('#bstate').val($('#state').val());
+               $('#bdistrict').val($('#district').val());
            }
        });
 
