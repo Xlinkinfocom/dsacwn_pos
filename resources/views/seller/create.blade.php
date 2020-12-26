@@ -370,9 +370,10 @@
            {
                $('#baddress1').val($('#address1').val());
                $('#address2').val($('#address2').val());
-               $('#bcountry').val($('#country').val());               
+               $('#bcountry').prop($("#country").prop('selectedIndex'));               
                $('#bstate').val($('#state').val());
                $('#bdistrict').val($('#district').val());
+               $('.selectpicker').selectpicker('refresh');
            }
        });
 
