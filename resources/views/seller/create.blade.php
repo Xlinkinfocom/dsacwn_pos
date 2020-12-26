@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
-                                        <input type="text" name="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="zipcode" id="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
                                     
                                     <div class="form-group">
