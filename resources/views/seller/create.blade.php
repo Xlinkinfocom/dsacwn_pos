@@ -374,7 +374,7 @@
                $('#bstate option:selected').text($('#state option:selected').text());
                $('#bdistrict option:selected').text($('#district option:selected').text());
                $('.selectpicker').selectpicker('refresh');
-               $('#bzipcode')val($('#zipcode')val());
+               $('#bzipcode').val($('#zipcode').val());
            }
        });
 
