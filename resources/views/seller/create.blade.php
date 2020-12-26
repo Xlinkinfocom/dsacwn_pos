@@ -371,8 +371,8 @@
                $('#baddress1').val($('#address1').val());
                $('#address2').val($('#address2').val());
                $('#bcountry option:selected').text($('#country option:selected').text());               
-               $('#bstate').val($('#state').val());
-               $('#bdistrict').val($('#district').val());
+               $('#bstate option:selected').text($('#state option:selected').text());
+               $('#bdistrict option:selected').text($('#district option:selected').text());
                $('.selectpicker').selectpicker('refresh');
            }
        });
