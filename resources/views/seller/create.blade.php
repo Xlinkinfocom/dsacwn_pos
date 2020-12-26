@@ -366,7 +366,7 @@
 
        $('#chkAdd').on('click', function() {
 
-           if($this.prop('checked') === true)
+           if($(this).prop('checked') === true)
            {
                alert('test');
            }
