@@ -79,7 +79,7 @@
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach --}}
-                                          <option value="153">Nepal</option>
+                                          <option value="1">India</option>  
                                         </select>
                                     </div>
                                     <div class="form-group" id="state-id">
