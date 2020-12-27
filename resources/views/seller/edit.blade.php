@@ -88,7 +88,7 @@
                                         <select name="district" id="district" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select district...">
                                           @foreach($districts as $district)
-                                              <option value="{{$district->id}}" {{ old('id', $seller->district->id) == $district->id ? 'selected' : '' }}>{{$district->name}}</option>
+                                              <option value="{{$district->id}}" >{{$district->name}}</option>
                                           @endforeach                                        
                                         </select>
                                     </div>

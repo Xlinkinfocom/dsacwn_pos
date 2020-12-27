@@ -243,9 +243,9 @@ class SellerController extends Controller
             $bdistricts = array();
             $bdistricts = $bdistricts_arr[0];
 
-            dd($districts);
+            /* dd($districts);
             dd($bdistricts);
-            die();
+            die(); */
             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
