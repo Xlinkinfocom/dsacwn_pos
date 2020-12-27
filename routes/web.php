@@ -302,6 +302,12 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('package/add', 'PackageController@create')->name('package.add');
 	Route::post('package/create', 'PackageController@store')->name('package.create');
 	Route::delete('package/{id}', 'PackageController@destory')->name('package.destroy');
+
+	Route::resource('managecommission', 'ManagecommissionController');
+	Route::post('managecommission/update/{id}', 'ManagecommissionController@update')->name('managecommission.update');
+	Route::get('managecommission/add', 'ManagecommissionController@create')->name('managecommission.add');
+	Route::post('managecommission/create', 'ManagecommissionController@store')->name('managecommission.create');
+	Route::delete('managecommission/{id}', 'ManagecommissionController@destory')->name('managecommission.destroy');
 	
 });
 
