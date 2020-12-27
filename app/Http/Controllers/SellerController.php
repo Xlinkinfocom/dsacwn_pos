@@ -227,13 +227,13 @@ class SellerController extends Controller
             $seller_arr = Seller::where('user_id', $id)->get();
             $seller = $seller_arr[0];
 
-            $districts_arr = District::select('id', 'name')
+            $districts = District::select('id', 'name')
                     ->where('state_id', $seller->state_id)
                     ->orderBy('name')
                     ->get();
             
-            $districts = array();            
-            $districts = $districts_arr[0];
+            /* $districts = array();            
+            $districts = $districts_arr[0]; */
 
             $bdistricts = District::select('id', 'name')
             ->where('state_id', $seller->bstate_id)
