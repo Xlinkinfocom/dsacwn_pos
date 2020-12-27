@@ -16,7 +16,7 @@ class Seller extends Model
 
     public function state()
     {
-        return $this->belongsTo('App\State', 'state_id')->select(['id', 'name']);
+        return $this->belongsTo('App\State', ['state_id', 'bstate_id'])->select(['id', 'name']);
     }
 
     public function district()
