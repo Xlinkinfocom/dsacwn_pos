@@ -79,7 +79,7 @@
                                         <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
                                         @foreach($states as $state)
-                                            <option value="{{$state->id}}" {{ old('state_id', $seller->state->state_id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                            <option value="{{$state->id}}" {{ old('id', $seller->state->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
                                         @endforeach
                                         </select>
                                     </div>
