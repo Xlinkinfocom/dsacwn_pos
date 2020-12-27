@@ -72,7 +72,7 @@ class SellerController extends Controller
     public function store(Request $request)
     {        
         $lims_seller_data = $request->all();
-        if($lims_seller_data['phone_number']){
+        if($lims_seller_data['phone']){
             $this->validate($request, [
                 'phone' => [
                     'max:255',
