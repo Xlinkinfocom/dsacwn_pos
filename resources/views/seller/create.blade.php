@@ -368,9 +368,12 @@
            {
                $('#baddress1').val($('#address1').val());
                $('#address2').val($('#address2').val());
-               $('#bcountry option:selected').text($('#country option:selected').text());               
+               $('#bcountry option:selected').text($('#country option:selected').text());
+               $('#bcountry option:selected').val($('#country option:selected').val());               
                $('#bstate option:selected').text($('#state option:selected').text());
+               $('#bstate option:selected').val($('#state option:selected').val());
                $('#bdistrict option:selected').text($('#district option:selected').text());
+               $('#bdistrict option:selected').val($('#district option:selected').val());
                $('.selectpicker').selectpicker('refresh');
                $('#bzipcode').val($('#zipcode').val());
            }
