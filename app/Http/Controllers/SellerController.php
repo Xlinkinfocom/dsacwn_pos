@@ -228,7 +228,7 @@ class SellerController extends Controller
             $seller = $seller_arr[0];
 
             $districts_arr = District::select('id', 'name')
-                    ->where('id', $seller->state_id)
+                    ->where('state_id', $seller->state_id)
                     ->orderBy('name')
                     ->get();
             
@@ -236,16 +236,13 @@ class SellerController extends Controller
             $districts = $districts_arr[0];
 
             $bdistricts = District::select('id', 'name')
-            ->where('id', $seller->bstate_id)
+            ->where('state_id', $seller->bstate_id)
                     ->orderBy('name')
                     ->get();
 
             //$bdistricts = array();
             //$bdistricts = $bdistricts_arr[0];
-            dd($seller->bstate_id);
-            dd($districts);
-            dd($bdistricts);
-            die();             
+            
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
