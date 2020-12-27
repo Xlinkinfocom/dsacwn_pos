@@ -131,6 +131,7 @@ class SellerController extends Controller
         $user->phone = $request->phone;
         $user->role_id = $request->role_id;
         $user->is_active = $request->is_active;
+        $user->is_deleted = '0';
 
         if($user->save())
         {
