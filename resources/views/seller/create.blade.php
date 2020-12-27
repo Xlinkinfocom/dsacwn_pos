@@ -367,7 +367,7 @@
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
            {
                $('#baddress1').val($('#address1').val());
-               $('#address2').val($('#address2').val());
+               $('#baddress2').val($('#address2').val());
                $('#bcountry option:selected').text($('#country option:selected').text());
                $('#bcountry option:selected').val($('#country option:selected').val());               
                $('#bstate option:selected').text($('#state option:selected').text());

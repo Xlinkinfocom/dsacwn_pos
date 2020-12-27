@@ -172,14 +172,16 @@ class SellerController extends Controller
 
             if($seller->save())
             {
-
+                return redirect('seller')->with('message', 'Seller created successfully.');
             }
             else
             {
-
+                return redirect('seller')->with('message', 'Seller not added successfully.');
             }
         }
         else{
+
+            return redirect('seller')->with('message', 'Seller not added successfully.');
 
         }
 
