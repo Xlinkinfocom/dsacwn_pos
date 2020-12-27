@@ -105,25 +105,22 @@ class SellerController extends Controller
         if($request->file('citizenship_document'))
         {
             $extn = $request->file('citizenship_document')->getClientOriginalExtension();
-            $citizenship_document = "citizenship_".".".$extn;
-            $tempfile = File::get($request->citizenship_document);
-            Storage::disk('local')->put('public/images/seller/citizen_doc/'.$citizenship_document, $tempfile);
+            $citizenship_document = "citizenship_".".".$extn;           
+            $request->file('citizenship_document')->move('public/images/seller/citizen_doc/', $citizenship_document);
         }
 
         if($request->file('passportsizephoto'))
         {
             $extn = $request->file('passportsizephoto')->getClientOriginalExtension();
-            $passportsizephoto = "passportsize_".".".$extn;
-            $tempfile = File::get($request->passportsizephoto);
-            Storage::disk('local')->put('public/images/seller/passport_photo/'.$passportsizephoto, $tempfile);
+            $passportsizephoto = "passportsize_".".".$extn;            
+            $request->file('passportsizephoto')->move('public/images/seller/passport_photo/', $passportsizephoto);
         }
 
         if($request->file('check_image'))
         {
             $extn = $request->file('check_image')->getClientOriginalExtension();
-            $check_image = "check_".rand().".".$extn;
-            $tempfile = File::get($request->check_image);
-            Storage::disk('local')->put('public/images/seller/cancel_chq/'.$check_image, $tempfile);
+            $check_image = "check_".rand().".".$extn;           
+            $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
         }
 
         /* $lims_customer_data['is_active'] = true;
