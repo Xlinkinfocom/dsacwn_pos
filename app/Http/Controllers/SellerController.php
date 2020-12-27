@@ -149,6 +149,7 @@ class SellerController extends Controller
             $seller->vatno = $request->vatno;
             $seller->gstno = $request->gstno;
             $seller->bankaccountname = $request->bankaccountname;
+            $seller->bankname = $request->bankname;
             $seller->accountnumber = $request->accountnumber;
             $seller->branchname = $request->branchname;
             $seller->business_name = $request->business_name;
