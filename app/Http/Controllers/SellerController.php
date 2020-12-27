@@ -70,7 +70,7 @@ class SellerController extends Controller
     public function store(Request $request)
     {        
         $lims_seller_data = $request->all();
-        if($lims_seller_data['phone']){
+        /* if($lims_seller_data['phone']){
             $this->validate($request, [
                 'phone' => [
                     'max:255',
@@ -79,7 +79,7 @@ class SellerController extends Controller
                     }),
                 ],
             ]);
-        } 
+        }  */
 
         $panno_image = "";
         $citizenship_document = "";
@@ -170,7 +170,7 @@ class SellerController extends Controller
 
             if($seller->save())
             {
-                
+
             }
             else
             {
