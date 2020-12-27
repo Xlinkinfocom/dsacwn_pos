@@ -224,7 +224,7 @@ class SellerController extends Controller
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
 
-            $seller = Seller::find($id);
+            $seller = Seller::where('user_id', $id)->get();
 
             dd($seller);
             die();
