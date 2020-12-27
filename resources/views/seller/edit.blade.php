@@ -21,8 +21,8 @@
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Account Type')}} *</strong> </label>
                                         <span style="display: block">
-                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="business">&nbsp; Business &nbsp;&nbsp;
-                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" value="personal">&nbsp;Personal
+                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" {{ old('aacount_type', $seller->aacount_type) == "business" ? 'checked' : '' }} value="business">&nbsp; Business &nbsp;&nbsp;
+                                        <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" {{ old('aacount_type', $seller->aacount_type) == "personal" ? 'checked' : '' }} value="personal">&nbsp;Personal
                                         </span>
                                         @if($errors->has('account_type'))
                                        <span>

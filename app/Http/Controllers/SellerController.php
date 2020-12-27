@@ -182,7 +182,6 @@ class SellerController extends Controller
         else{
 
             return redirect('seller')->with('message', 'Seller not added successfully.');
-
         }
 
 
@@ -223,10 +222,23 @@ class SellerController extends Controller
         if($role->hasPermissionTo('users-edit')){
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
+            $states = State::select('id', 'name')->orderBy('name')->get();
+
+            $seller = Seller::find($id);
+
+            $districts = District::select('id', 'name')
+                    ->where('state_id', $seller->state)
+                    ->orderBy('name')
+                    ->get();
+
+            $bdistricts = District::select('id', 'name')
+            ->where('state_id', $seller->bstate_id)
+                    ->orderBy('name')
+                    ->get();
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
-            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
+            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'seller', 'districts', 'bdistricts', 'lims_warehouse_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
