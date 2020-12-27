@@ -232,8 +232,7 @@ class SellerController extends Controller
                     ->orderBy('name')
                     ->get();
             
-            $districts = array();
-            
+            $districts = array();            
             $districts = $districts_arr[0];
 
             $bdistricts_arr = District::select('id', 'name')
@@ -241,6 +240,7 @@ class SellerController extends Controller
                     ->orderBy('name')
                     ->get();
 
+            $bdistricts = array();
             $bdistricts = $bdistricts_arr[0];
             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
