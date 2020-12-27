@@ -231,8 +231,7 @@
                                         data-live-search-style="begins" title="Select district...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">District One</option>
+                                          @endforeach --}}                                          
                                         </select>
                                     </div>
                                   
