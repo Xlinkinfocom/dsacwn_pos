@@ -235,18 +235,17 @@ class SellerController extends Controller
             $districts = array();            
             $districts = $districts_arr[0];
 
-            $bdistricts_arr = District::select('id', 'name')
+            $bdistricts = District::select('id', 'name')
             ->where('id', $seller->bstate_id)
                     ->orderBy('name')
                     ->get();
 
-            $bdistricts = array();
-            $bdistricts = $bdistricts_arr[0];
+            //$bdistricts = array();
+            //$bdistricts = $bdistricts_arr[0];
 
-            /* dd($districts);
+           dd($districts);
             dd($bdistricts);
-            die(); */
-            
+            die();             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
