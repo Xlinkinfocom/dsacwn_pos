@@ -145,11 +145,11 @@
                                     </div>
                                     <div class="form-group">
                                        
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1">
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="0">
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
                                     <div class="form-group">                                        
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1" >                                       
+                                        <input class="mt-2" type="checkbox" name="is_active" id="is_active" value="0" >                                       
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
                                     <div class="form-group">
@@ -365,7 +365,6 @@
        });
 
        $('#chkAdd').on('click', function() {
-
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
            {
                $('#baddress1').val($('#address1').val());
@@ -376,6 +375,28 @@
                $('.selectpicker').selectpicker('refresh');
                $('#bzipcode').val($('#zipcode').val());
            }
+       });
+
+       $('#is_kyc_verified').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).va('1');
+            }
+            else
+            {
+                $(this).va('0');
+            }
+       });
+
+       $('#is_active').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).va('1');
+            }
+            else
+            {
+                $(this).va('0');
+            }
        });
 
 

@@ -9,15 +9,13 @@ use App\Deposit;
 use App\User;
 use App\State;
 use App\District;
+use App\Seller;
 use Illuminate\Validation\Rule;
 use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-
 use App\Roles;
 use App\Biller;
 use App\Warehouse;
@@ -71,7 +69,7 @@ class SellerController extends Controller
 
     public function store(Request $request)
     {        
-        /* $lims_seller_data = $request->all();
+        $lims_seller_data = $request->all();
         if($lims_seller_data['phone']){
             $this->validate($request, [
                 'phone' => [
@@ -81,7 +79,7 @@ class SellerController extends Controller
                     }),
                 ],
             ]);
-        } */
+        } 
 
         $panno_image = "";
         $citizenship_document = "";
@@ -89,30 +87,33 @@ class SellerController extends Controller
         $gst_document = "";
         $check_image = "";
         $extn = "";
+        $data = array();
 
         if($request->file('panno_image'))
         {
-            
-
             $extn = $request->file('panno_image')->getClientOriginalExtension();
             $panno_image = "panno_".rand().".".$extn;
-            $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);
-            /* $tempfile = File::get($request->panno_image);
-            dd($tempfile);
-            Storage::disk('local')->put('public/images/seller/panno_img/'.$panno_image, $tempfile); */
+            $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);           
+        }
+
+        if($request->file('gst_document'))
+        {
+            $extn = $request->file('gst_document')->getClientOriginalExtension();
+            $gst_document = "gst_".rand().".".$extn;           
+            $request->file('gst_document')->move('public/images/seller/gst_doc/', $gst_document);
         }
 
         if($request->file('citizenship_document'))
         {
             $extn = $request->file('citizenship_document')->getClientOriginalExtension();
-            $citizenship_document = "citizenship_".".".$extn;           
+            $citizenship_document = "citizenship_".rand().".".$extn;           
             $request->file('citizenship_document')->move('public/images/seller/citizen_doc/', $citizenship_document);
         }
 
         if($request->file('passportsizephoto'))
         {
             $extn = $request->file('passportsizephoto')->getClientOriginalExtension();
-            $passportsizephoto = "passportsize_".".".$extn;            
+            $passportsizephoto = "passportsize_".rand().".".$extn;            
             $request->file('passportsizephoto')->move('public/images/seller/passport_photo/', $passportsizephoto);
         }
 
@@ -122,6 +123,67 @@ class SellerController extends Controller
             $check_image = "check_".rand().".".$extn;           
             $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
         }
+
+        $user = New User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->phone = $request->phone;
+        $user->role_id = $request->role_id;
+        $user->is_active = $request->is_active;
+
+        if($user->save())
+        {
+            $seller = New Seller;
+            $seller->user_id = $user->id;
+            $seller->aacount_type = $request->aacount_type;
+            $seller->address_1 = $request->address_1;
+            $seller->address_2 = $request->address_2;
+            $seller->country = $request->country;
+            $seller->state_id = $request->state_id;
+            $seller->district_id = $request->district_id;
+            $seller->zip_code = $request->zip_code;
+            $seller->citizennumber = $request->citizennumber;
+            $seller->panno = $request->panno;
+            $seller->vatno = $request->vatno;
+            $seller->gstno = $request->gstno;
+            $seller->bankaccountname = $request->bankaccountname;
+            $seller->accountnumber = $request->accountnumber;
+            $seller->branchname = $request->branchname;
+            $seller->business_name = $request->business_name;
+            $seller->seller_name = $request->seller_name;
+            $seller->company_name = $request->company_name;
+            $seller->areaofinterest = $request->areaofinterest;
+            $seller->baddress1 = $request->baddress1;
+            $seller->baddress2 = $request->baddress2;
+            $seller->bcountry = $request->bcountry;
+            $seller->bstate_id = $request->bstate_id;
+            $seller->bdistrict_id = $request->bdistrict_id;
+            $seller->bzipcode = $request->bzipcode;
+            $seller->panno_image = $panno_image;
+            $seller->citizenship_document = $citizenship_document;
+            $seller->passportsizephoto = $passportsizephoto;
+            $seller->gst_document = $gst_document;
+            $seller->check_image = $check_image;
+            $seller->is_kyc_verified = $request->is_kyc_verified;
+            $seller->is_active = $request->is_active;
+
+            if($seller->save())
+            {
+                
+            }
+            else
+            {
+
+            }
+        }
+        else{
+
+        }
+
+
+
+
 
         /* $lims_customer_data['is_active'] = true;
         $message = 'Customer created successfully';
