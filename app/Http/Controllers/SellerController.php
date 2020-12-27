@@ -243,7 +243,7 @@ class SellerController extends Controller
             $bdistricts = array();
             $bdistricts = $bdistricts_arr[0];
 
-            dd($districts);
+            //dd($districts);
             dd($bdistricts);
             die();
             
