@@ -223,11 +223,9 @@ class SellerController extends Controller
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
-
-            $seller = Seller::where('user_id', $id)->get();
-
-            dd($seller[0]->user_id);
-            die();
+            $seller = array();
+            $seller_arr = Seller::where('user_id', $id)->get();
+            $seller = $seller_arr[0];
 
             $districts = District::select('id', 'name')
                     ->where('id', $seller->state_id)
