@@ -38,16 +38,7 @@
                                            <strong>{{ $errors->first('name') }}</strong>
                                         </span>
                                         @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>{{trans('file.Change Password')}}</strong> </label>
-                                        <div class="input-group">
-                                            <input type="password" name="password" class="form-control">
-                                            <div class="input-group-append">
-                                                <button id="genbutton" type="button" class="btn btn-default">{{trans('file.Generate')}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="form-group mt-3">
                                         <label><strong>{{trans('file.Email')}} *</strong></label>
                                         <input type="email" name="email" placeholder="example@example.com" required class="form-control" value="{{$lims_user_data->email}}">
@@ -63,12 +54,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
-                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address1}}">
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
-                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address2}}">
                                     </div>
 
                                     <div class="form-group" id="country-id">
@@ -79,7 +70,7 @@
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach --}}
-                                          <option value="153">Nepal</option>
+                                          <option value="1" {{ old('country', $seller->country) == "1" ? 'selected' : '' }}>India</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="state-id">
@@ -87,10 +78,9 @@
                                         <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">State One</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->id}}" {{ old('state_id', $seller->state->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                        @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group" id="district-id">
