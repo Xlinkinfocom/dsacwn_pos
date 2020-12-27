@@ -14,8 +14,7 @@
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         <input type="hidden" name="id" value="">
-                        <input type="hidden" name="account_type" id="account_type" value="">
-                       
+                        <input type="hidden" name="account_type" id="account_type" value="">                       
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -78,9 +77,9 @@
                                         <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
-                                        @foreach($states as $state)
-                                            <option value="{{$state->id}}" {{ old('id', $seller->state->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
-                                        @endforeach
+                                            @foreach($states as $state)
+                                                <option value="{{$state->id}}" {{ old('id', $seller->state->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group" id="district-id">
@@ -88,10 +87,9 @@
                                         <input type="hidden" name="district_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="district" id="district" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select district...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">District One</option>
+                                          @foreach($districts as $district)
+                                              <option value="{{$district->id}}" {{ old('id', $seller->district->id) == $district->id ? 'selected' : '' }}>{{$district->name}}</option>
+                                          @endforeach                                        
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -130,20 +128,11 @@
                                     <div class="form-group">
                                         <label><strong>{{trans('file.ACCOUNT NUMBER')}} </strong> </label>
                                         <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="{{--{{$lims_user_data->name}} --}}">
-                                    </div>
-                                  
-                                    
+                                    </div>                      
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
                                         <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{--{{$lims_user_data->name}} --}}">
                                     </div>
-
-
-
-                                   
-
-
-
                                     <div class="form-group">
                                         @if($lims_user_data->is_active)
                                         <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1" checked>
@@ -152,8 +141,6 @@
                                         @endif
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
-
-
                                     <div class="form-group">
                                         @if($lims_user_data->is_active)
                                         <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
@@ -184,7 +171,7 @@
                                         <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
                                         <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                                           @foreach($lims_role_list as $role)
-                                              <option value="{{$role->id}}">{{$role->name}}</option>
+                                              <option value="{{$role->id}}" {{ old('id', $lims_user_data->role->id) == $role->id ? 'selected' : '' }}>{{$role->name}}</option>
                                           @endforeach
                                         </select>
                                     </div>
@@ -192,10 +179,7 @@
                                         <label><strong>{{trans('file.Business area of interest')}}</strong></label>
                                         <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
                                         <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
-                                        data-live-search-style="begins" title="Select Business area of interest...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
+                                        data-live-search-style="begins" title="Select Business area of interest...">                                          
                                           <option value="Wholesale Selling to Rollo">Wholesale Selling to Rollo</option>
                                         <option value="Rollo Marketplace">Rollo Marketplace</option>
                                         <option value="Rollo Travels">Rollo Travels</option> 
@@ -220,7 +204,7 @@
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach --}}
-                                          <option value="153">Nepal</option>
+                                          <option value="1">India</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="bstate-id">
