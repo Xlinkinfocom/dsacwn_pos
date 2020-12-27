@@ -180,9 +180,9 @@
                                         <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
                                         <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Business area of interest...">                                          
-                                          <option value="Wholesale Selling to Rollo">Wholesale Selling to Rollo</option>
-                                        <option value="Rollo Marketplace">Rollo Marketplace</option>
-                                        <option value="Rollo Travels">Rollo Travels</option> 
+                                          <option value="Wholesale Selling to Rollo" {{ $seller->areaofinterest == "Wholesale Selling to Rollo" ? 'selected' : '' }}>Wholesale Selling to Rollo</option>
+                                        <option value="Rollo Marketplace" {{ $seller->areaofinterest == "Rollo Marketplace" ? 'selected' : '' }}>Rollo Marketplace</option>
+                                        <option value="Rollo Travels" {{ $seller->areaofinterest == "Rollo Travels" ? 'selected' : '' }}>Rollo Travels</option> 
                                         </select>
                                     </div>
 
@@ -204,7 +204,7 @@
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach --}}
-                                          <option value="1">India</option>
+                                          <option value="1" {{ old('bcountry', $seller->bcountry) == "1" ? 'selected' : '' }}>India</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="bstate-id">
@@ -212,10 +212,10 @@
                                         <input type="hidden" name="bstate_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bstate" id="bstate" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">State One</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->id}}" {{ old('id', $seller->bstate->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                        @endforeach
+                                          
                                         </select>
                                     </div>
                                     <div class="form-group" id="bdistrict-id">
@@ -223,10 +223,9 @@
                                         <input type="hidden" name="bdistrict_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bdistrict" id="bdistrict" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select district...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">District One</option>
+                                        @foreach($bdistricts as $district)
+                                              <option value="{{$district->id}}" {{ old('id', $seller->bdistrict->id) == $district->id ? 'selected' : '' }}>{{$district->name}}</option>
+                                          @endforeach                                          
                                         </select>
                                     </div>
                                   
