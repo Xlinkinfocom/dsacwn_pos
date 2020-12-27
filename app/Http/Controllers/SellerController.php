@@ -227,7 +227,7 @@ class SellerController extends Controller
             $seller = Seller::find($id);
 
             $districts = District::select('id', 'name')
-                    ->where('id', $seller->state)
+                    ->where('id', $seller->state_id)
                     ->orderBy('name')
                     ->get();
 
