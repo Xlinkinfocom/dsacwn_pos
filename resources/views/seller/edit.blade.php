@@ -94,58 +94,58 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
-                                        <input type="text" name="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{$seller->zip_code}}">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Citizen Number')}} </strong> </label>
-                                        <input type="text" name="citizennumber" required class="form-control" placeholder="Citizen Number" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="citizennumber" required class="form-control" placeholder="Citizen Number" value="{{$seller->citizennumber}}">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label><strong>{{trans('file.PAN Number')}} </strong> </label>
-                                        <input type="text" name="panno" required class="form-control" placeholder="PAN Number" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="panno" required class="form-control" placeholder="PAN Number" value="{{$seller->panno}}">
                                     </div>
                                     
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Vat Number')}} </strong> </label>
-                                        <input type="text" name="vatno" required class="form-control" placeholder="Vat Number" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="vatno" required class="form-control" placeholder="Vat Number" value="{{$seller->vatno}}">
                                     </div>
                                   
                                     <div class="form-group">
                                         <label><strong>{{trans('file.CST/GST Number')}} </strong> </label>
-                                        <input type="text" name="gstno" required class="form-control" placeholder="CST/GST Number" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="gstno" required class="form-control" placeholder="CST/GST Number" value="{{$seller->gstno}}">
                                     </div>
                                   
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BANK ACCOUNT NAME')}} </strong> </label>
-                                        <input type="text" name="bankaccountname" required class="form-control" placeholder="BANK ACCOUNT NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="bankaccountname" required class="form-control" placeholder="BANK ACCOUNT NAME" value="{{$seller->bankaccountname}}">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BANK NAME')}} </strong> </label>
-                                        <input type="text" name="bankname" required class="form-control" placeholder="BANK NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="bankname" required class="form-control" placeholder="BANK NAME" value="{{$seller->bankname}}">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.ACCOUNT NUMBER')}} </strong> </label>
-                                        <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="{{$seller->accountnumber}}">
                                     </div>                      
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
-                                        <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{--{{$lims_user_data->name}} --}}">
+                                        <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{$seller->branchname}}">
                                     </div>
                                     <div class="form-group">
-                                        @if($lims_user_data->is_active)
+                                        @if($seller->is_kyc_verified)
                                         <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1" checked>
                                         @else
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1">
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="0">
                                         @endif
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
                                     <div class="form-group">
-                                        @if($lims_user_data->is_active)
+                                        @if($seller->is_active)
                                         <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
                                         @else
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1">
+                                        <input class="mt-2" type="checkbox" name="is_active" value="0">
                                         @endif
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
@@ -156,11 +156,11 @@
                                 <div class="col-md-6">
                                     <div class="">
                                         <label><strong>{{trans('file.Business Name')}}</strong></label>
-                                         <input type="text" name="business_name" class="form-control" value="{{--{{$lims_user_data->business_name}}--}}"> 
+                                         <input type="text" name="business_name" class="form-control" value="{{$seller->business_name}}"> 
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Seller Name')}}</strong></label>
-                                        <input type="text" name="seller_name" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="seller_name" class="form-control" value="{{$seller->seller_name}}"> 
                                     </div> 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Company Name')}}</strong></label>
@@ -188,12 +188,12 @@
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" class="sameaddress"></label>                                     
-                                        <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{$seller->baddress1}}"> 
                                     </div>
                                    
                                     <div class="form-group">
                                         <label><strong>{{trans('file.BILLING ADDRESS 2')}} </strong></label>                                     
-                                        <input type="text" name="baddress2" id="baddress2" placeholder="Address Line 2" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="baddress2" id="baddress2" placeholder="Address Line 2" class="form-control" value="{{$seller->baddress2}}"> 
                                     </div>
                                     
                                 <div class="form-group" id="bcountry-id">
@@ -230,11 +230,12 @@
                                   
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Zip/Postal Code')}} </strong></label>                                     
-                                        <input type="text" name="bzipcode" id="bzipcode" placeholder="Zip/Postal Code" class="form-control" value="{{--{{$lims_user_data->seller_name}}--}}"> 
+                                        <input type="text" name="bzipcode" id="bzipcode" placeholder="Zip/Postal Code" class="form-control" value="{{$seller->bzipcode}}"> 
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
-                                        <input class="form-control" type="file" name="panno_image[]" placeholder="">  
+                                        <input class="form-control" type="file" name="panno_image" placeholder="">
+                                          
                                     </div>
 
                                     <div class="form-group">
