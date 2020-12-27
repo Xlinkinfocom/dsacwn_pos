@@ -226,7 +226,7 @@ class SellerController extends Controller
 
             $seller = Seller::where('user_id', $id)->get();
 
-            dd($seller->user_id);
+            dd($seller);
             die();
 
             $districts = District::select('id', 'name')
