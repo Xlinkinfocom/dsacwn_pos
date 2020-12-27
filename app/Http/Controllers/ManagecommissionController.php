@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\CommissionMst;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\CommissionLog;
+use App\Category;
 
 class ManagecommissionController extends Controller
 {
@@ -30,7 +31,9 @@ class ManagecommissionController extends Controller
     {
         //
         try {
-          //  $credit_package = CreditPackageMst::findOrFail($id);
+            $credit_package = Category::where("parent_id",null)->orWhere("parent_id",0)->get();
+            print_r($credit_package);
+            exit;
             return view('managecommission.add');
         } catch (ModelNotFoundException $e) {
             return $e;
