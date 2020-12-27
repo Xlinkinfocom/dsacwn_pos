@@ -137,7 +137,7 @@ class SellerController extends Controller
         {
             $seller = New Seller;
             $seller->user_id = $user->id;
-            $seller->aacount_type = $request->aacount_type;
+            $seller->aacount_type = $request->account_type;
             $seller->address_1 = $request->address_1;
             $seller->address_2 = $request->address_2;
             $seller->country = $request->country;
