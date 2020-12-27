@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\CreditPackageMst;
+use App\CommissionMst;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\CreditPackageLog;
+use App\CommissionLog;
 
 class ManagecommissionController extends Controller
 {
@@ -17,8 +17,8 @@ class ManagecommissionController extends Controller
      */
     public function index()
     {
-        $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get();
-        return view('package.index', compact('credit_packages'));
+        $credit_packages = CommissionMst::orderBy('created_at' , 'desc')->get();
+        return view('managecommission.index', compact('credit_packages'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ManagecommissionController extends Controller
         //
         try {
           //  $credit_package = CreditPackageMst::findOrFail($id);
-            return view('package.add');
+            return view('managecommission.add');
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -48,38 +48,41 @@ class ManagecommissionController extends Controller
     {
         //
         $this->validate($request, [
-            'no_of_credit' => 'required|numeric',
+            'cat_id' => 'required|numeric',
            // 'price'        => 'required|numeric'
         ]);
 
         try {
            
            
-            $credit_package_log = new CreditPackageLog;
-            $credit_package_log->name = $request->name;
-            $credit_package_log->description = $request->description;
-            $credit_package_log->face_value = $request->no_of_credit;
-            $credit_package_log->cost = $request->no_of_credit;
-            $credit_package_log->expiry_inDays = 0;
-            $credit_package_log->save();
+            $commission_log = new CommissionLog;
+            $commission_log->cat_id = (int)$request->cat_id;
+            $commission_log->sub_cat_id = (int)$request->sub_cat_id;
+            $commission_log->commssion = (float)$request->commssion;
+            $commission_log->payment_fee = (float)$request->payment_fee;
+            $commission_log->vat = (float)$request->vat;
+            $commission_log->total_commission = (float)$request->vat+(float)$request->payment_fee+(float)$request->commssion;
+            $commission_log->save();
             $is_active=0;
             if(isset($request->is_active)){
                 $is_active=(int)$request->is_active;
             }
           
-            $credit_package=new CreditPackageMst;
-            $credit_package->name= $request->name;
-            $credit_package->description= $request->description;
-            $credit_package->face_value= $request->no_of_credit;
-            $credit_package->cost= $request->no_of_credit;
-            $credit_package->credit_package_log_id= $credit_package_log->credit_package_log_id;
-            $credit_package->is_active=$is_active;
-            $credit_package->save();
-            return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Create Successfully');    
+            $commission_mst=new CommissionMst;
+            $commission_mst->commission_log_id = (int)$commission_log->commission_log_id;
+            $commission_mst->cat_id = (int)$request->cat_id;            
+            $commission_mst->sub_cat_id = (int)$request->sub_cat_id;
+            $commission_mst->commssion = (float)$request->commssion;
+            $commission_mst->payment_fee = (float)$request->payment_fee;
+            $commission_mst->vat = (float)$request->vat;
+            $commission_mst->total_commission = (float)$request->vat+(float)$request->payment_fee+(float)$request->commssion;
+            $commission_mst->is_active=$is_active;
+            $commission_mst->save();
+            return redirect()->route('managecommission.index')->with('flash_success', 'Commission Create Successfully');    
         } 
 
         catch (Exception $e) {
-            return back()->with('flash_error', 'Subscription Plan Not Found');
+            return back()->with('flash_error', 'Commission Not Found');
         }
 
     }
@@ -104,8 +107,8 @@ class ManagecommissionController extends Controller
     public function edit($id)
     {
         try {
-            $credit_package = CreditPackageMst::findOrFail($id);
-            return view('package.edit',compact('credit_package'));
+            $commission_mst = CreditPackageMst::findOrFail($id);
+            return view('managecommission.edit',compact('commission_mst'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -126,25 +129,25 @@ class ManagecommissionController extends Controller
         ]);
 
         try {
-            $credit_package_log = new CreditPackageLog;
-            $credit_package_log->name = $request->name;
-            $credit_package_log->description = $request->description;
-            $credit_package_log->face_value = $request->no_of_credit;
-            $credit_package_log->cost = $request->no_of_credit;
-            $credit_package_log->expiry_inDays = 0;
-            $credit_package_log->save();
+            $credit_package = new CreditPackageLog;
+            $credit_package->name = $request->name;
+            $credit_package->description = $request->description;
+            $credit_package->face_value = $request->no_of_credit;
+            $credit_package->cost = $request->no_of_credit;
+            $credit_package->expiry_inDays = 0;
+            $credit_package->save();
             $is_active=0;
             if(isset($request->is_active)){
                 $is_active=(int)$request->is_active;
             }
             CreditPackageMst::where('credit_package_id',$id)->update([
-                    'credit_package_log_id' =>  (int)$credit_package_log->credit_package_log_id,
+                    'credit_package_id' =>  (int)$credit_package->credit_package_id,
                     'face_value'            => $request->no_of_credit,
                     'description'            => $request->description,
                     'cost'                  => $request->no_of_credit,
                     'is_active'=>$is_active,
                 ]);
-            return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Updated Successfully');    
+            return redirect()->route('managecommission.index')->with('flash_success', 'Subscription Plan Updated Successfully');    
         } 
 
         catch (Exception $e) {
@@ -163,7 +166,7 @@ class ManagecommissionController extends Controller
     {
         //
         CreditPackageMst::where('credit_package_id',(int)$id)->delete();
-        return redirect()->route('package.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
+        return redirect()->route('managecommission.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
         echo $id; exit;
     }
 }
