@@ -15,6 +15,8 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 use App\Roles;
 use App\Biller;
@@ -68,30 +70,59 @@ class SellerController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-
-            'name' => 'required',
-            'phone' => 'required|digits:10|unique:sellers',
-            'email' => 'required|email|unique:sellers'
-
-        ]);
-
-        dd($request);
-        exit;
-        $lims_customer_data = $request->all();
-        if($lims_customer_data['phone_number']){
+    {        
+        $lims_seller_data = $request->all();
+        if($lims_seller_data['phone_number']){
             $this->validate($request, [
-                'phone_number' => [
+                'phone' => [
                     'max:255',
-                        Rule::unique('customers')->where(function ($query) {
+                        Rule::unique('user')->where(function ($query) {
                         return $query->where('is_active', 1);
                     }),
                 ],
             ]);
         }
 
-        $lims_customer_data['is_active'] = true;
+        $panno_image = "";
+        $citizenship_document = "";
+        $passportsizephoto = "";
+        $gst_document = "";
+        $check_image = "";
+        $extn = "";
+
+        if($request->file('panno_image'))
+        {
+            $extn = $request->file('panno_image')->getClientOriginalExtension();
+            $panno_image = "panno_".rand().".".$extn;
+            $tempfile = File::get($request->panno_image);
+            Storage::disk('local')->put('public/images/seller/panno_img/'.$panno_image, $tempfile);
+        }
+
+        if($request->file('citizenship_document'))
+        {
+            $extn = $request->file('citizenship_document')->getClientOriginalExtension();
+            $citizenship_document = "citizenship_".".".$extn;
+            $tempfile = File::get($request->citizenship_document);
+            Storage::disk('local')->put('public/images/seller/citizen_doc/'.$citizenship_document, $tempfile);
+        }
+
+        if($request->file('passportsizephoto'))
+        {
+            $extn = $request->file('passportsizephoto')->getClientOriginalExtension();
+            $passportsizephoto = "passportsize_".".".$extn;
+            $tempfile = File::get($request->passportsizephoto);
+            Storage::disk('local')->put('public/images/seller/passport_photo/'.$passportsizephoto, $tempfile);
+        }
+
+        if($request->file('check_image'))
+        {
+            $extn = $request->file('check_image')->getClientOriginalExtension();
+            $check_image = "check_".rand().".".$extn;
+            $tempfile = File::get($request->check_image);
+            Storage::disk('local')->put('public/images/seller/cancel_chq/'.$check_image, $tempfile);
+        }
+
+        /* $lims_customer_data['is_active'] = true;
         $message = 'Customer created successfully';
         if($lims_customer_data['email']){
             try{
@@ -104,13 +135,12 @@ class SellerController extends Controller
                 $message = 'Customer created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
             }   
         }
-        // print_r($lims_customer_data);
-        // die();
+        
         Customer::create($lims_customer_data);
         if($lims_customer_data['pos'])
             return redirect('pos')->with('message', $message);
         else
-            return redirect('customer')->with('create_message', $message);
+            return redirect('customer')->with('create_message', $message); */
     }
 
 
