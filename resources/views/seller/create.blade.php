@@ -380,22 +380,22 @@
        $('#is_kyc_verified').on('click', function() {
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
             {
-                $(this).va('1');
+                $(this).val('1');
             }
             else
             {
-                $(this).va('0');
+                $(this).val('0');
             }
        });
 
        $('#is_active').on('click', function() {
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
             {
-                $(this).va('1');
+                $(this).val('1');
             }
             else
             {
-                $(this).va('0');
+                $(this).val('0');
             }
        });
 
