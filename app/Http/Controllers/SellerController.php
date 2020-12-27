@@ -227,12 +227,12 @@ class SellerController extends Controller
             $seller = Seller::find($id);
 
             $districts = District::select('id', 'name')
-                    ->where('state_id', $seller->state)
+                    ->where('state', $seller->state)
                     ->orderBy('name')
                     ->get();
 
             $bdistricts = District::select('id', 'name')
-            ->where('state_id', $seller->bstate_id)
+            ->where('bstate_id', $seller->bstate_id)
                     ->orderBy('name')
                     ->get();
         //    $lims_biller_list = Biller::where('is_active', true)->get();
