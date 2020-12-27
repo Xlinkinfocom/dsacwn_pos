@@ -242,8 +242,8 @@ class SellerController extends Controller
 
             //$bdistricts = array();
             //$bdistricts = $bdistricts_arr[0];
-
-           dd($districts);
+            dd($seller->bstate_id);
+            dd($districts);
             dd($bdistricts);
             die();             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
