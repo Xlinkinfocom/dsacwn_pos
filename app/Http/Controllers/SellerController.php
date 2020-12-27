@@ -71,7 +71,7 @@ class SellerController extends Controller
 
     public function store(Request $request)
     {        
-        $lims_seller_data = $request->all();
+        /* $lims_seller_data = $request->all();
         if($lims_seller_data['phone']){
             $this->validate($request, [
                 'phone' => [
@@ -81,7 +81,7 @@ class SellerController extends Controller
                     }),
                 ],
             ]);
-        }
+        } */
 
         $panno_image = "";
         $citizenship_document = "";
