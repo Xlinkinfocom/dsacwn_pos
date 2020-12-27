@@ -214,8 +214,7 @@
                                         data-live-search-style="begins" title="Select state/province...">
                                         @foreach($states as $state)
                                             <option value="{{$state->id}}" {{ old('id', $seller->bstate->id) == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
-                                        @endforeach
-                                          
+                                        @endforeach                                          
                                         </select>
                                     </div>
                                     <div class="form-group" id="bdistrict-id">
