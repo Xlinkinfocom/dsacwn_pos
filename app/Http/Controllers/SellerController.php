@@ -96,7 +96,7 @@ class SellerController extends Controller
 
             $extn = $request->file('panno_image')->getClientOriginalExtension();
             $panno_image = "panno_".rand().".".$extn;
-            $file->move('public/images/seller/panno_img', $panno_image);
+            $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);
             /* $tempfile = File::get($request->panno_image);
             dd($tempfile);
             Storage::disk('local')->put('public/images/seller/panno_img/'.$panno_image, $tempfile); */
