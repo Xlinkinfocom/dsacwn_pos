@@ -53,12 +53,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
-                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address1}}">
+                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address_1}}">
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
-                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address2}}">
+                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address_2}}">
                                     </div>
 
                                     <div class="form-group" id="country-id">
@@ -164,7 +164,7 @@
                                     </div> 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Company Name')}}</strong></label>
-                                        <input type="text" name="company_name" class="form-control" value="{{$lims_user_data->company_name}}">
+                                        <input type="text" name="company_name" class="form-control" value="{{$seller->company_name}}">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Role')}} *</strong></label>
@@ -235,7 +235,7 @@
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
                                         <input class="form-control" type="file" name="panno_image" placeholder="">
-                                          
+
                                     </div>
 
                                     <div class="form-group">
