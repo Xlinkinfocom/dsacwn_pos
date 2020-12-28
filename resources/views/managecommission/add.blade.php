@@ -17,14 +17,15 @@
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Name')}} *</strong> </label>
-										<input type="text" value="" name="name" id="name" placeholder="Name" required class="form-control">
-										@if($errors->has('name'))
-                                       <span>
-                                           <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                        @endif
+                                    <div class="form-group" id="category-id">
+                                        <label><strong>{{trans('file.Category')}}</strong></label>
+                                        <input type="hidden" name="category_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Category">
+                                        @foreach($Category as $Categorys)
+                                            <option value="{{$Categorys->id}}">{{$Categorys->name}}</option>
+                                        @endforeach                                         
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Plan Description')}} *</strong> </label>
