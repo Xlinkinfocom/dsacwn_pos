@@ -24,11 +24,11 @@ class ManagecommissionController extends Controller
           //  print_r($key); exit;
             $CommissionMst[$key]['categoryName']="";
             if($val['cat_id']!=0){
-                $categoryName=Category::where("id",$val['cat_id'])->get();
+                $categoryName=Category::where("id",$val['cat_id'])->first();
                 $CommissionMst[$key]['categoryName']=$categoryName->name;
             }
             if($val['sub_cat_id']!=0){
-                $categoryName=Category::where("id",$val['sub_cat_id'])->get();
+                $categoryName=Category::where("id",$val['sub_cat_id'])->first();
                 $CommissionMst[$key]['categoryName']=$CommissionMst[$key]['categoryName'].'->'.$categoryName->name;
             }
             
