@@ -19,13 +19,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($credit_packages as $index => $credit_package)
+                    @foreach($CommissionMst as $index => $Commission)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{$credit_package->name}}</td>
-                            <td>{{$credit_package->description}}</td>
-                            <td>{{$credit_package->cost}}</td>
-                        @if($credit_package->is_active)
+                            <td>{{$Commission->name}}</td>
+                            <td>{{$Commission->description}}</td>
+                            <td>{{$Commission->cost}}</td>
+                        @if($Commission->is_active)
                         <td><div class="badge badge-success">Active</div></td>
                         @else
                         <td><div class="badge badge-danger">Inactive</div></td>
@@ -39,12 +39,12 @@
                                 <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                     {{-- @if(in_array("users-edit", $all_permission)) --}}
                                     <li>
-                                        <a href="{{ route('package.edit', $credit_package->credit_package_id) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
+                                        <a href="{{ route('package.edit', $Commission->credit_package_id) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
                                     </li>
                                     {{-- @endif --}}
                                     <li class="divider"></li>
                                     {{-- @if(in_array("users-delete", $all_permission)) --}}
-                                    {{ Form::open(['route' => ['package.destroy', $credit_package->credit_package_id], 'method' => 'DELETE'] ) }}
+                                    {{ Form::open(['route' => ['package.destroy', $Commission->credit_package_id], 'method' => 'DELETE'] ) }}
                                     <li>
                                         <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
                                     </li>
