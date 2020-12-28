@@ -172,4 +172,15 @@ class ManagecommissionController extends Controller
         return redirect()->route('managecommission.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
         echo $id; exit;
     }
+
+    public function getsubCat(Request $request){
+        $id = $request->id;
+
+        $Category = Category::select('id', 'name')
+                    ->where('id', $id)
+                    ->orderBy('name')
+                    ->get();
+        return response()->json($Category);
+
+    }
 }

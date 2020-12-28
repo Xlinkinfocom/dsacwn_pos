@@ -68,5 +68,36 @@
     </div>
 </section>
 
+<script>
+$('#category').on('change', function() {
+           var id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('getsubCat') }}",
+               type: "GET",
+               data: { id: id },
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#bdistrict').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#bdistrict").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                   }
+               }
+           });
+       });
+
+
+</script>
 
 @endsection

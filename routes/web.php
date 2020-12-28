@@ -308,6 +308,6 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('managecommission/add', 'ManagecommissionController@create')->name('managecommission.add');
 	Route::post('managecommission/create', 'ManagecommissionController@store')->name('managecommission.create');
 	Route::delete('managecommission/{id}', 'ManagecommissionController@destory')->name('managecommission.destroy');
-	
+	Route::get('managecommission/get-subcategory','ManagecommissionController@getsubCat')->name('managecommission.getsubCat');
 });
 
