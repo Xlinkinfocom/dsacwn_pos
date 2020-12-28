@@ -185,8 +185,8 @@ class ManagecommissionController extends Controller
     public function destroy(Request $request, $id)
     {
         //
-        CreditPackageMst::where('credit_package_id',(int)$id)->delete();
-        return redirect()->route('managecommission.index')->with('flash_success', 'Subscription Plan Deleted Successfully');    
+        CommissionMst::where('commission_id',(int)$id)->delete();
+        return redirect()->route('managecommission.index')->with('flash_success', 'Commission Deleted Successfully');    
         echo $id; exit;
     }
 
