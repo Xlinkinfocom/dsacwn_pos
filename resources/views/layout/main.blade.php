@@ -975,6 +975,7 @@
               </a>
               <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                 <li>
+                  {{$role->id}}
                   <a href="{{route('user.profile', ['id' => Auth::id()])}}"><i class="dripicons-user"></i> {{trans('file.profile')}}</a>
                 </li>
                 @if($general_setting_permission_active)

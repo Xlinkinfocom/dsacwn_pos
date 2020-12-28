@@ -104,7 +104,7 @@ class RegisterController extends Controller
             'role_id' => $data['role_id'],
            // 'biller_id' => $data['biller_id'],
             //'warehouse_id' => $data['warehouse_id'],
-            'is_active' => false,
+            'is_active' => true,
             'is_deleted' => false,
             'seller_url'=>strtolower(preg_replace('/\s+/', '', $data['name'])),
             'password' => bcrypt($data['password']),
