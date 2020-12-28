@@ -74,7 +74,7 @@ $('#category').on('change', function() {
            var id = $(this).val();
             var html_district = "";
            $.ajax({
-               url: "{{ route('managecommission.getsubCat') }}/"+id,
+               url: "{{ route('managecommission.getsubCat',['id'=>"+id+"]) }}/"
                type: "GET",
                success: function(response) {
                    if(response.length >= 1)
