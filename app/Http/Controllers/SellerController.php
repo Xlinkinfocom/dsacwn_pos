@@ -9,15 +9,13 @@ use App\Deposit;
 use App\User;
 use App\State;
 use App\District;
+use App\Seller;
 use Illuminate\Validation\Rule;
 use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-
 use App\Roles;
 use App\Biller;
 use App\Warehouse;
@@ -71,8 +69,8 @@ class SellerController extends Controller
 
     public function store(Request $request)
     {        
-        /* $lims_seller_data = $request->all();
-        if($lims_seller_data['phone']){
+        $lims_seller_data = $request->all();
+        /* if($lims_seller_data['phone']){
             $this->validate($request, [
                 'phone' => [
                     'max:255',
@@ -81,7 +79,7 @@ class SellerController extends Controller
                     }),
                 ],
             ]);
-        } */
+        }  */
 
         $panno_image = "";
         $citizenship_document = "";
@@ -89,30 +87,33 @@ class SellerController extends Controller
         $gst_document = "";
         $check_image = "";
         $extn = "";
+        $data = array();
 
         if($request->file('panno_image'))
         {
-            
-
             $extn = $request->file('panno_image')->getClientOriginalExtension();
             $panno_image = "panno_".rand().".".$extn;
-            $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);
-            /* $tempfile = File::get($request->panno_image);
-            dd($tempfile);
-            Storage::disk('local')->put('public/images/seller/panno_img/'.$panno_image, $tempfile); */
+            $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);           
+        }
+
+        if($request->file('gst_document'))
+        {
+            $extn = $request->file('gst_document')->getClientOriginalExtension();
+            $gst_document = "gst_".rand().".".$extn;           
+            $request->file('gst_document')->move('public/images/seller/gst_doc/', $gst_document);
         }
 
         if($request->file('citizenship_document'))
         {
             $extn = $request->file('citizenship_document')->getClientOriginalExtension();
-            $citizenship_document = "citizenship_".".".$extn;           
+            $citizenship_document = "citizenship_".rand().".".$extn;           
             $request->file('citizenship_document')->move('public/images/seller/citizen_doc/', $citizenship_document);
         }
 
         if($request->file('passportsizephoto'))
         {
             $extn = $request->file('passportsizephoto')->getClientOriginalExtension();
-            $passportsizephoto = "passportsize_".".".$extn;            
+            $passportsizephoto = "passportsize_".rand().".".$extn;            
             $request->file('passportsizephoto')->move('public/images/seller/passport_photo/', $passportsizephoto);
         }
 
@@ -122,6 +123,70 @@ class SellerController extends Controller
             $check_image = "check_".rand().".".$extn;           
             $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
         }
+
+        $user = New User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->phone = $request->phone;
+        $user->role_id = $request->role_id;
+        $user->is_active = $request->is_active;
+        $user->is_deleted = '0';
+
+        if($user->save())
+        {
+            $seller = New Seller;
+            $seller->user_id = $user->id;
+            $seller->aacount_type = $request->account_type;
+            $seller->address_1 = $request->address1;
+            $seller->address_2 = $request->address2;
+            $seller->country = $request->country;
+            $seller->state_id = $request->state;
+            $seller->district_id = $request->district;
+            $seller->zip_code = $request->zipcode;
+            $seller->citizennumber = $request->citizennumber;
+            $seller->panno = $request->panno;
+            $seller->vatno = $request->vatno;
+            $seller->gstno = $request->gstno;
+            $seller->bankaccountname = $request->bankaccountname;
+            $seller->bankname = $request->bankname;
+            $seller->accountnumber = $request->accountnumber;
+            $seller->branchname = $request->branchname;
+            $seller->business_name = $request->business_name;
+            $seller->seller_name = $request->seller_name;
+            $seller->company_name = $request->company_name;
+            $seller->areaofinterest = $request->areaofinterest;
+            $seller->baddress1 = $request->baddress1;
+            $seller->baddress2 = $request->baddress2;
+            $seller->bcountry = $request->bcountry;
+            $seller->bstate_id = $request->bstate;
+            $seller->bdistrict_id = $request->bdistrict;
+            $seller->bzipcode = $request->bzipcode;
+            $seller->panno_image = $panno_image;
+            $seller->citizenship_document = $citizenship_document;
+            $seller->passportsizephoto = $passportsizephoto;
+            $seller->gst_document = $gst_document;
+            $seller->check_image = $check_image;
+            $seller->is_kyc_verified = $request->is_kyc_verified;
+            $seller->is_active = $request->is_active;
+
+            if($seller->save())
+            {
+                return redirect('seller')->with('message', 'Seller created successfully.');
+            }
+            else
+            {
+                return redirect('seller')->with('message', 'Seller not added successfully.');
+            }
+        }
+        else{
+
+            return redirect('seller')->with('message', 'Seller not added successfully.');
+        }
+
+
+
+
 
         /* $lims_customer_data['is_active'] = true;
         $message = 'Customer created successfully';
@@ -157,10 +222,25 @@ class SellerController extends Controller
         if($role->hasPermissionTo('users-edit')){
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
+            $states = State::select('id', 'name')->orderBy('name')->get();
+            $seller = array();
+            $seller_arr = Seller::where('user_id', $id)->get();
+            $seller = $seller_arr[0];
+
+            $districts = District::select('id', 'name')
+                    ->where('state_id', $seller->state_id)
+                    ->orderBy('name')
+                    ->get();       
+
+            $bdistricts = District::select('id', 'name')
+            ->where('state_id', $seller->bstate_id)
+                    ->orderBy('name')
+                    ->get();
+            
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
-            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
+            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'seller', 'states', 'districts', 'bdistricts', 'lims_warehouse_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

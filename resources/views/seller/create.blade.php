@@ -145,11 +145,11 @@
                                     </div>
                                     <div class="form-group">
                                        
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1">
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="0">
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
                                     <div class="form-group">                                        
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1" >                                       
+                                        <input class="mt-2" type="checkbox" name="is_active" id="is_active" value="0" >                                       
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
                                     <div class="form-group">
@@ -231,8 +231,7 @@
                                         data-live-search-style="begins" title="Select district...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}
-                                          <option value="153">District One</option>
+                                          @endforeach --}}                                          
                                         </select>
                                     </div>
                                   
@@ -365,17 +364,41 @@
        });
 
        $('#chkAdd').on('click', function() {
-
            if($(this).prop('checked') === true || $(this).is(":checked") === true)
            {
                $('#baddress1').val($('#address1').val());
-               $('#address2').val($('#address2').val());
-               $('#bcountry option:selected').text($('#country option:selected').text());               
+               $('#baddress2').val($('#address2').val());
+               $('#bcountry option:selected').text($('#country option:selected').text());
+               $('#bcountry option:selected').val($('#country option:selected').val());               
                $('#bstate option:selected').text($('#state option:selected').text());
+               $('#bstate option:selected').val($('#state option:selected').val());
                $('#bdistrict option:selected').text($('#district option:selected').text());
+               $('#bdistrict option:selected').val($('#district option:selected').val());
                $('.selectpicker').selectpicker('refresh');
                $('#bzipcode').val($('#zipcode').val());
            }
+       });
+
+       $('#is_kyc_verified').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).val('1');
+            }
+            else
+            {
+                $(this).val('0');
+            }
+       });
+
+       $('#is_active').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).val('1');
+            }
+            else
+            {
+                $(this).val('0');
+            }
        });
 
 
