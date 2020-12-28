@@ -27,15 +27,16 @@
                                         @endforeach                                         
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Description')}} *</strong> </label>
-										<input type="text" value="" name="description" id="description" placeholder="Plan Description" required class="form-control">
-										@if($errors->has('description'))
-                                       <span>
-                                           <strong>{{ $errors->first('description') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>                                         
+                                    <div class="form-group" id="subcat-id">
+                                        <label><strong>{{trans('file.Sub Category')}}</strong></label>
+                                        <input type="hidden" name="subcat_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="subcat" id="subcat" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Sub Category...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}                                          
+                                        </select>
+                                    </div>                                     
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Plan Value Per Month')}} *</strong></label>
                                         <input type="text" value="" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
@@ -80,7 +81,7 @@ $('#category').on('change', function() {
                    if(response.length >= 1)
                    {
                     //console.log(response);
-                    $('#bdistrict').find('option').remove();
+                    $('#subcat').find('option').remove();
                     //$("#chapter_id").remove();
                     var html_option = "";                    
                        for(var i=0; i<response.length; i++)
@@ -90,7 +91,7 @@ $('#category').on('change', function() {
 
                             html_option += '<option value="'+id+'">'+name+'</option>';
                        }
-                       $("#bdistrict").append(html_option);
+                       $("#subcat").append(html_option);
                        $('.selectpicker').selectpicker('refresh');
                    }
                }
