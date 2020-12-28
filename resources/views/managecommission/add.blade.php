@@ -9,11 +9,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h4>{{trans('file.Add Subscription Plan')}}</h4>
+                        <h4>{{trans('file.Add Commission')}}</h4>
                     </div>
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
-                        <form class="form-horizontal" action="{{route('package.create')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form class="form-horizontal" action="{{route('managecommission.create')}}" method="POST" enctype="multipart/form-data" role="form">
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-md-6">
@@ -38,11 +38,29 @@
                                         </select>
                                     </div>                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Value Per Month')}} *</strong></label>
-                                        <input type="text" value="" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
-                                        @if($errors->has('no_of_credit'))
+                                        <label><strong>{{trans('file.Commssion')}} *</strong></label>
+                                        <input type="text" value="" name="commssion" id="commssion" placeholder="Commssion" required class="form-control">
+                                        @if($errors->has('commssion'))
                                        <span>
-                                           <strong>{{ $errors->first('no_of_credit') }}</strong>
+                                           <strong>{{ $errors->first('commssion') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Payment Fee')}} *</strong></label>
+                                        <input type="text" value="" name="payment_fee" id="payment_fee" placeholder="Payment Fee" required class="form-control">
+                                        @if($errors->has('payment_fee'))
+                                       <span>
+                                           <strong>{{ $errors->first('payment_fee') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>{{trans('file.Vat')}} *</strong></label>
+                                        <input type="text" value="" name="vat" id="vat" placeholder="Vat" required class="form-control">
+                                        @if($errors->has('vat'))
+                                       <span>
+                                           <strong>{{ $errors->first('vat') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -54,8 +72,8 @@
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>
                                         <div class="col-xs-10">
-                                            <button type="submit" class="btn btn-primary">Add Subscription Plan</button>
-                                            <a href="{{route('package.index')}}" class="btn btn-default">Cancel</a>
+                                            <button type="submit" class="btn btn-primary">Add Commission</button>
+                                            <a href="{{route('managecommission.index')}}" class="btn btn-default">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
