@@ -48,7 +48,7 @@
                                     {{-- @endif --}}
                                     <li class="divider"></li>
                                     {{-- @if(in_array("users-delete", $all_permission)) --}}
-                                    {{ Form::open(['route' => ['package.destroy', $Commission['commission_id']), 'method' => 'DELETE'] ) }}
+                                    {{ Form::open(['route' => ['package.destroy', $Commission['commission_id'], 'method' => 'DELETE'] ) }}
                                     <li>
                                         <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
                                     </li>
