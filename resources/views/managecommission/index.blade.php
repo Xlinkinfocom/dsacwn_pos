@@ -29,7 +29,7 @@
                             <td>{{$Commission['payment_fee']}}</td>
                             <td>{{$Commission['vat']}}</td>
                             <td>{{$Commission['total_commission']}}</td>
-                        @if($Commission->is_active)
+                        @if($Commission['is_active'])
                         <td><div class="badge badge-success">Active</div></td>
                         @else
                         <td><div class="badge badge-danger">Inactive</div></td>
