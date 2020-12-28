@@ -22,7 +22,7 @@
                     @foreach($CommissionMst as $index => $Commission)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{$Commission->name}}</td>
+                            <td>{{$Commission['name']}}</td>
                             <td>{{$Commission->description}}</td>
                             <td>{{$Commission->cost}}</td>
                         @if($Commission->is_active)

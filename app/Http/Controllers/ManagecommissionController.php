@@ -32,6 +32,7 @@ class ManagecommissionController extends Controller
             }
             
         }
+        print_r($CommissionMst); exit;
         return view('managecommission.index', compact('CommissionMst'));
     }
 
