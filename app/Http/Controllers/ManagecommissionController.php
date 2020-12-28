@@ -76,7 +76,7 @@ class ManagecommissionController extends Controller
            
             $commission_log = new CommissionLog;
             $commission_log->cat_id = (int)$request->category;
-            $commission_log->sub_cat_id = (int)$request->sub_cat_id;
+            $commission_log->sub_cat_id = (int)$request->subcat;
             $commission_log->commssion = (float)$request->commssion;
             $commission_log->payment_fee = (float)$request->payment_fee;
             $commission_log->vat = (float)$request->vat;
@@ -90,7 +90,7 @@ class ManagecommissionController extends Controller
             $commission_mst=new CommissionMst;
             $commission_mst->commission_log_id = (int)$commission_log->commission_log_id;
             $commission_mst->cat_id = (int)$request->category;            
-            $commission_mst->sub_cat_id = (int)$request->sub_cat_id;
+            $commission_mst->sub_cat_id = (int)$request->subcat;
             $commission_mst->commssion = (float)$request->commssion;
             $commission_mst->payment_fee = (float)$request->payment_fee;
             $commission_mst->vat = (float)$request->vat;
