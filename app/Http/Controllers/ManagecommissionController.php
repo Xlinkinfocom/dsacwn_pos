@@ -31,10 +31,10 @@ class ManagecommissionController extends Controller
     {
         //
         try {
-            $credit_package = Category::where("parent_id",null)->orWhere("parent_id",0)->get();
-            print_r($credit_package);
-            exit;
-            return view('managecommission.add');
+            $category = Category::where("parent_id",null)->orWhere("parent_id",0)->get();
+           // print_r($credit_package);
+           // exit;
+            return view('managecommission.add',compact('category'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
