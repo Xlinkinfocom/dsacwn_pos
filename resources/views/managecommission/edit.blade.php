@@ -37,9 +37,7 @@
                                         <input type="hidden" name="subcat_hidden" value="{{$commission_mst->sub_cat_id}}">
                                         <select name="subcat" id="subcat" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Sub Category...">
-                                          {{-- @foreach($lims_biller_list as $biller)
-                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
-                                          @endforeach --}}                                          
+                                                                               
                                         </select>
                                     </div>                                     
                                     <div class="form-group">
