@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group" id="category-id">
                                         <label><strong>{{trans('file.Category')}}</strong>*</label>
-                                        <input type="hidden" name="category_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <input type="hidden" name="category_hidden" id="category_hidden" value="{{$commission_mst->cat_id}}">
                                         <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Category">
                                         @foreach($category as $Categorys)
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="form-group" id="subcat-id">
                                         <label><strong>{{trans('file.Sub Category')}}</strong></label>
-                                        <input type="hidden" name="subcat_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <input type="hidden" name="subcat_hidden" value="{{$commission_mst->sub_cat_id}}">
                                         <select name="subcat" id="subcat" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Sub Category...">
                                           {{-- @foreach($lims_biller_list as $biller)
