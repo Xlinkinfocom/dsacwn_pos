@@ -22,7 +22,7 @@
                                         <input type="hidden" name="category_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Category">
-                                        @foreach($Category as $Categorys)
+                                        @foreach($category as $Categorys)
                                             <option value="{{$Categorys->id}}">{{$Categorys->name}}</option>
                                         @endforeach                                         
                                         </select>
