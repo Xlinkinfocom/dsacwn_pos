@@ -12,8 +12,10 @@
                        
                         <th>S.No</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>                        
+                        <th>Commission (%)</th>
+                        <th>Payment Fee (%)</th>   
+                        <th>Vat (%)</th>   
+                        <th>Total Commission (%)</th>                     
                         <th>{{trans('file.Status')}}</th>
                         <th class="not-exported">{{trans('file.action')}}</th>
                     </tr>
@@ -22,9 +24,11 @@
                     @foreach($CommissionMst as $index => $Commission)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{$Commission['name']}}</td>
-                            <td>{{$Commission->description}}</td>
-                            <td>{{$Commission->cost}}</td>
+                            <td>{{$Commission['categoryName']}}</td>
+                            <td>{{$Commission['commssion']}}</td>
+                            <td>{{$Commission['payment_fee']}}</td>
+                            <td>{{$Commission['vat']}}</td>
+                            <td>{{$Commission['total_commission']}}</td>
                         @if($Commission->is_active)
                         <td><div class="badge badge-success">Active</div></td>
                         @else
@@ -39,12 +43,12 @@
                                 <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                     {{-- @if(in_array("users-edit", $all_permission)) --}}
                                     <li>
-                                        <a href="{{ route('package.edit', $Commission->credit_package_id) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
+                                        <a href="{{ route('package.edit', $Commission['commission_id']) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
                                     </li>
                                     {{-- @endif --}}
                                     <li class="divider"></li>
                                     {{-- @if(in_array("users-delete", $all_permission)) --}}
-                                    {{ Form::open(['route' => ['package.destroy', $Commission->credit_package_id], 'method' => 'DELETE'] ) }}
+                                    {{ Form::open(['route' => ['package.destroy', $Commission['commission_id']), 'method' => 'DELETE'] ) }}
                                     <li>
                                         <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
                                     </li>
