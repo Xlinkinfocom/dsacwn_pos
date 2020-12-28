@@ -127,7 +127,7 @@ class ManagecommissionController extends Controller
     public function edit($id)
     {
         try {
-            $commission_mst = CreditPackageMst::findOrFail($id);
+            $commission_mst = CommissionMst::findOrFail($id);
             return view('managecommission.edit',compact('commission_mst'));
         } catch (ModelNotFoundException $e) {
             return $e;
