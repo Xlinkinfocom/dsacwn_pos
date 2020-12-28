@@ -18,7 +18,11 @@ class ManagecommissionController extends Controller
      */
     public function index()
     {
-        $credit_packages = CommissionMst::orderBy('created_at' , 'desc')->get();
+        $CommissionMst = CommissionMst::orderBy('created_at' , 'desc')->get()->toArray();
+        print_r($CommissionMst); exit;
+
+
+
         return view('managecommission.index', compact('credit_packages'));
     }
 
@@ -61,7 +65,7 @@ class ManagecommissionController extends Controller
            
            
             $commission_log = new CommissionLog;
-            $commission_log->cat_id = (int)$request->cat_id;
+            $commission_log->cat_id = (int)$request->category;
             $commission_log->sub_cat_id = (int)$request->sub_cat_id;
             $commission_log->commssion = (float)$request->commssion;
             $commission_log->payment_fee = (float)$request->payment_fee;
@@ -75,7 +79,7 @@ class ManagecommissionController extends Controller
           
             $commission_mst=new CommissionMst;
             $commission_mst->commission_log_id = (int)$commission_log->commission_log_id;
-            $commission_mst->cat_id = (int)$request->cat_id;            
+            $commission_mst->cat_id = (int)$request->category;            
             $commission_mst->sub_cat_id = (int)$request->sub_cat_id;
             $commission_mst->commssion = (float)$request->commssion;
             $commission_mst->payment_fee = (float)$request->payment_fee;
