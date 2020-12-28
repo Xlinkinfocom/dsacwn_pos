@@ -21,6 +21,7 @@ class ManagecommissionController extends Controller
         $CommissionMst = CommissionMst::orderBy('created_at' , 'desc')->get()->toArray();
       
         foreach($CommissionMst as $key=>$val){
+            print_r($key); exit;
             $CommissionMst[$key]['categoryName']="";
             if($val['cat_id']!=0){
                 $categoryName=Category::where("id",$val['cat_id'])->get();
