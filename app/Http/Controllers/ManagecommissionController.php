@@ -174,7 +174,7 @@ class ManagecommissionController extends Controller
     }
 
     public function getsubCat(Request $request){
-        $id = $request->id;
+      echo  $id = $request->id; exit;
 
         $Category = Category::select('id', 'name')
                     ->where('id', $id)
