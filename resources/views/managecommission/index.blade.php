@@ -2,7 +2,7 @@
 <section>
         {{-- @if(in_array("users-add", $all_permission)) --}}
             <div class="container-fluid">
-                <a href="{{route('package.create')}}" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('file.Add Plan')}}</a>
+                <a href="{{route('managecommission.create')}}" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('file.Add Commission')}}</a>
             </div>
         {{-- @endif --}}
         <div class="table-responsive">
@@ -43,12 +43,12 @@
                                 <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                     {{-- @if(in_array("users-edit", $all_permission)) --}}
                                     <li>
-                                        <a href="{{ route('package.edit', $Commission['commission_id']) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
+                                        <a href="{{ route('managecommission.edit', $Commission['commission_id']) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
                                     </li>
                                     {{-- @endif --}}
                                     <li class="divider"></li>
                                     {{-- @if(in_array("users-delete", $all_permission)) --}}
-                                    {{ Form::open(['route' => ['package.destroy', $Commission['commission_id']], 'method' => 'DELETE'] ) }}                                    
+                                    {{ Form::open(['route' => ['managecommission.destroy', $Commission['commission_id']], 'method' => 'DELETE'] ) }}                                    
                                     <li>
                                         <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
                                     </li>
