@@ -128,7 +128,8 @@ class ManagecommissionController extends Controller
     {
         try {
             $commission_mst = CommissionMst::findOrFail($id);
-            return view('managecommission.edit',compact('commission_mst'));
+            $category = Category::where("parent_id",null)->orWhere("parent_id",0)->get();
+            return view('managecommission.edit',compact('commission_mst','category'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }

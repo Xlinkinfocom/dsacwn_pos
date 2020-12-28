@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
-                        <form class="form-horizontal" action="{{route('managecommission.update')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form class="form-horizontal" action="{{route('managecommission.update', $commission_mst->commission_id )}}" method="POST" enctype="multipart/form-data" role="form">
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-md-6">
