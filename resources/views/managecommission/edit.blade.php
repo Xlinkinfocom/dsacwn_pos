@@ -96,6 +96,7 @@
 </section>
 
 <script>
+    $('select[name=category]').val($("input[name='category_hidden']").val());
 $('#category').on('change', function() {
            var id = $(this).val();
             var html_district = "";
