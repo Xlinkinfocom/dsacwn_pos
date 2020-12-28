@@ -97,6 +97,30 @@
 
 <script>
     $('select[name=category]').val($("input[name='category_hidden']").val());
+    var html_district = "";
+           $.ajax({
+               url: "{{ route('managecommission.getsubCat',['id'=>'']) }}/"+$("input[name='category_hidden']").val(),
+               type: "GET",
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#subcat').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#subcat").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                       $('select[name=subcat]').val($("input[name='subcat_hidden']").val());
+                   }
+               }
+           });
 $('#category').on('change', function() {
            var id = $(this).val();
             var html_district = "";
