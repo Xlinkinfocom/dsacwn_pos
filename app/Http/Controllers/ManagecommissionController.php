@@ -51,8 +51,10 @@ class ManagecommissionController extends Controller
     {
         //
         $this->validate($request, [
-            'cat_id' => 'required|numeric',
-           // 'price'        => 'required|numeric'
+            'category' => 'required|numeric',
+            'commssion' => 'required|numeric',
+            'payment_fee' => 'required|numeric',
+            'vat' => 'required|numeric',
         ]);
 
         try {

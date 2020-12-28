@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group" id="category-id">
-                                        <label><strong>{{trans('file.Category')}}</strong></label>
+                                        <label><strong>{{trans('file.Category')}}</strong>*</label>
                                         <input type="hidden" name="category_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Category">
@@ -26,6 +26,11 @@
                                             <option value="{{$Categorys->id}}">{{$Categorys->name}}</option>
                                         @endforeach                                         
                                         </select>
+                                        @if($errors->has('category'))
+                                        <span>
+                                            <strong>{{ $errors->first('category') }}</strong>
+                                         </span>
+                                         @endif
                                     </div>
                                     <div class="form-group" id="subcat-id">
                                         <label><strong>{{trans('file.Sub Category')}}</strong></label>
