@@ -19,9 +19,12 @@ class ManagecommissionController extends Controller
     public function index()
     {
         $CommissionMst = CommissionMst::orderBy('created_at' , 'desc')->get()->toArray();
-        print_r($CommissionMst); exit;
+        print_r($CommissionMst);
+        foreach($CommissionMst as $key=>$val){
+            print_r($val);
+        }
 
-
+        exit;
 
         return view('managecommission.index', compact('credit_packages'));
     }
