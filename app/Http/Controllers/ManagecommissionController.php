@@ -178,7 +178,7 @@ class ManagecommissionController extends Controller
      // echo $id; exit;
 
         $Category = Category::select('id', 'name')
-                    ->where('id', $id)
+                    ->where('parent_id', $id)
                     ->orderBy('name')
                     ->get();
         return response()->json($Category);
