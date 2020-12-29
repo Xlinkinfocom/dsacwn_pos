@@ -86,7 +86,7 @@
             <br><br>
             <a href="{{ route('password.request') }}" class="forgot-pass">{{trans('file.Forgot Password?')}}</a>
             <p>{{trans('file.Do not have an account?')}} yes</p>
-            <a href="{{url('register')}}" class="signup">{{trans('file.Register')}}</a> | <a href="{{url('seller_register')}}" class="signup">Register Seller</a>
+            <a href="{{url('register')}}" class="signup">{{trans('file.Register')}}</a> | <a href="{{route('seller_register')}}" class="signup">Register Seller</a>
           </div>
           <div class="copyrights text-center">
             <p>{{trans('file.Developed By')}} <a href="https://www.sunshiene.com/" class="external">Sunshiene Softech</a></p>
