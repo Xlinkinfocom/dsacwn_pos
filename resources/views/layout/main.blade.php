@@ -888,9 +888,9 @@
                 ['role_id', $role->id]
               ])->first();
               ?>
-              @if($role->id <= 2) <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
+               <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
           </li>
-          @endif
+          
           @if($warehouse_permission_active)
           <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
           @endif
