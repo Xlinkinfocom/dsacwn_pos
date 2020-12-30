@@ -117,6 +117,119 @@ class RoleController extends Controller
         else
             $role->revokePermissionTo('products-delete');
 
+
+            if($request->has('seller-index')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-index']);
+                if(!$role->hasPermissionTo('seller-index')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-index');
+    
+            if($request->has('seller-add')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-add']);
+                if(!$role->hasPermissionTo('seller-add')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-add');
+            if($request->has('seller-edit')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-edit']);
+                if(!$role->hasPermissionTo('seller-edit')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-edit');
+    
+            if($request->has('seller-delete')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-delete']);
+                if(!$role->hasPermissionTo('seller-delete')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-delete');
+    
+
+
+                if($request->has('manageSubscription-index')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-index']);
+                    if(!$role->hasPermissionTo('manageSubscription-index')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-index');
+        
+                if($request->has('manageSubscription-add')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-add']);
+                    if(!$role->hasPermissionTo('manageSubscription-add')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-add');
+                if($request->has('manageSubscription-edit')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-edit']);
+                    if(!$role->hasPermissionTo('manageSubscription-edit')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-edit');
+        
+                if($request->has('manageSubscription-delete')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-delete']);
+                    if(!$role->hasPermissionTo('manageSubscription-delete')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-delete');
+
+
+                    if($request->has('manageCommission-index')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-index']);
+                        if(!$role->hasPermissionTo('manageCommission-index')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-index');
+            
+                    if($request->has('manageCommission-add')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-add']);
+                        if(!$role->hasPermissionTo('manageCommission-add')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-add');
+                    if($request->has('manageCommission-edit')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-edit']);
+                        if(!$role->hasPermissionTo('manageCommission-edit')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-edit');
+            
+                    if($request->has('manageCommission-delete')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-delete']);
+                        if(!$role->hasPermissionTo('manageCommission-delete')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-delete');
+
+
+
+
+
         if($request->has('purchases-index')){
             $permission = Permission::firstOrCreate(['name' => 'purchases-index']);
             if(!$role->hasPermissionTo('purchases-index')){

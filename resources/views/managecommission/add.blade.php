@@ -9,38 +9,63 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h4>{{trans('file.Add Subscription Plan')}}</h4>
+                        <h4>{{trans('file.Add Commission')}}</h4>
                     </div>
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
-                        <form class="form-horizontal" action="{{route('package.create')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form class="form-horizontal" action="{{route('managecommission.create')}}" method="POST" enctype="multipart/form-data" role="form">
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="form-group" id="category-id">
+                                        <label><strong>{{trans('file.Category')}}</strong>*</label>
+                                        <input type="hidden" name="category_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Category">
+                                        @foreach($category as $Categorys)
+                                            <option value="{{$Categorys->id}}">{{$Categorys->name}}</option>
+                                        @endforeach                                         
+                                        </select>
+                                        @if($errors->has('category'))
+                                        <span>
+                                            <strong>{{ $errors->first('category') }}</strong>
+                                         </span>
+                                         @endif
+                                    </div>
+                                    <div class="form-group" id="subcat-id">
+                                        <label><strong>{{trans('file.Sub Category')}}</strong></label>
+                                        <input type="hidden" name="subcat_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                                        <select name="subcat" id="subcat" class="selectpicker form-control" data-live-search="true" 
+                                        data-live-search-style="begins" title="Select Sub Category...">
+                                          {{-- @foreach($lims_biller_list as $biller)
+                                              <option value="{{$biller->id}}">{{$biller->name}}</option>
+                                          @endforeach --}}                                          
+                                        </select>
+                                    </div>                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Name')}} *</strong> </label>
-										<input type="text" value="" name="name" id="name" placeholder="Name" required class="form-control">
-										@if($errors->has('name'))
+                                        <label><strong>{{trans('file.Commssion')}} *</strong></label>
+                                        <input type="text" value="" name="commssion" id="commssion" placeholder="Commssion" required class="form-control">
+                                        @if($errors->has('commssion'))
                                        <span>
-                                           <strong>{{ $errors->first('name') }}</strong>
+                                           <strong>{{ $errors->first('commssion') }}</strong>
                                         </span>
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Description')}} *</strong> </label>
-										<input type="text" value="" name="description" id="description" placeholder="Plan Description" required class="form-control">
-										@if($errors->has('description'))
+                                        <label><strong>{{trans('file.Payment Fee')}} *</strong></label>
+                                        <input type="text" value="" name="payment_fee" id="payment_fee" placeholder="Payment Fee" required class="form-control">
+                                        @if($errors->has('payment_fee'))
                                        <span>
-                                           <strong>{{ $errors->first('description') }}</strong>
+                                           <strong>{{ $errors->first('payment_fee') }}</strong>
                                         </span>
                                         @endif
-                                    </div>                                         
+                                    </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Plan Value Per Month')}} *</strong></label>
-                                        <input type="text" value="" name="no_of_credit" id="no_of_credit" placeholder="Plan Value Per Month" required class="form-control">
-                                        @if($errors->has('no_of_credit'))
+                                        <label><strong>{{trans('file.Vat')}} *</strong></label>
+                                        <input type="text" value="" name="vat" id="vat" placeholder="Vat" required class="form-control">
+                                        @if($errors->has('vat'))
                                        <span>
-                                           <strong>{{ $errors->first('no_of_credit') }}</strong>
+                                           <strong>{{ $errors->first('vat') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -52,8 +77,8 @@
                                     <div class="form-group row">
                                         <label for="zipcode" class="col-xs-2 col-form-label"></label>
                                         <div class="col-xs-10">
-                                            <button type="submit" class="btn btn-primary">Add Subscription Plan</button>
-                                            <a href="{{route('package.index')}}" class="btn btn-default">Cancel</a>
+                                            <button type="submit" class="btn btn-primary">Add Commission</button>
+                                            <a href="{{route('managecommission.index')}}" class="btn btn-default">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -67,5 +92,35 @@
     </div>
 </section>
 
+<script>
+$('#category').on('change', function() {
+           var id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('managecommission.getsubCat',['id'=>'']) }}/"+id,
+               type: "GET",
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#subcat').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#subcat").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                   }
+               }
+           });
+       });
+
+
+</script>
 
 @endsection

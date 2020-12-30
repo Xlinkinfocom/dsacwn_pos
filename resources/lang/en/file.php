@@ -588,7 +588,10 @@ return [
 	"Subscription List"=>"Subscription List",
 	"Subscription Add"=>"Subscription Add",
 	"Add Commission"=>"Add Commission",
-	"Commission List"=>"Commission List"
+	"Commission List"=>"Commission List",
+	"Seller"=>"Seller",
+	"Manage Seller Subscription"=>"Manage Seller Subscription",
+	"Manage Seller Commission"=>"Manage Seller Commission"
 	
 ];
 ?>
