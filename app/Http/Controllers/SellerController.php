@@ -225,7 +225,7 @@ class SellerController extends Controller
             $states = State::select('id', 'name')->orderBy('name')->get();
             $seller = array();
             $seller_arr = Seller::where('user_id', $id)->get();
-            if(!empty($seller_arr))
+            if($seller_arr)
             {
                 dd($seller_arr);
                 die();
