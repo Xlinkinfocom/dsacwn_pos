@@ -227,6 +227,9 @@ class SellerController extends Controller
             $seller_arr = Seller::where('user_id', $id)->get();
             $seller = $seller_arr[0];
 
+            dd($seller_arr[0]);
+            die();
+
             $districts = District::select('id', 'name')
                     ->where('state_id', $seller->state_id)
                     ->orderBy('name')
@@ -274,6 +277,8 @@ class SellerController extends Controller
             $input['password'] = bcrypt($request['password']);
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);
+
+        
         return redirect('seller')->with('message2', 'Data updated successfullly');
     }
     public function importCustomer(Request $request)
