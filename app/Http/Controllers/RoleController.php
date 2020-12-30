@@ -117,6 +117,44 @@ class RoleController extends Controller
         else
             $role->revokePermissionTo('products-delete');
 
+
+            if($request->has('seller-index')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-index']);
+                if(!$role->hasPermissionTo('seller-index')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-index');
+    
+            if($request->has('seller-add')){
+                $permission = Permission::firstOrCreate(['name' => 'seller-add']);
+                if(!$role->hasPermissionTo('seller-add')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-add');
+            if($request->has('seller-edit')){
+                $permission = Permission::firstOrCreate(['name' => 'products-edit']);
+                if(!$role->hasPermissionTo('seller-edit')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-edit');
+    
+            if($request->has('seller-delete')){
+                $permission = Permission::firstOrCreate(['name' => 'products-delete']);
+                if(!$role->hasPermissionTo('seller-delete')){
+                    $role->givePermissionTo($permission);
+                }
+            }
+            else
+                $role->revokePermissionTo('seller-delete');
+    
+
+
         if($request->has('purchases-index')){
             $permission = Permission::firstOrCreate(['name' => 'purchases-index']);
             if(!$role->hasPermissionTo('purchases-index')){
