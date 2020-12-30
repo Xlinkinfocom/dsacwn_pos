@@ -395,27 +395,78 @@
             </ul>
           </li>
           @endif
-
+          <?php
+          $index_permission = DB::table('permissions')->where('name', 'manageSubscription-index')->first();
+          $index_permission_active = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission->id],
+            ['role_id', $role->id]
+          ])->first();
+          $index_permission_add = DB::table('permissions')->where('name', 'manageSubscription-add')->first();
+          $index_permission_active_add = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission_add->id],
+            ['role_id', $role->id]
+          ])->first();
+          ?>
+            @if($index_permission_active || $index_permission_active_add)
           <li class=""><a href="#subscription" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>{{trans('file.Manage Subscription')}}</span></a>
             <ul id="subscription" class="collapse list-unstyled ">
               @if($index_permission_active)
               <li id="subscription-list-menu"><a href="{{route('package.index')}}">{{trans('file.Subscription List')}}</a></li>
+              @endif
+              @if($index_permission_active_add)
               <li id="subscription-list-menu"><a href="{{route('package.create')}}">{{trans('file.Subscription Add')}}</a></li>
               @endif
             </ul>
           </li>
+          @endif
+          <?php
+          $index_permission = DB::table('permissions')->where('name', 'seller-index')->first();
+          $index_permission_active = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission->id],
+            ['role_id', $role->id]
+          ])->first();
+          $index_permission_add = DB::table('permissions')->where('name', 'seller-add')->first();
+          $index_permission_active_add = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission_add->id],
+            ['role_id', $role->id]
+          ])->first();
+          ?>
+          @if($index_permission_active || $index_permission_active_add)
           <li class=""><a href="#seller" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>Manage Seller</span></a>
             <ul id="seller" class="collapse list-unstyled ">
+              @if($index_permission_active)
               <li id="seller-list-menu"><a href="{{route('seller.index')}}">{{trans('file.Seller List')}}</a></li>
+              @endif
+              @if($index_permission_active_add)
               <li id="seller-create-menu"><a href="{{route('seller.create')}}">{{trans('file.Add Seller')}}</a></li>
+              @endif
             </ul>
           </li>
+          @endif
+          <?php
+          $index_permission = DB::table('permissions')->where('name', 'managecommission-index')->first();
+          $index_permission_active = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission->id],
+            ['role_id', $role->id]
+          ])->first();
+          $index_permission_add = DB::table('permissions')->where('name', 'managecommission-add')->first();
+          $index_permission_active_add = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission_add->id],
+            ['role_id', $role->id]
+          ])->first();
+          ?>
+          @if($index_permission_active || $index_permission_active_add)
           <li class=""><a href="#managecommission" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>Manage Commission</span></a>
             <ul id="managecommission" class="collapse list-unstyled ">
+              @if($index_permission_active)
               <li id="managecommission-list-menu"><a href="{{route('managecommission.index')}}">{{trans('file.Commission List')}}</a></li>
+              @endif
+              @if($index_permission_active_add)
               <li id="managecommission-create-menu"><a href="{{route('managecommission.create')}}">{{trans('file.Add Commission')}}</a></li>
+              @endif
             </ul>
           </li>
+          @endif
 
 
 
