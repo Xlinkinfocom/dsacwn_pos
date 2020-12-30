@@ -227,6 +227,8 @@ class SellerController extends Controller
             $seller_arr = Seller::where('user_id', $id)->get();
             if(!empty($seller_arr))
             {
+                dd($seller_arr);
+                die();
                 $seller = $seller_arr[0];
             }
            
