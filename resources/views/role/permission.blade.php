@@ -865,6 +865,57 @@
 						            </td>
 						        </tr>
 						      
+								<tr>
+						            <td>{{trans('file.Manage Seller Commission')}}</td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageCommission-index", $all_permission))
+								                <input type="checkbox" value="1" id="manageCommission-index" name="manageCommission-index" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageCommission-index" name="manageCommission-index">
+								                @endif
+								                <label for="manageCommission-index"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageCommission-add", $all_permission))
+								                <input type="checkbox" value="1" id="manageCommission-add" name="manageCommission-add" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageCommission-add" name="manageCommission-add">
+								                @endif
+								                <label for="manageCommission-add"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageCommission-edit", $all_permission))
+								                <input type="checkbox" value="1" id="manageCommission-edit" name="manageCommission-edit" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageCommission-edit" name="manageCommission-edit">
+								                @endif
+								                <label for="manageCommission-edit"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageCommission-delete", $all_permission))
+								                <input type="checkbox" value="1" id="manageCommission-delete" name="manageCommission-delete" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageCommission-delete" name="manageCommission-delete">
+								                @endif
+								                <label for="manageCommission-delete"></label>
+								            </div>
+						            	</div>
+						            </td>
+						        </tr>
 
 						        						        <tr>
 						            <td>{{trans('file.Accounting')}}</td>

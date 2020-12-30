@@ -191,6 +191,45 @@ class RoleController extends Controller
                     $role->revokePermissionTo('manageSubscription-delete');
 
 
+                    if($request->has('manageCommission-index')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-index']);
+                        if(!$role->hasPermissionTo('manageCommission-index')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-index');
+            
+                    if($request->has('manageCommission-add')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-add']);
+                        if(!$role->hasPermissionTo('manageCommission-add')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-add');
+                    if($request->has('manageCommission-edit')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-edit']);
+                        if(!$role->hasPermissionTo('manageCommission-edit')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-edit');
+            
+                    if($request->has('manageCommission-delete')){
+                        $permission = Permission::firstOrCreate(['name' => 'manageCommission-delete']);
+                        if(!$role->hasPermissionTo('manageCommission-delete')){
+                            $role->givePermissionTo($permission);
+                        }
+                    }
+                    else
+                        $role->revokePermissionTo('manageCommission-delete');
+
+
+
+
+
         if($request->has('purchases-index')){
             $permission = Permission::firstOrCreate(['name' => 'purchases-index']);
             if(!$role->hasPermissionTo('purchases-index')){
