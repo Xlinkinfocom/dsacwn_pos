@@ -811,6 +811,58 @@
 								            </div>
 						            	</div>
 						            </td>
+								</tr>
+
+								<tr>
+						            <td>{{trans('file.Manage Seller Subscription')}}</td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageSubscription-index", $all_permission))
+								                <input type="checkbox" value="1" id="manageSubscription-index" name="manageSubscription-index" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageSubscription-index" name="manageSubscription-index">
+								                @endif
+								                <label for="manageSubscription-index"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageSubscription-add", $all_permission))
+								                <input type="checkbox" value="1" id="manageSubscription-add" name="manageSubscription-add" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageSubscription-add" name="manageSubscription-add">
+								                @endif
+								                <label for="manageSubscription-add"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageSubscription-edit", $all_permission))
+								                <input type="checkbox" value="1" id="manageSubscription-edit" name="manageSubscription-edit" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageSubscription-edit" name="manageSubscription-edit">
+								                @endif
+								                <label for="manageSubscription-edit"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("manageSubscription-delete", $all_permission))
+								                <input type="checkbox" value="1" id="manageSubscription-delete" name="manageSubscription-delete" checked>
+								                @else
+								                <input type="checkbox" value="1" id="manageSubscription-delete" name="manageSubscription-delete">
+								                @endif
+								                <label for="manageSubscription-delete"></label>
+								            </div>
+						            	</div>
+						            </td>
 						        </tr>
 						      
 

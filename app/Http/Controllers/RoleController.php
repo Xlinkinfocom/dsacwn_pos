@@ -136,7 +136,7 @@ class RoleController extends Controller
             else
                 $role->revokePermissionTo('seller-add');
             if($request->has('seller-edit')){
-                $permission = Permission::firstOrCreate(['name' => 'products-edit']);
+                $permission = Permission::firstOrCreate(['name' => 'seller-edit']);
                 if(!$role->hasPermissionTo('seller-edit')){
                     $role->givePermissionTo($permission);
                 }
@@ -145,7 +145,7 @@ class RoleController extends Controller
                 $role->revokePermissionTo('seller-edit');
     
             if($request->has('seller-delete')){
-                $permission = Permission::firstOrCreate(['name' => 'products-delete']);
+                $permission = Permission::firstOrCreate(['name' => 'seller-delete']);
                 if(!$role->hasPermissionTo('seller-delete')){
                     $role->givePermissionTo($permission);
                 }
@@ -153,6 +153,42 @@ class RoleController extends Controller
             else
                 $role->revokePermissionTo('seller-delete');
     
+
+
+                if($request->has('manageSubscription-index')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-index']);
+                    if(!$role->hasPermissionTo('manageSubscription-index')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-index');
+        
+                if($request->has('manageSubscription-add')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-add']);
+                    if(!$role->hasPermissionTo('manageSubscription-add')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-add');
+                if($request->has('manageSubscription-edit')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-edit']);
+                    if(!$role->hasPermissionTo('manageSubscription-edit')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-edit');
+        
+                if($request->has('manageSubscription-delete')){
+                    $permission = Permission::firstOrCreate(['name' => 'manageSubscription-delete']);
+                    if(!$role->hasPermissionTo('manageSubscription-delete')){
+                        $role->givePermissionTo($permission);
+                    }
+                }
+                else
+                    $role->revokePermissionTo('manageSubscription-delete');
 
 
         if($request->has('purchases-index')){
