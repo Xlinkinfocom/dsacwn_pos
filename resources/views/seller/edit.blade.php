@@ -53,18 +53,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address')}} *</strong> </label>
-                                        <input type="text" name="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address_1}}">
+                                        <input type="text" name="address1" id="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address_1}}">
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
-                                        <input type="text" name="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address_2}}">
+                                        <input type="text" name="address2" id="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address_2}}">
                                     </div>
 
                                     <div class="form-group" id="country-id">
                                         <label><strong>{{trans('file.Country')}}</strong></label>
                                         <input type="hidden" name="country_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="country" class="selectpicker form-control" data-live-search="true" 
+                                        <select name="country" id="country" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
-                                        <input type="text" name="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{$seller->zip_code}}">
+                                        <input type="text" name="zipcode" id="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{$seller->zip_code}}">
                                     </div>
                                     
                                     <div class="form-group">
@@ -135,17 +135,17 @@
                                     </div>
                                     <div class="form-group">
                                         @if($seller->is_kyc_verified)
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="1" checked>
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="1" checked>
                                         @else
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" value="0">
+                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="0">
                                         @endif
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
                                     <div class="form-group">
                                         @if($seller->is_active)
-                                        <input class="mt-2" type="checkbox" name="is_active" value="1" checked>
+                                        <input class="mt-2" type="checkbox" name="is_active"  id="is_active" value="1" checked>
                                         @else
-                                        <input class="mt-2" type="checkbox" name="is_active" value="0">
+                                        <input class="mt-2" type="checkbox" name="is_active" id="is_active"  value="0">
                                         @endif
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
@@ -199,7 +199,7 @@
                                 <div class="form-group" id="bcountry-id">
                                         <label><strong>{{trans('file.Country')}}</strong></label>
                                         <input type="hidden" name="bcountry_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
-                                        <select name="bcountry" class="selectpicker form-control" data-live-search="true" 
+                                        <select name="bcountry"  id="bcountry" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
                                           {{-- @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
@@ -322,6 +322,112 @@
         $("input[name='password']").val(data);
       });
     });
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#genbutton').on("click", function(){
+            $.get('genpass', function(data){
+                $("input[name='password']").val(data);
+            });
+        });
+
+       $('#state').on('change', function() {
+           var state_id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('get-districts') }}",
+               type: "GET",
+               data: { state_id: state_id },
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#district').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#district").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                   }
+               }
+           });
+       });
+
+
+       $('#bstate').on('change', function() {
+           var state_id = $(this).val();
+            var html_district = "";
+           $.ajax({
+               url: "{{ route('get-districts') }}",
+               type: "GET",
+               data: { state_id: state_id },
+               success: function(response) {
+                   if(response.length >= 1)
+                   {
+                    //console.log(response);
+                    $('#bdistrict').find('option').remove();
+                    //$("#chapter_id").remove();
+                    var html_option = "";                    
+                       for(var i=0; i<response.length; i++)
+                       {
+                            var id = response[i].id;
+                            var name = response[i].name;
+
+                            html_option += '<option value="'+id+'">'+name+'</option>';
+                       }
+                       $("#bdistrict").append(html_option);
+                       $('.selectpicker').selectpicker('refresh');
+                   }
+               }
+           });
+       });
+
+       $('#chkAdd').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+           {
+               $('#baddress1').val($('#address1').val());
+               $('#baddress2').val($('#address2').val());
+               $('#bcountry option:selected').text($('#country option:selected').text());
+               $('#bcountry option:selected').val($('#country option:selected').val());               
+               $('#bstate option:selected').text($('#state option:selected').text());
+               $('#bstate option:selected').val($('#state option:selected').val());
+               $('#bdistrict option:selected').text($('#district option:selected').text());
+               $('#bdistrict option:selected').val($('#district option:selected').val());
+               $('.selectpicker').selectpicker('refresh');
+               $('#bzipcode').val($('#zipcode').val());
+           }
+       });
+
+       $('#is_kyc_verified').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).val('1');
+            }
+            else
+            {
+                $(this).val('0');
+            }
+       });
+
+       $('#is_active').on('click', function() {
+           if($(this).prop('checked') === true || $(this).is(":checked") === true)
+            {
+                $(this).val('1');
+            }
+            else
+            {
+                $(this).val('0');
+            }
+       });
+   });
+</script>
 
 </script>
 @endsection

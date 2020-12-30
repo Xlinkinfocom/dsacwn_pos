@@ -217,25 +217,30 @@ class SellerController extends Controller
     }
 
     public function edit($id)
-    {
+    {        
         $role = Role::find(Auth::user()->role_id);
-        if($role->hasPermissionTo('users-edit')){
+        if($role->hasPermissionTo('users-edit')){            
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
             $seller = array();
+            $districts = array();
+            $bdistricts = array();
             $seller_arr = Seller::where('user_id', $id)->get();
-            $seller = $seller_arr[0];
-
-            $districts = District::select('id', 'name')
+            if ($seller_arr->isNotEmpty())
+            {                
+                $seller = $seller_arr[0];
+                $districts = District::select('id', 'name')
                     ->where('state_id', $seller->state_id)
                     ->orderBy('name')
                     ->get();       
 
-            $bdistricts = District::select('id', 'name')
-            ->where('state_id', $seller->bstate_id)
-                    ->orderBy('name')
-                    ->get();
+                $bdistricts = District::select('id', 'name')
+                ->where('state_id', $seller->bstate_id)
+                        ->orderBy('name')
+                        ->get();
+            }
+                       
             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
@@ -274,6 +279,8 @@ class SellerController extends Controller
             $input['password'] = bcrypt($request['password']);
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);
+
+        
         return redirect('seller')->with('message2', 'Data updated successfullly');
     }
     public function importCustomer(Request $request)
