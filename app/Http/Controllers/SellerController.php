@@ -224,22 +224,23 @@ class SellerController extends Controller
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
             $seller = array();
+            $districts = array();
+            $bdistricts = array();
             $seller_arr = Seller::where('user_id', $id)->get();
-            if (!$seller_arr->isEmpty())
+            if ($seller_arr->isNotEmpty())
             {                
                 $seller = $seller_arr[0];
-            }
-           
-
-            $districts = District::select('id', 'name')
+                $districts = District::select('id', 'name')
                     ->where('state_id', $seller->state_id)
                     ->orderBy('name')
                     ->get();       
 
-            $bdistricts = District::select('id', 'name')
-            ->where('state_id', $seller->bstate_id)
-                    ->orderBy('name')
-                    ->get();
+                $bdistricts = District::select('id', 'name')
+                ->where('state_id', $seller->bstate_id)
+                        ->orderBy('name')
+                        ->get();
+            }
+                       
             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
