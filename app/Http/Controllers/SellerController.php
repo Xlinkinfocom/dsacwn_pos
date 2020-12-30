@@ -217,8 +217,7 @@ class SellerController extends Controller
     }
 
     public function edit($id)
-    {
-        
+    {        
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('users-edit')){            
             $lims_user_data = User::find($id);
@@ -226,12 +225,11 @@ class SellerController extends Controller
             $states = State::select('id', 'name')->orderBy('name')->get();
             $seller = array();
             $seller_arr = Seller::where('user_id', $id)->get();
-            dd($seller_arr);
-            die();
-            $seller = $seller_arr[0];
-
-            dd($seller_arr[0]);
-            die();
+            if(!empty($seller_arr))
+            {
+                $seller = $seller_arr[0];
+            }
+           
 
             $districts = District::select('id', 'name')
                     ->where('state_id', $seller->state_id)
