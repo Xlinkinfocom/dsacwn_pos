@@ -218,10 +218,11 @@ class SellerController extends Controller
 
     public function edit($id)
     {
-        dd($id);
-        die();
+        
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('users-edit')){
+            dd($role);
+            die();
             $lims_user_data = User::find($id);
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
