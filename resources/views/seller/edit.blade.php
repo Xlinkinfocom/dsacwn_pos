@@ -438,7 +438,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" id="chkAdd" name="add" class="sameaddress"></label>                                     
+                                            <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox"  name="add" class="sameaddress"></label>                                     
                                             <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{$seller->baddress1}}"> 
                                         </div>
                                     
