@@ -61,7 +61,7 @@
                                 @endif
                                
                                 <li>
-                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
+                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.Login')}}</a>
                                 </li>
                                
                                 <li class="divider"></li>
