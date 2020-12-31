@@ -135,20 +135,14 @@
                                         <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
                                         <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="">
                                     </div>
-                                    <div class="form-group">
-                                        @if($seller->is_kyc_verified)
-                                        <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="1" checked>
-                                        @else
+                                    <div class="form-group">                                       
                                         <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="0">
-                                        @endif
+                                        
                                         <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
                                     </div>
                                     <div class="form-group">
-                                        @if($seller->is_active)
-                                        <input class="mt-2" type="checkbox" name="is_active"  id="is_active" value="1" checked>
-                                        @else
-                                        <input class="mt-2" type="checkbox" name="is_active" id="is_active"  value="0">
-                                        @endif
+                                        
+                                        <input class="mt-2" type="checkbox" name="is_active" id="is_active"  value="0">                                       
                                         <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
                                     </div>
                                     <div class="form-group">
