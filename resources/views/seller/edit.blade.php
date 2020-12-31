@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                @if($isNew == '0')
+                @if($isNew === true)
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h4>{{trans('file.Update User')}}</h4>
