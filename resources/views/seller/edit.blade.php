@@ -167,7 +167,7 @@
                                         <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
                                         <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                                           @foreach($lims_role_list as $role)
-                                              <option value="{{$role->id}}" >{{$role->name}}</option>
+                                              <option value="{{$role->id}}" {{ $lims_user_data->role_id == $role->id ? 'selected' : '' }}>{{$role->name}}</option>
                                           @endforeach
                                         </select>
                                     </div>
