@@ -525,9 +525,7 @@
     $("ul#people").siblings('a').attr('aria-expanded','true');
     $("ul#people").addClass("show");
     $('#biller-id').hide();
-    $('#warehouseId').hide();
-    
-    
+    $('#warehouseId').hide();   
 
     $('select[name=role_id]').val($("input[name='role_id_hidden']").val());
     if($('select[name=role_id]').val() > 2){
@@ -559,7 +557,7 @@
       });
     });
 
-    <script type="text/javascript">
+   
     $(document).ready(function () {
 
         $('#genbutton').on("click", function(){
@@ -665,5 +663,5 @@
    });
 </script>
 
-</script>
+
 @endsection
