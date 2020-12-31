@@ -59,6 +59,11 @@
                                 	<a href="{{ route('seller.edit', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
                                 </li>
                                 @endif
+                               
+                                <li>
+                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.Login')}}</a>
+                                </li>
+                               
                                 <li class="divider"></li>
                                 @if(in_array("users-delete", $all_permission))
                                 {{ Form::open(['route' => ['seller.destroy', $user->id], 'method' => 'DELETE'] ) }}

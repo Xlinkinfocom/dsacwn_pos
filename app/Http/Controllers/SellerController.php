@@ -11,7 +11,8 @@ use App\State;
 use App\District;
 use App\Seller;
 use Illuminate\Validation\Rule;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+//use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Mail\UserNotification;
@@ -22,6 +23,7 @@ use App\Warehouse;
 use Hash;
 use Keygen;
 
+use Illuminate\Validation\ValidationException;
 
 class SellerController extends Controller
 {
@@ -437,4 +439,34 @@ class SellerController extends Controller
         $lims_customer_data->save();
         return redirect('customer')->with('not_permitted','Data deleted Successfully');
     }
+     public function login(Request $request,$id)
+    {
+        # code...
+       
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+       
+        if ($this->byID($id)) {
+        return  redirect('/');
+        }
+    }
+    protected function byID($id)
+    {
+        return Auth::loginUsingId($id);
+    }
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+       // $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
+    }
+
 }
