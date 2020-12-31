@@ -383,6 +383,7 @@ class SellerController extends Controller
                             ->select('id')
                             ->where('user_id', $id)->first();
             dd($seller_id->id);
+            die();
         }
 
         
