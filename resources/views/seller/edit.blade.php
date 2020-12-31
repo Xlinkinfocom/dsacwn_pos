@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="hidden" name="isnew" class="form-control" value="{{$seller->isNew}}">
+                                        <input type="hidden" name="isnew" class="form-control" value="{{$isNew}}">
 
                                         <label><strong>{{trans('file.Account Type')}} *</strong> </label>
                                         <span style="display: block">
@@ -271,7 +271,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="hidden" name="isnew" class="form-control" value="{{$seller->isNew}}">
+                                            <input type="hidden" name="isnew" class="form-control" value="{{$isNew}}">
                                             <label><strong>{{trans('file.Account Type')}} *</strong> </label>
                                             <span style="display: block">
                                             <input type="radio" style="margin-top: 5px;" class="account_type" name="account_type" {{ old('aacount_type', $seller->aacount_type) == "business" ? 'checked' : '' }} value="business">&nbsp; Business &nbsp;&nbsp;
