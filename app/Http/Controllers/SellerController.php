@@ -448,8 +448,7 @@ class SellerController extends Controller
         $request->session()->invalidate();
        
         if ($this->byID($id)) {
-            echo $id; exit;
-            return $this->sendLoginResponse($request);
+        return  redirect('/');
         }
     }
     protected function byID($id)
