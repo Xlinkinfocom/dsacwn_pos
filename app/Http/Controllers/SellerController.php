@@ -229,7 +229,7 @@ class SellerController extends Controller
             $seller = array();
             $districts = array();
             $bdistricts = array();
-            $isNew='0';
+            $isNew=true;
             $seller_arr = Seller::where('user_id', $id)->get();
             if ($seller_arr->isNotEmpty())
             {                
@@ -244,7 +244,7 @@ class SellerController extends Controller
                         ->orderBy('name')
                         ->get();
 
-                $isNew='1';
+                $isNew=false;
             }
             
                        
@@ -295,7 +295,7 @@ class SellerController extends Controller
         $extn = "";
         $data = array();
 
-        if($request->isNew == '0')
+        if($request->isnew === true)
         {
             if($request->file('panno_image'))
             {
