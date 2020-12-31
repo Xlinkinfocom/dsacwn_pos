@@ -295,7 +295,7 @@ class SellerController extends Controller
         $extn = "";
         $data = array();
 
-        if($request->isnew === true)
+        if($request->isnew)
         {
             if($request->file('panno_image'))
             {
