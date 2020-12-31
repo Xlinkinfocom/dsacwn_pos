@@ -22,6 +22,7 @@ use App\Biller;
 use App\Warehouse;
 use Hash;
 use Keygen;
+use DB;
 
 use Illuminate\Validation\ValidationException;
 
@@ -286,9 +287,111 @@ class SellerController extends Controller
         $lims_user_data = User::find($id);
         $lims_user_data->update($input);
 
+        if($request->isNew === true)
+        {
+            $panno_image = "";
+            $citizenship_document = "";
+            $passportsizephoto = "";
+            $gst_document = "";
+            $check_image = "";
+            $extn = "";
+            $data = array();
+
+            if($request->file('panno_image'))
+            {
+                $extn = $request->file('panno_image')->getClientOriginalExtension();
+                $panno_image = "panno_".rand().".".$extn;
+                $request->file('panno_image')->move('public/images/seller/panno_img', $panno_image);           
+            }
+
+            if($request->file('gst_document'))
+            {
+                $extn = $request->file('gst_document')->getClientOriginalExtension();
+                $gst_document = "gst_".rand().".".$extn;           
+                $request->file('gst_document')->move('public/images/seller/gst_doc/', $gst_document);
+            }
+
+            if($request->file('citizenship_document'))
+            {
+                $extn = $request->file('citizenship_document')->getClientOriginalExtension();
+                $citizenship_document = "citizenship_".rand().".".$extn;           
+                $request->file('citizenship_document')->move('public/images/seller/citizen_doc/', $citizenship_document);
+            }
+
+            if($request->file('passportsizephoto'))
+            {
+                $extn = $request->file('passportsizephoto')->getClientOriginalExtension();
+                $passportsizephoto = "passportsize_".rand().".".$extn;            
+                $request->file('passportsizephoto')->move('public/images/seller/passport_photo/', $passportsizephoto);
+            }
+
+            if($request->file('check_image'))
+            {
+                $extn = $request->file('check_image')->getClientOriginalExtension();
+                $check_image = "check_".rand().".".$extn;           
+                $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
+            }
+
+            $seller = New Seller;
+            $seller->user_id = $id;
+            $seller->aacount_type = $request->account_type;
+            $seller->address_1 = $request->address1;
+            $seller->address_2 = $request->address2;
+            $seller->country = $request->country;
+            $seller->state_id = $request->state;
+            $seller->district_id = $request->district;
+            $seller->zip_code = $request->zipcode;
+            $seller->citizennumber = $request->citizennumber;
+            $seller->panno = $request->panno;
+            $seller->vatno = $request->vatno;
+            $seller->gstno = $request->gstno;
+            $seller->bankaccountname = $request->bankaccountname;
+            $seller->bankname = $request->bankname;
+            $seller->accountnumber = $request->accountnumber;
+            $seller->branchname = $request->branchname;
+            $seller->business_name = $request->business_name;
+            $seller->seller_name = $request->seller_name;
+            $seller->company_name = $request->company_name;
+            $seller->areaofinterest = $request->areaofinterest;
+            $seller->baddress1 = $request->baddress1;
+            $seller->baddress2 = $request->baddress2;
+            $seller->bcountry = $request->bcountry;
+            $seller->bstate_id = $request->bstate;
+            $seller->bdistrict_id = $request->bdistrict;
+            $seller->bzipcode = $request->bzipcode;
+            $seller->panno_image = $panno_image;
+            $seller->citizenship_document = $citizenship_document;
+            $seller->passportsizephoto = $passportsizephoto;
+            $seller->gst_document = $gst_document;
+            $seller->check_image = $check_image;
+            $seller->is_kyc_verified = $request->is_kyc_verified;
+            $seller->is_active = $request->is_active;
+
+            if($seller->save())
+            {
+                return redirect('seller')->with('message', 'Seller updated successfully.');
+            }
+            else
+            {
+                return redirect('seller')->with('message', 'Seller not updated successfully.');
+            }
+
+        }
+        else
+        {
+            $seller_id = DB::table('sellers')
+                            ->select('id')
+                            ->where('user_id', $id)->first();
+            dd($seller_id->id);
+        }
+
+        
+
         
         return redirect('seller')->with('message2', 'Data updated successfullly');
     }
+
+
     public function importCustomer(Request $request)
     {
         $role = Role::find(Auth::user()->role_id);
