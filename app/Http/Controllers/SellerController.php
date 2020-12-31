@@ -228,6 +228,7 @@ class SellerController extends Controller
             $seller = array();
             $districts = array();
             $bdistricts = array();
+            $isNew=true;
             $seller_arr = Seller::where('user_id', $id)->get();
             if ($seller_arr->isNotEmpty())
             {                
@@ -241,13 +242,16 @@ class SellerController extends Controller
                 ->where('state_id', $seller->bstate_id)
                         ->orderBy('name')
                         ->get();
+
+                $isNew=false;
             }
+            
                        
             
         //    $lims_biller_list = Biller::where('is_active', true)->get();
           //  $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             //return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'lims_biller_list', 'lims_warehouse_list'));
-            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'seller', 'states', 'districts', 'bdistricts', 'lims_warehouse_list'));
+            return view('seller.edit', compact('lims_user_data', 'lims_role_list', 'seller', 'states', 'districts', 'bdistricts', 'isNew', 'lims_warehouse_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
