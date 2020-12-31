@@ -446,8 +446,9 @@ class SellerController extends Controller
         $this->guard()->logout();
 
         $request->session()->invalidate();
-        echo $id; exit;
+       
         if ($this->byID($id)) {
+            echo $id; exit;
             return $this->sendLoginResponse($request);
         }
     }
