@@ -16,13 +16,10 @@
                         <form class="form-horizontal" action="{{route('package.create')}}" method="POST" enctype="multipart/form-data" role="form">
                             {{csrf_field()}}
                             <div class="card">
-                                <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+                                <h3 class="card-header">Featured</h3>
                                 <div class="card-body">
-                                  <h4 class="card-title">Card title</h4>
-                                  <p class="card-text">
-                                    Some quick example text to build on the card title
-                                    and make up the bulk of the card's content.
-                                  </p>
+                                  <h4 class="card-title">Special title treatment</h4>
+                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                   <a href="#!" class="btn btn-primary">Go somewhere</a>
                                 </div>
                               </div>
