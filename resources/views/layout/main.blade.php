@@ -438,7 +438,7 @@
           <li class=""><a href="#subscription" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>{{trans('file.My Subscription')}}</span></a>
             <ul id="subscription" class="collapse list-unstyled ">
               @if($index_permission_active)
-              <li id="subscription-list-menu"><a href="{{route('sellerpackage.index')}}">{{trans('file.Subscription List')}}</a></li>
+              <li id="subscription-list-menu"><a href="{{route('sellerpackage.add')}}">{{trans('file.Subscription List')}}</a></li>
               @endif
               @if($index_permission_active_add)
               <li id="subscription-list-menu"><a href="{{route('sellerpackage.add')}}">{{trans('file.Subscription Add')}}</a></li>
