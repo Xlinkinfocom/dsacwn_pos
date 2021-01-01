@@ -15,6 +15,10 @@
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         <form class="form-horizontal" action="{{route('package.create')}}" method="POST" enctype="multipart/form-data" role="form">
                             {{csrf_field()}}
+                            <?php
+                            print_r($credit_packages);
+                            
+                            ?>
                             <div class="card-group">
                                 <div class="card">
                                   <div class="card-body">

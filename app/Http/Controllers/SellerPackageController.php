@@ -32,8 +32,8 @@ class SellerPackageController extends Controller
     {
         //
         try {
-          //  $credit_package = CreditPackageMst::findOrFail($id);
-            return view('sellerpackage.add');
+            $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get();
+            return view('sellerpackage.add',compact('credit_packages'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
