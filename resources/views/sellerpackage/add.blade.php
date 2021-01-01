@@ -13,9 +13,8 @@
                     </div>
                     <div class="card-body">
                       
-                        <form class="form-horizontal" action="{{route('package.create')}}" method="POST" enctype="multipart/form-data" role="form">
-                            {{csrf_field()}}
-                            <div class="card-group">
+                       
+                        <div class="card-group">
                             <?php
                             //print_r($credit_packages);
                             foreach ($credit_packages as $key => $value) {
@@ -26,13 +25,13 @@
                                   <div class="card-body">
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                                     <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <a href="#!" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
+                                    <a href="{{ route('package.edit', $value['credit_package_id']) }}" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
                                   </div>
                                 </div>
                         <?php    }
                             ?>
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
             </div>
