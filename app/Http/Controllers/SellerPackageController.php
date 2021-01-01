@@ -32,7 +32,7 @@ class SellerPackageController extends Controller
     {
         //
         try {
-            $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get();
+            $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get()->toArray();
             return view('sellerpackage.add',compact('credit_packages'));
         } catch (ModelNotFoundException $e) {
             return $e;
