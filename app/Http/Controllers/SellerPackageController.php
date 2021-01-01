@@ -10,7 +10,7 @@ use App\CreditPackageLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class PackageController extends Controller
+class SellerPackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class PackageController extends Controller
         //
         try {
           //  $credit_package = CreditPackageMst::findOrFail($id);
-            return view('package.add');
+            return view('sellerpackage.add');
         } catch (ModelNotFoundException $e) {
             return $e;
         }
