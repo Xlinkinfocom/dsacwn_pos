@@ -312,11 +312,10 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::delete('managecommission/{id}', 'ManagecommissionController@destory')->name('managecommission.destroy');
 	Route::get('managecommission/getsubcategory/{id}','ManagecommissionController@getsubCat')->name('managecommission.getsubCat');
 
-	Route::resource('sellerpackage', 'SellerPackageController');
+	
 
-	Route::post('package/update/{id}', 'PackageController@update')->name('package.update');
+
 	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('sellerpackage.add');
-	Route::post('package/create', 'PackageController@store')->name('package.create');
-	Route::delete('package/{id}', 'PackageController@destory')->name('package.destroy');
+
 });
 
