@@ -17,7 +17,7 @@
                             {{csrf_field()}}
                             <div class="card-group">
                             <?php
-                            print_r($credit_packages);
+                            //print_r($credit_packages);
                             foreach ($credit_packages as $key => $value) {
                                 # code...
                           ?>
