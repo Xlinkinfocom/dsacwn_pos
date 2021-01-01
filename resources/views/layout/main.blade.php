@@ -419,6 +419,37 @@
             </ul>
           </li>
           @endif
+
+
+
+          <?php
+          $index_permission = DB::table('permissions')->where('name', 'mySubscription-index')->first();
+          $index_permission_active = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission->id],
+            ['role_id', $role->id]
+          ])->first();
+          $index_permission_add = DB::table('permissions')->where('name', 'mySubscription-add')->first();
+          $index_permission_active_add = DB::table('role_has_permissions')->where([
+            ['permission_id', $index_permission_add->id],
+            ['role_id', $role->id]
+          ])->first();
+          ?>
+            @if($index_permission_active || $index_permission_active_add)
+          <li class=""><a href="#subscription" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-briefcase"></i><span>{{trans('file.My Subscription')}}</span></a>
+            <ul id="subscription" class="collapse list-unstyled ">
+              @if($index_permission_active)
+              <li id="subscription-list-menu"><a href="{{route('package.index')}}">{{trans('file.Subscription List')}}</a></li>
+              @endif
+              @if($index_permission_active_add)
+              <li id="subscription-list-menu"><a href="{{route('sellerpackage.add')}}">{{trans('file.Subscription Add')}}</a></li>
+              @endif
+            </ul>
+          </li>
+          @endif
+
+
+
+
           <?php
           $index_permission = DB::table('permissions')->where('name', 'seller-index')->first();
           $index_permission_active = DB::table('role_has_permissions')->where([
