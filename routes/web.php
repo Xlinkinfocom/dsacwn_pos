@@ -315,7 +315,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::resource('sellerpackage', 'SellerPackageController');
 
 	Route::post('package/update/{id}', 'PackageController@update')->name('package.update');
-	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('package.add');
+	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('sellerpackage.add');
 	Route::post('package/create', 'PackageController@store')->name('package.create');
 	Route::delete('package/{id}', 'PackageController@destory')->name('package.destroy');
 });
