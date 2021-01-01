@@ -33,7 +33,7 @@ class SellerPackageController extends Controller
     public function buy(Request $request, $id){
           //
           try {
-            $credit_packages = CreditPackageMst::where('credit_packages_id' , $id)->get()->toArray();
+            $credit_packages = CreditPackageMst::where('credit_package_id' , $id)->get()->toArray();
             return view('sellerpackage.add',compact('credit_packages'));
         } catch (ModelNotFoundException $e) {
             return $e;
