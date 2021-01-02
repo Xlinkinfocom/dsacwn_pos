@@ -311,5 +311,12 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('managecommission/create', 'ManagecommissionController@store')->name('managecommission.create');
 	Route::delete('managecommission/{id}', 'ManagecommissionController@destory')->name('managecommission.destroy');
 	Route::get('managecommission/getsubcategory/{id}','ManagecommissionController@getsubCat')->name('managecommission.getsubCat');
+
+	
+
+
+	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('sellerpackage.add');
+	Route::get('sellerpackage/buy/{id}', 'SellerPackageController@buy')->name('sellerpackage.buy');
+
 });
 

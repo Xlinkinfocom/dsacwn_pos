@@ -864,6 +864,58 @@
 						            	</div>
 						            </td>
 						        </tr>
+						    
+								<tr>
+						            <td>{{trans('file.My Subscription')}}</td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("mySubscription-index", $all_permission))
+								                <input type="checkbox" value="1" id="mySubscription-index" name="mySubscription-index" checked>
+								                @else
+								                <input type="checkbox" value="1" id="mySubscription-index" name="mySubscription-index">
+								                @endif
+								                <label for="mySubscription-index"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("mySubscription-add", $all_permission))
+								                <input type="checkbox" value="1" id="mySubscription-add" name="mySubscription-add" checked>
+								                @else
+								                <input type="checkbox" value="1" id="mySubscription-add" name="mySubscription-add">
+								                @endif
+								                <label for="mySubscription-add"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("mySubscription-edit", $all_permission))
+								                <input type="checkbox" value="1" id="mySubscription-edit" name="mySubscription-edit" checked>
+								                @else
+								                <input type="checkbox" value="1" id="mySubscription-edit" name="mySubscription-edit">
+								                @endif
+								                <label for="mySubscription-edit"></label>
+								            </div>
+						            	</div>
+						            </td>
+						            <td class="text-center">
+						                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false">
+							                <div class="checkbox">
+								                @if(in_array("mySubscription-delete", $all_permission))
+								                <input type="checkbox" value="1" id="mySubscription-delete" name="mySubscription-delete" checked>
+								                @else
+								                <input type="checkbox" value="1" id="mySubscription-delete" name="mySubscription-delete">
+								                @endif
+								                <label for="mySubscription-delete"></label>
+								            </div>
+						            	</div>
+						            </td>
+						        </tr>
 						      
 								<tr>
 						            <td>{{trans('file.Manage Seller Commission')}}</td>
