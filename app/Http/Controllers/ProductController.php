@@ -201,7 +201,7 @@ class ProductController extends Controller
             $lims_category_list = Category::where('is_active', true)->get();
             $lims_unit_list = Unit::where('is_active', true)->get();
             $lims_tax_list = Tax::where('is_active', true)->get();
-            $seller_list = Seller::select('user_id', 'seller_name', 'company_name')
+            $seller_list = Seller::select('id', 'seller_name', 'company_name')
                                     ->where('is_active', '1')
                                     ->get();
             return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
@@ -295,7 +295,7 @@ class ProductController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_product_data = Product::where('id', $id)->first();
             $lims_product_variant_data = $lims_product_data->variant()->orderBy('position')->get();
-            $seller_list = Seller::select('user_id', 'seller_name', 'company_name')
+            $seller_list = Seller::select('id', 'seller_name', 'company_name')
             ->where('is_active', '1')
             ->get();
             //return dd($lims_product_variant_data);

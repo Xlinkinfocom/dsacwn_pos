@@ -23,7 +23,7 @@ class Product extends Model
 
     public function seller()
     {
-    	return $this->belongsTo('App\Seller', 'seller_id')->select(['user_id', 'seller_name']);
+    	return $this->belongsTo('App\Seller', 'seller_id')->select(['id', 'seller_name']);
     }
 
     public function unit()
