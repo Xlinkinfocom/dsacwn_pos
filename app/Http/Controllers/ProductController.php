@@ -63,9 +63,7 @@ class ProductController extends Controller
         if($request->is_superadmin == '0')
         {
             $seller_arr = Seller::select('id')
-                        ->where('user_id', $request->user_id)->get();
-            dd($seller_arr);
-            die();
+                        ->where('user_id', $request->user_id)->get();            
             $seller = $seller_arr[0];
            
             $totalData = Product::where('is_active', true)
