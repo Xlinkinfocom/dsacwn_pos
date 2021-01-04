@@ -35,7 +35,8 @@ class ProductController extends Controller
             if(empty($all_permission))
                 $all_permission[] = 'dummy text';
                 $is_superadmin = Auth::user()->is_supersdmin;
-            return view('product.index', compact('all_permission', 'is_superadmin'));
+                $user_id = Auth::user()->id;
+            return view('product.index', compact('all_permission', 'is_superadmin', 'user_id'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
@@ -53,60 +54,125 @@ class ProductController extends Controller
             8 => 'price' 
         );
 
-        echo $request->is_superadmin; 
-        die();
-        
-        $totalData = Product::where('is_active', true)->count();
-        $totalFiltered = $totalData; 
+        $user_id="";
+        $seller_arr = array();
+        $totalData = "";
+        $totalFiltered="";
+        $seller_arr = Seller::where('id', $request->user_id)->get();
+        $seller = $seller_arr[0];
 
-        if($request->input('length') != -1)
-            $limit = $request->input('length');
-        else
+        if($request->is_superadmin == '0')
+        {            
+            $totalData = Product::where('is_active', true)
+                                ->where('seller_id', $seller->id)                            
+                                ->count();
+            $totalFiltered = $totalData; 
+
+            if($request->input('length') != -1)
+                $limit = $request->input('length');
+            else
             $limit = $totalData;
-        $start = $request->input('start');
-        $order = 'products.'.$columns[$request->input('order.0.column')];
-        $dir = $request->input('order.0.dir');
-        if(empty($request->input('search.value'))){
-            $products = Product::with('category', 'brand', 'unit')->offset($start)
-                        ->where('is_active', true)
-                        ->limit($limit)
-                        ->orderBy($order,$dir)
-                        ->get();
+            $start = $request->input('start');
+            $order = 'products.'.$columns[$request->input('order.0.column')];
+            $dir = $request->input('order.0.dir');
+            if(empty($request->input('search.value'))){
+                $products = Product::with('category', 'brand', 'unit')->offset($start)
+                            ->where('is_active', true)
+                            ->where('seller_id', $seller->id)
+                            ->limit($limit)
+                            ->orderBy($order,$dir)
+                            ->get();
+            }
+            else
+            {
+                $search = $request->input('search.value'); 
+                $products =  Product::select('products.*')
+                            ->with('category', 'brand', 'unit')
+                            ->join('categories', 'products.category_id', '=', 'categories.id')
+                            ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                            ->where([
+                                ['products.name', 'LIKE', "%{$search}%"],
+                                ['products.is_active', true],
+                                ['products.seller_id', $seller->id]
+                            ])
+                            ->orWhere([
+                                ['products.code', 'LIKE', "%{$search}%"],
+                                ['products.is_active', true],
+                                ['products.seller_id', $seller->id]
+                            ])
+                            ->orWhere([
+                                ['categories.name', 'LIKE', "%{$search}%"],
+                                ['categories.is_active', true],
+                                ['products.is_active', true],
+                                ['products.seller_id', $seller->id]
+                            ])
+                            ->orWhere([
+                                ['brands.title', 'LIKE', "%{$search}%"],
+                                ['brands.is_active', true],
+                                ['products.is_active', true],
+                                ['products.seller_id', $seller->id]
+                            ])
+                            ->offset($start)
+                            ->limit($limit)
+                            ->orderBy($order,$dir)->get();
+
+                $totalFiltered = Product::
+                                join('categories', 'products.category_id', '=', 'categories.id')
+                                ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                                ->where([
+                                    ['products.name','LIKE',"%{$search}%"],
+                                    ['products.is_active', true],
+                                    ['products.seller_id', $seller->id]
+                                ])
+                                ->orWhere([
+                                    ['products.code', 'LIKE', "%{$search}%"],
+                                    ['products.is_active', true],
+                                    ['products.seller_id', $seller->id]
+                                ])
+                                ->orWhere([
+                                    ['categories.name', 'LIKE', "%{$search}%"],
+                                    ['categories.is_active', true],
+                                    ['products.is_active', true],
+                                    ['products.seller_id', $seller->id]
+                                ])
+                                ->orWhere([
+                                    ['brands.title', 'LIKE', "%{$search}%"],
+                                    ['brands.is_active', true],
+                                    ['products.is_active', true],
+                                    ['products.seller_id', $seller->id]
+                                ])
+                                ->count();
+            }
+
         }
         else
         {
-            $search = $request->input('search.value'); 
-            $products =  Product::select('products.*')
-                        ->with('category', 'brand', 'unit')
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
-                        ->where([
-                            ['products.name', 'LIKE', "%{$search}%"],
-                            ['products.is_active', true]
-                        ])
-                        ->orWhere([
-                            ['products.code', 'LIKE', "%{$search}%"],
-                            ['products.is_active', true]
-                        ])
-                        ->orWhere([
-                            ['categories.name', 'LIKE', "%{$search}%"],
-                            ['categories.is_active', true],
-                            ['products.is_active', true]
-                        ])
-                        ->orWhere([
-                            ['brands.title', 'LIKE', "%{$search}%"],
-                            ['brands.is_active', true],
-                            ['products.is_active', true]
-                        ])
-                        ->offset($start)
-                        ->limit($limit)
-                        ->orderBy($order,$dir)->get();
+            $totalData = Product::where('is_active', true)->count();
+            $totalFiltered = $totalData; 
 
-            $totalFiltered = Product::
-                            join('categories', 'products.category_id', '=', 'categories.id')
+            if($request->input('length') != -1)
+                $limit = $request->input('length');
+            else
+            $limit = $totalData;
+            $start = $request->input('start');
+            $order = 'products.'.$columns[$request->input('order.0.column')];
+            $dir = $request->input('order.0.dir');
+            if(empty($request->input('search.value'))){
+                $products = Product::with('category', 'brand', 'unit')->offset($start)
+                            ->where('is_active', true)
+                            ->limit($limit)
+                            ->orderBy($order,$dir)
+                            ->get();
+            }
+            else
+            {
+                $search = $request->input('search.value'); 
+                $products =  Product::select('products.*')
+                            ->with('category', 'brand', 'unit')
+                            ->join('categories', 'products.category_id', '=', 'categories.id')
                             ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
                             ->where([
-                                ['products.name','LIKE',"%{$search}%"],
+                                ['products.name', 'LIKE', "%{$search}%"],
                                 ['products.is_active', true]
                             ])
                             ->orWhere([
@@ -123,8 +189,38 @@ class ProductController extends Controller
                                 ['brands.is_active', true],
                                 ['products.is_active', true]
                             ])
-                            ->count();
+                            ->offset($start)
+                            ->limit($limit)
+                            ->orderBy($order,$dir)->get();
+
+                $totalFiltered = Product::
+                                join('categories', 'products.category_id', '=', 'categories.id')
+                                ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                                ->where([
+                                    ['products.name','LIKE',"%{$search}%"],
+                                    ['products.is_active', true]
+                                ])
+                                ->orWhere([
+                                    ['products.code', 'LIKE', "%{$search}%"],
+                                    ['products.is_active', true]
+                                ])
+                                ->orWhere([
+                                    ['categories.name', 'LIKE', "%{$search}%"],
+                                    ['categories.is_active', true],
+                                    ['products.is_active', true]
+                                ])
+                                ->orWhere([
+                                    ['brands.title', 'LIKE', "%{$search}%"],
+                                    ['brands.is_active', true],
+                                    ['products.is_active', true]
+                                ])
+                                ->count();
+            }
+
         }
+
+        
+
         $data = array();
         if(!empty($products))
         {
