@@ -26,8 +26,7 @@ use App\ProductVariant;
 class ProductController extends Controller
 {
     public function index()
-    {
-        dd(Auth::user());
+    {        
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('products-index')){            
             $permissions = Role::findByName($role->name)->permissions;
@@ -35,7 +34,8 @@ class ProductController extends Controller
                 $all_permission[] = $permission->name;
             if(empty($all_permission))
                 $all_permission[] = 'dummy text';
-            return view('product.index', compact('all_permission'));
+                $is_superadmin = Auth::user()->is_supersdmin;
+            return view('product.index', compact('all_permission', 'is_superadmin'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

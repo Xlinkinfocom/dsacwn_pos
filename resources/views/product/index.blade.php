@@ -142,6 +142,7 @@
     var product_id = [];
     var all_permission = <?php echo json_encode($all_permission) ?>;
     var user_verified = <?php echo json_encode(env('USER_VERIFIED')) ?>;
+    var is_superadmin = <?php echo $is_superadmin; ?>;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -304,7 +305,8 @@
             "ajax":{
                 url:"products/product-data",
                 data:{
-                    all_permission: all_permission
+                    all_permission: all_permission,
+                    is_superadmin: is_superadmin
                 },
                 dataType: "json",
                 type:"post"
