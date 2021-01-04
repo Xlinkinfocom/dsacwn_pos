@@ -643,7 +643,7 @@ class SellerController extends Controller
             //$seller = array();
             $lims_customer_data = Seller::find($seller_id->id);
 
-        $lims_customer_data = Seller::find($id);
+        //$lims_customer_data = Seller::find($id);
         $lims_customer_data->is_active = 0;
         $lims_customer_data->save();
         return redirect('seller')->with('not_permitted','Data deleted Successfully');
