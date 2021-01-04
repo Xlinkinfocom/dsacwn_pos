@@ -13,6 +13,18 @@
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         <form id="product-form">
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{trans('file.Seller')}}</label>
+                                        <div class="input-group">
+                                            <select name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Seller...">
+                                              @foreach($seller_list as $seller)
+                                                  <option value="{{$seller->user_id}}">{{$seller->seller_name.' - '.$seller->company_name}}</option>
+                                              @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>{{trans('file.Product Type')}} *</strong> </label>

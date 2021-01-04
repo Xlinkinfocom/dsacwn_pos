@@ -21,6 +21,11 @@ class Product extends Model
     	return $this->belongsTo('App\Brand');
     }
 
+    public function seller()
+    {
+    	return $this->belongsTo('App\Seller', 'seller_id')->select(['user_id', 'seller_name']);
+    }
+
     public function unit()
     {
         return $this->belongsTo('App\Unit');
