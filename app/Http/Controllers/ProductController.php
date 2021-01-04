@@ -204,7 +204,7 @@ class ProductController extends Controller
             $seller_list = Seller::select('user_id', 'seller_name', 'company_name')
                                     ->where('is_active', '1')
                                     ->get();
-            return view('product.create',compact('lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
+            return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
