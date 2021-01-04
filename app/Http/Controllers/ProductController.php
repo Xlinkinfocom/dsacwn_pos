@@ -35,7 +35,7 @@ class ProductController extends Controller
             if(empty($all_permission))
                 $all_permission[] = 'dummy text';
                 $is_superadmin = Auth::user()->is_supersdmin;
-                dd(Auth::user());
+                //dd(Auth::user());
                 $user_id = Auth::user()->id;
             return view('product.index', compact('all_permission', 'is_superadmin', 'user_id'));
         }
