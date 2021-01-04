@@ -295,9 +295,12 @@ class ProductController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_product_data = Product::where('id', $id)->first();
             $lims_product_variant_data = $lims_product_data->variant()->orderBy('position')->get();
+            $seller_list = Seller::select('user_id', 'seller_name', 'company_name')
+            ->where('is_active', '1')
+            ->get();
             //return dd($lims_product_variant_data);
 
-            return view('product.edit',compact('lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list', 'lims_product_data', 'lims_product_variant_data'));
+            return view('product.edit',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list', 'lims_product_data', 'lims_product_variant_data'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
