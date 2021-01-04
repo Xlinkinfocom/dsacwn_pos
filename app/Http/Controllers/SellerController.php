@@ -637,7 +637,7 @@ class SellerController extends Controller
 
     public function destroy($id)
     {
-        $lims_customer_data = Customer::find($id);
+        $lims_customer_data = Seller::find($id);
         $lims_customer_data->is_active = false;
         $lims_customer_data->save();
         return redirect('customer')->with('not_permitted','Data deleted Successfully');
