@@ -27,6 +27,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        dd(Auth::user());
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('products-index')){            
             $permissions = Role::findByName($role->name)->permissions;
