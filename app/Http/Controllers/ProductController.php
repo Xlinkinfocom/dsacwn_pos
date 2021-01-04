@@ -65,6 +65,8 @@ class ProductController extends Controller
             $seller_arr = Seller::select('id')
                         ->where('user_id', $request->user_id)->get();            
             $seller = $seller_arr[0];
+            dd($seller->id);
+            die();
            
             $totalData = Product::where('is_active', true)
                                 ->where('seller_id', $seller->id)                            
