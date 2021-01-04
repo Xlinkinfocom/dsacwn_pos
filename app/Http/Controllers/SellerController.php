@@ -637,10 +637,16 @@ class SellerController extends Controller
 
     public function destroy($id)
     {
+        $seller_id = DB::table('sellers')
+                            ->select('id')
+                            ->where('user_id', $id)->first();
+            //$seller = array();
+            $lims_customer_data = Seller::find($seller_id->id);
+
         $lims_customer_data = Seller::find($id);
-        $lims_customer_data->is_active = false;
+        $lims_customer_data->is_active = 0;
         $lims_customer_data->save();
-        return redirect('customer')->with('not_permitted','Data deleted Successfully');
+        return redirect('seller')->with('not_permitted','Data deleted Successfully');
     }
      public function login(Request $request,$id)
     {
