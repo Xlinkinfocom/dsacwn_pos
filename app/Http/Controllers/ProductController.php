@@ -52,6 +52,9 @@ class ProductController extends Controller
             7 => 'unit_id',
             8 => 'price' 
         );
+
+        echo $request->is_superadmin; 
+        die();
         
         $totalData = Product::where('is_active', true)->count();
         $totalFiltered = $totalData; 
