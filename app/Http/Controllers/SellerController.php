@@ -186,11 +186,6 @@ class SellerController extends Controller
 
             return redirect('seller')->with('message', 'Seller not added successfully.');
         }
-
-
-
-
-
         /* $lims_customer_data['is_active'] = true;
         $message = 'Customer created successfully';
         if($lims_customer_data['email']){

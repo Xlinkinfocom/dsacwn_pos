@@ -58,8 +58,7 @@ class ProductController extends Controller
         $user_id="";
         $seller_arr = array();
         $totalData = "";
-        $totalFiltered="";
-        
+        $totalFiltered="";        
 
         if($request->is_superadmin == '0')
         {
@@ -221,9 +220,7 @@ class ProductController extends Controller
                                 ->count();
             }
 
-        }
-
-        
+        }        
 
         $data = array();
         if(!empty($products))
@@ -305,9 +302,24 @@ class ProductController extends Controller
             $lims_category_list = Category::where('is_active', true)->get();
             $lims_unit_list = Unit::where('is_active', true)->get();
             $lims_tax_list = Tax::where('is_active', true)->get();
-            $seller_list = Seller::select('id', 'seller_name', 'company_name')
-                                    ->where('is_active', '1')
-                                    ->get();
+            $is_superadmin = Auth::user()->is_supersdmin;               
+            $user_id = Auth::user()->id;
+            $seller_list = array();
+            if($is_superadmin == '1')
+            {
+                $seller_list = Seller::select('id', 'seller_name', 'company_name')
+                ->where('is_active', '1')
+                ->get();
+            }
+            else
+            {                
+
+                $seller_list = Seller::select('id', 'seller_name', 'company_name')
+                ->where('is_active', '1')
+                ->where('user_id', $user_id)
+                ->get();
+            }
+           
             return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
         else
