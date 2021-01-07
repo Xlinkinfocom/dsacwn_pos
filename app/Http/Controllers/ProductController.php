@@ -312,13 +312,15 @@ class ProductController extends Controller
                 ->get();
             }
             else
-            {                
+            { 
 
                 $seller_list = Seller::select('id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
             }
+
+            dd($seller_list);
            
             return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
