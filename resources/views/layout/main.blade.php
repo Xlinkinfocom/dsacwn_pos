@@ -175,7 +175,10 @@
             ])->first();
           
             ?>
-
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>
             <li><a href="#product" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-list"></i><span>{{__('file.product')}}</span><span></a>
               <ul id="product" class="collapse list-unstyled ">
                 <li id="category-menu"><a href="{{route('category.index')}}">{{__('file.category')}}</a></li>
@@ -204,6 +207,7 @@
                 @endif
               </ul>
             </li>
+            <?php } ?>
             <?php
             $index_permission = DB::table('permissions')->where('name', 'purchases-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
