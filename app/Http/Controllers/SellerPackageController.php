@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\CreditPackageLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\PaymentWithPaypal;
 
 class SellerPackageController extends Controller
 {
