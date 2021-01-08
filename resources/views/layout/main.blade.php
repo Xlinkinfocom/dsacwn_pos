@@ -122,12 +122,9 @@
           {
               $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
 
-              //echo empty($get_subscripe);
-              
-              /* if(!empty($get_subscripe))
-              {
-                echo 'ok';
-                die();
+              ?>
+                @if($get_subscripe)
+                <?php
                   $current_time = date('Y-m-d H:i:s');
                   $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date));
 
@@ -141,13 +138,10 @@
               }
               else {
                 $check_is_subscribed = false;
-              }           
-            }
-            else {
-              $check_is_subscribed = true;          
-            } */
-          }
-         ?>
+              } 
+            ?>
+                @endif
+              
          @if( $check_is_subscribed === false)
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
