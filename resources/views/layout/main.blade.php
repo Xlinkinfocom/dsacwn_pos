@@ -117,7 +117,7 @@
           $role = DB::table('roles')->find(Auth::user()->role_id);
           $user_id = Auth::user()->id;
            $check_is_subscribed = false;
-          if($role->id == '7' )
+          if($role == '7' )
           {
             $get_subscripe = DB::table('subscriptions')
                             ->select('expire_date');
@@ -146,7 +146,7 @@
             $check_is_subscribed = true;
           }
 
-          dd($check_is_subscribed);
+          
         ?>
         @if( $check_is_subscribed )
           <ul id="side-main-menu" class="side-menu list-unstyled">
