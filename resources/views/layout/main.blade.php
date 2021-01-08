@@ -121,8 +121,10 @@
          if($role->id == '7' )
           {
               $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
+
+              echo empty($get_subscripe);
               
-              if(!empty($get_subscripe))
+              /* if(!empty($get_subscripe))
               {
                 echo 'ok';
                 die();
@@ -143,7 +145,7 @@
             }
             else {
               $check_is_subscribed = true;          
-            }
+            } */
           
          ?>
          @if( $check_is_subscribed )
