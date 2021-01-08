@@ -124,7 +124,10 @@
 
               ?>
                 @if($get_subscripe)
-                  <?php echo 'ok'; ?>
+                  <?php 
+                  $current_time = date('Y-m-d H:i:s');
+                  $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date)); 
+                  ?>
                 @else
                 <?php echo 'not ok'; ?>
                 @endif
