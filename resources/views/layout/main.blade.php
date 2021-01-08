@@ -139,7 +139,9 @@
                 <?php $check_is_subscribed = 1; ?>
                 @endif
               
-        <?php } ?>
+        <?php } 
+        echo $check_is_subscribed;
+        ?>
           
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
