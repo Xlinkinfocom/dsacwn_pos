@@ -117,7 +117,7 @@
         <?php
         $role = DB::table('roles')->find(Auth::user()->role_id);
         $user_id = Auth::user()->id;
-         $check_is_subscribed = false;
+         $check_is_subscribed = 0;
          if($role->id == '7' )
           {
               $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
@@ -129,21 +129,21 @@
                   $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date)); 
                   if($current_time > $expire_date)
                   {
-                    $check_is_subscribed = false;
+                    $check_is_subscribed = 0;
                   }
                   else {
-                    $check_is_subscribed = true;
+                    $check_is_subscribed = 1;
                   }
               ?>
                 @else
-                <?php $check_is_subscribed = false; ?>
+                <?php $check_is_subscribed = 0; ?>
                 @endif
               
         <?php } else {
-          $check_is_subscribed = true;
+          $check_is_subscribed = 1;
         }        
 
-        if( $check_is_subscribed === true)
+        if( $check_is_subscribed == 1)
         {        
         ?>          
           <ul id="side-main-menu" class="side-menu list-unstyled">
