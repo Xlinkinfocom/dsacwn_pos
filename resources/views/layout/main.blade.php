@@ -146,7 +146,7 @@
             $check_is_subscribed = true;
           }
         ?>
-        @if($check_is_subscribed)
+        @if( $check_is_subscribed )
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
             <li><div id="google_translate_element"></div></li>
@@ -994,6 +994,7 @@
           </ul>
           </li>       
           </ul>
+
         @endif
       </div>
     </div>
