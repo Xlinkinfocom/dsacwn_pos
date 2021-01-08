@@ -457,7 +457,7 @@
               </ul>
             </li>
             @endif
-            <?php } ?>
+            
             <?php
             $index_permission = DB::table('permissions')->where('name', 'mySubscription-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
@@ -482,6 +482,7 @@
               </ul>
             </li>
             @endif
+            <?php } ?>
             <?php
             $index_permission = DB::table('permissions')->where('name', 'seller-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
