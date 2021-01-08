@@ -124,6 +124,8 @@
               
               if(!empty($get_subscripe))
               {
+                echo 'ok';
+                die();
                   $current_time = date('Y-m-d H:i:s');
                   $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date));
 
@@ -142,7 +144,7 @@
             else {
               $check_is_subscribed = true;          
             }
-          }
+          
          ?>
          @if( $check_is_subscribed )
           <ul id="side-main-menu" class="side-menu list-unstyled">
