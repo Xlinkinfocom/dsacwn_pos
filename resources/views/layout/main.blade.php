@@ -117,7 +117,8 @@
           $role = DB::table('roles')->find(Auth::user()->role_id);
           $user_id = Auth::user()->id;
            $check_is_subscribed = false;
-          if($role == '7' )
+           print_r($role);
+          if($role->id == '7' )
           {
             $get_subscripe = DB::table('subscriptions')
                             ->select('expire_date');
