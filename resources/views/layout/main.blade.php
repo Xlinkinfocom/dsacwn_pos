@@ -117,7 +117,7 @@
         <?php
         $role = DB::table('roles')->find(Auth::user()->role_id);
         $user_id = Auth::user()->id;
-         $check_is_subscribed = 0;
+         $check_is_subscribed = false;
          if($role->id == '7' )
           {
               $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
@@ -129,22 +129,23 @@
                   $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date)); 
                   if($current_time > $expire_date)
                   {
-                    $check_is_subscribed = 0;
+                    $check_is_subscribed = false;
                   }
                   else {
-                    $check_is_subscribed = 1;
+                    $check_is_subscribed = true;
                   }
               ?>
                 @else
-                <?php $check_is_subscribed = 0; ?>
+                <?php $check_is_subscribed = false; ?>
                 @endif
               
         <?php } else {
-          $check_is_subscribed = 1;
-        }
-        echo $check_is_subscribed;
-        ?>
-          
+          $check_is_subscribed = true;
+        }        
+
+        if( $check_is_subscribed === true)
+        {        
+        ?>          
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
             <li><div id="google_translate_element"></div></li>
@@ -992,7 +993,7 @@
           </ul>
           </li>       
           </ul>
-        
+        <?php } ?>
       </div>
     </div>
   </nav>
