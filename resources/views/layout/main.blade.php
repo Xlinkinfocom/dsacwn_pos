@@ -118,7 +118,14 @@
         $role = DB::table('roles')->find(Auth::user()->role_id);
         $user_id = Auth::user()->id;
          $check_is_subscribed = false;
-         print_r($user_id);
+         if($role->id == '7' )
+          {
+            $get_subscripe = DB::table('subscriptions')
+                            ->select('expire_date');
+                            ->where('user_id', $user_id)
+                            ->first();
+            print_r($get_subscripe);
+          }
          ?>
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
