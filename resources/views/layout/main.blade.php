@@ -124,22 +124,9 @@
 
               ?>
                 @if($get_subscripe)
-                <?php
-                  $current_time = date('Y-m-d H:i:s');
-                  $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date));
-
-                  if($current_time > $expire_date)
-                  {
-                    $check_is_subscribed = false;
-                  }
-                  else {
-                    $check_is_subscribed = true;
-                  }
-              }
-              else {
-                $check_is_subscribed = false;
-              } 
-            ?>
+                  <?php echo 'ok'; ?>
+                @else
+                <?php echo 'not ok'; ?>
                 @endif
               
          @if( $check_is_subscribed === false)
