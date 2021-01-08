@@ -143,7 +143,7 @@
           $check_is_subscribed = 1;
         }        
 
-                
+            echo $check_is_subscribed;
         ?>          
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
@@ -452,9 +452,6 @@
               </ul>
             </li>
             @endif
-
-
-
             <?php
             $index_permission = DB::table('permissions')->where('name', 'mySubscription-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
@@ -479,10 +476,6 @@
               </ul>
             </li>
             @endif
-
-
-
-
             <?php
             $index_permission = DB::table('permissions')->where('name', 'seller-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
@@ -530,12 +523,7 @@
                 @endif
               </ul>
             </li>
-            @endif
-
-
-
-
-          
+            @endif          
             <?php
             $department = DB::table('permissions')->where('name', 'department')->first();
             $department_active = DB::table('role_has_permissions')->where([
