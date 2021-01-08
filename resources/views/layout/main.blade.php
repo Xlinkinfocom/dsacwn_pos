@@ -143,8 +143,7 @@
           $check_is_subscribed = 1;
         }        
 
-        if( $check_is_subscribed == 1)
-        {        
+                
         ?>          
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
@@ -993,7 +992,7 @@
           </ul>
           </li>       
           </ul>
-        <?php } ?>
+        
       </div>
     </div>
   </nav>
