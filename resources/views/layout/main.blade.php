@@ -146,7 +146,7 @@
             else {
               $check_is_subscribed = true;          
             } */
-          
+          }
          ?>
          @if( $check_is_subscribed === false)
           <ul id="side-main-menu" class="side-menu list-unstyled">
