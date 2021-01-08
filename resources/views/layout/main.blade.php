@@ -129,7 +129,7 @@
                 <?php echo 'not ok'; ?>
                 @endif
               
-         @if( $check_is_subscribed === false)
+        
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
             <li><div id="google_translate_element"></div></li>
@@ -977,7 +977,7 @@
           </ul>
           </li>       
           </ul>
-          @endif        
+         
       </div>
     </div>
   </nav>
