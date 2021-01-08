@@ -432,7 +432,7 @@
               </ul>
             </li>
             @endif
-            <?php } ?>
+            
             <?php
             $index_permission = DB::table('permissions')->where('name', 'manageSubscription-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
@@ -947,7 +947,7 @@
                 ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
             </li>
-            
+            <?php } ?>
             @if($warehouse_permission_active)
             <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
             @endif
