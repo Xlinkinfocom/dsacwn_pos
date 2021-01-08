@@ -206,8 +206,7 @@
                 <li id="stock-count-menu"><a href="{{route('stock-count.index')}}">{{trans('file.Stock Count')}}</a></li>
                 @endif
               </ul>
-            </li>
-            <?php } ?>
+            </li>            
             <?php
             $index_permission = DB::table('permissions')->where('name', 'purchases-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
@@ -981,6 +980,7 @@
             @if($hrm_setting_permission_active)
             <li id="hrm-setting-menu"><a href="{{route('setting.hrm')}}"> {{trans('file.HRM Setting')}}</a></li>
             @endif
+            <?php } ?>
           </ul>
           </li>       
           </ul>
