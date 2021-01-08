@@ -294,7 +294,7 @@
               ['role_id', $role->id]
             ])->first();
             ?>
-            <?php } ?>
+            
             @if($index_permission_active)
             <li><a href="#expense" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-wallet"></i><span>{{trans('file.Expense')}}</span></a>
               <ul id="expense" class="collapse list-unstyled ">
@@ -432,6 +432,7 @@
               </ul>
             </li>
             @endif
+            <?php } ?>
             <?php
             $index_permission = DB::table('permissions')->where('name', 'manageSubscription-index')->first();
             $index_permission_active = DB::table('role_has_permissions')->where([
