@@ -118,7 +118,7 @@
         $role = DB::table('roles')->find(Auth::user()->role_id);
         $user_id = Auth::user()->id;
          $check_is_subscribed = false;
-         print_r($role);
+         print_r($user_id);
          ?>
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
