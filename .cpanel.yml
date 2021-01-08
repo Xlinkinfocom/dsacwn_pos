@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/redonhcg/repositories/dsacwn_pos
+    - /bin/cp -R * $DEPLOYPATH
