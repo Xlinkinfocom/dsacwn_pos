@@ -121,7 +121,26 @@
          if($role->id == '7' )
           {
             $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
-            print_r($get_subscripe);
+            
+            if(!empty($get_subscripe))
+            {
+                $current_time = date('Y-m-d H:i:s');
+                $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date));
+
+                if($current_time > $expire_date)
+                {
+                  $check_is_subscribed = false;
+                }
+                else {
+                  $check_is_subscribed = true;
+                }
+            }
+            else {
+              $check_is_subscribed = false;
+            }           
+          }
+          else {
+            $check_is_subscribed = true;          
           }
          ?>
           <ul id="side-main-menu" class="side-menu list-unstyled">
