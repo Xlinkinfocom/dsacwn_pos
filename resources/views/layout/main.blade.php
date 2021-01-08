@@ -122,7 +122,7 @@
           {
               $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
 
-              echo empty($get_subscripe);
+              //echo empty($get_subscripe);
               
               /* if(!empty($get_subscripe))
               {
@@ -148,7 +148,7 @@
             } */
           
          ?>
-         @if( $check_is_subscribed )
+         @if( $check_is_subscribed === false)
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
             <li><div id="google_translate_element"></div></li>
