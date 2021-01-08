@@ -136,10 +136,12 @@
                   }
               ?>
                 @else
-                <?php $check_is_subscribed = 1; ?>
+                <?php $check_is_subscribed = 0; ?>
                 @endif
               
-        <?php } 
+        <?php } else {
+          $check_is_subscribed = 1;
+        }
         echo $check_is_subscribed;
         ?>
           
