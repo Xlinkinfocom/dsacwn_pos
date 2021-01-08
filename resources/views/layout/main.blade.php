@@ -120,10 +120,7 @@
          $check_is_subscribed = false;
          if($role->id == '7' )
           {
-            $get_subscripe = DB::table('subscriptions')
-                            ->select('expire_date');
-                            ->where('user_id', $user_id)
-                            ->first();
+            $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
             print_r($get_subscripe);
           }
          ?>
