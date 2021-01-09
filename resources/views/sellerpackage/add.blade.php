@@ -12,8 +12,7 @@
                         <h4>{{trans('file.Add Subscription Plan')}}</h4>
                         
                     </div>
-                    {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm', 'class' => 'payment-form']) !!}
-                    @csrf
+                    
                     <div class="card-body">                      
                         <div class="card-group">
                             <?php
@@ -22,18 +21,22 @@
                                     # code...
                                     $packageID = $value['credit_package_id'];
                             ?>
+                            {!! Form::open(['route' => 'sellerpackage.create', 'name' =>'frm_{{ $packageID }}', 'method' => 'post', 'class' => 'payment-form']) !!}
+                            @csrf
+                            <input type="hidden" class="form-control" id="package_id" value="{{ $packageID }}" />
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body">                                    
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
-                                    <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <a href="javascript:void(0)" id="btnID{{ $packageID }}" onclick="sendPackage('{{ $packageID }}')" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
-                                </div>
+                                    <p class="card-text"><?php echo $value['description'] ?></p>   
+                                    <input type="button" value="{{trans('file.submit')}}" name="btnID{{ $packageID }}" class="btn btn-primary">                                 
+                                </div>                                
                             </div>
+                            {!! Form::close() !!}
                             <?php } ?>
-                            <input type="hidden" class="form-control" id="package_id" value="" />
+                            
                         </div>
                     </div>
-                    {!! Form::close() !!}
+                    
                 </div>
             </div>
         </div>
@@ -41,7 +44,8 @@
 </section>
 
 <script type="text/javascript">
-    function sendPackage(package_id) { 
+
+   function sendPackage(package_id) { 
             $('#package_id').val(package_id);
             $("#package_frm").submit();
         }
