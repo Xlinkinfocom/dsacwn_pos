@@ -883,7 +883,7 @@
               </ul>
             </li>
             <?php } 
-            echo $check_is_subscribed; 
+            
             
             ?>
             
@@ -956,9 +956,13 @@
                   ['role_id', $role->id]
                 ])->first();
                 ?>
-
+                <?php 
+                if($check_is_subscribed == '1') 
+                {
+                  ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
-                </li>          
+                </li> 
+                <?php } ?>         
                   @if($warehouse_permission_active)
                   <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
                   @endif
