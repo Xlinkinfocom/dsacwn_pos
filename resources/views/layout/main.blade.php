@@ -530,7 +530,11 @@
                 @endif
               </ul>
             </li>
-            @endif          
+            @endif 
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>         
             <?php
             $department = DB::table('permissions')->where('name', 'department')->first();
             $department_active = DB::table('role_has_permissions')->where([
@@ -553,10 +557,7 @@
               ['role_id', $role->id]
             ])->first();
             ?>
-            <?php 
-            if($check_is_subscribed == '1') 
-            {
-              ?>
+            
             <li class=""><a href="#hrm" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-user-group"></i><span>HRM</span></a>
               <ul id="hrm" class="collapse list-unstyled ">
                 @if($department_active)
