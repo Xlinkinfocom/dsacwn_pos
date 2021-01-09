@@ -881,8 +881,12 @@
                 </li>
                 @endif
               </ul>
-            </li>           
-
+            </li>
+            <?php } ?>
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>
             <li><a href="#setting" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-gear"></i><span>{{trans('file.settings')}}</span></a>
               <ul id="setting" class="collapse list-unstyled ">
                 <?php
