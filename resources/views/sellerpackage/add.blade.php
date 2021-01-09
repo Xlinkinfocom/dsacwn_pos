@@ -24,7 +24,7 @@
                              <form Method="POST" action="{{ route('sellerpackage.create') }}" name ="frm_<?php echo $packageID; ?>" class="payment-form">
                             
                             @csrf
-                            <input type="hidden" class="form-control" id="package_id" value="<?php echo $packageID; ?>" />
+                            <input type="hidden" name="package_id" class="form-control" id="package_id" value="<?php echo $packageID; ?>" />
                             <div class="card">
                                 <div class="card-body">                                    
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
