@@ -33,11 +33,13 @@ class SellerPackageController extends Controller
 
     public function store(Request $request) {
 
-        $data = $request->all();
+        dd($request);
+
+        /* $data = $request->all();
 
         $data['user_id'] = Auth::id();
 
-        dd($data);
+        dd($data); */
     }
 
     /*public function storeBkp(Request $request)
