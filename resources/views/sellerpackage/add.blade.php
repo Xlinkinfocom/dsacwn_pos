@@ -36,15 +36,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </section>
 
-@endsection
-@push('scripts')
-    <script>
-        function sendPackage(package_id) { 
+<script type="text/javascript">
+    function sendPackage(package_id) { 
             $('#package_id').val(package_id);
             $("#package_frm").submit();
         }
-    </script>
-@endpush
+</script>
+
+@endsection
