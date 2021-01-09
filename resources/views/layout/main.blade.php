@@ -657,6 +657,10 @@
                 @endif
               </ul>
             </li>
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>
             <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-document-remove"></i><span>{{trans('file.Reports')}}</span></a>
               <?php
               $profit_loss_active = DB::table('permissions')
@@ -878,6 +882,7 @@
                 @endif
               </ul>
             </li>
+            <?php } ?>
             <li><a href="#setting" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-gear"></i><span>{{trans('file.settings')}}</span></a>
               <ul id="setting" class="collapse list-unstyled ">
                 <?php
