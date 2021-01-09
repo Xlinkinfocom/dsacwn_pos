@@ -553,7 +553,10 @@
               ['role_id', $role->id]
             ])->first();
             ?>
-
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>
             <li class=""><a href="#hrm" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-user-group"></i><span>HRM</span></a>
               <ul id="hrm" class="collapse list-unstyled ">
                 @if($department_active)
@@ -949,7 +952,7 @@
                 ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
             </li>
-           
+           <?php } ?>
             @if($warehouse_permission_active)
             <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
             @endif
