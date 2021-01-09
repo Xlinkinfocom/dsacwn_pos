@@ -24,7 +24,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                                     <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <a href="javascript:void(0)" onclick="sendPackage('{{ $packageID }}')" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
+                                    <a href="javascript:void(0)" id="btnID{{ $packageID }}" onclick="sendPackage('{{ $packageID }}')" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
                                 </div>
                             </div>
                             <?php } ?>
@@ -38,10 +38,19 @@
 </section>
 @push('scripts')
     <script>
-        function sendPackage() {
+        /*function sendPackage() {
             var PackID = $this.value();
             //alert(PackID);
-        }
+            $("#package_frm").submit(); // Submit the form
+        }*/
+
+
+        $(document).ready(function(){
+            $("#btnID").click(function sendPackage(){
+                $("#package_frm").submit(); // Submit the form
+            });
+        });
+
     </script>
 @endpush
 @endsection
