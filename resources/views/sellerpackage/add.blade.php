@@ -38,6 +38,8 @@
         </div>
     </div>
 </section>
+
+@endsection
 @push('scripts')
     <script>
         function sendPackage(package_id) { 
@@ -46,4 +48,3 @@
         }
     </script>
 @endpush
-@endsection
