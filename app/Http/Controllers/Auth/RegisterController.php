@@ -109,6 +109,8 @@ class RegisterController extends Controller
             'seller_url'=>strtolower(preg_replace('/\s+/', '', $data['name'])),
             'password' => bcrypt($data['password']),
         ]);
+
+        
     }
      /**
      * Show the application registration form.

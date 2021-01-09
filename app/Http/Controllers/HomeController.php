@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function index()
     { 
+        dd(Auth::user()->role_id);
         $start_date = date("Y").'-'.date("m").'-'.'01';
         $end_date = date("Y").'-'.date("m").'-'.'31';
         $yearly_sale_amount = [];
