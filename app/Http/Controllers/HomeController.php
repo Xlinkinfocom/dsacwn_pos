@@ -145,7 +145,7 @@ class HomeController extends Controller
             }
             else{
 
-                dd(Auth::user()->role_id);
+                //dd(Auth::user()->role_id);
 
                 try {
                     $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get()->toArray();
