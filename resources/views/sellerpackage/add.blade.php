@@ -27,9 +27,11 @@
                             <div class="card">
                                 <div class="card-body">                                    
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
-                                    <p class="card-text"><?php echo $value['description'] ?></p>   
-                                    <input type="button" value="{{trans('file.submit')}}" name="btnID{{ $packageID }}" class="btn btn-primary">                                 
-                                </div>                                
+                                    <p class="card-text"><?php echo $value['description'] ?></p>
+                                    <input type="submit" value="<?php echo "Buy At $ ".$value['cost']?>" name="btnID{{ $packageID }}" class="btn btn-primary">
+                                    
+                                </div>
+                                
                             </div>
                             {!! Form::close() !!}
                             <?php } ?>
