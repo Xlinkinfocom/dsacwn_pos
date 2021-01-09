@@ -29,8 +29,7 @@ class HomeController extends Controller
     }
 
     public function index()
-    { 
-        dd(Auth::user()->role_id);
+    {        
         $start_date = date("Y").'-'.date("m").'-'.'01';
         $end_date = date("Y").'-'.date("m").'-'.'31';
         $yearly_sale_amount = [];
@@ -121,6 +120,12 @@ class HomeController extends Controller
             $start = strtotime("+1 month", $start);
         }
         //return $month;
+        $user_id = Auth::user()->id;
+        if(Auth::user()->role_id == 7)
+        {
+            $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
+        }
+        
         return view('index', compact('revenue', 'purchase', 'expense', 'return', 'purchase_return', 'profit', 'payment_recieved', 'payment_sent', 'month', 'yearly_sale_amount', 'yearly_purchase_amount', 'recent_sale', 'recent_purchase', 'recent_quotation', 'recent_payment', 'best_selling_qty', 'yearly_best_selling_qty', 'yearly_best_selling_price'));
     }
 
