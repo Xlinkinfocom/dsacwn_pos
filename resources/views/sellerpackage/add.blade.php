@@ -28,6 +28,7 @@
                                 </div>
                             </div>
                             <?php } ?>
+                            <input type="textbox" class="form-control" id="package_id" value="" />
                         </div>
                     </div>
                     {!! Form::close() !!}
@@ -38,18 +39,10 @@
 </section>
 @push('scripts')
     <script>
-        function sendPackage(package_id) {
-            var PackID = $this.value();
-            //alert(PackID);
+        function sendPackage(package_id) { 
+            $('#package_id').val(package_id);
+            $("#package_frm").submit();
         }
-
-
-        /*$(document).ready(function(){
-            $("#btnID").click(function sendPackage(){
-                var PackID = $('#btnID').val();
-                $("#package_frm").submit(); // Submit the form
-            });
-        });*/
     </script>
 @endpush
 @endsection
