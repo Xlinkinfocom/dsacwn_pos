@@ -18,13 +18,15 @@
                             //print_r($credit_packages);
                             foreach ($credit_packages as $key => $value) {
                                 # code...
+                                $packageID = $value['credit_package_id'];
                           ?>
                           
                                 <div class="card">
                                   <div class="card-body">
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                                     <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <a href="{{ route('sellerpackage.buy', $value['credit_package_id']) }}" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
+                                    <!--<a href="{{ route('sellerpackage.buy', $value['credit_package_id']) }}" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>-->
+                                    <a href="javascript:void(0)" onclick="sendPackage('{{ $packageID }}')" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
                                   </div>
                                 </div>
                         <?php    }
