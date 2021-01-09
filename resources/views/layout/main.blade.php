@@ -955,10 +955,14 @@
                   ['permission_id', $hrm_setting_permission->id],
                   ['role_id', $role->id]
                 ])->first();
-                ?>                
+                ?>   
+                <?php 
+                if($check_is_subscribed == '1') 
+                {
+                  ?>             
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
                 </li> 
-                       
+                    <?php } ?>   
                   @if($warehouse_permission_active)
                   <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
                   @endif
@@ -974,6 +978,7 @@
                   @if($tax_permission_active)
                   <li id="tax-menu"><a href="{{route('tax.index')}}">{{trans('file.Tax')}}</a></li>
                   @endif
+
                   <li id="user-menu"><a href="{{route('user.profile', ['id' => Auth::id()])}}">{{trans('file.User Profile')}}</a></li>
                   @if($create_sms_permission_active)
                   <li id="create-sms-menu"><a href="{{route('setting.createSms')}}">{{trans('file.Create SMS')}}</a></li>
