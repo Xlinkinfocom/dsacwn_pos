@@ -31,10 +31,10 @@ class SellerPackageController extends Controller
        
     }
 
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         $data = $request->all();
-        //return dd($data);
+       
         $data['user_id'] = Auth::id();
 
         $provider = new ExpressCheckout;
@@ -79,7 +79,7 @@ class SellerPackageController extends Controller
                 $response = $provider->setExpressCheckout($paypal_data);
                  // This will redirect user to PayPal
                 return redirect($response['paypal_link']);
-    }
+    } */
 
     public function buy(Request $request, $id){
           //
