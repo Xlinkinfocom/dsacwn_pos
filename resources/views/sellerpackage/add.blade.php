@@ -21,7 +21,8 @@
                                     # code...
                                     $packageID = $value['credit_package_id'];
                             ?>
-                            {!! Form::open(['route' => 'sellerpackage.create', 'name' =>"frm_<?php echo $packageID; ?>", 'method' => 'post', 'class' => 'payment-form']) !!}
+                             <form Method="POST" action="{{ route('sellerpackage.create') }}" name ="frm_<?php echo $packageID; ?>" class="payment-form">
+                            
                             @csrf
                             <input type="hidden" class="form-control" id="package_id" value="<?php echo $packageID; ?>" />
                             <div class="card">
@@ -33,7 +34,7 @@
                                 </div>
                                 
                             </div>
-                            {!! Form::close() !!}
+                             </form>
                             <?php } ?>
                             
                         </div>
