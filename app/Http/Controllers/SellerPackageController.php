@@ -2,12 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\CustomerGroup;
+use App\Customer;
+use App\Deposit;
+use App\User;
+use App\State;
+use App\District;
+use App\Seller;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+//use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Mail\UserNotification;
+use Illuminate\Support\Facades\Mail;
+use App\Roles;
+use App\Biller;
+use App\Warehouse;
+use Hash;
+use Keygen;
+use DB;
+
+
+
+use App\Http\Controllers\Controller;
+
 use App\CreditPackageMst;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\CreditPackageLog;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Validation\ValidationException;
 use App\PaymentWithPaypal;
 
