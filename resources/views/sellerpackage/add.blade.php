@@ -13,6 +13,7 @@
                         
                     </div>
                     {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm', 'class' => 'payment-form']) !!}
+                    @csrf
                     <div class="card-body">                      
                         <div class="card-group">
                             <?php
