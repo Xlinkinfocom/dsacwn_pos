@@ -150,7 +150,6 @@ class HomeController extends Controller
                 } catch (ModelNotFoundException $e) {
                     return $e;
                 }
-
             }
         }
         else

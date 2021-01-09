@@ -316,7 +316,9 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 
 
 	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('sellerpackage.add');
+	Route::get('sellerpackage/create', 'SellerPackageController@store')->name('sellerpackage.create');
 	Route::get('sellerpackage/buy/{id}', 'SellerPackageController@buy')->name('sellerpackage.buy');
+	Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess');
 
 });
 
