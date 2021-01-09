@@ -38,19 +38,19 @@
 </section>
 @push('scripts')
     <script>
-        /*function sendPackage() {
-            var PackID = $this.value();
-            //alert(PackID);
+        function sendPackage() {
+            var PackID = $('#btnID').val();
+            alert(PackID);
             $("#package_frm").submit(); // Submit the form
-        }*/
+        }
 
 
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             $("#btnID").click(function sendPackage(){
+                var PackID = $('#btnID').val();
                 $("#package_frm").submit(); // Submit the form
             });
-        });
-
+        });*/
     </script>
 @endpush
 @endsection
