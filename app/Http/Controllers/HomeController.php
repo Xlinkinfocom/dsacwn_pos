@@ -124,7 +124,7 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         if(Auth::user()->role_id == 7)
         {
-            dd(Auth::user()->role_id);
+            
             $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
             if(!empty($get_subscripe))
             {
@@ -144,6 +144,8 @@ class HomeController extends Controller
                   }
             }
             else{
+
+                dd(Auth::user()->role_id);
 
                 try {
                     $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get()->toArray();
