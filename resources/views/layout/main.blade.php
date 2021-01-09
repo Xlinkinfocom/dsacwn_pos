@@ -143,7 +143,7 @@
           $check_is_subscribed = 1;
         }        
 
-            echo $check_is_subscribed;
+           
         ?>          
           <ul id="side-main-menu" class="side-menu list-unstyled">
             <li><a href="{{url('/')}}"> <i class="dripicons-meter"></i><span>{{ __('file.dashboard') }}</span></a></li>
@@ -955,14 +955,10 @@
                   ['permission_id', $hrm_setting_permission->id],
                   ['role_id', $role->id]
                 ])->first();
-                ?>
-                <?php 
-                if($check_is_subscribed == '1') 
-                {
-                  ?>
+                ?>                
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
                 </li> 
-                <?php } ?>         
+                       
                   @if($warehouse_permission_active)
                   <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
                   @endif
