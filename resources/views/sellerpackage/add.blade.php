@@ -10,33 +10,38 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h4>{{trans('file.Add Subscription Plan')}}</h4>
-                        {{-- {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm'  'class' => 'payment-form']) !!} --}}
+                        {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm', 'class' => 'payment-form']) !!}
                     </div>
                     <div class="card-body">                      
                         <div class="card-group">
                             <?php
-                            //print_r($credit_packages);
-                            foreach ($credit_packages as $key => $value) {
-                                # code...
-                          ?>
-                          
-                                <div class="card">
-                                  <div class="card-body">
+                                //print_r($credit_packages);
+                                foreach ($credit_packages as $key => $value) {
+                                    # code...
+                                    $packageID = $value['credit_package_id'];
+                            ?>
+                            <div class="card">
+                                <div class="card-body">
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                                     <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <a href="{{ route('sellerpackage.buy', $value['credit_package_id']) }}" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
-                                  </div>
+                                    <a href="javascript:void(0)" onclick="sendPackage('{{ $packageID }}')" class="btn btn-primary"><?php echo "Buy At $ ".$value['cost']?></a>
                                 </div>
-                        <?php    }
-                            ?>
-                            </div>                       
+                            </div>
+                            <?php } ?>
+                        </div>
                     </div>
-                    {{-- {!! Form::close() !!} --}}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
+@push('scripts')
+    <script>
+        function sendPackage() {
+            var PackID = $this.value();
+            //alert(PackID);
+        }
+    </script>
+@endpush
 @endsection
