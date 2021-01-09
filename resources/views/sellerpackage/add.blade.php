@@ -38,7 +38,7 @@
 </section>
 @push('scripts')
     <script>
-        function sendPackage() {
+        function sendPackage(package_id) {
             var PackID = $this.value();
             //alert(PackID);
         }
