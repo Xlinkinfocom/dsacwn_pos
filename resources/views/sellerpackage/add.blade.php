@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <?php } ?>
-                            <input type="textbox" class="form-control" id="package_id" value="" />
+                            <input type="text" class="form-control" id="package_id" value="" />
                         </div>
                     </div>
                     {!! Form::close() !!}
