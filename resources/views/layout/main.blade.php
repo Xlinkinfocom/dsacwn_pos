@@ -882,12 +882,14 @@
                 @endif
               </ul>
             </li>
-            
-            
+            <?php } ?>
+            <?php 
+            if($check_is_subscribed == '1') 
+            {
+              ?>
             <li><a href="#setting" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-gear"></i><span>{{trans('file.settings')}}</span></a>
               <ul id="setting" class="collapse list-unstyled ">
                 <?php
-
                 $warehouse_permission = DB::table('permissions')->where('name', 'warehouse')->first();
                 $warehouse_permission_active = DB::table('role_has_permissions')->where([
                   ['permission_id', $warehouse_permission->id],
@@ -955,47 +957,45 @@
                 ])->first();
                 ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
-            </li>
+                </li>
           
-            @if($warehouse_permission_active)
-            <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
-            @endif
-            @if($customer_group_permission_active)
-            <li id="customer-group-menu"><a href="{{route('customer_group.index')}}">{{trans('file.Customer Group')}}</a></li>
-            @endif
-            @if($brand_permission_active)
-            <li id="brand-menu"><a href="{{route('brand.index')}}">{{trans('file.Brand')}}</a></li>
-            @endif
-            @if($unit_permission_active)
-            <li id="unit-menu"><a href="{{route('unit.index')}}">{{trans('file.Unit')}}</a></li>
-            @endif
-            @if($tax_permission_active)
-            <li id="tax-menu"><a href="{{route('tax.index')}}">{{trans('file.Tax')}}</a></li>
-            @endif
-            <li id="user-menu"><a href="{{route('user.profile', ['id' => Auth::id()])}}">{{trans('file.User Profile')}}</a></li>
-            @if($create_sms_permission_active)
-            <li id="create-sms-menu"><a href="{{route('setting.createSms')}}">{{trans('file.Create SMS')}}</a></li>
-            @endif
-            @if($general_setting_permission_active)
-            <li id="general-setting-menu"><a href="{{route('setting.general')}}">{{trans('file.General Setting')}}</a></li>
-            @endif
-            @if($mail_setting_permission_active)
-            <li id="mail-setting-menu"><a href="{{route('setting.mail')}}">{{trans('file.Mail Setting')}}</a></li>
-            @endif
-            @if($sms_setting_permission_active)
-            <li id="sms-setting-menu"><a href="{{route('setting.sms')}}">{{trans('file.SMS Setting')}}</a></li>
-            @endif
-            @if($pos_setting_permission_active)
-            <li id="pos-setting-menu"><a href="{{route('setting.pos')}}">POS {{trans('file.settings')}}</a></li>
-            @endif
-            @if($hrm_setting_permission_active)
-            <li id="hrm-setting-menu"><a href="{{route('setting.hrm')}}"> {{trans('file.HRM Setting')}}</a></li>
-            @endif
-            
-          </ul>
-
-          </li>   
-          <?php } ?>    
+                  @if($warehouse_permission_active)
+                  <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
+                  @endif
+                  @if($customer_group_permission_active)
+                  <li id="customer-group-menu"><a href="{{route('customer_group.index')}}">{{trans('file.Customer Group')}}</a></li>
+                  @endif
+                  @if($brand_permission_active)
+                  <li id="brand-menu"><a href="{{route('brand.index')}}">{{trans('file.Brand')}}</a></li>
+                  @endif
+                  @if($unit_permission_active)
+                  <li id="unit-menu"><a href="{{route('unit.index')}}">{{trans('file.Unit')}}</a></li>
+                  @endif
+                  @if($tax_permission_active)
+                  <li id="tax-menu"><a href="{{route('tax.index')}}">{{trans('file.Tax')}}</a></li>
+                  @endif
+                  <li id="user-menu"><a href="{{route('user.profile', ['id' => Auth::id()])}}">{{trans('file.User Profile')}}</a></li>
+                  @if($create_sms_permission_active)
+                  <li id="create-sms-menu"><a href="{{route('setting.createSms')}}">{{trans('file.Create SMS')}}</a></li>
+                  @endif
+                  @if($general_setting_permission_active)
+                  <li id="general-setting-menu"><a href="{{route('setting.general')}}">{{trans('file.General Setting')}}</a></li>
+                  @endif
+                  @if($mail_setting_permission_active)
+                  <li id="mail-setting-menu"><a href="{{route('setting.mail')}}">{{trans('file.Mail Setting')}}</a></li>
+                  @endif
+                  @if($sms_setting_permission_active)
+                  <li id="sms-setting-menu"><a href="{{route('setting.sms')}}">{{trans('file.SMS Setting')}}</a></li>
+                  @endif
+                  @if($pos_setting_permission_active)
+                  <li id="pos-setting-menu"><a href="{{route('setting.pos')}}">POS {{trans('file.settings')}}</a></li>
+                  @endif
+                  @if($hrm_setting_permission_active)
+                  <li id="hrm-setting-menu"><a href="{{route('setting.hrm')}}"> {{trans('file.HRM Setting')}}</a></li>
+                  @endif            
+                </ul>
+              </li>   
+            <?php } ?>  
           </ul>
         
       </div>
