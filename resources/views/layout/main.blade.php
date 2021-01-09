@@ -882,11 +882,8 @@
                 @endif
               </ul>
             </li>
-            <?php } ?>
-            <?php 
-            if($check_is_subscribed == '1') 
-            {
-              ?>
+            
+            
             <li><a href="#setting" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-gear"></i><span>{{trans('file.settings')}}</span></a>
               <ul id="setting" class="collapse list-unstyled ">
                 <?php
@@ -959,7 +956,7 @@
                 ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
             </li>
-            <?php } ?>
+          
             @if($warehouse_permission_active)
             <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
             @endif
@@ -996,7 +993,9 @@
             @endif
             
           </ul>
-          </li>       
+
+          </li>   
+          <?php } ?>    
           </ul>
         
       </div>
