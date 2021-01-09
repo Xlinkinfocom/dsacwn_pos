@@ -320,5 +320,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('sellerpackage/buy/{id}', 'SellerPackageController@buy')->name('sellerpackage.buy');
 	Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess');
 
+	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
+
 });
 

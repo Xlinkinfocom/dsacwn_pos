@@ -504,6 +504,7 @@
                 @if($index_permission_active_add)
                 <li id="seller-create-menu"><a href="{{route('seller.create')}}">{{trans('file.Add Seller')}}</a></li>
                 @endif
+                <li id="seller-transaction"><a href="{{route('stransaction.index')}}">{{trans('file.Seller Transaction')}}</a></li>
               </ul>
             </li>
             @endif
