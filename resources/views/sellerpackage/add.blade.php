@@ -21,14 +21,14 @@
                                     # code...
                                     $packageID = $value['credit_package_id'];
                             ?>
-                            {!! Form::open(['route' => 'sellerpackage.create', 'name' =>'frm_{{ $packageID }}', 'method' => 'post', 'class' => 'payment-form']) !!}
+                            {!! Form::open(['route' => 'sellerpackage.create', 'name' =>"frm_<?php echo $packageID; ?>", 'method' => 'post', 'class' => 'payment-form']) !!}
                             @csrf
-                            <input type="hidden" class="form-control" id="package_id" value="{{ $packageID }}" />
+                            <input type="hidden" class="form-control" id="package_id" value="<?php echo $packageID; ?>" />
                             <div class="card">
                                 <div class="card-body">                                    
                                     <h4 class="card-title"><?php echo $value['name'] ?></h4>
                                     <p class="card-text"><?php echo $value['description'] ?></p>
-                                    <input type="submit" value="<?php echo "Buy At $ ".$value['cost']?>" name="btnID{{ $packageID }}" class="btn btn-primary">
+                                    <input type="submit" value="<?php echo "Buy At $ ".$value['cost']?>" name="btnID_<?php echo $packageID; ?>" class="btn btn-primary">
                                     
                                 </div>
                                 
