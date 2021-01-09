@@ -531,10 +531,7 @@
               </ul>
             </li>
             @endif 
-            <?php 
-            if($check_is_subscribed == '1') 
-            {
-              ?>         
+           
             <?php
             $department = DB::table('permissions')->where('name', 'department')->first();
             $department_active = DB::table('role_has_permissions')->where([
@@ -953,7 +950,7 @@
                 ?>
                 <li id="role-menu"><a href="{{route('role.index')}}">{{trans('file.Role Permission')}}</a>
             </li>
-           <?php } ?>
+           
             @if($warehouse_permission_active)
             <li id="warehouse-menu"><a href="{{route('warehouse.index')}}">{{trans('file.Warehouse')}}</a></li>
             @endif
