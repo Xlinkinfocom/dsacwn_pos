@@ -40,17 +40,8 @@
     <script>
         function sendPackage() {
             var PackID = $('#btnID').val();
-            alert(PackID);
-            $("#package_frm").submit(); // Submit the form
+            $("#package_frm").submit();
         }
-
-
-        /*$(document).ready(function(){
-            $("#btnID").click(function sendPackage(){
-                var PackID = $('#btnID').val();
-                $("#package_frm").submit(); // Submit the form
-            });
-        });*/
     </script>
 @endpush
 @endsection
