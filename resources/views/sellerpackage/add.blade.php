@@ -10,8 +10,9 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h4>{{trans('file.Add Subscription Plan')}}</h4>
-                        {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm', 'class' => 'payment-form']) !!}
+                        
                     </div>
+                    {!! Form::open(['route' => 'sellerpackage.create', 'method' => 'post', 'id' => 'package_frm', 'class' => 'payment-form']) !!}
                     <div class="card-body">                      
                         <div class="card-group">
                             <?php
@@ -28,7 +29,7 @@
                                 </div>
                             </div>
                             <?php } ?>
-                            <input type="text" class="form-control" id="package_id" value="" />
+                            <input type="hidden" class="form-control" id="package_id" value="" />
                         </div>
                     </div>
                     {!! Form::close() !!}
