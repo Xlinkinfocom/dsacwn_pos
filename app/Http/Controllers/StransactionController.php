@@ -92,10 +92,30 @@ class StransactionController extends Controller
                                         $categories = array_unique($duplicate_categories);
                                         $parent_categories = array();
                                         foreach($categories as $category)
-                                        {
-                                            echo $category;
-                                            /* $get_parent = Category::select('parent_id')
-                                                        ->where('id', ) */
+                                        {                                            
+                                            $get_parent = Category::select('parent_id')
+                                                        ->where('id', $category)
+                                                        ->first();
+
+                                            if(!empty($get_parent))
+                                            {
+                                                $get_commission = DB::table('commission_mst')
+                                                            ->select('total_commission')
+                                                            ->where('cat_id', $get_parent->parent_id)
+                                                            ->orWhere('sub_cat_id', $get_parent->parent_id)
+                                                            ->get();
+                                                echo '<pre>';
+                                                print_r($get_commission); 
+                                            }
+                                            else{
+                                                $get_commission = DB::table('commission_mst')
+                                                            ->select('total_commission')
+                                                            ->where('cat_id', $category)
+                                                            ->orWhere('sub_cat_id', $category)
+                                                            ->get();
+                                                echo '<pre>';
+                                                print_r($get_commission);
+                                            }
                                         }
                                     
                                     }
