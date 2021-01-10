@@ -32,7 +32,7 @@ class StransactionController extends Controller
     public function index()
     {  
         $role = Role::find(Auth::user()->role_id);
-        dd($role); exit;
+        //dd($role); exit;
         if($role->hasPermissionTo('sales-index')) {
             $sellers = array();
             $transactions = array();
@@ -42,7 +42,7 @@ class StransactionController extends Controller
                                 '2' => 'Credit Card', 
                                 '3' => 'Debit Card'
             );
-            if($role != '7')
+            if($role->id != '7')
             {
                 $sellers = User::select('id', 'name')
                                 ->where('role_id', '7')
