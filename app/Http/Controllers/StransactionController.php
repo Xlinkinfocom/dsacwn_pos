@@ -45,7 +45,7 @@ class StransactionController extends Controller
             if($role != '7')
             {
                 $sellers = User::select('id', 'name')
-                                ->where('id', Auth::user()->id)
+                                ->where('role_id', '7')
                                 ->where('is_active', '1')
                                 ->orderBy('name', 'ASC')                                
                                 ->get();
