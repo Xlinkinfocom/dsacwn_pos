@@ -35,6 +35,10 @@
                                 <option value="{{$seller->id}}">{{$seller->name}}</option>
                                 @endforeach
                             </select>
+
+                            @foreach($transactions as $transaction)
+                                <span> {{ $transaction->seller_name }}</span>
+                            @endforeach
                         </div>
                     </div>
                 </div>
