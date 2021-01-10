@@ -1116,7 +1116,8 @@
                 </li>
                 @endif
                 <li>
-                  <a href="{{url('my-transactions/'.date('Y').'/'.date('m'))}}"><i class="dripicons-swap"></i> {{trans('file.My Transaction')}}</a>
+                  <a href="{{route('stransaction.index')}}"><i class="dripicons-swap"></i>{{trans('file.Seller Transaction')}}</a>
+                  
                 </li>
                 <li>
                   <a href="{{url('holidays/my-holiday/'.date('Y').'/'.date('m'))}}"><i class="dripicons-vibrate"></i> {{trans('file.My Holiday')}}</a>
