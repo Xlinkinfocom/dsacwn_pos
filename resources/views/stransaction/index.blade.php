@@ -26,15 +26,15 @@
                 </div>
                 <div class="col-md-4 mt-4">
                     <div class="form-group row">
-                        <label class="d-tc mt-2"><strong>{{trans('file.Choose Seller')}}</strong> &nbsp;</label>
+                        {{-- <label class="d-tc mt-2"><strong>{{trans('file.Choose Seller')}}</strong> &nbsp;</label> --}}
                         <div class="d-tc">
-                            <input type="hidden" name="warehouse_id_hidden" value="" />
+                            {{-- <input type="hidden" name="warehouse_id_hidden" value="" />
                             <select id="seller_id" name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
                                 <option value="0">{{trans('file.All Seller')}}</option>
                                 @foreach($sellers as $seller)
                                 <option value="{{$seller->id}}">{{$seller->name}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                     </div>
                 </div>
