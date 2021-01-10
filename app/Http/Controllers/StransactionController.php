@@ -12,6 +12,7 @@ use App\Stransaction;
 use App\Product_Sale;
 use App\Product_Warehouse;
 use App\CommissionMst;
+use App\Category;
 use DB;
 use App\GeneralSetting;
 use Stripe\Stripe;
@@ -78,8 +79,7 @@ class StransactionController extends Controller
                                 if(!empty($products))
                                 {
                                     $duplicate_categories = array();
-                                    $categories = array();
-                                    $parent_categories = array();
+                                    $categories = array();                                    
                                     $i = 0;
                                     foreach($products as $product)
                                     {
@@ -87,11 +87,22 @@ class StransactionController extends Controller
                                         $i++;                                                    
                                     }
 
-                                    print_r($duplicate_categories);
+                                    if(!empty($duplicate_categories))
+                                    {
+                                        $categories = array_unique($duplicate_categories);
+                                        $parent_categories = array();
+                                        foreach($categories as $category)
+                                        {
+                                            echo $category;
+                                            /* $get_parent = Category::select('parent_id')
+                                                        ->where('id', ) */
+                                        }
+                                    
+                                    }
 
-                                    $categories = array_unique($duplicate_categories);                                    
-                                    echo 'after :';
-                                    print_r($categories);
+                                    
+
+
 
                                     /* foreach($products as $product)
                                     {
