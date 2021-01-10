@@ -53,9 +53,8 @@ class StransactionController extends Controller
                     foreach($sellers as $seller)
                     {
                         $payments = DB::table('payments')
-                                    ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                    ->join('product_sales', 'sales.id', '=', 'product_sales.sale_id')
-                                    ->select('product_sales.product_id','sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.paying_method', 'payments.created_at')                                            
+                                    ->join('sales', 'payments.sale_id', '=', 'sales.id')                                    
+                                    ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.paying_method', 'payments.created_at')                                            
                                     ->where('payments.user_id', $seller->id)
                                             ->whereIn('payments.paying_method', $paying_methods)
                                             ->orderBy('payments.created_at', 'DESC')
