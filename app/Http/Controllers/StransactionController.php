@@ -84,15 +84,17 @@ class StransactionController extends Controller
 
                                         if($product->parent_id != "")
                                         {
-                                            $get_commission = CommissionMst::select('total_commissoin')
+                                            /* $get_commission = CommissionMst::select('total_commissoin')
                                                             ->where('cat_id', $product->parent_id)
                                                             ->orWhere('sub_cat_id', $product->parent_id)
                                                             ->get();
                                             echo '<pre>';
-                                            print_r($get_commission);
+                                            print_r($get_commission); */
                                         }
                                         else
                                         {
+                                            echo 'category_id : '.$product->category_id;
+                                            
                                             $get_commission = DB::table('commission_mst')
                                                             ->select('total_commissoin')
                                                             ->where('cat_id', $product->category_id)
