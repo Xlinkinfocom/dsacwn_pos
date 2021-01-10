@@ -1,16 +1,13 @@
 @extends('layout.main') @section('content')
 
-@php 
-if(!empty($transactions))
-{
-    @endphp
+@php if(!empty($transactions)) { @endphp
     <section class="forms">
     <div class="container-fluid">
         <div class="card">
             <div class="card-header mt-2">
                 <h3 class="text-center">{{trans('file.Sale Report')}}</h3>
             </div>
-            {!! Form::open(['route' => 'report.sale', 'method' => 'post']) !!}
+            {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 mt-4">
                     <div class="form-group row">
@@ -46,11 +43,9 @@ if(!empty($transactions))
             </div>
             {!! Form::close() !!}
         </div>
-    </div>
-    
+    </div>    
 </section>
     @php
-
 }
 else {
 @endphp
