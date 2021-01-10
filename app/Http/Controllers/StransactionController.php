@@ -79,17 +79,18 @@ class StransactionController extends Controller
                                 {
                                     foreach($products as $product)
                                     {
-                                        $categories = array();
+                                        echo $product->category_id;
+                                        /* $categories = array();
                                         $get_commission = array();
 
                                         if($product->parent_id != "")
                                         {
-                                            /* $get_commission = CommissionMst::select('total_commissoin')
+                                           $get_commission = CommissionMst::select('total_commissoin')
                                                             ->where('cat_id', $product->parent_id)
                                                             ->orWhere('sub_cat_id', $product->parent_id)
                                                             ->get();
                                             echo '<pre>';
-                                            print_r($get_commission); */
+                                            print_r($get_commission); 
                                         }
                                         else
                                         {
@@ -98,11 +99,11 @@ class StransactionController extends Controller
                                             $get_commission = DB::table('commission_mst')
                                                             ->select('total_commissoin')
                                                             ->where('sub_cat_id', $product->category_id)
-                                                            //->orWhere('sub_cat_id', $product->category_id)
+                                                            ->orWhere('sub_cat_id', $product->category_id)
                                                             ->get();
                                             echo '<pre>';
                                             print_r($get_commission);
-                                        }
+                                        } */
                                     }
                                 }
 
