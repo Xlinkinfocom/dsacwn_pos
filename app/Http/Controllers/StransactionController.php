@@ -89,7 +89,7 @@ class StransactionController extends Controller
                                     print_r($categories);
 
                                     array_unique($categories);
-
+                                    echo 'after :';
                                     print_r($categories);
 
                                     /* foreach($products as $product)
