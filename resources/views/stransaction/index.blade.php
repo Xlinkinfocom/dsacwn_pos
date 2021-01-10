@@ -47,6 +47,47 @@
             {!! Form::close() !!}
         </div>
     </div> 
+    @if($role_id != '7')
+        <div class="table-responsive">
+            <table id="report-table" class="table table-hover">
+                <thead>
+                    <tr>                    
+                        <th>{{trans('file.Seller Name')}}</th>
+                        <th>{{trans('file.Invoice Id')}}</th>
+                        <th>{{trans('file.Invoice Date')}}</th>
+                        <th>{{trans('file.Sale Amount')}}</th>
+                        <th>{{trans('file.Commision')}}</th>
+                        <th>{{trans('file.Commision Amount')}}</th>
+                        <th>{{trans('file.Payable Amount')}}</th>
+                        <th>{{trans('file.Paid Mode')}}</th>
+                        <th>{{trans('file.Seller Pay Status')}}</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(!empty($transactions))
+                    @foreach($transactions as $transaction)
+                    <tr>
+                        <td>
+                            <input type="hidden" name[]="sale_id" value="{{ sale_id }}" />
+                            {{ $transaction['seller_name'] }}
+                        </td>
+                        <td>{{ $transaction['invoice_id'] }}</td>
+                        <td>{{ $transaction['invoice_date'] }}</td>
+                        <td>{{ $transaction['sale_amount'] }}</td>                        
+                        <td>{{ $transaction['commission'] }}</td>
+                        <td>{{ $transaction['commission_amt'] }}</td>
+                        <td>{{ $transaction['payable_amount'] }}</td>
+                        <td>{{ $transaction['paid_mode'] }}</td>
+                        <td>{{ $transaction['payable_status'] }}</td>
+                        <td>{{ $transaction['sale_id'] }}</td>
+                    </tr>
+                    @endforeach
+                    @endif
+                </tbody>            
+            </table>
+        </div>
+    @else
     <div class="table-responsive">
         <table id="report-table" class="table table-hover">
             <thead>
@@ -54,24 +95,35 @@
                     <th>{{trans('file.Seller Name')}}</th>
                     <th>{{trans('file.Invoice Id')}}</th>
                     <th>{{trans('file.Invoice Date')}}</th>
-                    <th>{{trans('file.Commision')}}</th>
+                    <th>{{trans('file.Sale Amount')}}</th>                   
+                    <th>{{trans('file.Payable Amount')}}</th>                    
+                    <th>{{trans('file.Seller Pay Status')}}</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 @if(!empty($transactions))
                 @foreach($transactions as $transaction)
                 <tr>
-                    <td>{{ $transaction['seller_name'] }}</td>
+                    <td>
+                        <input type="hidden" name[]="sale_id" value="{{ sale_id }}" />
+                        {{ $transaction['seller_name'] }}
+                    </td>
                     <td>{{ $transaction['invoice_id'] }}</td>
                     <td>{{ $transaction['invoice_date'] }}</td>
-                    <td>{{ $transaction['commission'] }}</td>                                        
+                    <td>{{ $transaction['sale_amount'] }}</td>            
+                    <td>{{ $transaction['payable_amount'] }}</td>                    
+                    <td>{{ $transaction['payable_status'] }}</td>
+                    <td>{{ $transaction['sale_id'] }}</td>
                 </tr>
                 @endforeach
                 @endif
-            </tbody>
-            
+            </tbody>            
         </table>
-    </div>   
+    </div>
+    
+    @endif
+
 </section>
 
 <script type="text/javascript">

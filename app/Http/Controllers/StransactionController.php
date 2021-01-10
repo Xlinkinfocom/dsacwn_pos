@@ -32,6 +32,7 @@ class StransactionController extends Controller
     public function index()
     {  
         $role = Role::find(Auth::user()->role_id);
+        $role_id = $role->id;
         //dd($role); exit;
         if($role->hasPermissionTo('sales-index')) {
             $sellers = array();
@@ -66,8 +67,7 @@ class StransactionController extends Controller
                         {                            
 
                             foreach($payments as $payment)
-                            {  
-                                
+                            {                              
 
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
@@ -130,18 +130,39 @@ class StransactionController extends Controller
                                     }
                                     
                                 }
+
+                                $payable_amount = 0;
+                                $commission_amt = 0;
+                                $payable_status = "";
+
+                                $commission_amt = ($payment->amount * $commission) / 100;
+                                $payable_amount = ($payment->amount - $commission_amt);
+
+                                $get_payment_status = Stransaction::select('seller_pay_status')
+                                                    ->where('invoice_id', $payment->sale_id)
+                                                    ->first();
+                                if(!empty($get_payment_status))
+                                {
+                                    $payable_status = "Unpaid";
+                                }
+                                else
+                                {
+                                    $payable_status = "Paid";
+                                }
                                 
                                 $transactions[] = array(
                                     'seller_id' => $seller->id,
                                     'seller_name' => $seller->name,
+                                    'sale_id'      => $payment->sale_id,
                                     'invoice_id' => $payment->reference_no,
                                     'invoice_date' => $payment->created_at,
-                                    'commission' => $commission
-                                );                              
-
-                                //echo $commission;
-
-
+                                    'sale_amount' => $payment->amount,
+                                    'commission' => $commission,
+                                    'commission_amt' => $commission_amt,
+                                    'payable_amount' => $payable_amount,
+                                    'paid_mode' => $payment->paying_method,
+                                    'payable_status' => $payable_status
+                                );                       
                             }
                             
                         }
@@ -240,15 +261,38 @@ class StransactionController extends Controller
                                     
                                 }
                                 
+                                $payable_amount = 0;
+                                $commission_amt = 0;
+                                $payable_status = "";
+
+                                $commission_amt = ($payment->amount * $commission) / 100;
+                                $payable_amount = ($payment->amount - $commission_amt);
+
+                                $get_payment_status = Stransaction::select('seller_pay_status')
+                                                    ->where('invoice_id', $payment->sale_id)
+                                                    ->first();
+                                if(!empty($get_payment_status))
+                                {
+                                    $payable_status = "Unpaid";
+                                }
+                                else
+                                {
+                                    $payable_status = "Paid";
+                                }
+                                
                                 $transactions[] = array(
                                     'seller_id' => $seller->id,
                                     'seller_name' => $seller->name,
+                                    'sale_id'      => $payment->sale_id,
                                     'invoice_id' => $payment->reference_no,
                                     'invoice_date' => $payment->created_at,
-                                    'commission' => $commission
-                                );                              
-
-                                //echo $commission;
+                                    'sale_amount' => $payment->amount,
+                                    'commission' => $commission,
+                                    'commission_amt' => $commission_amt,
+                                    'payable_amount' => $payable_amount,
+                                    'paid_mode' => $payment->paying_method,
+                                    'payable_status' => $payable_status
+                                );
 
 
                             }
@@ -260,7 +304,7 @@ class StransactionController extends Controller
              /* echo '<pre>';
             print_r($transactions);
             die();  */
-            return view('stransaction.index', compact('sellers', 'transactions'));
+            return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
