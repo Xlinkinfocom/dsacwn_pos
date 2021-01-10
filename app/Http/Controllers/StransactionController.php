@@ -110,7 +110,7 @@ class StransactionController extends Controller
                                                             ->get();
                                                 if(!empty($get_commission))
                                                 {
-                                                    $commission += $get_commission->total_commission;
+                                                    //$commission += $get_commission->total_commission;
                                                 }                                                
                                             }
                                             else{
@@ -121,7 +121,7 @@ class StransactionController extends Controller
                                                             ->get();
                                                 if(!empty($get_commission))
                                                 {
-                                                    $commission += $get_commission->total_commission;
+                                                    //$commission += $get_commission->total_commission;
                                                 }                                                
                                             }
                                         }
