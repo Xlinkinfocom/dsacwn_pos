@@ -59,20 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                        foreach($transactions as $transaction)
-                        {
-                            ?>
-                                <tr>
-                                    <td><?php echo $transaction->seller_name; ?></td>
-                                    <td><?php echo $transaction->seller_name; ?></td>
-                                    <td><?php echo $transaction->seller_name; ?></td>
-                                    <td><?php echo $transaction->seller_name; ?></td>                   
-                                </tr>
-                            <?php
-                        }
-
-                ?>
+                
                 {{-- @if(!empty($transactions))
                 @foreach($transactions as $transaction)
                 <tr>
