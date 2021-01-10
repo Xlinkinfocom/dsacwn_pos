@@ -130,7 +130,9 @@ class StransactionController extends Controller
                                     
                                 }
 
-                                $transactions['commission'][] = $commission;
+                                //$transactions['commission'][] = $commission;
+
+                                echo $commission;
 
 
                             }
