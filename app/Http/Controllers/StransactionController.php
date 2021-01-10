@@ -79,10 +79,11 @@ class StransactionController extends Controller
                                 {
                                     $categories = array();
                                     $parent_categories = array();
-
+                                    $i = 0;
                                     foreach($products as $product)
                                     {
-                                        $categories[] = $product->category_id;                                                    
+                                        $categories[$i] = $product->category_id;
+                                        $i++;                                                    
                                     }
 
                                     print_r($categories);
