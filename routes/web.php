@@ -326,7 +326,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('sellerpackage/paypalCancel', 'SellerPackageController@paypalCancel')->name('sellerpackage.paypalCancel');
     //Paypal END
 
-	Route::post('seller-transaction', 'StransactionController@index')->name('stransaction.index');
+	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
 	//Route::post('report/sale_report', 'ReportController@saleReport')->name('report.sale');
 
 });
