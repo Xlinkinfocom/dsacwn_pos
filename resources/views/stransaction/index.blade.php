@@ -5,7 +5,7 @@ print_r($transactions);
 
 foreach($transactions as $transaction)
 {
-    echo $transaction->seller_name;
+    echo $transaction['seller_name'];
 }
 
 @endphp
