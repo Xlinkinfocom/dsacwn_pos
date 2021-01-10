@@ -89,7 +89,7 @@ class StransactionController extends Controller
 
                                     print_r($duplicate_categories);
 
-                                    $categories = array_flip($duplicate_categories);                                    
+                                    $categories = array_unique($duplicate_categories);                                    
                                     echo 'after :';
                                     print_r($categories);
 
