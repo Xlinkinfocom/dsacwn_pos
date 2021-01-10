@@ -86,14 +86,19 @@ class StransactionController extends Controller
                                         {
                                             $get_commission = CommissionMst::select('total_commissoin')
                                                             ->where('cat_id', $product->parent_id)
-                                                            ->orWhere('cat_id', $product->parent_id)
+                                                            ->orWhere('sub_cat_id', $product->parent_id)
                                                             ->get();
                                             echo '<pre>';
                                             print_r($get_commission);
                                         }
                                         else
                                         {
-
+                                            $get_commission = CommissionMst::select('total_commissoin')
+                                                            ->where('cat_id', $product->category_id)
+                                                            ->orWhere('sub_cat_id', $product->category_id)
+                                                            ->get();
+                                            echo '<pre>';
+                                            print_r($get_commission);
                                         }
                                     }
                                 }
