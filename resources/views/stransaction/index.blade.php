@@ -74,10 +74,10 @@
                         </td>
                         <td>{{ $transaction['invoice_id'] }}</td>
                         <td>{{ date('d-m-Y', strtotime($transaction['invoice_date'])) }}</td>
-                        <td>{{ $transaction['sale_amount'] }}</td>                        
+                        <td>{{ number_format($transaction['sale_amount'], 2) }}</td>                        
                         <td>{{ $transaction['commission'] }}</td>
-                        <td>{{ $transaction['commission_amt'] }}</td>
-                        <td>{{ $transaction['payable_amount'] }}</td>
+                        <td>{{ number_format($transaction['commission_amt'], 2) }}</td>
+                        <td>{{ number_format($transaction['payable_amount'], 2) }}</td>
                         <td>{{ $transaction['paid_mode'] }}</td>
                         <td>{{ $transaction['payable_status'] }}</td>
                         
@@ -110,9 +110,9 @@
                         {{ $transaction['seller_name'] }}
                     </td>
                     <td>{{ $transaction['invoice_id'] }}</td>
-                    <td>{{ $transaction['invoice_date'] }}</td>
-                    <td>{{ $transaction['sale_amount'] }}</td>            
-                    <td>{{ $transaction['payable_amount'] }}</td>                    
+                    <td>{{ date('d-m-Y', strtotime($transaction['invoice_date'])) }}</td>
+                    <td>{{ number_format($transaction['sale_amount'], 2) }}</td>            
+                    <td>{{ number_format($transaction['payable_amount'], 2) }}</td>                    
                     <td>{{ $transaction['payable_status'] }}</td>
                     
                 </tr>
