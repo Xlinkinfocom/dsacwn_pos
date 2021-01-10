@@ -69,22 +69,28 @@ class StransactionController extends Controller
                             {                                
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
-                                        ->join('categories', 'categories.id', '=','products.category_id')                                        
-                                        ->select('product_sales.sale_id', 'product_sales.product_id', 'products.name as product_name', 'products.category_id', 'categories.parent_id')
+                                        //->join('categories', 'categories.id', '=','products.category_id')                                        
+                                        ->select('product_sales.sale_id', 'product_sales.product_id', 'products.category_id')
                                         ->where('product_sales.sale_id', $payment->sale_id)
+                                        ->groupBy('products.category_id')
                                         ->get();
                                 echo '<pre>';
                                 print_r($products);
                                 if(!empty($products))
                                 {
-                                    foreach($products as $product)
+                                    $sub_categories = array();
+                                    $parent_categories = array();
+
+                                    /* foreach($products as $product)
                                     {
-                                        //echo $product->category_id;                                       
-                                         $categories = array();
+                                                                   
+                                         
                                         $get_commission = array();
 
                                         if($product->parent_id != "")
                                         {
+                                            $parent_categories[$product->parent_id][] = $product->parent_id;
+
                                             $get_commission = DB::table('commission_mst')
                                                             ->select('total_commission')
                                                             ->where('cat_id', $product->parent_id)
@@ -105,7 +111,7 @@ class StransactionController extends Controller
                                             echo '<pre>';
                                             print_r($get_commission);
                                         } 
-                                    }
+                                    } */
                                 }
 
                             }
