@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-md-3 mt-4">
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">{{trans('file.submit')}}</button>
+                        {{-- <button class="btn btn-primary" type="submit">{{trans('file.submit')}}</button> --}}
                     </div>
                 </div>
             </div>
