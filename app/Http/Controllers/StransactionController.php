@@ -69,7 +69,7 @@ class StransactionController extends Controller
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
                                         ->join('categories', 'categories.id', '=','products.category_id')                                        
-                                        ->select('product_sales.sale_id', 'product_sales.product_id', 'products.name as product_name', 'products.category_id', 'categories.name')
+                                        ->select('product_sales.sale_id', 'product_sales.product_id', 'products.name as product_name', 'products.category_id', 'categories.parent_id')
                                         ->where('product_sales.sale_id', $payment->sale_id)
                                         ->get();
                                 echo '<pre>';
