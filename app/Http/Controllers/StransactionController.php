@@ -110,6 +110,8 @@ class StransactionController extends Controller
                                                             ->get();
                                                 if(!empty($get_commission))
                                                 {
+                                                    echo '<pre>';
+                                                    print_r($get_commission);
                                                     //$commission += $get_commission->total_commission;
                                                 }                                                
                                             }
@@ -121,6 +123,8 @@ class StransactionController extends Controller
                                                             ->get();
                                                 if(!empty($get_commission))
                                                 {
+                                                    echo '<pre>';
+                                                    print_r($get_commission);
                                                     //$commission += $get_commission->total_commission;
                                                 }                                                
                                             }
@@ -132,7 +136,7 @@ class StransactionController extends Controller
 
                                 //$transactions['commission'][] = $commission;
 
-                                echo $commission;
+                                //echo $commission;
 
 
                             }
@@ -149,8 +153,8 @@ class StransactionController extends Controller
                                 ->get();
             }
 
-            echo '<pre>';
-            print_r($transactions);
+            //echo '<pre>';
+            //print_r($transactions);
             die();
             return view('stransaction.index', compact('sellers'));
         }
