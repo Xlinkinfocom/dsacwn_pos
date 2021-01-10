@@ -37,7 +37,7 @@
                             </select>
 
                             @foreach($transactions as $transaction)
-                                <span> {{ $transaction->seller_name }}</span>
+                                <span> {{ $transaction['seller_name'] }}</span>
                             @endforeach
                         </div>
                     </div>
