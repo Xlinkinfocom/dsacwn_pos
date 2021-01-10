@@ -94,11 +94,11 @@ class StransactionController extends Controller
                                         else
                                         {
                                             echo 'category_id : '.$product->category_id;
-                                            
+
                                             $get_commission = DB::table('commission_mst')
                                                             ->select('total_commissoin')
-                                                            ->where('cat_id', $product->category_id)
-                                                            ->orWhere('sub_cat_id', $product->category_id)
+                                                            ->where('sub_cat_id', $product->category_id)
+                                                            //->orWhere('sub_cat_id', $product->category_id)
                                                             ->get();
                                             echo '<pre>';
                                             print_r($get_commission);
