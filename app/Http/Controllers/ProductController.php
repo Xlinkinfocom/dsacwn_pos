@@ -305,7 +305,12 @@ class ProductController extends Controller
             $is_superadmin = Auth::user()->is_supersdmin;               
             $user_id = Auth::user()->id;
             $seller_list = array();
-            if($is_superadmin == '1')
+
+            $seller_list = Seller::select('id', 'seller_name', 'company_name')
+                ->where('is_active', '1')
+                ->get();
+
+            /* if($is_superadmin == '1')
             {
                 $seller_list = Seller::select('id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
@@ -318,7 +323,7 @@ class ProductController extends Controller
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
-            }
+            } */
 
             
            
