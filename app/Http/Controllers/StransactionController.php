@@ -138,7 +138,7 @@ class StransactionController extends Controller
                                 $commission_amt = ($payment->amount * $commission) / 100;
                                 $payable_amount = ($payment->amount - $commission_amt);
 
-                                $get_payment_status = Stransaction::select('seller_pay_status')
+                                $get_payment_status = DB::table('stransaction')->select('seller_pay_status')
                                                     ->where('invoice_id', $payment->sale_id)
                                                     ->first();
                                 if(!empty($get_payment_status))
@@ -301,9 +301,9 @@ class StransactionController extends Controller
                     }
                 }
             }
-             echo '<pre>';
+             /* echo '<pre>';
             print_r($transactions);
-            die(); 
+            die();  */
             return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
         }
         else
