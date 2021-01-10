@@ -73,6 +73,100 @@
         </table>
     </div>   
 </section>
+
+<script type="text/javascript">
+    $("ul#report").siblings('a').attr('aria-expanded','true');
+    $("ul#report").addClass("show");
+    $("ul#report #sale-report-menu").addClass("active");
+
+    $('#warehouse_id').val($('input[name="warehouse_id_hidden"]').val());
+    $('.selectpicker').selectpicker('refresh');
+
+    $('#report-table').DataTable( {
+        "order": [],
+        'language': {
+            'lengthMenu': '_MENU_ {{trans("file.records per page")}}',
+             "info":      '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
+            "search":  '{{trans("file.Search")}}',
+            'paginate': {
+                    'previous': '<i class="dripicons-chevron-left"></i>',
+                    'next': '<i class="dripicons-chevron-right"></i>'
+            }
+        },
+        'columnDefs': [
+            {
+                "orderable": false,
+                'targets': 0
+            },
+            {
+                'render': function(data, type, row, meta){
+                    if(type === 'display'){
+                        data = '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>';
+                    }
+
+                   return data;
+                },
+                'checkboxes': {
+                   'selectRow': true,
+                   'selectAllRender': '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>'
+                },
+                'targets': [0]
+            }
+        ],
+        'select': { style: 'multi',  selector: 'td:first-child'},
+        'lengthMenu': [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        dom: '<"row"lfB>rtip',
+        buttons: [
+            {
+                extend: 'pdf',
+                text: '{{trans("file.PDF")}}',
+                exportOptions: {
+                    columns: ':visible:not(.not-exported)',
+                    rows: ':visible'
+                },
+               
+            },
+            {
+                extend: 'csv',
+                text: '{{trans("file.CSV")}}',
+                exportOptions: {
+                    columns: ':visible:not(.not-exported)',
+                    rows: ':visible'
+                },
+                
+            },
+            {
+                extend: 'print',
+                text: '{{trans("file.Print")}}',
+                exportOptions: {
+                    columns: ':visible:not(.not-exported)',
+                    rows: ':visible'
+                },
+                
+            },
+            {
+                extend: 'colvis',
+                text: '{{trans("file.Column visibility")}}',
+                columns: ':gt(0)'
+            }
+        ],
+       
+    } );
+
+    
+
+$(".daterangepicker-field").daterangepicker({
+  callback: function(startDate, endDate, period){
+    var start_date = startDate.format('YYYY-MM-DD');
+    var end_date = endDate.format('YYYY-MM-DD');
+    var title = start_date + ' To ' + end_date;
+    $(this).val(title);
+    $('input[name="start_date"]').val(start_date);
+    $('input[name="end_date"]').val(end_date);
+  }
+});
+
+</script>
    
 
 @endsection
