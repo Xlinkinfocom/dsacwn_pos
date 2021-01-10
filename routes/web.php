@@ -327,7 +327,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
     //Paypal END
 
 	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
-	//Route::post('report/sale_report', 'ReportController@saleReport')->name('report.sale');
+	Route::post('seller-store', 'StransactionController@store')->name('stransaction.store');
 
 });
 

@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Validator;
 
 class StransactionController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {  
         $role = Role::find(Auth::user()->role_id);
         //dd($role); exit;
@@ -159,6 +159,11 @@ class StransactionController extends Controller
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
+
+    }
+
+    public function store(Request $request)
+    {
 
     }
 }
