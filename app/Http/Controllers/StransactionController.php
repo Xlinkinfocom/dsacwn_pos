@@ -85,8 +85,12 @@ class StransactionController extends Controller
                                                             ->where('sub_cat_id', $product->category_id)
                                                             //->orWhere('sub_cat_id', $product->category_id)
                                                             ->get();
+                                        if(!empty($get_commission))
+                                        {
                                             echo '<pre>';
                                             print_r($get_commission);
+                                        }
+                                            
                                         /* $categories = array();
                                         $get_commission = array();
 
