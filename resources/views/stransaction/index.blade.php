@@ -73,14 +73,14 @@
                             {{ $transaction['seller_name'] }}
                         </td>
                         <td>{{ $transaction['invoice_id'] }}</td>
-                        <td>{{ $transaction['invoice_date'] }}</td>
+                        <td>{{ date('d-m-Y', strtotime($transaction['invoice_date'])) }}</td>
                         <td>{{ $transaction['sale_amount'] }}</td>                        
                         <td>{{ $transaction['commission'] }}</td>
                         <td>{{ $transaction['commission_amt'] }}</td>
                         <td>{{ $transaction['payable_amount'] }}</td>
                         <td>{{ $transaction['paid_mode'] }}</td>
                         <td>{{ $transaction['payable_status'] }}</td>
-                        <td>{{ $transaction['sale_id'] }}</td>
+                        
                     </tr>
                     @endforeach
                     @endif
@@ -114,7 +114,7 @@
                     <td>{{ $transaction['sale_amount'] }}</td>            
                     <td>{{ $transaction['payable_amount'] }}</td>                    
                     <td>{{ $transaction['payable_status'] }}</td>
-                    <td>{{ $transaction['sale_id'] }}</td>
+                    
                 </tr>
                 @endforeach
                 @endif
