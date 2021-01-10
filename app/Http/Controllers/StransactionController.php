@@ -66,6 +66,7 @@ class StransactionController extends Controller
                         {
                             foreach($payments as $payment)
                             {
+                                echo $payment->sale_id;
                                 $products = DB::table('product_sales')
                                         ->join('products', 'product_sales.product_id', '=', 'products.id')
                                         ->join('categories', 'products.category_id', '=', 'categories.id')
