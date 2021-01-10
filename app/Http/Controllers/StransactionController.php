@@ -151,7 +151,7 @@ class StransactionController extends Controller
             }
             else
             {
-                dd();
+                dd(Auth::user()->id);
                 $sellers = User::select('id', 'name')
                                 ->where('role_id', '7')
                                 ->where('id', Auth::user()->id)
