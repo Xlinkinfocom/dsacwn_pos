@@ -77,18 +77,19 @@ class StransactionController extends Controller
                                 print_r($products);
                                 if(!empty($products))
                                 {
+                                    $duplicate_categories = array();
                                     $categories = array();
                                     $parent_categories = array();
                                     $i = 0;
                                     foreach($products as $product)
                                     {
-                                        $categories[$i] = $product->category_id;
+                                        $duplicate_categories[$i] = $product->category_id;
                                         $i++;                                                    
                                     }
 
-                                    print_r($categories);
+                                    print_r($duplicate_categories);
 
-                                    array_unique($categories);
+                                    $categories = array_flip($duplicate_categories);                                    
                                     echo 'after :';
                                     print_r($categories);
 
