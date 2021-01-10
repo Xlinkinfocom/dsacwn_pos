@@ -98,7 +98,8 @@ class SellerPackageController extends Controller
         $paypal_data['invoice_id']          = 'sub'.strtotime(date('Y-m-d H:i:s')).rand();
         $paypal_data['invoice_description'] = "Reference # {$paypal_data['invoice_id']} Invoice";
         $paypal_data['return_url']          = url('/sellerpackage/paypalSuccess');
-        $paypal_data['cancel_url']          = url('/sellerpackage/create');
+        //$paypal_data['cancel_url']          = url('/sellerpackage/create');
+        $paypal_data['cancel_url']          = url('/sellerpackage/paypalCancel');
 
         $total = 0;
         foreach($paypal_data['items'] as $item) {
@@ -113,6 +114,11 @@ class SellerPackageController extends Controller
     }
 
     public function paypalSuccess(Request $request) {
+
+        dd($request->all());
+    }
+
+    public function paypalCancel(Request $request) {
 
         dd($request->all());
     }
