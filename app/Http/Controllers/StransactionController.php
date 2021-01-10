@@ -155,9 +155,9 @@ class StransactionController extends Controller
                                 ->where('is_active', '1')                                
                                 ->get();
             }
-             echo '<pre>';
+             /* echo '<pre>';
             print_r($transactions);
-            die(); 
+            die();  */
             return view('stransaction.index', compact('sellers', 'transactions'));
         }
         else
