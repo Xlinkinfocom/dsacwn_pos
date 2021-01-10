@@ -33,7 +33,7 @@ class StransactionController extends Controller
     {  
         $role = Role::find(Auth::user()->role_id);
         //dd($role); exit;
-        if($role->hasPermissionTo('users-index')){
+        if($role->hasPermissionTo('sales-index')) {
             $sellers = array();
             $transactions = array();
             $paying_methods = array(
