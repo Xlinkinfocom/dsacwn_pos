@@ -70,16 +70,22 @@ class StransactionController extends Controller
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
                                         //->join('categories', 'categories.id', '=','products.category_id')                                        
-                                        ->select('product_sales.sale_id', 'product_sales.product_id', 'products.category_id')
-                                        ->where('product_sales.sale_id', $payment->sale_id)
-                                        ->groupBy('products.category_id')
+                                        ->select('products.category_id')
+                                        ->where('product_sales.sale_id', $payment->sale_id)                                       
                                         ->get();
                                 echo '<pre>';
                                 print_r($products);
                                 if(!empty($products))
                                 {
-                                    $sub_categories = array();
+                                    $categories = array();
                                     $parent_categories = array();
+
+                                    foreach($products as $product)
+                                    {
+                                        $categories[] = $product->category_id;
+                                    }
+
+                                    print_r($categories);
 
                                     /* foreach($products as $product)
                                     {
