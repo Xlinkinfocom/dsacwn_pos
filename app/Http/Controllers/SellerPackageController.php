@@ -2,38 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\CustomerGroup;
-use App\Customer;
-use App\Deposit;
-use App\User;
-use App\State;
-use App\District;
-use App\Seller;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+//use DB;
+//use Hash;
 //use Auth;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\Mail\UserNotification;
-use Illuminate\Support\Facades\Mail;
-use App\Roles;
-use App\Biller;
-use App\Warehouse;
-use Hash;
-use Keygen;
-use DB;
-use App\Http\Controllers\Controller;
+//use Keygen;
+//use App\PaymentWithPaypal;
 use App\CreditPackageMst;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\CreditPackageLog;
-use Illuminate\Validation\ValidationException;
-use App\PaymentWithPaypal;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\ExpressCheckout;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SellerPackageController extends Controller
 {
-   
     /**
     * Show the form for creating a new resource.
     *
@@ -44,7 +25,7 @@ class SellerPackageController extends Controller
         //
         try {
             $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get()->toArray();
-            return view('sellerpackage.add',compact('credit_packages'));
+            return view('sellerpackage.add', compact('credit_packages'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
