@@ -79,25 +79,16 @@ class StransactionController extends Controller
                                 {
                                     foreach($products as $product)
                                     {
-                                        //echo $product->category_id;
-                                        $get_commission = DB::table('commission_mst')
-                                                            ->select('commission_mst.total_commissoin')
-                                                            ->where('commission_mst.sub_cat_id', $product->category_id)                                                            
-                                                            ->get();
-                                        if(!empty($get_commission))
-                                        {
-                                            echo '<pre>';
-                                            print_r($get_commission);
-                                        }
-                                            
-                                        /* $categories = array();
+                                        //echo $product->category_id;                                       
+                                         $categories = array();
                                         $get_commission = array();
 
                                         if($product->parent_id != "")
                                         {
-                                           $get_commission = CommissionMst::select('total_commissoin')
-                                                            ->where('cat_id', $product->parent_id)
-                                                            ->orWhere('sub_cat_id', $product->parent_id)
+                                            $get_commission = DB::table('commission_mst')
+                                                            ->select('total_commission')
+                                                            ->where('sub_cat_id', $product->category_id)
+                                                            ->orWhere('sub_cat_id', $product->category_id)
                                                             ->get();
                                             echo '<pre>';
                                             print_r($get_commission); 
@@ -107,13 +98,13 @@ class StransactionController extends Controller
                                             echo 'category_id : '.$product->category_id;
 
                                             $get_commission = DB::table('commission_mst')
-                                                            ->select('total_commissoin')
+                                                            ->select('total_commission')
                                                             ->where('sub_cat_id', $product->category_id)
                                                             ->orWhere('sub_cat_id', $product->category_id)
                                                             ->get();
                                             echo '<pre>';
                                             print_r($get_commission);
-                                        } */
+                                        } 
                                     }
                                 }
 
