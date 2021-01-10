@@ -85,6 +85,7 @@ class StransactionController extends Controller
                                         $categories[] = array(
                                                                 'category_id'   => $product->category_id,
                                                                 'product_id'    => $product->product_id 
+                                                            );
                                     }
 
                                     print_r($categories);
