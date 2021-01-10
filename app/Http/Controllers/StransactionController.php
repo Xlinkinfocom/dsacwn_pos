@@ -153,7 +153,7 @@ class StransactionController extends Controller
             {
                 $sellers = User::select('id', 'name')
                                 ->where('role_id', '7')
-                                ->where('id', Auth::user())
+                                ->where('id', Auth::user()->id)
                                 ->where('is_active', '1')
                                 ->orderBy('name', 'ASC')                                
                                 ->get();
