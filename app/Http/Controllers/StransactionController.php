@@ -60,26 +60,30 @@ class StransactionController extends Controller
                                     ->where('payments.user_id', $seller->id)
                                             ->whereIn('payments.paying_method', $paying_methods)
                                             ->orderBy('payments.created_at', 'DESC')
-                                            ->get();
-                        echo '<pre>';
-                        print_r($payments);
+                                            ->get();                       
 
                         if(!empty($payments))
-                        {
+                        {                            
+
                             foreach($payments as $payment)
-                            {                                
+                            {  
+                                $transactions['seller_id'][] = $seller->id;
+                                $transactions['seller_name'][] = $seller->name;
+                                $transactions['invoice_id'][] = $payment->reference_no;
+                                $transactions['invoice_date'][] = $payment->created_at;
+
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
                                         //->join('categories', 'categories.id', '=','products.category_id')                                        
                                         ->select('products.category_id')
                                         ->where('product_sales.sale_id', $payment->sale_id)                                       
                                         ->get();
-                                echo '<pre>';
-                                print_r($products);
+                                
                                 if(!empty($products))
                                 {
                                     $duplicate_categories = array();
-                                    $categories = array();                                    
+                                    $categories = array();
+                                    $commission = 0;                                    
                                     $i = 0;
                                     foreach($products as $product)
                                     {
@@ -104,8 +108,10 @@ class StransactionController extends Controller
                                                             ->where('cat_id', $get_parent->parent_id)
                                                             ->orWhere('sub_cat_id', $get_parent->parent_id)
                                                             ->get();
-                                                echo '<pre>';
-                                                print_r($get_commission); 
+                                                if(!empty($get_commission))
+                                                {
+                                                    $commission += $get_commission->total_commission;
+                                                }                                                
                                             }
                                             else{
                                                 $get_commission = DB::table('commission_mst')
@@ -113,49 +119,19 @@ class StransactionController extends Controller
                                                             ->where('cat_id', $category)
                                                             ->orWhere('sub_cat_id', $category)
                                                             ->get();
-                                                echo '<pre>';
-                                                print_r($get_commission);
+                                                if(!empty($get_commission))
+                                                {
+                                                    $commission += $get_commission->total_commission;
+                                                }                                                
                                             }
                                         }
                                     
                                     }
-
                                     
-
-
-
-                                    /* foreach($products as $product)
-                                    {
-                                                                   
-                                         
-                                        $get_commission = array();
-
-                                        if($product->parent_id != "")
-                                        {
-                                            $parent_categories[$product->parent_id][] = $product->parent_id;
-
-                                            $get_commission = DB::table('commission_mst')
-                                                            ->select('total_commission')
-                                                            ->where('cat_id', $product->parent_id)
-                                                            ->orWhere('sub_cat_id', $product->parent_id)
-                                                            ->get();
-                                            echo '<pre>';
-                                            print_r($get_commission); 
-                                        }
-                                        else
-                                        {
-                                            echo 'category_id : '.$product->category_id;
-
-                                            $get_commission = DB::table('commission_mst')
-                                                            ->select('total_commission')
-                                                            ->where('cat_id', $product->category_id)
-                                                            ->orWhere('sub_cat_id', $product->category_id)
-                                                            ->get();
-                                            echo '<pre>';
-                                            print_r($get_commission);
-                                        } 
-                                    } */
                                 }
+
+                                $transactions['commission'][] = $commission;
+
 
                             }
                             
@@ -171,7 +147,8 @@ class StransactionController extends Controller
                                 ->get();
             }
 
-
+            echo '<pre>';
+            print_r($transactions);
             die();
             return view('stransaction.index', compact('sellers'));
         }
