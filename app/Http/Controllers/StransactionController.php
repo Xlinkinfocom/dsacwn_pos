@@ -67,10 +67,7 @@ class StransactionController extends Controller
 
                             foreach($payments as $payment)
                             {  
-                                $transactions['seller_id'][] = $seller->id;
-                                $transactions['seller_name'][] = $seller->name;
-                                $transactions['invoice_id'][] = $payment->reference_no;
-                                $transactions['invoice_date'][] = $payment->created_at;
+                                
 
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
@@ -134,7 +131,13 @@ class StransactionController extends Controller
                                     
                                 }
 
-                                $transactions['commission'][] = $commission;
+                                $transactions[] = array(
+                                    'seller_id' => $seller->id,
+                                    'seller_name' => $seller->name,
+                                    'invoice_id' => $payment->reference_no,
+                                    'invoice_date' => $payment->created_at,
+                                    'commission' => $commission
+                                );                              
 
                                 //echo $commission;
 
@@ -152,9 +155,9 @@ class StransactionController extends Controller
                                 ->where('is_active', '1')                                
                                 ->get();
             }
-            /* echo '<pre>';
+             echo '<pre>';
             print_r($transactions);
-            die(); */
+            die(); 
             return view('stransaction.index', compact('sellers', 'transactions'));
         }
         else
