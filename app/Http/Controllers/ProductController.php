@@ -349,7 +349,7 @@ class ProductController extends Controller
                 }),
             ]
         ]);
-        dd($request->input);
+        $data['seller_id'] = $request->seller_id;
         $data = $request->except('image', 'file');
         if($data['type'] == 'combo'){
             $data['product_list'] = implode(",", $data['product_id']);
