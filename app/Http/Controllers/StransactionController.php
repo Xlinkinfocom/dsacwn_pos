@@ -151,9 +151,110 @@ class StransactionController extends Controller
             }
             else
             {
-                $sellers = User::select('id', 'name')                                
-                                ->where('is_active', '1')                                
+                $sellers = User::select('id', 'name')
+                                ->where('role_id', '7')
+                                ->where('id', Auth::user())
+                                ->where('is_active', '1')
+                                ->orderBy('name', 'ASC')                                
                                 ->get();
+                
+                if(!empty($sellers))
+                {   
+                    foreach($sellers as $seller)
+                    {
+                        $payments = DB::table('payments')
+                                    ->join('sales', 'payments.sale_id', '=', 'sales.id')                                    
+                                    ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.paying_method', 'payments.created_at')                                            
+                                    ->where('payments.user_id', $seller->id)
+                                            ->whereIn('payments.paying_method', $paying_methods)
+                                            ->orderBy('payments.created_at', 'DESC')
+                                            ->get();                       
+
+                        if(!empty($payments))
+                        {                            
+
+                            foreach($payments as $payment)
+                            {  
+                                
+
+                                $products = DB::table('products')
+                                        ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
+                                        //->join('categories', 'categories.id', '=','products.category_id')                                        
+                                        ->select('products.category_id')
+                                        ->where('product_sales.sale_id', $payment->sale_id)                                       
+                                        ->get();
+                                
+                                if(!empty($products))
+                                {
+                                    $duplicate_categories = array();
+                                    $categories = array();
+                                    $commission = 0;                                    
+                                    $i = 0;
+                                    foreach($products as $product)
+                                    {
+                                        $duplicate_categories[$i] = $product->category_id;
+                                        $i++;                                                    
+                                    }
+
+                                    if(!empty($duplicate_categories))
+                                    {
+                                        $categories = array_unique($duplicate_categories);
+                                        $parent_categories = array();
+                                        foreach($categories as $category)
+                                        {                                            
+                                            $get_parent = Category::select('parent_id')
+                                                        ->where('id', $category)
+                                                        ->first();
+
+                                            if(!empty($get_parent))
+                                            {
+                                                $get_commission = DB::table('commission_mst')
+                                                            ->select('total_commission')
+                                                            ->where('cat_id', $get_parent->parent_id)
+                                                            ->orWhere('sub_cat_id', $get_parent->parent_id)
+                                                            ->first();
+                                                if(!empty($get_commission))
+                                                {
+                                                    /* echo '<pre>';
+                                                    print_r($get_commission); */
+                                                    $commission += $get_commission->total_commission;
+                                                }                                                
+                                            }
+                                            else{
+                                                $get_commission = DB::table('commission_mst')
+                                                            ->select('total_commission')
+                                                            ->where('cat_id', $category)
+                                                            ->orWhere('sub_cat_id', $category)
+                                                            ->first();
+                                                if(!empty($get_commission))
+                                                {
+                                                    /* echo '<pre>';
+                                                    print_r($get_commission); */
+                                                    $commission += $get_commission->total_commission;
+                                                }                                                
+                                            }
+                                        }
+                                    
+                                    }
+                                    
+                                }
+                                
+                                $transactions[] = array(
+                                    'seller_id' => $seller->id,
+                                    'seller_name' => $seller->name,
+                                    'invoice_id' => $payment->reference_no,
+                                    'invoice_date' => $payment->created_at,
+                                    'commission' => $commission
+                                );                              
+
+                                //echo $commission;
+
+
+                            }
+                            
+                        }
+                    }
+                }
             }
              /* echo '<pre>';
             print_r($transactions);
