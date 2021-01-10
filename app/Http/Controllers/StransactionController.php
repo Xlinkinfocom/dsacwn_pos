@@ -152,11 +152,10 @@ class StransactionController extends Controller
                                 ->where('is_active', '1')                                
                                 ->get();
             }
-
-            echo '<pre>';
+            /* echo '<pre>';
             print_r($transactions);
-            die();
-            return view('stransaction.index', compact('sellers'));
+            die(); */
+            return view('stransaction.index', compact('sellers', 'transactions'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

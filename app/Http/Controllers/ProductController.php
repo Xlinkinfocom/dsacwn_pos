@@ -443,7 +443,6 @@ class ProductController extends Controller
                         return $query->where('is_active', 1);
                     }),
                 ],
-
                 'code' => [
                     'max:255',
                     Rule::unique('products')->ignore($request->input('id'))->where(function ($query) {
