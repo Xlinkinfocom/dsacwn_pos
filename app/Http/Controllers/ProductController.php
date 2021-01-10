@@ -306,7 +306,7 @@ class ProductController extends Controller
             $user_id = Auth::user()->id;
             $seller_list = array();
 
-            $seller_list = Seller::select('id', 'seller_name', 'company_name')
+            $seller_list = Seller::select('usre_id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
                 ->get();
 
@@ -419,7 +419,7 @@ class ProductController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_product_data = Product::where('id', $id)->first();
             $lims_product_variant_data = $lims_product_data->variant()->orderBy('position')->get();
-            $seller_list = Seller::select('id', 'seller_name', 'company_name')
+            $seller_list = Seller::select('user_id', 'seller_name', 'company_name')
             ->where('is_active', '1')
             ->get();
             //return dd($lims_product_variant_data);
@@ -451,6 +451,7 @@ class ProductController extends Controller
                     }),
                 ]
             ]);
+            $data['seller_id'] = $request->seller_id;
             $data = $request->except('image', 'file');
             $lims_product_data = Product::findOrFail($request->input('id'));
             $data = $request->except('image', 'file');
