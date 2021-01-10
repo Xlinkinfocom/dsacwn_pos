@@ -69,7 +69,7 @@
                     @foreach($transactions as $transaction)
                     <tr>
                         <td>
-                            <input type="hidden" name[]="sale_id" value="{{ sale_id }}" />
+                            <input type="hidden" name[]="sale_id" value="{{ $transaction['sale_id'] }}" />
                             {{ $transaction['seller_name'] }}
                         </td>
                         <td>{{ $transaction['invoice_id'] }}</td>
@@ -106,7 +106,7 @@
                 @foreach($transactions as $transaction)
                 <tr>
                     <td>
-                        <input type="hidden" name[]="sale_id" value="{{ sale_id }}" />
+                        <input type="hidden" name[]="sale_id" value="{{ $transaction['sale_id'] }}" />
                         {{ $transaction['seller_name'] }}
                     </td>
                     <td>{{ $transaction['invoice_id'] }}</td>
