@@ -82,11 +82,12 @@ class StransactionController extends Controller
 
                                     foreach($products as $product)
                                     {
-                                        $categories[] = array(
-                                                                'category_id'   => $product->category_id,
-                                                                'product_id'    => $product->product_id 
-                                                            );
+                                        $categories[] = $product->category_id;                                                    
                                     }
+
+                                    print_r($categories);
+
+                                    array_unique($categories);
 
                                     print_r($categories);
 
