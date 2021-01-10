@@ -320,11 +320,16 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('sellerpackage/create', 'SellerPackageController@store')->name('sellerpackage.create');
 	Route::get('sellerpackage/buy/{id}', 'SellerPackageController@buy')->name('sellerpackage.buy');
 
-    //Paypal START
+    //Paypal START Here
 	//Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess');
 	Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess')->name('sellerpackage.paypalSuccess');
 	Route::get('sellerpackage/paypalCancel', 'SellerPackageController@paypalCancel')->name('sellerpackage.paypalCancel');
-    //Paypal END
+
+
+    Route::post('payment-save', ['as' => 'payment_save', 'uses' => 'SellerPackageController@payment_save']);
+    Route::get('paypal', ['as' => 'paypal', 'uses' => 'SellerPackageController@paypal_save']);
+    Route::get('cancel-return', ['as' => 'cancel_return', 'uses' => 'SellerPackageController@paypal_cancel']);
+    //Paypal END Here
 
 	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
 	Route::post('seller-store', 'StransactionController@store')->name('stransaction.store');

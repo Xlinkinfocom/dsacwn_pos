@@ -8,8 +8,10 @@ namespace App\Http\Controllers;
 //use Keygen;
 //use App\PaymentWithPaypal;
 use App\CreditPackageMst;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -104,8 +106,72 @@ class SellerPackageController extends Controller
         dd($request->all());
     }
 
-    /*public function storeBkp(Request $request)
-    {
+    ///////////////////// Newly Modified /////////////////////////
+    public function payment_save(Request $request) {
+
+        $data                 = $request->all();
+        $data['user_id']      = Auth::id();
+        $data['package_id']   = $request->package_id;
+        $data['package_cost'] = $request->package_cost;
+        $data['current_Date'] = Carbon::now()->format('Y-m-d h:i:s');
+        $data['expire_Date']  = Carbon::now()->addMonths(1);
+        //dd($data);
+
+        //////// Storing Data ////////
+        DB::table('subscriptions')->insert([
+            'user_id'     => $data['user_id'],
+            'package_id'  => $data['package_id'],
+            'expire_date' => $data['expire_Date'],
+            'created_at'  => date('Y-m-d H:i:s'),
+            'updated_at'  => date('Y-m-d H:i:s'),
+        ]);
+        //////// End ////////
+
+        $paypal_data = [];
+        $paypal_data['invoice_id']          = 'sub'.strtotime(date('Y-m-d H:i:s')).rand();
+        $paypal_data['invoice_description'] = "Reference # {$paypal_data['invoice_id']} Invoice";
+        $paypal_data['return_url']          = route('paypal');
+        $paypal_data['cancel_url']          = route('cancel_return');
+
+        return view('sellerpackage.payment', compact('data', 'paypal_data'));
+    }
+
+    public function paypal_save(Request $request) {
+        //dd($request->all());
+        if($request->st == 'Completed') {
+
+            $data      = $request->all();
+            $currentDt = date('Y-m-d h:i:s');
+            $usrID     = Auth::id();
+
+            $data['user_id']           = $usrID;
+            $data['payment_reference'] = $request->item_number;
+            $data['transaction_id']    = "'".$request->tx."'";
+            $data['payment_status']    = "'".$request->st."'";
+            $data['payment_date']      = "'".$currentDt."'";
+
+            //////// Storing Data ////////
+            DB::table('payment_with_subscripe')->insert([
+                'user_id'            => $data['user_id'],
+                'payment_reference'  => $data['payment_reference'],
+                'transaction_id'     => $data['transaction_id'],
+                'payment_status'     => $data['payment_status'],
+                'payment_date'       => $data['payment_date'],
+            ]);
+            //////// End ////////
+
+            return redirect(route('index'))->with('succes_paid', 'Payment successfull..');
+        }
+    }
+
+    public function paypal_cancel(){
+
+        return redirect(route('cancel_return'))->with('error_cancel', 'Payment Cancel..');
+    }
+    //////////////////////////////////////////////////////////////
+
+    /*public function storeBkp(Request $request) {
+
         $data = $request->all();
        
         $data['user_id'] = Auth::id();

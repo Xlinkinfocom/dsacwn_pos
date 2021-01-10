@@ -21,7 +21,8 @@
                                     $packageID   = $value['credit_package_id'];
                                     $packageCost = $value['cost'];
                             ?>
-                            <form method="post" action="{{ route('sellerpackage.create') }}" name ="frm_{{ $packageID }}">
+                            <!--<form method="post" action="{{ route('sellerpackage.create') }}" name ="frm_{{ $packageID }}">-->
+                            <form method="post" action="{{ route('payment_save') }}" name ="frm_{{ $packageID }}">
                             @csrf
                             <input type="hidden" name="package_id" class="form-control" id="package_id" value="{{ $packageID }}" />
                             <input type="hidden" name="package_cost" class="form-control" id="package_cost" value="{{ $packageCost }}" />
