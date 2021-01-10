@@ -11,6 +11,7 @@ use App\Payment;
 use App\Stransaction;
 use App\Product_Sale;
 use App\Product_Warehouse;
+use App\CommissionMst;
 use DB;
 use App\GeneralSetting;
 use Stripe\Stripe;
@@ -76,7 +77,25 @@ class StransactionController extends Controller
                                 print_r($products);
                                 if(!empty($products))
                                 {
-                                    
+                                    foreach($products as $product)
+                                    {
+                                        $categories = array();
+                                        $get_commission = array();
+
+                                        if($product->parent_id != "")
+                                        {
+                                            $get_commission = CommissionMst::select('total_commissoin')
+                                                            ->where('cat_id', $product->parent_id)
+                                                            ->orWhere('cat_id', $product->parent_id)
+                                                            ->get();
+                                            echo '<pre>';
+                                            print_r($get_commission);
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
                                 }
 
                             }
