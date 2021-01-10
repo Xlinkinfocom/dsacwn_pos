@@ -301,9 +301,9 @@ class StransactionController extends Controller
                     }
                 }
             }
-             /* echo '<pre>';
+             echo '<pre>';
             print_r($transactions);
-            die();  */
+            die(); 
             return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
         }
         else
