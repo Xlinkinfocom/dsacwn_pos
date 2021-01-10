@@ -57,9 +57,9 @@
                 <tr>
                     <th class="not-exported"></th>
                     <th>{{trans('file.Seller Name')}}</th>
-                    <th>{{trans('file.Sold Amount')}}</th>
-                    <th>{{trans('file.Sold Qty')}}</th>
-                    <th>{{trans('file.In Stock')}}</th>
+                    <th>{{trans('file.Invoice Id')}}</th>
+                    <th>{{trans('file.Invoice Date')}}</th>
+                    <th>{{trans('file.Commision')}}</th>
                 </tr>
             </thead>
             <tbody>
