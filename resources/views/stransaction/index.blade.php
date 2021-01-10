@@ -54,8 +54,7 @@
     <div class="table-responsive">
         <table id="report-table" class="table table-hover">
             <thead>
-                <tr>
-                    <th class="not-exported"></th>
+                <tr>                    
                     <th>{{trans('file.Seller Name')}}</th>
                     <th>{{trans('file.Invoice Id')}}</th>
                     <th>{{trans('file.Invoice Date')}}</th>
