@@ -32,7 +32,7 @@ class StransactionController extends Controller
     public function index()
     {  
         $role = Role::find(Auth::user()->role_id);
-        //dd($role); exit;
+        dd($role); exit;
         if($role->hasPermissionTo('sales-index')) {
             $sellers = array();
             $transactions = array();
