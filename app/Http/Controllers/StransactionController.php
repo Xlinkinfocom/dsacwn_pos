@@ -130,7 +130,7 @@ class StransactionController extends Controller
                                     }
                                     
                                 }
-
+                                
                                 $transactions[] = array(
                                     'seller_id' => $seller->id,
                                     'seller_name' => $seller->name,
