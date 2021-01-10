@@ -17,9 +17,9 @@
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Your Date')}}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <div class="input-group">
-                                <input type="text" class="daterangepicker-field form-control" value="{{$start_date}} To {{$end_date}}" required />
-                                <input type="hidden" name="start_date" value="{{$start_date}}" />
-                                <input type="hidden" name="end_date" value="{{$end_date}}" />
+                                <input type="text" class="daterangepicker-field form-control" value="" required />
+                                <input type="hidden" name="start_date" value="" />
+                                <input type="hidden" name="end_date" value="" />
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Seller')}}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <input type="hidden" name="warehouse_id_hidden" value="" />
-                            <select id="seller_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
+                            <select id="seller_id" name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
                                 <option value="0">{{trans('file.All Seller')}}</option>
                                 @foreach($sellers as $seller)
                                 <option value="{{$seller->id}}">{{$seller->name}}</option>
