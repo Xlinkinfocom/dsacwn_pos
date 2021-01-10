@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header mt-2">
-                <h3 class="text-center">{{trans('file.Sale Report')}}</h3>
+                <h3 class="text-center">{{trans('file.Transaction Report')}}</h3>
             </div>
             {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row mb-3">
@@ -35,10 +35,6 @@
                                 <option value="{{$seller->id}}">{{$seller->name}}</option>
                                 @endforeach
                             </select>
-
-                            @foreach($transactions as $transaction)
-                                <span> {{ $transaction['seller_name'] }}</span>
-                            @endforeach
                         </div>
                     </div>
                 </div>
