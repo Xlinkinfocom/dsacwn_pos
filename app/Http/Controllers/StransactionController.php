@@ -62,6 +62,23 @@ class StransactionController extends Controller
                                             ->get();
                         echo '<pre>';
                         print_r($payments);
+
+                        if(!empty($payments))
+                        {
+                            foreach($payments as $payment)
+                            {
+                                $products = DB::table('product_sales')
+                                        ->join('products', 'product_sales.product_id', '=', 'products.id')
+                                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                                        ->select('products.id', 'products.name', 'categories.id', 'categories.name')
+                                        ->where('product_sales.sale_id', $payment->sale_id)
+                                        ->get();
+                                echo '<pre>';
+                                print_r($products);
+
+                            }
+                            
+                        }
                     }
                 }
 
