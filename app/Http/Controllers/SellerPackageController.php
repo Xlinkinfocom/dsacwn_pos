@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//use DB;
-//use Hash;
-//use Auth;
-//use Keygen;
-//use App\PaymentWithPaypal;
-use App\CreditPackageMst;
 use Carbon\Carbon;
+use App\CreditPackageMst;
+use App\PaymentWithSubscribe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -140,27 +136,17 @@ class SellerPackageController extends Controller
         //dd($request->all());
         if($request->st == 'Completed') {
 
-            $data      = $request->all();
-            $currentDt = date('Y-m-d h:i:s');
-            $usrID     = Auth::id();
-
-            $data['user_id']           = $usrID;
-            $data['payment_reference'] = $request->item_number;
-            $data['transaction_id']    = "'".$request->tx."'";
-            $data['payment_status']    = "'".$request->st."'";
-            $data['payment_date']      = "'".$currentDt."'";
-
             //////// Storing Data ////////
-            DB::table('payment_with_subscripe')->insert([
-                'user_id'            => $data['user_id'],
-                'payment_reference'  => $data['payment_reference'],
-                'transaction_id'     => $data['transaction_id'],
-                'payment_status'     => $data['payment_status'],
-                'payment_date'       => $data['payment_date'],
-            ]);
+            $fetch = new PaymentWithSubscribe;
+            $fetch->user_id           = Auth::id();
+            $fetch->payment_reference = $request->item_number;
+            $fetch->transaction_id    = $request->tx;
+            $fetch->payment_status    = $request->st;
+            $fetch->payment_date      = date('Y-m-d h:i:s');
+            $fetch->save();
             //////// End ////////
 
-            return redirect(route('index'))->with('succes_paid', 'Payment successfull..');
+            return redirect(route('home'))->with('succes_paid', 'Payment successfull..');
         }
     }
 
