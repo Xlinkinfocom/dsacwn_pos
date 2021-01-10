@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\CustomerGroup;
 use App\Customer;
@@ -25,26 +23,22 @@ use App\Warehouse;
 use Hash;
 use Keygen;
 use DB;
-
-
-
 use App\Http\Controllers\Controller;
-
 use App\CreditPackageMst;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\CreditPackageLog;
-
 use Illuminate\Validation\ValidationException;
 use App\PaymentWithPaypal;
+use Srmklive\PayPal\Services\ExpressCheckout;
 
 class SellerPackageController extends Controller
 {
    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create(Request $request)
     {        
         //
@@ -59,13 +53,68 @@ class SellerPackageController extends Controller
 
     public function store(Request $request) {
 
-        dd($request);
+        $data                 = $request->all();
+        $data['user_id']      = Auth::id();
+        $data['package_id']   = $request->package_id;
+        $data['package_cost'] = $request->package_cost;
+        //dd($data);
 
-        /* $data = $request->all();
+        $provider             = new ExpressCheckout;
+        $paypal_data          = [];
+        $paypal_data['items'] = [];
 
-        $data['user_id'] = Auth::id();
+        //foreach ($data['package_id'] as $key => $product_id) {
+        if(!empty($data['package_id'])) {
+            //$lims_product_data = CreditPackageMst::find($product_id);
+            $lims_product_data = CreditPackageMst::find($data['package_id']);
+            //dd($lims_product_data);
+            $paypal_data['items'][] = [
+                'name'  => $lims_product_data->name,
+                //'price' => $lims_product_data->name->cost,
+                'price' => $lims_product_data->cost,
+                'qty'   => 1
+            ];
+        }
 
-        dd($data); */
+        $paypal_data['items'][] = [
+            'name'  => 'Order Tax',
+            'price' => 0,
+            'qty'   => 1
+        ];
+
+        $paypal_data['items'][] = [
+            'name'  => 'Order Discount',
+            'price' => 0,
+            'qty'   => 1
+        ];
+
+        $paypal_data['items'][] = [
+            'name'  => 'Shipping Cost',
+            'price' => 0,
+            'qty'   => 1
+        ];
+        //dd($paypal_data);
+
+        $paypal_data['invoice_id']          = 'sub'.strtotime(date('Y-m-d H:i:s')).rand();
+        $paypal_data['invoice_description'] = "Reference # {$paypal_data['invoice_id']} Invoice";
+        $paypal_data['return_url']          = url('/sellerpackage/paypalSuccess');
+        $paypal_data['cancel_url']          = url('/sellerpackage/create');
+
+        $total = 0;
+        foreach($paypal_data['items'] as $item) {
+            $total += $item['price']*$item['qty'];
+        }
+
+        $paypal_data['total'] = $total;
+        $response = $provider->setExpressCheckout($paypal_data);
+
+        //This will redirect user to PayPal
+        return redirect($response['paypal_link']);
+    }
+
+    public function paypalSuccess(Request $request) {
+
+        dd($request->all());
     }
 
     /*public function storeBkp(Request $request)
@@ -114,13 +163,13 @@ class SellerPackageController extends Controller
 
         $paypal_data['total'] = $total;
         $response = $provider->setExpressCheckout($paypal_data);
-         // This will redirect user to PayPal
+        //This will redirect user to PayPal
         return redirect($response['paypal_link']);
     }*/
 
     public function buy(Request $request, $id){
-          //
-          try {
+        //
+        try {
             $credit_packages = CreditPackageMst::where('credit_package_id' , $id)->get()->toArray();
             return view('sellerpackage.add',compact('credit_packages'));
         } catch (ModelNotFoundException $e) {

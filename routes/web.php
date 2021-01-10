@@ -316,9 +316,11 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 
 	Route::resource('sellerpackage', 'SellerPackageController');
 	Route::get('sellerpackage/add', 'SellerPackageController@create')->name('sellerpackage.add');
-	Route::get('sellerpackage/create', 'SellerPackageController@store')->name('sellerpackage.create');
+	//Route::get('sellerpackage/create', 'SellerPackageController@store')->name('sellerpackage.create');
+	Route::post('sellerpackage/create', 'SellerPackageController@store')->name('sellerpackage.create');
 	Route::get('sellerpackage/buy/{id}', 'SellerPackageController@buy')->name('sellerpackage.buy');
-	Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess');
+	//Route::get('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess');
+	Route::post('sellerpackage/paypalSuccess', 'SellerPackageController@paypalSuccess')->name('sellerpackage.paypalSuccess');
 
 	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
 
