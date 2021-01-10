@@ -107,7 +107,7 @@ class StransactionController extends Controller
                                                             ->select('total_commission')
                                                             ->where('cat_id', $get_parent->parent_id)
                                                             ->orWhere('sub_cat_id', $get_parent->parent_id)
-                                                            ->get();
+                                                            ->first();
                                                 if(!empty($get_commission))
                                                 {
                                                     echo '<pre>';
@@ -120,7 +120,7 @@ class StransactionController extends Controller
                                                             ->select('total_commission')
                                                             ->where('cat_id', $category)
                                                             ->orWhere('sub_cat_id', $category)
-                                                            ->get();
+                                                            ->first();
                                                 if(!empty($get_commission))
                                                 {
                                                     echo '<pre>';
