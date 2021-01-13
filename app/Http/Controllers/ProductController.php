@@ -423,7 +423,7 @@ class ProductController extends Controller
                             ->where('role_id', '7')
                             ->where('is_active', '1')
                             ->get();
-            //dd($seller_list);
+            dd($lims_product_data);
 
             return view('product.edit',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list', 'lims_product_data', 'lims_product_variant_data'));
         }
