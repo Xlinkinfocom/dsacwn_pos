@@ -14,6 +14,7 @@ use App\Product;
 use App\Product_Warehouse;
 use App\Product_Supplier;
 use App\Seller;
+use App\User;
 use Auth;
 use DNS1D;
 use Spatie\Permission\Models\Role;
@@ -306,9 +307,10 @@ class ProductController extends Controller
             $user_id = Auth::user()->id;
             $seller_list = array();
 
-            $seller_list = Seller::select('usre_id', 'seller_name', 'company_name')
-                ->where('is_active', '1')
-                ->get();
+            $seller_list = User::select('id', 'name', 'phone')
+                            ->where('role_id', '7')
+                            ->where('is_active', '1')
+                            ->get();
 
             /* if($is_superadmin == '1')
             {
@@ -323,9 +325,7 @@ class ProductController extends Controller
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
-            } */
-
-            
+            } */            
            
             return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
