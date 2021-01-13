@@ -21,7 +21,7 @@ class Product extends Model
     	return $this->belongsTo('App\Brand');
     }
 
-    public function user()
+    public function edituser()
     {
     	return $this->belongsTo('App\User', 'seller_id')->select(['id', 'name']);
     }

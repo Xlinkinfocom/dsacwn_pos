@@ -20,7 +20,7 @@
                                         <div class="input-group">
                                             <select name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Seller...">
                                               @foreach($seller_list as $seller)
-                                                  <option value="{{$seller->id}}" {{ old('id', $lims_product_data->user->id) == $seller->id ? 'selected' : '' }}>{{$seller->name.' - '.$seller->phone}}</option>
+                                                  <option value="{{$seller->id}}" {{ old('id', $lims_product_data->edituser->id) == $seller->id ? 'selected' : '' }}>{{$seller->name.' - '.$seller->phone}}</option>
                                               @endforeach
                                             </select>
                                         </div>
