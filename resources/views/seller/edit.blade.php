@@ -34,7 +34,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.UserName')}} *</strong> </label>
+                                        <label><strong>{{trans('UserName')}} *</strong> </label>
                                         <input type="text" name="name" required class="form-control" value="{{$lims_user_data->name}}">
                                         @if($errors->has('name'))
                                        <span>
@@ -43,7 +43,7 @@
                                         @endif
                                     </div>                                    
                                     <div class="form-group mt-3">
-                                        <label><strong>{{trans('file.Email')}} *</strong></label>
+                                        <label><strong>{{trans('Email')}} *</strong></label>
                                         <input type="email" name="email" placeholder="example@example.com" required class="form-control" value="{{$lims_user_data->email}}">
                                         @if($errors->has('email'))
                                        <span>
@@ -52,21 +52,21 @@
                                         @endif
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label><strong>{{trans('file.Phone Number')}} *</strong></label>
+                                        <label><strong>{{trans('Phone Number')}} *</strong></label>
                                         <input type="text" name="phone" required class="form-control" value="{{$lims_user_data->phone}}">
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Address')}} *</strong> </label>
+                                        <label><strong>{{trans('Address')}} *</strong> </label>
                                         <input type="text" name="address1" id="address1" required class="form-control" placeholder="Address Line 1" value="">
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
+                                        <label><strong>{{trans('Address Line 2')}}</strong> </label>
                                         <input type="text" name="address2" id="address2" required class="form-control" placeholder="Address Line 2" value="">
                                     </div>
 
                                     <div class="form-group" id="country-id">
-                                        <label><strong>{{trans('file.Country')}}</strong></label>
+                                        <label><strong>{{trans('Country')}}</strong></label>
                                         <input type="hidden" name="country_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="country" id="country" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
@@ -77,7 +77,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="state-id">
-                                        <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                        <label><strong>{{trans('State/Province')}}</strong></label>
                                         <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
@@ -87,7 +87,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="district-id">
-                                        <label><strong>{{trans('file.District')}}</strong></label>
+                                        <label><strong>{{trans('District')}}</strong></label>
                                         <input type="hidden" name="district_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="district" id="district" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select district...">
@@ -97,44 +97,44 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
+                                        <label><strong>{{trans('Zip/Postal Code')}} </strong> </label>
                                         <input type="text" name="zipcode" id="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="">
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Citizen Number')}} </strong> </label>
+                                        <label><strong>{{trans('Citizen Number')}} </strong> </label>
                                         <input type="text" name="citizennumber" required class="form-control" placeholder="Citizen Number" value="">
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.PAN Number')}} </strong> </label>
+                                        <label><strong>{{trans('PAN Number')}} </strong> </label>
                                         <input type="text" name="panno" required class="form-control" placeholder="PAN Number" value="">
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Vat Number')}} </strong> </label>
+                                        <label><strong>{{trans('Vat Number')}} </strong> </label>
                                         <input type="text" name="vatno" required class="form-control" placeholder="Vat Number" value="">
                                     </div>
                                   
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.CST/GST Number')}} </strong> </label>
+                                        <label><strong>{{trans('CST/GST Number')}} </strong> </label>
                                         <input type="text" name="gstno" required class="form-control" placeholder="CST/GST Number" value="">
                                     </div>
                                   
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BANK ACCOUNT NAME')}} </strong> </label>
+                                        <label><strong>{{trans('BANK ACCOUNT NAME')}} </strong> </label>
                                         <input type="text" name="bankaccountname" required class="form-control" placeholder="BANK ACCOUNT NAME" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BANK NAME')}} </strong> </label>
+                                        <label><strong>{{trans('BANK NAME')}} </strong> </label>
                                         <input type="text" name="bankname" required class="form-control" placeholder="BANK NAME" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.ACCOUNT NUMBER')}} </strong> </label>
+                                        <label><strong>{{trans('ACCOUNT NUMBER')}} </strong> </label>
                                         <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="">
                                     </div>                      
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
+                                        <label><strong>{{trans('BRANCH NAME')}} </strong> </label>
                                         <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="">
                                     </div>
                                     <div class="form-group">                                       
@@ -145,27 +145,27 @@
                                     <div class="form-group">
                                         
                                         <input class="mt-2" type="checkbox" name="is_active" id="is_active"  value="0">                                       
-                                        <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
+                                        <label class="mt-2"><strong>{{trans('Active')}}</strong></label>
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" value="{{trans('file.submit')}}" class="btn btn-primary">
+                                        <input type="submit" value="{{trans('submit')}}" class="btn btn-primary">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="">
-                                        <label><strong>{{trans('file.Business Name')}}</strong></label>
+                                        <label><strong>{{trans('Business Name')}}</strong></label>
                                          <input type="text" name="business_name" class="form-control" value=""> 
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Seller Name')}}</strong></label>
+                                        <label><strong>{{trans('Seller Name')}}</strong></label>
                                         <input type="text" name="seller_name" class="form-control" value=""> 
                                     </div> 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Company Name')}}</strong></label>
+                                        <label><strong>{{trans('Company Name')}}</strong></label>
                                         <input type="text" name="company_name" class="form-control" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Role')}} *</strong></label>
+                                        <label><strong>{{trans('Role')}} *</strong></label>
                                         <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
                                         <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                                           @foreach($lims_role_list as $role)
@@ -174,7 +174,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="areaofinterest-id">
-                                        <label><strong>{{trans('file.Business area of interest')}}</strong></label>
+                                        <label><strong>{{trans('Business area of interest')}}</strong></label>
                                         <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
                                         <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Business area of interest...">                                          
@@ -185,17 +185,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" id="chkAdd" class="sameaddress"></label>                                     
+                                        <label><strong>{{trans('BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox" name="add" id="chkAdd" class="sameaddress"></label>
                                         <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value=""> 
                                     </div>
                                    
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.BILLING ADDRESS 2')}} </strong></label>                                     
+                                        <label><strong>{{trans('BILLING ADDRESS 2')}} </strong></label>
                                         <input type="text" name="baddress2" id="baddress2" placeholder="Address Line 2" class="form-control" value=""> 
                                     </div>
                                     
                                 <div class="form-group" id="bcountry-id">
-                                        <label><strong>{{trans('file.Country')}}</strong></label>
+                                        <label><strong>{{trans('Country')}}</strong></label>
                                         <input type="hidden" name="bcountry_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bcountry"  id="bcountry" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select country...">
@@ -206,7 +206,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="bstate-id">
-                                        <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                        <label><strong>{{trans('State/Province')}}</strong></label>
                                         <input type="hidden" name="bstate_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bstate" id="bstate" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select state/province...">
@@ -216,7 +216,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="bdistrict-id">
-                                        <label><strong>{{trans('file.District')}}</strong></label>
+                                        <label><strong>{{trans('District')}}</strong></label>
                                         <input type="hidden" name="bdistrict_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                         <select name="bdistrict" id="bdistrict" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select district...">
@@ -227,31 +227,31 @@
                                     </div>
                                   
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Zip/Postal Code')}} </strong></label>                                     
+                                        <label><strong>{{trans('Zip/Postal Code')}} </strong></label>
                                         <input type="text" name="bzipcode" id="bzipcode" placeholder="Zip/Postal Code" class="form-control" value=""> 
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
+                                        <label><strong>{{trans('Upload PAN Card')}} </strong></label>
                                         <input class="form-control" type="file" name="panno_image" placeholder="">
 
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Upload Citizenship')}} </strong></label>                                     
+                                        <label><strong>{{trans('Upload Citizenship')}} </strong></label>
                                         <input class="form-control" type="file" name="citizenship_document" placeholder="">  
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Upload Passport Size Photo')}} </strong></label>                                     
+                                        <label><strong>{{trans('Upload Passport Size Photo')}} </strong></label>
                                         <input class="form-control" type="file" name="passportsizephoto" placeholder="">  
                                     </div>
 
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Upload GST')}} </strong></label>                                     
+                                        <label><strong>{{trans('Upload GST')}} </strong></label>
                                         <input class="form-control" type="file" name="gst_document" placeholder="">  
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.UPLOAD CANCELLED CHEQUE')}} </strong></label>                                     
+                                        <label><strong>{{trans('UPLOAD CANCELLED CHEQUE')}} </strong></label>
                                         <input class="form-control" type="file" name="check_image" placeholder="">  
                                     </div>                                    
                                 </div>                              
@@ -262,10 +262,10 @@
                 @else
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>{{trans('file.Update User')}}</h4>
+                            <h4>{{trans('Update User')}}</h4>
                         </div>{!! Form::open(['route' => ['seller.update', $lims_user_data->id], 'method' => 'put', 'files' => true]) !!}
                         <div class="card-body">
-                            <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
+                            <p class="italic"><small>{{trans('The field labels marked with * are required input fields')}}.</small></p>
                             <input type="hidden" name="id" value="">
                             <input type="hidden" name="account_type" id="account_type" value="">                       
                                 <div class="row">
@@ -284,7 +284,7 @@
                                             @endif
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.UserName')}} *</strong> </label>
+                                            <label><strong>{{trans('UserName')}} *</strong> </label>
                                             <input type="text" name="name" required class="form-control" value="{{$lims_user_data->name}}">
                                             @if($errors->has('name'))
                                         <span>
@@ -293,7 +293,7 @@
                                             @endif
                                         </div>                                    
                                         <div class="form-group mt-3">
-                                            <label><strong>{{trans('file.Email')}} *</strong></label>
+                                            <label><strong>{{trans('Email')}} *</strong></label>
                                             <input type="email" name="email" placeholder="example@example.com" required class="form-control" value="{{$lims_user_data->email}}">
                                             @if($errors->has('email'))
                                         <span>
@@ -302,21 +302,21 @@
                                             @endif
                                         </div>
                                         <div class="form-group mt-3">
-                                            <label><strong>{{trans('file.Phone Number')}} *</strong></label>
+                                            <label><strong>{{trans('Phone Number')}} *</strong></label>
                                             <input type="text" name="phone" required class="form-control" value="{{$lims_user_data->phone}}">
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Address')}} *</strong> </label>
+                                            <label><strong>{{trans('Address')}} *</strong> </label>
                                             <input type="text" name="address1" id="address1" required class="form-control" placeholder="Address Line 1" value="{{$seller->address_1}}">
                                         </div>
 
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Address Line 2')}}</strong> </label>
+                                            <label><strong>{{trans('Address Line 2')}}</strong> </label>
                                             <input type="text" name="address2" id="address2" required class="form-control" placeholder="Address Line 2" value="{{$seller->address_2}}">
                                         </div>
 
                                         <div class="form-group" id="country-id">
-                                            <label><strong>{{trans('file.Country')}}</strong></label>
+                                            <label><strong>{{trans('Country')}}</strong></label>
                                             <input type="hidden" name="country_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="country" id="country" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select country...">
@@ -327,7 +327,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group" id="state-id">
-                                            <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                            <label><strong>{{trans('State/Province')}}</strong></label>
                                             <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="state" id="state" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select state/province...">
@@ -337,7 +337,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group" id="district-id">
-                                            <label><strong>{{trans('file.District')}}</strong></label>
+                                            <label><strong>{{trans('District')}}</strong></label>
                                             <input type="hidden" name="district_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="district" id="district" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select district...">
@@ -347,44 +347,44 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Zip/Postal Code')}} </strong> </label>
+                                            <label><strong>{{trans('Zip/Postal Code')}} </strong> </label>
                                             <input type="text" name="zipcode" id="zipcode" required class="form-control" placeholder="Zip/Postal Code" value="{{$seller->zip_code}}">
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Citizen Number')}} </strong> </label>
+                                            <label><strong>{{trans('Citizen Number')}} </strong> </label>
                                             <input type="text" name="citizennumber" required class="form-control" placeholder="Citizen Number" value="{{$seller->citizennumber}}">
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.PAN Number')}} </strong> </label>
+                                            <label><strong>{{trans('PAN Number')}} </strong> </label>
                                             <input type="text" name="panno" required class="form-control" placeholder="PAN Number" value="{{$seller->panno}}">
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Vat Number')}} </strong> </label>
+                                            <label><strong>{{trans('Vat Number')}} </strong> </label>
                                             <input type="text" name="vatno" required class="form-control" placeholder="Vat Number" value="{{$seller->vatno}}">
                                         </div>
                                     
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.CST/GST Number')}} </strong> </label>
+                                            <label><strong>{{trans('CST/GST Number')}} </strong> </label>
                                             <input type="text" name="gstno" required class="form-control" placeholder="CST/GST Number" value="{{$seller->gstno}}">
                                         </div>
                                     
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BANK ACCOUNT NAME')}} </strong> </label>
+                                            <label><strong>{{trans('BANK ACCOUNT NAME')}} </strong> </label>
                                             <input type="text" name="bankaccountname" required class="form-control" placeholder="BANK ACCOUNT NAME" value="{{$seller->bankaccountname}}">
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BANK NAME')}} </strong> </label>
+                                            <label><strong>{{trans('BANK NAME')}} </strong> </label>
                                             <input type="text" name="bankname" required class="form-control" placeholder="BANK NAME" value="{{$seller->bankname}}">
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.ACCOUNT NUMBER')}} </strong> </label>
+                                            <label><strong>{{trans('ACCOUNT NUMBER')}} </strong> </label>
                                             <input type="text" name="accountnumber" required class="form-control" placeholder="ACCOUNT NUMBER" value="{{$seller->accountnumber}}">
                                         </div>                      
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BRANCH NAME')}} </strong> </label>
+                                            <label><strong>{{trans('BRANCH NAME')}} </strong> </label>
                                             <input type="text" name="branchname" required class="form-control" placeholder="BRANCH NAME" value="{{$seller->branchname}}">
                                         </div>
                                         <div class="form-group">
@@ -393,7 +393,7 @@
                                             @else
                                             <input class="mt-2" type="checkbox" name="is_kyc_verified" id="is_kyc_verified" value="0">
                                             @endif
-                                            <label class="mt-2"><strong>{{trans('file.Verify Kyc')}}</strong></label>
+                                            <label class="mt-2"><strong>{{trans('Verify Kyc')}}</strong></label>
                                         </div>
                                         <div class="form-group">
                                             @if($seller->is_active)
@@ -401,27 +401,27 @@
                                             @else
                                             <input class="mt-2" type="checkbox" name="is_active" id="is_active"  value="0">
                                             @endif
-                                            <label class="mt-2"><strong>{{trans('file.Active')}}</strong></label>
+                                            <label class="mt-2"><strong>{{trans('Active')}}</strong></label>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" value="{{trans('file.submit')}}" class="btn btn-primary">
+                                            <input type="submit" value="{{trans('submit')}}" class="btn btn-primary">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="">
-                                            <label><strong>{{trans('file.Business Name')}}</strong></label>
+                                            <label><strong>{{trans('Business Name')}}</strong></label>
                                             <input type="text" name="business_name" class="form-control" value="{{$seller->business_name}}"> 
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Seller Name')}}</strong></label>
+                                            <label><strong>{{trans('Seller Name')}}</strong></label>
                                             <input type="text" name="seller_name" class="form-control" value="{{$seller->seller_name}}"> 
                                         </div> 
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Company Name')}}</strong></label>
+                                            <label><strong>{{trans('Company Name')}}</strong></label>
                                             <input type="text" name="company_name" class="form-control" value="{{$seller->company_name}}">
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Role')}} *</strong></label>
+                                            <label><strong>{{trans('Role')}} *</strong></label>
                                             <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
                                             <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
                                             @foreach($lims_role_list as $role)
@@ -430,7 +430,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group" id="areaofinterest-id">
-                                            <label><strong>{{trans('file.Business area of interest')}}</strong></label>
+                                            <label><strong>{{trans('Business area of interest')}}</strong></label>
                                             <input type="hidden" name="areaofinterest_hidden" value="{{$lims_user_data->biller_id}}">
                                             <select name="areaofinterest" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select Business area of interest...">                                          
@@ -441,17 +441,17 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox"  id="chkAdd" name="add" class="sameaddress"></label>                                     
+                                            <label><strong>{{trans('BILLING ADDRESS')}} </strong>(Same as Pick Address)  <input type="checkbox"  id="chkAdd" name="add" class="sameaddress"></label>
                                             <input type="text" name="baddress1" id="baddress1"  placeholder="Address Line 1" class="form-control" value="{{$seller->baddress1}}"> 
                                         </div>
                                     
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.BILLING ADDRESS 2')}} </strong></label>                                     
+                                            <label><strong>{{trans('BILLING ADDRESS 2')}} </strong></label>
                                             <input type="text" name="baddress2" id="baddress2" placeholder="Address Line 2" class="form-control" value="{{$seller->baddress2}}"> 
                                         </div>
                                         
                                     <div class="form-group" id="bcountry-id">
-                                            <label><strong>{{trans('file.Country')}}</strong></label>
+                                            <label><strong>{{trans('Country')}}</strong></label>
                                             <input type="hidden" name="bcountry_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="bcountry"  id="bcountry" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select country...">
@@ -462,7 +462,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group" id="bstate-id">
-                                            <label><strong>{{trans('file.State/Province')}}</strong></label>
+                                            <label><strong>{{trans('State/Province')}}</strong></label>
                                             <input type="hidden" name="bstate_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="bstate" id="bstate" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select state/province...">
@@ -472,7 +472,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group" id="bdistrict-id">
-                                            <label><strong>{{trans('file.District')}}</strong></label>
+                                            <label><strong>{{trans('District')}}</strong></label>
                                             <input type="hidden" name="bdistrict_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                                             <select name="bdistrict" id="bdistrict" class="selectpicker form-control" data-live-search="true" 
                                             data-live-search-style="begins" title="Select district...">
@@ -483,17 +483,17 @@
                                         </div>
                                     
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Zip/Postal Code')}} </strong></label>                                     
+                                            <label><strong>{{trans('Zip/Postal Code')}} </strong></label>
                                             <input type="text" name="bzipcode" id="bzipcode" placeholder="Zip/Postal Code" class="form-control" value="{{$seller->bzipcode}}"> 
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Upload PAN Card')}} </strong></label>                                     
+                                            <label><strong>{{trans('Upload PAN Card')}} </strong></label>
                                             <input class="form-control" type="file" name="panno_image" placeholder="">
 
                                         </div>
 
                                         <div class="form-group">
-                                            <label><strong>{{trans('file.Upload Citizenship')}} </strong></label>                                     
+                                            <label><strong>{{trans('Upload Citizenship')}} </strong></label>
                                             <input class="form-control" type="file" name="citizenship_document" placeholder="">  
                                         </div>
 

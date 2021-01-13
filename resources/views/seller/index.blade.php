@@ -15,7 +15,7 @@
 <section>
     @if(in_array("users-add", $all_permission))
         <div class="container-fluid">
-            <a href="{{route('user.create')}}" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('file.Add User')}}</a>
+            <a href="{{route('user.create')}}" class="btn btn-info"><i class="dripicons-plus"></i> {{trans('Add User')}}</a>
         </div>
     @endif
     <div class="table-responsive">
@@ -23,13 +23,13 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{trans('file.UserName')}}</th>
-                    <th>{{trans('file.Email')}}</th>
-                    <th>{{trans('file.Company Name')}}</th>
-                    <th>{{trans('file.Phone Number')}}</th>
-                    <th>{{trans('file.Role')}}</th>
-                    <th>{{trans('file.Status')}}</th>
-                    <th class="not-exported">{{trans('file.action')}}</th>
+                    <th>{{trans('UserName')}}</th>
+                    <th>{{trans('Email')}}</th>
+                    <th>{{trans('Company Name')}}</th>
+                    <th>{{trans('Phone Number')}}</th>
+                    <th>{{trans('Role')}}</th>
+                    <th>{{trans('Status')}}</th>
+                    <th class="not-exported">{{trans('action')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,26 +49,26 @@
                     @endif
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{trans('file.action')}}
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{trans('action')}}
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                 @if(in_array("users-edit", $all_permission))
                                 <li>
-                                	<a href="{{ route('seller.edit', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
+                                	<a href="{{ route('seller.edit', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('edit')}}</a>
                                 </li>
                                 @endif
                                
                                 <li>
-                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.Login')}}</a>
+                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('Login')}}</a>
                                 </li>
                                
                                 <li class="divider"></li>
                                 @if(in_array("users-delete", $all_permission))
                                 {{ Form::open(['route' => ['seller.destroy', $user->id], 'method' => 'DELETE'] ) }}
                                 <li>
-                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>
+                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('delete')}}</button>
                                 </li>
                                 {{ Form::close() }}
                                 @endif
@@ -109,11 +109,11 @@
         "order": [],
         'language': {
             'lengthMenu': '_MENU_ {{trans("file.records per page")}}',
-             "info":      '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
+             "info":   '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
             "search":  '{{trans("file.Search")}}',
             'paginate': {
-                    'previous': '<i class="dripicons-chevron-left"></i>',
-                    'next': '<i class="dripicons-chevron-right"></i>'
+                'previous': '<i class="dripicons-chevron-left"></i>',
+                'next': '<i class="dripicons-chevron-right"></i>'
             }
         },
         'columnDefs': [

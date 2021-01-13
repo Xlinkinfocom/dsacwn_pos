@@ -8,13 +8,13 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header mt-2">
-                <h3 class="text-center">{{trans('file.Transaction Report')}}</h3>
+                <h3 class="text-center">{{trans('Seller Transaction Report')}}</h3>
             </div>
             {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 mt-4">
                     <div class="form-group row">
-                        {{-- <label class="d-tc mt-2"><strong>{{trans('file.Choose Your Date')}}</strong> &nbsp;</label> --}}
+                        {{-- <label class="d-tc mt-2"><strong>{{trans('Choose Your Date')}}</strong> &nbsp;</label> --}}
                         <div class="d-tc">
                             <div class="input-group">
                                 {{-- <input type="text" class="daterangepicker-field form-control" value="" required />
@@ -26,11 +26,11 @@
                 </div>
                 <div class="col-md-4 mt-4">
                     <div class="form-group row">
-                        {{-- <label class="d-tc mt-2"><strong>{{trans('file.Choose Seller')}}</strong> &nbsp;</label> --}}
+                        {{-- <label class="d-tc mt-2"><strong>{{trans('Choose Seller')}}</strong> &nbsp;</label> --}}
                         <div class="d-tc">
                             {{-- <input type="hidden" name="warehouse_id_hidden" value="" />
                             <select id="seller_id" name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
-                                <option value="0">{{trans('file.All Seller')}}</option>
+                                <option value="0">{{trans('All Seller')}}</option>
                                 @foreach($sellers as $seller)
                                 <option value="{{$seller->id}}">{{$seller->name}}</option>
                                 @endforeach
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-md-3 mt-4">
                     <div class="form-group">
-                        {{-- <button class="btn btn-primary" type="submit">{{trans('file.submit')}}</button> --}}
+                        {{-- <button class="btn btn-primary" type="submit">{{trans('submit')}}</button> --}}
                     </div>
                 </div>
             </div>
@@ -52,16 +52,15 @@
             <table id="report-table" class="table table-hover">
                 <thead>
                     <tr>                    
-                        <th>{{trans('file.Seller Name')}}</th>
-                        <th>{{trans('file.Invoice Id')}}</th>
-                        <th>{{trans('file.Invoice Date')}}</th>
-                        <th>{{trans('file.Sale Amount')}}</th>
-                        <th>{{trans('file.Commision')}}</th>
-                        <th>{{trans('file.Commision Amount')}}</th>
-                        <th>{{trans('file.Payable Amount')}}</th>
-                        <th>{{trans('file.Paid Mode')}}</th>
-                        <th>{{trans('file.Seller Pay Status')}}</th>
-                        
+                        <th>{{trans('Seller Name')}}</th>
+                        <th>{{trans('Invoice Id')}}</th>
+                        <th>{{trans('Invoice Date')}}</th>
+                        <th>{{trans('Sale Amount')}}</th>
+                        <th>{{trans('Commision')}}</th>
+                        <th>{{trans('Commision Amount')}}</th>
+                        <th>{{trans('Payable Amount')}}</th>
+                        <th>{{trans('Paid Mode')}}</th>
+                        <th>{{trans('Seller Pay Status')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,7 +79,6 @@
                         <td>{{ number_format($transaction['payable_amount'], 2) }}</td>
                         <td>{{ $transaction['paid_mode'] }}</td>
                         <td>{{ $transaction['payable_status'] }}</td>
-                        
                     </tr>
                     @endforeach
                     @endif
@@ -92,13 +90,12 @@
         <table id="report-table" class="table table-hover">
             <thead>
                 <tr>                    
-                    <th>{{trans('file.Seller Name')}}</th>
-                    <th>{{trans('file.Invoice Id')}}</th>
-                    <th>{{trans('file.Invoice Date')}}</th>
-                    <th>{{trans('file.Sale Amount')}}</th>                   
-                    <th>{{trans('file.Payable Amount')}}</th>                    
-                    <th>{{trans('file.Seller Pay Status')}}</th>
-                    
+                    <th>{{trans('Seller Name')}}</th>
+                    <th>{{trans('Invoice Id')}}</th>
+                    <th>{{trans('Invoice Date')}}</th>
+                    <th>{{trans('Sale Amount')}}</th>
+                    <th>{{trans('Payable Amount')}}</th>
+                    <th>{{trans('Seller Pay Status')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -114,16 +111,13 @@
                     <td>{{ number_format($transaction['sale_amount'], 2) }}</td>            
                     <td>{{ number_format($transaction['payable_amount'], 2) }}</td>                    
                     <td>{{ $transaction['payable_status'] }}</td>
-                    
                 </tr>
                 @endforeach
                 @endif
             </tbody>            
         </table>
     </div>
-    
     @endif
-
 </section>
 
 <script type="text/javascript">
@@ -138,11 +132,11 @@
         "order": [],
         'language': {
             'lengthMenu': '_MENU_ {{trans("file.records per page")}}',
-             "info":      '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
+             "info":   '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
             "search":  '{{trans("file.Search")}}',
             'paginate': {
-                    'previous': '<i class="dripicons-chevron-left"></i>',
-                    'next': '<i class="dripicons-chevron-right"></i>'
+                'previous': '<i class="dripicons-chevron-left"></i>',
+                'next': '<i class="dripicons-chevron-right"></i>'
             }
         },
         'columnDefs': [
@@ -150,7 +144,6 @@
                 "orderable": false,
                 'targets': 0
             },
-           
         ],
         'select': { style: 'multi',  selector: 'td:first-child'},
         'lengthMenu': [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -163,7 +156,6 @@
                     columns: ':visible:not(.not-exported)',
                     rows: ':visible'
                 },
-               
             },
             {
                 extend: 'csv',
@@ -172,7 +164,6 @@
                     columns: ':visible:not(.not-exported)',
                     rows: ':visible'
                 },
-                
             },
             {
                 extend: 'print',
@@ -181,7 +172,6 @@
                     columns: ':visible:not(.not-exported)',
                     rows: ':visible'
                 },
-                
             },
             {
                 extend: 'colvis',
@@ -191,12 +181,6 @@
         ],
        
     } );
-
-    
-
-
-
 </script>
-   
 
 @endsection
