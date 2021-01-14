@@ -15,6 +15,8 @@ use App\Account;
 use App\Product_Sale;
 use App\CreditPackageMst;
 use App\Roles;
+use App\State;
+use App\District;
 use DB;
 use Auth;
 
