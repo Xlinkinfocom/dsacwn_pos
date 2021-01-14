@@ -23,19 +23,19 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{trans('UserName')}}</th>
-                    <th>{{trans('Email')}}</th>
-                    <th>{{trans('Company Name')}}</th>
-                    <th>{{trans('Phone Number')}}</th>
-                    <th>{{trans('Role')}}</th>
-                    <th>{{trans('Status')}}</th>
-                    <th class="not-exported">{{trans('action')}}</th>
+                    <th>{{ trans('UserName') }}</th>
+                    <th>{{ trans('Email') }}</th>
+                    <th>{{ trans('Company Name') }}</th>
+                    <th>{{ trans('Phone Number')}}</th>
+                    <th>{{ trans('Role') }}</th>
+                    <th>{{ trans('Status') }}</th>
+                    <th class="not-exported">{{ trans('Action') }}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($lims_user_list as $key=>$user)
-                <tr data-id="{{$user->id}}">
-                    <td>{{$key}}</td>
+                @foreach($lims_user_list as $key => $user)
+                <tr data-id="{{ $user->id }}">
+                    <td>{{ $key }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email}}</td>
                     <td>{{ $user->company_name}}</td>
@@ -49,26 +49,34 @@
                     @endif
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{trans('action')}}
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('Action') }}
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                                 @if(in_array("users-edit", $all_permission))
                                 <li>
-                                	<a href="{{ route('seller.edit', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('edit')}}</a>
+                                	<a href="{{ route('seller.edit', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{ trans('Edit') }}</a>
                                 </li>
                                 @endif
                                
                                 <li>
-                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('Login')}}</a>
+                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{ trans('Login') }}</a>
                                 </li>
+
+                                <span id="status{{ $user->id }}">
+                                    <?php if($user->is_active==1){?>
+                                        <a href="javascript:GetSellerStatus('<?php echo $user->id; ?>','<?php echo $user->is_active; ?>');" class="btn btn-success">Active </a>&emsp;
+                                    <?php } else{?>
+                                        <a href="javascript:GetSellerStatus('<?php echo $user->id; ?>','<?php echo $user->is_active; ?>');" class="btn btn-warning" >Inactive </a>&emsp;
+                                    <?php } ?>
+                                </span>
                                
                                 <li class="divider"></li>
                                 @if(in_array("users-delete", $all_permission))
                                 {{ Form::open(['route' => ['seller.destroy', $user->id], 'method' => 'DELETE'] ) }}
                                 <li>
-                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('delete')}}</button>
+                                    <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{ trans('Delete') }}</button>
                                 </li>
                                 {{ Form::close() }}
                                 @endif
@@ -88,8 +96,8 @@
     $("ul#people").addClass("show");
     $("ul#people #user-list-menu").addClass("active");
 
-    var user_id = [];
-    var user_verified = <?php echo json_encode(env('USER_VERIFIED')) ?>;
+    var user_id        = [];
+    var user_verified  = <?php echo json_encode(env('USER_VERIFIED')) ?>;
     var all_permission = <?php echo json_encode($all_permission) ?>;
 
     $.ajaxSetup({
@@ -97,6 +105,25 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    var Inactive = 0;
+    var Active   = 1;
+    function GetSellerStatus(id,is_active) {
+        $.ajax({
+            type: "post",
+            url: '{{ route('get-status') }}',
+            data: {
+                _token: '<?php echo csrf_token();?>',
+                id: id,
+                is_active:is_active
+            },
+            success: function (data) {
+                var resp = JSON.parse(data);
+                $('#status'+resp.id).html(resp.html);
+                $(document).find('.child #status'+resp.id).html(resp.html);
+            }
+        });
+    }
 
 	function confirmDelete() {
 	    if (confirm("Are you sure want to delete?")) {
@@ -108,9 +135,9 @@
     $('#user-table').DataTable( {
         "order": [],
         'language': {
-            'lengthMenu': '_MENU_ {{trans("file.records per page")}}',
-             "info":   '<small>{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)</small>',
-            "search":  '{{trans("file.Search")}}',
+            'lengthMenu': '_MENU_ {{ trans("file.records per page") }}',
+             "info":   '<small>{{ trans("file.Showing") }} _START_ - _END_ (_TOTAL_)</small>',
+            "search":  '{{ trans("file.Search") }}',
             'paginate': {
                 'previous': '<i class="dripicons-chevron-left"></i>',
                 'next': '<i class="dripicons-chevron-right"></i>'

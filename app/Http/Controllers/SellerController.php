@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\CustomerGroup;
-use App\Customer;
-use App\Deposit;
-use App\User;
-use App\State;
-use App\District;
-use App\Seller;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use DB;
 //use Auth;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\Mail\UserNotification;
-use Illuminate\Support\Facades\Mail;
-use App\Roles;
-use App\Biller;
-use App\Warehouse;
 use Hash;
 use Keygen;
-use DB;
-
+use App\User;
+use App\State;
+use App\Roles;
+use App\Biller;
+use App\Customer;
+use App\Deposit;
+use App\District;
+use App\Seller;
+use App\Warehouse;
+use App\CustomerGroup;
+use App\Mail\UserNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\ValidationException;
 
 class SellerController extends Controller
@@ -62,9 +61,9 @@ class SellerController extends Controller
         $state_id = $request->state_id;
 
         $districts = District::select('id', 'name')
-                    ->where('state_id', $state_id)
-                    ->orderBy('name')
-                    ->get();
+            ->where('state_id', $state_id)
+            ->orderBy('name')
+            ->get();
         return response()->json($districts);
     }
 
@@ -125,51 +124,51 @@ class SellerController extends Controller
             $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
         }
 
-        $user = New User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->phone = $request->phone;
-        $user->role_id = $request->role_id;
-        $user->is_active = $request->is_active;
+        $user             = New User;
+        $user->name       = $request->name;
+        $user->email      = $request->email;
+        $user->password   = bcrypt($request->password);
+        $user->phone      = $request->phone;
+        $user->role_id    = $request->role_id;
+        $user->is_active  = $request->is_active;
         $user->is_deleted = '0';
 
         if($user->save())
         {
-            $seller = New Seller;
-            $seller->user_id = $user->id;
-            $seller->aacount_type = $request->account_type;
-            $seller->address_1 = $request->address1;
-            $seller->address_2 = $request->address2;
-            $seller->country = $request->country;
-            $seller->state_id = $request->state;
-            $seller->district_id = $request->district;
-            $seller->zip_code = $request->zipcode;
-            $seller->citizennumber = $request->citizennumber;
-            $seller->panno = $request->panno;
-            $seller->vatno = $request->vatno;
-            $seller->gstno = $request->gstno;
-            $seller->bankaccountname = $request->bankaccountname;
-            $seller->bankname = $request->bankname;
-            $seller->accountnumber = $request->accountnumber;
-            $seller->branchname = $request->branchname;
-            $seller->business_name = $request->business_name;
-            $seller->seller_name = $request->seller_name;
-            $seller->company_name = $request->company_name;
-            $seller->areaofinterest = $request->areaofinterest;
-            $seller->baddress1 = $request->baddress1;
-            $seller->baddress2 = $request->baddress2;
-            $seller->bcountry = $request->bcountry;
-            $seller->bstate_id = $request->bstate;
-            $seller->bdistrict_id = $request->bdistrict;
-            $seller->bzipcode = $request->bzipcode;
-            $seller->panno_image = $panno_image;
+            $seller                       = New Seller;
+            $seller->user_id              = $user->id;
+            $seller->aacount_type         = $request->account_type;
+            $seller->address_1            = $request->address1;
+            $seller->address_2            = $request->address2;
+            $seller->country              = $request->country;
+            $seller->state_id             = $request->state;
+            $seller->district_id          = $request->district;
+            $seller->zip_code             = $request->zipcode;
+            $seller->citizennumber        = $request->citizennumber;
+            $seller->panno                = $request->panno;
+            $seller->vatno                = $request->vatno;
+            $seller->gstno                = $request->gstno;
+            $seller->bankaccountname      = $request->bankaccountname;
+            $seller->bankname             = $request->bankname;
+            $seller->accountnumber        = $request->accountnumber;
+            $seller->branchname           = $request->branchname;
+            $seller->business_name        = $request->business_name;
+            $seller->seller_name          = $request->seller_name;
+            $seller->company_name         = $request->company_name;
+            $seller->areaofinterest       = $request->areaofinterest;
+            $seller->baddress1            = $request->baddress1;
+            $seller->baddress2            = $request->baddress2;
+            $seller->bcountry             = $request->bcountry;
+            $seller->bstate_id            = $request->bstate;
+            $seller->bdistrict_id         = $request->bdistrict;
+            $seller->bzipcode             = $request->bzipcode;
+            $seller->panno_image          = $panno_image;
             $seller->citizenship_document = $citizenship_document;
-            $seller->passportsizephoto = $passportsizephoto;
-            $seller->gst_document = $gst_document;
-            $seller->check_image = $check_image;
-            $seller->is_kyc_verified = $request->is_kyc_verified;
-            $seller->is_active = $request->is_active;
+            $seller->passportsizephoto    = $passportsizephoto;
+            $seller->gst_document         = $gst_document;
+            $seller->check_image          = $check_image;
+            $seller->is_kyc_verified      = $request->is_kyc_verified;
+            $seller->is_active            = $request->is_active;
 
             if($seller->save())
             {
@@ -184,6 +183,7 @@ class SellerController extends Controller
 
             return redirect('seller')->with('message', 'Seller not added successfully.');
         }
+
         /* $lims_customer_data['is_active'] = true;
         $message = 'Customer created successfully';
         if($lims_customer_data['email']){
@@ -204,7 +204,6 @@ class SellerController extends Controller
         else
             return redirect('customer')->with('create_message', $message); */
     }
-
 
     public function generatePassword()
     {
@@ -240,8 +239,6 @@ class SellerController extends Controller
 
                 $isNew=false;
             }
-            
-                       
             
             //$lims_biller_list = Biller::where('is_active', true)->get();
             //$lims_warehouse_list = Warehouse::where('is_active', true)->get();
@@ -326,40 +323,40 @@ class SellerController extends Controller
                 $request->file('check_image')->move('public/images/seller/cancel_chq/', $check_image);
             }
 
-            $seller = New Seller;
-            $seller->user_id = $id;
-            $seller->aacount_type = $request->account_type;
-            $seller->address_1 = $request->address1;
-            $seller->address_2 = $request->address2;
-            $seller->country = $request->country;
-            $seller->state_id = $request->state;
-            $seller->district_id = $request->district;
-            $seller->zip_code = $request->zipcode;
-            $seller->citizennumber = $request->citizennumber;
-            $seller->panno = $request->panno;
-            $seller->vatno = $request->vatno;
-            $seller->gstno = $request->gstno;
-            $seller->bankaccountname = $request->bankaccountname;
-            $seller->bankname = $request->bankname;
-            $seller->accountnumber = $request->accountnumber;
-            $seller->branchname = $request->branchname;
-            $seller->business_name = $request->business_name;
-            $seller->seller_name = $request->seller_name;
-            $seller->company_name = $request->company_name;
-            $seller->areaofinterest = $request->areaofinterest;
-            $seller->baddress1 = $request->baddress1;
-            $seller->baddress2 = $request->baddress2;
-            $seller->bcountry = $request->bcountry;
-            $seller->bstate_id = $request->bstate;
-            $seller->bdistrict_id = $request->bdistrict;
-            $seller->bzipcode = $request->bzipcode;
-            $seller->panno_image = $panno_image;
+            $seller                       = New Seller;
+            $seller->user_id              = $id;
+            $seller->aacount_type         = $request->account_type;
+            $seller->address_1            = $request->address1;
+            $seller->address_2            = $request->address2;
+            $seller->country              = $request->country;
+            $seller->state_id             = $request->state;
+            $seller->district_id          = $request->district;
+            $seller->zip_code             = $request->zipcode;
+            $seller->citizennumber        = $request->citizennumber;
+            $seller->panno                = $request->panno;
+            $seller->vatno                = $request->vatno;
+            $seller->gstno                = $request->gstno;
+            $seller->bankaccountname      = $request->bankaccountname;
+            $seller->bankname             = $request->bankname;
+            $seller->accountnumber        = $request->accountnumber;
+            $seller->branchname           = $request->branchname;
+            $seller->business_name        = $request->business_name;
+            $seller->seller_name          = $request->seller_name;
+            $seller->company_name         = $request->company_name;
+            $seller->areaofinterest       = $request->areaofinterest;
+            $seller->baddress1            = $request->baddress1;
+            $seller->baddress2            = $request->baddress2;
+            $seller->bcountry             = $request->bcountry;
+            $seller->bstate_id            = $request->bstate;
+            $seller->bdistrict_id         = $request->bdistrict;
+            $seller->bzipcode             = $request->bzipcode;
+            $seller->panno_image          = $panno_image;
             $seller->citizenship_document = $citizenship_document;
-            $seller->passportsizephoto = $passportsizephoto;
-            $seller->gst_document = $gst_document;
-            $seller->check_image = $check_image;
-            $seller->is_kyc_verified = $request->is_kyc_verified;
-            $seller->is_active = $request->is_active;
+            $seller->passportsizephoto    = $passportsizephoto;
+            $seller->gst_document         = $gst_document;
+            $seller->check_image          = $check_image;
+            $seller->is_kyc_verified      = $request->is_kyc_verified;
+            $seller->is_active            = $request->is_active;
 
             if($seller->save())
             {
@@ -374,8 +371,8 @@ class SellerController extends Controller
         else
         {
             $seller_id = DB::table('sellers')
-                            ->select('id')
-                            ->where('user_id', $id)->first();
+                ->select('id')
+                ->where('user_id', $id)->first();
             $seller = array();
             $seller = Seller::find($seller_id->id);            
 
@@ -434,39 +431,39 @@ class SellerController extends Controller
                 $check_image = $seller->check_image;
             }
 
-            $seller->user_id = $id;
-            $seller->aacount_type = $request->account_type;
-            $seller->address_1 = $request->address1;
-            $seller->address_2 = $request->address2;
-            $seller->country = $request->country;
-            $seller->state_id = $request->state;
-            $seller->district_id = $request->district;
-            $seller->zip_code = $request->zipcode;
-            $seller->citizennumber = $request->citizennumber;
-            $seller->panno = $request->panno;
-            $seller->vatno = $request->vatno;
-            $seller->gstno = $request->gstno;
-            $seller->bankaccountname = $request->bankaccountname;
-            $seller->bankname = $request->bankname;
-            $seller->accountnumber = $request->accountnumber;
-            $seller->branchname = $request->branchname;
-            $seller->business_name = $request->business_name;
-            $seller->seller_name = $request->seller_name;
-            $seller->company_name = $request->company_name;
-            $seller->areaofinterest = $request->areaofinterest;
-            $seller->baddress1 = $request->baddress1;
-            $seller->baddress2 = $request->baddress2;
-            $seller->bcountry = $request->bcountry;
-            $seller->bstate_id = $request->bstate;
-            $seller->bdistrict_id = $request->bdistrict;
-            $seller->bzipcode = $request->bzipcode;
-            $seller->panno_image = $panno_image;
+            $seller->user_id              = $id;
+            $seller->aacount_type         = $request->account_type;
+            $seller->address_1            = $request->address1;
+            $seller->address_2            = $request->address2;
+            $seller->country              = $request->country;
+            $seller->state_id             = $request->state;
+            $seller->district_id          = $request->district;
+            $seller->zip_code             = $request->zipcode;
+            $seller->citizennumber        = $request->citizennumber;
+            $seller->panno                = $request->panno;
+            $seller->vatno                = $request->vatno;
+            $seller->gstno                = $request->gstno;
+            $seller->bankaccountname      = $request->bankaccountname;
+            $seller->bankname             = $request->bankname;
+            $seller->accountnumber        = $request->accountnumber;
+            $seller->branchname           = $request->branchname;
+            $seller->business_name        = $request->business_name;
+            $seller->seller_name          = $request->seller_name;
+            $seller->company_name         = $request->company_name;
+            $seller->areaofinterest       = $request->areaofinterest;
+            $seller->baddress1            = $request->baddress1;
+            $seller->baddress2            = $request->baddress2;
+            $seller->bcountry             = $request->bcountry;
+            $seller->bstate_id            = $request->bstate;
+            $seller->bdistrict_id         = $request->bdistrict;
+            $seller->bzipcode             = $request->bzipcode;
+            $seller->panno_image          = $panno_image;
             $seller->citizenship_document = $citizenship_document;
-            $seller->passportsizephoto = $passportsizephoto;
-            $seller->gst_document = $gst_document;
-            $seller->check_image = $check_image;
-            $seller->is_kyc_verified = $request->is_kyc_verified;
-            $seller->is_active = $request->is_active;
+            $seller->passportsizephoto    = $passportsizephoto;
+            $seller->gst_document         = $gst_document;
+            $seller->check_image          = $check_image;
+            $seller->is_kyc_verified      = $request->is_kyc_verified;
+            $seller->is_active            = $request->is_active;
 
             if($seller->save())
             {
@@ -477,31 +474,32 @@ class SellerController extends Controller
                 return redirect('seller')->with('message', 'Seller not updated successfully.');
             }            
         }
-
-        
     }
-
 
     public function importCustomer(Request $request)
     {
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('customers-add')){
-            $upload=$request->file('file');
+            $upload = $request->file('file');
             $ext = pathinfo($upload->getClientOriginalName(), PATHINFO_EXTENSION);
+
             if($ext != 'csv')
                 return redirect()->back()->with('not_permitted', 'Please upload a CSV file');
             $filename =  $upload->getClientOriginalName();
-            $filePath=$upload->getRealPath();
+            $filePath = $upload->getRealPath();
+
             //open and read
-            $file=fopen($filePath, 'r');
-            $header= fgetcsv($file);
-            $escapedHeader=[];
+            $file   = fopen($filePath, 'r');
+            $header = fgetcsv($file);
+            $escapedHeader = [];
+
             //validate
             foreach ($header as $key => $value) {
                 $lheader=strtolower($value);
                 $escapedItem=preg_replace('/[^a-z]/', '', $lheader);
                 array_push($escapedHeader, $escapedItem);
             }
+
             //looping through othe columns
             while($columns=fgetcsv($file))
             {
@@ -510,23 +508,25 @@ class SellerController extends Controller
                 foreach ($columns as $key => $value) {
                     $value=preg_replace('/\D/','',$value);
                 }
-               $data= array_combine($escapedHeader, $columns);
-               $lims_customer_group_data = CustomerGroup::where('name', $data['customergroup'])->first();
-               $customer = Customer::firstOrNew(['name'=>$data['name']]);
-               $customer->customer_group_id = $lims_customer_group_data->id;
-               $customer->name = $data['name'];
-               $customer->company_name = $data['companyname'];
-               $customer->email = $data['email'];
-               $customer->phone_number = $data['phonenumber'];
-               $customer->address = $data['address'];
-               $customer->city = $data['city'];
-               $customer->state = $data['state'];
-               $customer->postal_code = $data['postalcode'];
-               $customer->country = $data['country'];
-               $customer->is_active = true;
-               $customer->save();
-               $message = 'Customer Imported Successfully';
-               if($data['email']){
+
+                $data = array_combine($escapedHeader, $columns);
+                $lims_customer_group_data    = CustomerGroup::where('name', $data['customergroup'])->first();
+                $customer                    = Customer::firstOrNew(['name'=>$data['name']]);
+                $customer->customer_group_id = $lims_customer_group_data->id;
+                $customer->name              = $data['name'];
+                $customer->company_name      = $data['companyname'];
+                $customer->email             = $data['email'];
+                $customer->phone_number      = $data['phonenumber'];
+                $customer->address           = $data['address'];
+                $customer->city              = $data['city'];
+                $customer->state             = $data['state'];
+                $customer->postal_code       = $data['postalcode'];
+                $customer->country           = $data['country'];
+                $customer->is_active         = true;
+                $customer->save();
+                $message = 'Customer Imported Successfully';
+
+                if($data['email']){
                     try{
                         Mail::send( 'mail.customer_create', $data, function( $message ) use ($data)
                         {
@@ -544,11 +544,49 @@ class SellerController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
 
+    public function GetSellerStatus(Request $request) {
+
+        $id     = $request->get('id');
+        $status = $request->get('is_active');
+
+        if ($status == 1) {
+            Seller::where('user_id', $id)->update([
+                'is_active' => 0,
+            ]);
+
+            User::where('id', $id)->update([
+                'is_active' => 0,
+            ]);
+
+            $st = 0;
+            $html = '<a href="javascript:void(0);" class="btn btn-sm btn-warning" onclick="GetSellerStatus(' . $id . ',' . $st . ')">Inactive</a>&emsp;';
+
+            return json_encode(array('id' => $id, 'html' => $html));
+
+        } else {
+
+            Seller::where('user_id', $id)->update([
+                'is_active' => 1,
+            ]);
+
+            User::where('id', $id)->update([
+                'is_active' => 1,
+            ]);
+
+            $st = 1;
+            $html = '<a href="javascript:void(0);" class="btn btn-sm btn-success" onclick="GetSellerStatus(' . $id . ',' . $st . ')">Active</a>&emsp;';
+
+            return json_encode(array('id' => $id, 'html' => $html));
+
+        }
+    }
+
     public function getDeposit($id)
     {
         $lims_deposit_list = Deposit::where('customer_id', $id)->get();
         $deposit_id = [];
         $deposits = [];
+
         foreach ($lims_deposit_list as $deposit) {
             $deposit_id[] = $deposit->id;
             $date[] = $deposit->created_at->toDateString() . ' '. $deposit->created_at->toTimeString();
@@ -566,6 +604,7 @@ class SellerController extends Controller
             $deposits[] = $name;
             $deposits[] = $email;
         }
+
         return $deposits;
     }
 
@@ -578,6 +617,7 @@ class SellerController extends Controller
         $lims_customer_data->save();
         Deposit::create($data);
         $message = 'Data inserted successfully';
+
         if($lims_customer_data->email){
             $data['name'] = $lims_customer_data->name;
             $data['email'] = $lims_customer_data->email;
@@ -592,6 +632,7 @@ class SellerController extends Controller
                 $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
             }
         }
+
         return redirect('customer')->with('create_message', $message);
     }
 
@@ -642,34 +683,35 @@ class SellerController extends Controller
         $lims_customer_data->save();
         return redirect('seller')->with('not_permitted','Data deleted Successfully');
     }
-     public function login(Request $request,$id)
+
+    public function login(Request $request,$id)
     {
         # code...
-       
         $this->guard()->logout();
-
         $request->session()->invalidate();
-       
+
         if ($this->byID($id)) {
-        return  redirect('/');
+            return  redirect('/');
         }
     }
+
     protected function byID($id)
     {
         return Auth::loginUsingId($id);
     }
+
     protected function guard()
     {
         return Auth::guard();
     }
+
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
 
-       // $this->clearLoginAttempts($request);
+        //$this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
     }
-
 }

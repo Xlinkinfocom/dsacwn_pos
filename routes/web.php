@@ -295,7 +295,10 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('seller/deletebyselection', 'SellerController@deleteBySelection');
 	Route::get('seller/get-district', ['uses'=> 'SellerController@getDistricts', 'as' => 'get-districts']);
 	Route::get('seller/login/{id}','SellerController@login')->name('seller.login');
-	
+
+	/////////// Start Of Seller Status /////////
+    Route::post('seller/status', ['as' => 'get-status', 'uses' => 'SellerController@GetSellerStatus']);
+    ////////// End Of Seller Status //////////
 	
 	Route::resource('seller', 'SellerController');
 
