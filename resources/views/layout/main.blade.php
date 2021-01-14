@@ -971,7 +971,7 @@
                   <li id="tax-menu"><a href="{{route('tax.index')}}">{{trans('Tax')}}</a></li>
                   @endif
 
-                  <li id="user-menu"><a href="{{route('user.profile', ['id' => Auth::id()])}}">{{trans('User Profile')}}</a></li>
+                  <li id="user-menu"><a href="{{route('seller.edit', ['id' => Auth::id()])}}">{{trans('User Profile')}}</a></li>
                   @if($create_sms_permission_active)
                   <li id="create-sms-menu"><a href="{{route('setting.createSms')}}">{{trans('Create SMS')}}</a></li>
                   @endif
