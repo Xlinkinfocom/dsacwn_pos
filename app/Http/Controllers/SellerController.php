@@ -49,8 +49,9 @@ class SellerController extends Controller
         if($role->hasPermissionTo('users-add')){
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
+            $user_id="";
 
-            return view('seller.create', compact('lims_role_list', 'states'));
+            return view('seller.create', compact('lims_role_list', 'states', 'user_id'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
