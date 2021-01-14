@@ -28,34 +28,36 @@
                                         </span>
                                         @endif
                                     </div>
-                                    <div class="form-group">
-                                        <label><strong>{{trans('file.UserName')}} *</strong> </label>
-                                        <input type="text" name="name" required class="form-control" value="">
-                                        @if($errors->has('name'))
-                                       <span>
-                                           <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>{{trans('file.Change Password')}}</strong> </label>
-                                        <div class="input-group">
-                                            <input type="password" name="password" class="form-control">
-                                            <div class="input-group-append">
-                                                <button id="genbutton" type="button" class="btn btn-default">{{trans('file.Generate')}}</button>
+                                    @if($user == "")
+                                        <div class="form-group">
+                                            <label><strong>{{trans('file.UserName')}} *</strong> </label>
+                                            <input type="text" name="name" required class="form-control" value="">
+                                            @if($errors->has('name'))
+                                        <span>
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>{{trans('file.Change Password')}}</strong> </label>
+                                            <div class="input-group">
+                                                <input type="password" name="password" class="form-control">
+                                                <div class="input-group-append">
+                                                    <button id="genbutton" type="button" class="btn btn-default">{{trans('file.Generate')}}</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label><strong>{{trans('file.Email')}} *</strong></label>
-                                        <input type="email" name="email" placeholder="example@example.com" required class="form-control" 
-                                        value="">
-                                        @if($errors->has('email'))
-                                       <span>
-                                           <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
+                                        <div class="form-group mt-3">
+                                            <label><strong>{{trans('file.Email')}} *</strong></label>
+                                            <input type="email" name="email" placeholder="example@example.com" required class="form-control" 
+                                            value="">
+                                            @if($errors->has('email'))
+                                        <span>
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    @endif
                                     <div class="form-group mt-3">
                                         <label><strong>{{trans('file.Phone Number')}} *</strong></label>
                                         <input type="text" name="phone" required class="form-control" value="">
