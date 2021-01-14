@@ -48,9 +48,6 @@ class SellerController extends Controller
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('users-add')){
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
-            //$lims_biller_list = Biller::where('is_active', true)->get();
-            //$lims_warehouse_list = Warehouse::where('is_active', true)->get();
-
             $states = State::select('id', 'name')->orderBy('name')->get();
 
             return view('seller.create', compact('lims_role_list', 'states'));
