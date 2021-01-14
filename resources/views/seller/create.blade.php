@@ -28,7 +28,7 @@
                                         </span>
                                         @endif
                                     </div>
-                                    @if($user == "")
+                                    @if($user_id == "")
                                         <div class="form-group">
                                             <label><strong>{{trans('file.UserName')}} *</strong> </label>
                                             <input type="text" name="name" required class="form-control" value="">
