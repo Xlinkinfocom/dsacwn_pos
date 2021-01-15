@@ -132,13 +132,12 @@ class HomeController extends Controller
             $seller = Seller::select('user_id')
                     ->where('user_id', Auth::user()->id)
                     ->first();
+            
 
-            dd($seller);
-
-            /* if(!empty($seller))
+            if(!empty($seller))
             {
                 dd($seller);
-            } */
+            }
 
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
