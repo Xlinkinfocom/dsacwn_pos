@@ -17,6 +17,7 @@ use App\CreditPackageMst;
 use App\Roles;
 use App\State;
 use App\District;
+use App\Seller;
 use DB;
 use Auth;
 
@@ -127,6 +128,14 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         if(Auth::user()->role_id == 7)
         {
+
+            $seller = Seller::find(Auth::user()->id);
+
+            if(!empty($seller))
+            {
+                dd($seller);
+            }
+
             $lims_role_list = Roles::where('is_active', true)->where('id', 7)->get();
             $states = State::select('id', 'name')->orderBy('name')->get();
 
