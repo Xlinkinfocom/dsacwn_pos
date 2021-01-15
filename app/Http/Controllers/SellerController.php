@@ -264,7 +264,7 @@ class SellerController extends Controller
             'email' => [
                 'email',
                 'max:255',
-                    Rule::unique('users')->ignore($id)->where(function ($query) {
+                Rule::unique('users')->ignore($id)->where(function ($query) {
                     return $query->where('is_deleted', false);
                 }),
             ],
