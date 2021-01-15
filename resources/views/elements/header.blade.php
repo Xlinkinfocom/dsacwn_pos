@@ -59,8 +59,8 @@
                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                             <li>
                                 @if($role->id==7)
-                                    <!--<a href="{{ route('seller.edit', ['id' => Auth::id()]) }}"><i class="dripicons-user"></i> {{ trans('Profile') }}</a>-->
-                                    <a href="{{ route('user.profile', ['id' => Auth::id()]) }}"><i class="dripicons-user"></i> {{ trans('Profile') }}</a>
+                                    <a href="{{ route('user.profile', ['id' => Auth::id()]) }}"><i class="dripicons-user"></i> {{ trans('User Profile') }}</a>
+                                    <a href="{{ route('seller.edit', ['id' => Auth::id()]) }}"><i class="dripicons-user"></i> {{ trans('Business Profile') }}</a>
                                 @else
                                     <a href="{{ route('user.profile', ['id' => Auth::id()]) }}"><i class="dripicons-user"></i> {{ trans('Profile') }}</a>
                                 @endif
