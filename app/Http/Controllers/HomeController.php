@@ -129,6 +129,24 @@ class HomeController extends Controller
         if(Auth::user()->role_id == 7)
         {
 
+            if(!empty($get_subscripe))
+            {
+                $current_time = date('Y-m-d H:i:s');
+                  $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date)); 
+                  if($current_time > $expire_date)
+                  {
+                    try {
+                        $credit_packages = CreditPackageMst::orderBy('created_at' , 'desc')->get()->toArray();
+                        return view('sellerpackage.add',compact('credit_packages'));
+                    } catch (ModelNotFoundException $e) {
+                        return $e;
+                    }
+                  }
+                  else {
+                    return view('index', compact('revenue', 'purchase', 'expense', 'return', 'purchase_return', 'profit', 'payment_recieved', 'payment_sent', 'month', 'yearly_sale_amount', 'yearly_purchase_amount', 'recent_sale', 'recent_purchase', 'recent_quotation', 'recent_payment', 'best_selling_qty', 'yearly_best_selling_qty', 'yearly_best_selling_price'));
+                  }
+            }
+
             $seller = Seller::select('user_id')
                     ->where('user_id', Auth::user()->id)
                     ->first();
@@ -137,6 +155,7 @@ class HomeController extends Controller
             if(!empty($seller))
             {
                 //dd($seller);
+                
                 return view('index', compact('revenue', 'purchase', 'expense', 'return', 'purchase_return', 'profit', 'payment_recieved', 'payment_sent', 'month', 'yearly_sale_amount', 'yearly_purchase_amount', 'recent_sale', 'recent_purchase', 'recent_quotation', 'recent_payment', 'best_selling_qty', 'yearly_best_selling_qty', 'yearly_best_selling_price'));
 
             } else{
