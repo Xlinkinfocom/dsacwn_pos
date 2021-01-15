@@ -129,7 +129,9 @@ class HomeController extends Controller
         if(Auth::user()->role_id == 7)
         {
 
-            $seller = Seller::find(Auth::user()->id);
+            $seller = Seller::select('user_id')
+                    ->where('user_id', Auth::user()->id)
+                    ->first();
 
             if(!empty($seller))
             {
