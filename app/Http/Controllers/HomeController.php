@@ -128,8 +128,13 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         if(Auth::user()->role_id == 7)
         {
+            $seller = Seller::select('user_id')
+                    ->where('user_id', Auth::user()->id)
+                    ->first();
 
-            if(!empty($get_subscripe))
+            $get_subscripe = DB::table('subscriptions')->select('expire_date')->where('user_id', $user_id)->first();
+
+            if(!empty($get_subscripe) && !empty($seller))
             {
                 $current_time = date('Y-m-d H:i:s');
                   $expire_date = date('Y-m-d H:i:s', strtotime($get_subscripe->expire_date)); 
@@ -146,10 +151,20 @@ class HomeController extends Controller
                     return view('index', compact('revenue', 'purchase', 'expense', 'return', 'purchase_return', 'profit', 'payment_recieved', 'payment_sent', 'month', 'yearly_sale_amount', 'yearly_purchase_amount', 'recent_sale', 'recent_purchase', 'recent_quotation', 'recent_payment', 'best_selling_qty', 'yearly_best_selling_qty', 'yearly_best_selling_price'));
                   }
             }
+            elseif(empty($get_subscripe) && !empty($seller))
+            {
 
-            $seller = Seller::select('user_id')
-                    ->where('user_id', Auth::user()->id)
-                    ->first();
+            }
+            elseif(empty($get_subscripe) && empty($seller))
+            {
+
+            }
+            elseif((!empty($get_subscripe) && empty($seller))
+            {
+                
+            }
+
+            
             
 
             if(!empty($seller))
