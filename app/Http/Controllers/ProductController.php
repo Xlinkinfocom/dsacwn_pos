@@ -455,7 +455,7 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request)
     {  
-        dd($request);
+        //dd($request);
 
         if(!env('USER_VERIFIED')) {
             \Session::flash('not_permitted', 'This feature is disable for demo!');
@@ -490,8 +490,15 @@ class ProductController extends Controller
             }
             elseif($data['type'] == 'digital')
                 $data['cost'] = $data['unit_id'] = $data['purchase_unit_id'] = $data['sale_unit_id'] = 0;
-            if(!isset($data['featured']))
+            if($request->featured == '1')
+            {
+                $data['featured'] = 1;
+            }
+            else
+            {
                 $data['featured'] = 0;
+            }
+                
 
             $data['product_details'] = str_replace('"', '@', $data['product_details']);
             $data['product_details'] = $data['product_details'];

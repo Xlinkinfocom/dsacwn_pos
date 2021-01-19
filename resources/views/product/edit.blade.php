@@ -770,7 +770,7 @@
                             success:function(response){
                                 console.log(response);
                                 //rturn false;
-                                //location.href = '../';
+                                location.href = '../';
                             },
                             error:function(response) {
                                 //console.log(response);
