@@ -400,6 +400,7 @@ class ProductController extends Controller
             $file->move('public/product/files', $fileName);
             $data['file'] = $fileName;
         }
+        
         $lims_product_data = Product::create($data);
 
         //dealing with product variant
