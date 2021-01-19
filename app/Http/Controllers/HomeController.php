@@ -159,7 +159,7 @@ class HomeController extends Controller
             {
 
             }
-            elseif((!empty($get_subscripe) && empty($seller))
+            elseif(!empty($get_subscripe) && empty($seller))
             {
                 
             }
