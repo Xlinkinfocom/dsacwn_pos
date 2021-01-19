@@ -311,12 +311,7 @@ class ProductController extends Controller
             $lims_tax_list      = Tax::where('is_active', true)->get();
             $is_superadmin      = Auth::user()->is_supersdmin;
             $user_id            = Auth::user()->id;
-            $seller_list        = array();
-
-            /* $seller_list = User::select('id', 'name', 'phone')
-                ->where('role_id', '7')
-                ->where('is_active', '1')
-                ->get(); */
+            $seller_list        = array();            
 
             if($is_superadmin == '1')
             {
@@ -434,11 +429,23 @@ class ProductController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_product_data = Product::where('id', $id)->first();
             $lims_product_variant_data = $lims_product_data->variant()->orderBy('position')->get();
-            $seller_list = User::select('id', 'name', 'phone')
-                            ->where('role_id', '7')
-                            ->where('is_active', '1')
-                            ->get();
-            //dd($lims_product_data);
+            $is_superadmin      = Auth::user()->is_supersdmin;
+            $user_id            = Auth::user()->id;
+            $seller_list        = array();            
+
+            if($is_superadmin == '1')
+            {
+                $seller_list = Seller::select('user_id', 'seller_name')
+                ->where('is_active', '1')
+                ->get();
+            }
+            else
+            {
+                $seller_list = Seller::select('user_id', 'seller_name')
+                ->where('is_active', '1')
+                ->where('user_id', $user_id)
+                ->get();
+            }
 
             return view('product.edit',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list', 'lims_product_data', 'lims_product_variant_data'));
         }
