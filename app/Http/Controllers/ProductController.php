@@ -473,6 +473,10 @@ class ProductController extends Controller
                     }),
                 ]
             ]);
+
+            echo '<pre>';
+            print_r($request);
+            die();
             $data['seller_id'] = $request->seller_id;
             $data = $request->except('image', 'file');
             $lims_product_data = Product::findOrFail($request->input('id'));
