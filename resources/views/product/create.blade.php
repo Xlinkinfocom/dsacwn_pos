@@ -8,8 +8,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h4>{{ trans('file.add_product') }}</h4>
-                    </div>
-                    {!! Form::open(['route' => 'products.create', 'method' => 'post', 'files' => true]) !!}
+                    </div>                    
                     <div class="card-body">
                         <p class="italic"><small>{{ trans('file.The field labels marked with * are required input fields') }}.</small></p>
                         <form id="product-form">
@@ -286,7 +285,7 @@
                             </div>
                         </form>
                     </div>
-                    {!! Form::close() !!}
+                    
                 </div>
             </div>
         </div>
