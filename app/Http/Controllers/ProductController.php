@@ -63,7 +63,7 @@ class ProductController extends Controller
 
         if($request->is_superadmin == '0')
         {
-            $seller_arr = Seller::select('id')
+            $seller_arr = Seller::select('user_id')
                 ->where('user_id', $request->user_id)->get();
 
             $seller = $seller_arr[0];
