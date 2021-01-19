@@ -320,13 +320,13 @@ class ProductController extends Controller
 
             if($is_superadmin == '1')
             {
-                $seller_list = Seller::select('id', 'seller_name', 'company_name')
+                $seller_list = Seller::select('user_id', 'seller_name')
                 ->where('is_active', '1')
                 ->get();
             }
             else
             {
-                $seller_list = Seller::select('id', 'seller_name', 'company_name')
+                $seller_list = Seller::select('user_id', 'seller_name')
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
