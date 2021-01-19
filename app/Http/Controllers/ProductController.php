@@ -313,12 +313,12 @@ class ProductController extends Controller
             $user_id            = Auth::user()->id;
             $seller_list        = array();
 
-            $seller_list = User::select('id', 'name', 'phone')
+            /* $seller_list = User::select('id', 'name', 'phone')
                 ->where('role_id', '7')
                 ->where('is_active', '1')
-                ->get();
+                ->get(); */
 
-            /*if($is_superadmin == '1')
+            if($is_superadmin == '1')
             {
                 $seller_list = Seller::select('id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
@@ -330,7 +330,7 @@ class ProductController extends Controller
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
-            }*/
+            }
            
             return view('product.create', compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
