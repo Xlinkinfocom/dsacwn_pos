@@ -69,7 +69,7 @@ class ProductController extends Controller
             $seller = $seller_arr[0];
            
             $totalData = Product::where('is_active', true)
-                ->where('seller_id', $seller->id)
+                ->where('seller_id', $seller->user_id)
                 ->count();
             $totalFiltered = $totalData; 
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
             if(empty($request->input('search.value'))){
                 $products = Product::with('category', 'brand', 'unit')->offset($start)
                     ->where('is_active', true)
-                    ->where('seller_id', $seller->id)
+                    ->where('seller_id', $seller->user_id)
                     ->limit($limit)
                     ->orderBy($order,$dir)
                     ->get();
@@ -100,24 +100,24 @@ class ProductController extends Controller
                     ->where([
                         ['products.name', 'LIKE', "%{$search}%"],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['products.code', 'LIKE', "%{$search}%"],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['categories.name', 'LIKE', "%{$search}%"],
                         ['categories.is_active', true],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['brands.title', 'LIKE', "%{$search}%"],
                         ['brands.is_active', true],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->offset($start)
                     ->limit($limit)
@@ -129,24 +129,24 @@ class ProductController extends Controller
                     ->where([
                         ['products.name','LIKE',"%{$search}%"],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['products.code', 'LIKE', "%{$search}%"],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['categories.name', 'LIKE', "%{$search}%"],
                         ['categories.is_active', true],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->orWhere([
                         ['brands.title', 'LIKE', "%{$search}%"],
                         ['brands.is_active', true],
                         ['products.is_active', true],
-                        ['products.seller_id', $seller->id]
+                        ['products.seller_id', $seller->user_id]
                     ])
                     ->count();
             }
