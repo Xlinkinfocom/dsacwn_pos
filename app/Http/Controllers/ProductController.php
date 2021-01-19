@@ -453,7 +453,7 @@ class ProductController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
 
-    public function update(Request $request)
+    public function updateProduct(Request $request)
     {        
         if(!env('USER_VERIFIED')) {
             \Session::flash('not_permitted', 'This feature is disable for demo!');
@@ -474,9 +474,9 @@ class ProductController extends Controller
                 ]
             ]);
 
-            /* echo '<pre>';
+            echo '<pre>';
             print_r($request);
-            die(); */
+            die(); 
             $data['seller_id'] = $request->seller_id;
             $data = $request->except('image', 'file');
             $lims_product_data = Product::findOrFail($request->input('id'));
