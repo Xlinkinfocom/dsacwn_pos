@@ -527,7 +527,7 @@ class ProductController extends Controller
                 $data['file'] = $fileName;
             }
 
-            dd($data);
+            //dd($data);
             $lims_product_data->update($data);
             $lims_product_variant_data = ProductVariant::where('product_id', $request->input('id'))->select('id', 'variant_id')->get();
             foreach ($lims_product_variant_data as $key => $value) {

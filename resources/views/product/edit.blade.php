@@ -768,7 +768,7 @@
                             url:'../update',
                             data: $("#product-form").serialize(),
                             success:function(response){
-                                //console.log(response);
+                                console.log(response);
                                 location.href = '../';
                             },
                             error:function(response) {
