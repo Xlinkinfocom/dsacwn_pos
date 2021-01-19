@@ -64,90 +64,92 @@ class ProductController extends Controller
         if($request->is_superadmin == '0')
         {
             $seller_arr = Seller::select('id')
-                        ->where('user_id', $request->user_id)->get();            
-            $seller = $seller_arr[0];            
+                ->where('user_id', $request->user_id)->get();
+
+            $seller = $seller_arr[0];
            
             $totalData = Product::where('is_active', true)
-                                ->where('seller_id', $seller->id)                            
-                                ->count();
+                ->where('seller_id', $seller->id)
+                ->count();
             $totalFiltered = $totalData; 
 
             if($request->input('length') != -1)
                 $limit = $request->input('length');
             else
-            $limit = $totalData;
+                $limit = $totalData;
+
             $start = $request->input('start');
             $order = 'products.'.$columns[$request->input('order.0.column')];
-            $dir = $request->input('order.0.dir');
+            $dir   = $request->input('order.0.dir');
+
             if(empty($request->input('search.value'))){
                 $products = Product::with('category', 'brand', 'unit')->offset($start)
-                            ->where('is_active', true)
-                            ->where('seller_id', $seller->id)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)
-                            ->get();
+                    ->where('is_active', true)
+                    ->where('seller_id', $seller->id)
+                    ->limit($limit)
+                    ->orderBy($order,$dir)
+                    ->get();
             }
             else
             {
                 $search = $request->input('search.value'); 
                 $products =  Product::select('products.*')
-                            ->with('category', 'brand', 'unit')
-                            ->join('categories', 'products.category_id', '=', 'categories.id')
-                            ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
-                            ->where([
-                                ['products.name', 'LIKE', "%{$search}%"],
-                                ['products.is_active', true],
-                                ['products.seller_id', $seller->id]
-                            ])
-                            ->orWhere([
-                                ['products.code', 'LIKE', "%{$search}%"],
-                                ['products.is_active', true],
-                                ['products.seller_id', $seller->id]
-                            ])
-                            ->orWhere([
-                                ['categories.name', 'LIKE', "%{$search}%"],
-                                ['categories.is_active', true],
-                                ['products.is_active', true],
-                                ['products.seller_id', $seller->id]
-                            ])
-                            ->orWhere([
-                                ['brands.title', 'LIKE', "%{$search}%"],
-                                ['brands.is_active', true],
-                                ['products.is_active', true],
-                                ['products.seller_id', $seller->id]
-                            ])
-                            ->offset($start)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)->get();
+                    ->with('category', 'brand', 'unit')
+                    ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                    ->where([
+                        ['products.name', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['products.code', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['categories.name', 'LIKE', "%{$search}%"],
+                        ['categories.is_active', true],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['brands.title', 'LIKE', "%{$search}%"],
+                        ['brands.is_active', true],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order,$dir)->get();
 
                 $totalFiltered = Product::
-                                join('categories', 'products.category_id', '=', 'categories.id')
-                                ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
-                                ->where([
-                                    ['products.name','LIKE',"%{$search}%"],
-                                    ['products.is_active', true],
-                                    ['products.seller_id', $seller->id]
-                                ])
-                                ->orWhere([
-                                    ['products.code', 'LIKE', "%{$search}%"],
-                                    ['products.is_active', true],
-                                    ['products.seller_id', $seller->id]
-                                ])
-                                ->orWhere([
-                                    ['categories.name', 'LIKE', "%{$search}%"],
-                                    ['categories.is_active', true],
-                                    ['products.is_active', true],
-                                    ['products.seller_id', $seller->id]
-                                ])
-                                ->orWhere([
-                                    ['brands.title', 'LIKE', "%{$search}%"],
-                                    ['brands.is_active', true],
-                                    ['products.is_active', true],
-                                    ['products.seller_id', $seller->id]
-                                ])
-                                ->count();
+                    join('categories', 'products.category_id', '=', 'categories.id')
+                    ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                    ->where([
+                        ['products.name','LIKE',"%{$search}%"],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['products.code', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['categories.name', 'LIKE', "%{$search}%"],
+                        ['categories.is_active', true],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->orWhere([
+                        ['brands.title', 'LIKE', "%{$search}%"],
+                        ['brands.is_active', true],
+                        ['products.is_active', true],
+                        ['products.seller_id', $seller->id]
+                    ])
+                    ->count();
             }
-
         }
         else
         {
@@ -157,70 +159,71 @@ class ProductController extends Controller
             if($request->input('length') != -1)
                 $limit = $request->input('length');
             else
-            $limit = $totalData;
+                $limit = $totalData;
+
             $start = $request->input('start');
             $order = 'products.'.$columns[$request->input('order.0.column')];
-            $dir = $request->input('order.0.dir');
+            $dir   = $request->input('order.0.dir');
+
             if(empty($request->input('search.value'))){
                 $products = Product::with('category', 'brand', 'unit')->offset($start)
-                            ->where('is_active', true)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)
-                            ->get();
+                    ->where('is_active', true)
+                    ->limit($limit)
+                    ->orderBy($order,$dir)
+                    ->get();
             }
             else
             {
                 $search = $request->input('search.value'); 
                 $products =  Product::select('products.*')
-                            ->with('category', 'brand', 'unit')
-                            ->join('categories', 'products.category_id', '=', 'categories.id')
-                            ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
-                            ->where([
-                                ['products.name', 'LIKE', "%{$search}%"],
-                                ['products.is_active', true]
-                            ])
-                            ->orWhere([
-                                ['products.code', 'LIKE', "%{$search}%"],
-                                ['products.is_active', true]
-                            ])
-                            ->orWhere([
-                                ['categories.name', 'LIKE', "%{$search}%"],
-                                ['categories.is_active', true],
-                                ['products.is_active', true]
-                            ])
-                            ->orWhere([
-                                ['brands.title', 'LIKE', "%{$search}%"],
-                                ['brands.is_active', true],
-                                ['products.is_active', true]
-                            ])
-                            ->offset($start)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)->get();
+                    ->with('category', 'brand', 'unit')
+                    ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                    ->where([
+                        ['products.name', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['products.code', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['categories.name', 'LIKE', "%{$search}%"],
+                        ['categories.is_active', true],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['brands.title', 'LIKE', "%{$search}%"],
+                        ['brands.is_active', true],
+                        ['products.is_active', true]
+                    ])
+                    ->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order,$dir)->get();
 
                 $totalFiltered = Product::
-                                join('categories', 'products.category_id', '=', 'categories.id')
-                                ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
-                                ->where([
-                                    ['products.name','LIKE',"%{$search}%"],
-                                    ['products.is_active', true]
-                                ])
-                                ->orWhere([
-                                    ['products.code', 'LIKE', "%{$search}%"],
-                                    ['products.is_active', true]
-                                ])
-                                ->orWhere([
-                                    ['categories.name', 'LIKE', "%{$search}%"],
-                                    ['categories.is_active', true],
-                                    ['products.is_active', true]
-                                ])
-                                ->orWhere([
-                                    ['brands.title', 'LIKE', "%{$search}%"],
-                                    ['brands.is_active', true],
-                                    ['products.is_active', true]
-                                ])
-                                ->count();
+                    join('categories', 'products.category_id', '=', 'categories.id')
+                    ->leftjoin('brands', 'products.brand_id', '=', 'brands.id')
+                    ->where([
+                        ['products.name','LIKE',"%{$search}%"],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['products.code', 'LIKE', "%{$search}%"],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['categories.name', 'LIKE', "%{$search}%"],
+                        ['categories.is_active', true],
+                        ['products.is_active', true]
+                    ])
+                    ->orWhere([
+                        ['brands.title', 'LIKE', "%{$search}%"],
+                        ['brands.is_active', true],
+                        ['products.is_active', true]
+                    ])
+                    ->count();
             }
-
         }        
 
         $data = array();
@@ -228,19 +231,19 @@ class ProductController extends Controller
         {
             foreach ($products as $key=>$product)
             {
-                $nestedData['id'] = $product->id;
-                $nestedData['key'] = $key;
-                $product_image = explode(",", $product->image);
-                $product_image = htmlspecialchars($product_image[0]);
+                $nestedData['id']    = $product->id;
+                $nestedData['key']   = $key;
+                $product_image       = explode(",", $product->image);
+                $product_image       = htmlspecialchars($product_image[0]);
                 $nestedData['image'] = '<img src="'.url('public/images/product', $product_image).'" height="80" width="80">';
-                $nestedData['name'] = $product->name;
-                $nestedData['code'] = $product->code;
+                $nestedData['name']  = $product->name;
+                $nestedData['code']  = $product->code;
                 if($product->brand_id)
                     $nestedData['brand'] = $product->brand->title;
                 else
                     $nestedData['brand'] = "N/A";
                 $nestedData['category'] = $product->category->name;
-                $nestedData['qty'] = $product->qty;
+                $nestedData['qty']      = $product->qty;
                 if($product->unit_id)
                     $nestedData['unit'] = $product->unit->unit_name;
                 else
@@ -248,25 +251,26 @@ class ProductController extends Controller
                 
                 $nestedData['price'] = $product->price;
                 $nestedData['options'] = '<div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.trans("file.action").'
-                              <span class="caret"></span>
-                              <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                            <li>
-                                <button="type" class="btn btn-link view"><i class="fa fa-eye"></i> '.trans('file.View').'</button>
-                            </li>';
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.trans("file.action").'
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                        <li>
+                            <button="type" class="btn btn-link view"><i class="fa fa-eye"></i> '.trans('file.View').'</button>
+                        </li>';
                 if(in_array("products-edit", $request['all_permission']))
                     $nestedData['options'] .= '<li>
                             <a href="'.route('products.edit', ['id' => $product->id]).'" class="btn btn-link"><i class="fa fa-edit"></i> '.trans('file.edit').'</a>
                         </li>';
                 if(in_array("products-delete", $request['all_permission']))
                     $nestedData['options'] .= \Form::open(["route" => ["products.destroy", $product->id], "method" => "DELETE"] ).'
-                            <li>
-                              <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="fa fa-trash"></i> '.trans("file.delete").'</button> 
-                            </li>'.\Form::close().'
-                        </ul>
-                    </div>';
+                        <li>
+                            <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="fa fa-trash"></i> '.trans("file.delete").'</button> 
+                        </li>'.\Form::close().'
+                    </ul>
+                </div>';
+
                 // data for product details by one click
                 if($product->tax_id)
                     $tax = Tax::find($product->tax_id)->name;
@@ -280,10 +284,12 @@ class ProductController extends Controller
 
                 $nestedData['product'] = array( '[ "'.$product->type.'"', ' "'.$product->name.'"', ' "'.$product->code.'"', ' "'.$nestedData['brand'].'"', ' "'.$nestedData['category'].'"', ' "'.$nestedData['unit'].'"', ' "'.$product->cost.'"', ' "'.$product->price.'"', ' "'.$tax.'"', ' "'.$tax_method.'"', ' "'.$product->alert_quantity.'"', ' "'.preg_replace('/\s+/S', " ", $product->product_details).'"', ' "'.$product->id.'"', ' "'.$product->product_list.'"', ' "'.$product->qty_list.'"', ' "'.$product->price_list.'"', ' "'.$product->qty.'"', ' "'.$product->image.'"]'
                 );
+
                 //$nestedData['imagedata'] = DNS1D::getBarcodePNG($product->code, $product->barcode_symbology);
                 $data[] = $nestedData;
             }
         }
+
         $json_data = array(
             "draw"            => intval($request->input('draw')),  
             "recordsTotal"    => intval($totalData),  
@@ -298,36 +304,35 @@ class ProductController extends Controller
     {
         $role = Role::firstOrCreate(['id' => Auth::user()->role_id]);
         if ($role->hasPermissionTo('products-add')){
-            $lims_product_list = Product::where([ ['is_active', true], ['type', 'standard'] ])->get();
-            $lims_brand_list = Brand::where('is_active', true)->get();
+            $lims_product_list  = Product::where([ ['is_active', true], ['type', 'standard'] ])->get();
+            $lims_brand_list    = Brand::where('is_active', true)->get();
             $lims_category_list = Category::where('is_active', true)->get();
-            $lims_unit_list = Unit::where('is_active', true)->get();
-            $lims_tax_list = Tax::where('is_active', true)->get();
-            $is_superadmin = Auth::user()->is_supersdmin;               
-            $user_id = Auth::user()->id;
-            $seller_list = array();
+            $lims_unit_list     = Unit::where('is_active', true)->get();
+            $lims_tax_list      = Tax::where('is_active', true)->get();
+            $is_superadmin      = Auth::user()->is_supersdmin;
+            $user_id            = Auth::user()->id;
+            $seller_list        = array();
 
             $seller_list = User::select('id', 'name', 'phone')
-                            ->where('role_id', '7')
-                            ->where('is_active', '1')
-                            ->get();
+                ->where('role_id', '7')
+                ->where('is_active', '1')
+                ->get();
 
-            /* if($is_superadmin == '1')
+            /*if($is_superadmin == '1')
             {
                 $seller_list = Seller::select('id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
                 ->get();
             }
             else
-            { 
-
+            {
                 $seller_list = Seller::select('id', 'seller_name', 'company_name')
                 ->where('is_active', '1')
                 ->where('user_id', $user_id)
                 ->get();
-            } */            
+            }*/
            
-            return view('product.create',compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
+            return view('product.create', compact('seller_list', 'lims_product_list', 'lims_brand_list', 'lims_category_list', 'lims_unit_list', 'lims_tax_list'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
@@ -349,13 +354,15 @@ class ProductController extends Controller
                 }),
             ]
         ]);
+
         $data['seller_id'] = $request->seller_id;
         $data = $request->except('image', 'file');
+
         if($data['type'] == 'combo'){
             $data['product_list'] = implode(",", $data['product_id']);
-            $data['qty_list'] = implode(",", $data['product_qty']);
-            $data['price_list'] = implode(",", $data['unit_price']);
-            $data['cost'] = $data['unit_id'] = $data['purchase_unit_id'] = $data['sale_unit_id'] = 0;
+            $data['qty_list']     = implode(",", $data['product_qty']);
+            $data['price_list']   = implode(",", $data['unit_price']);
+            $data['cost']         = $data['unit_id'] = $data['purchase_unit_id'] = $data['sale_unit_id'] = 0;
         }
         elseif($data['type'] == 'digital')
             $data['cost'] = $data['unit_id'] = $data['purchase_unit_id'] = $data['sale_unit_id'] = 0;
@@ -366,10 +373,12 @@ class ProductController extends Controller
             $data['starting_date'] = date('Y-m-d', strtotime($data['starting_date']));
         if($data['last_date'])
             $data['last_date'] = date('Y-m-d', strtotime($data['last_date']));
+
         $data['is_active'] = true;
         $images = $request->image;
         $image_names = [];
-        if($images) {            
+        //dd($data);
+        if($images) {
             foreach ($images as $key => $image) {
                 $imageName = $image->getClientOriginalName();
                 $image->move('public/images/product', $imageName);
@@ -380,28 +389,31 @@ class ProductController extends Controller
         else {
             $data['image'] = 'zummXD2dvAtI.png';
         }
+
         $file = $request->file;
         if ($file) {
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $ext      = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
             $fileName = strtotime(date('Y-m-d H:i:s'));
             $fileName = $fileName . '.' . $ext;
             $file->move('public/product/files', $fileName);
             $data['file'] = $fileName;
         }
         $lims_product_data = Product::create($data);
+
         //dealing with product variant
         if(isset($data['is_variant'])) {
             foreach ($data['variant_name'] as $key => $variant_name) {
-                $lims_variant_data = Variant::firstOrCreate(['name' => $data['variant_name'][$key]]);
+                $lims_variant_data       = Variant::firstOrCreate(['name' => $data['variant_name'][$key]]);
                 $lims_variant_data->name = $data['variant_name'][$key];
                 $lims_variant_data->save();
-                $lims_product_variant_data = new ProductVariant;             
-                $lims_product_variant_data->product_id = $lims_product_data->id;
-                $lims_product_variant_data->variant_id = $lims_variant_data->id;
-                $lims_product_variant_data->position = $key + 1;
-                $lims_product_variant_data->item_code = $data['item_code'][$key];
+
+                $lims_product_variant_data                   = new ProductVariant;
+                $lims_product_variant_data->product_id       = $lims_product_data->id;
+                $lims_product_variant_data->variant_id       = $lims_variant_data->id;
+                $lims_product_variant_data->position         = $key + 1;
+                $lims_product_variant_data->item_code        = $data['item_code'][$key];
                 $lims_product_variant_data->additional_price = $data['additional_price'][$key];
-                $lims_product_variant_data->qty = 0;
+                $lims_product_variant_data->qty              = 0;
                 $lims_product_variant_data->save();
             }
         }
