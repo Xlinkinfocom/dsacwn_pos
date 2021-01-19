@@ -33,7 +33,7 @@ class AdjustmentController extends Controller
     public function getProduct($id)
     {
         $lims_product_warehouse_data = DB::table('products')
-            ->join('product_warehouse', 'products.id', '=', 'product_warehouse.product_id')->where([ ['products.is_active', 1], ['product_warehouse.warehouse_id', $id] ])->select('product_warehouse.qty', 'products.code', 'products.name')->get();
+            ->leftJoin('product_warehouse', 'products.id', '=', 'product_warehouse.product_id')->where([ ['products.is_active', 1], ['product_warehouse.warehouse_id', $id] ])->select('product_warehouse.qty', 'products.code', 'products.name')->get();
         $product_code = [];
         $product_name = [];
         $product_qty = [];
