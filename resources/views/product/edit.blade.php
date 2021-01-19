@@ -769,7 +769,8 @@
                             data: $("#product-form").serialize(),
                             success:function(response){
                                 console.log(response);
-                                location.href = '../';
+                                //rturn false;
+                                //location.href = '../';
                             },
                             error:function(response) {
                                 //console.log(response);
