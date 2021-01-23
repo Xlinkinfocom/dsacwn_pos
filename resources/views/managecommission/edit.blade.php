@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h4>{{trans('file.Edit Commission')}}</h4>
+                        <h4>{{trans('Edit Commission')}}</h4>
                     </div>
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group" id="category-id">
-                                        <label><strong>{{trans('file.Category')}}</strong>*</label>
+                                        <label><strong>{{trans('Category')}}</strong>*</label>
                                         <input type="hidden" name="category_hidden" id="category_hidden" value="{{$commission_mst->cat_id}}">
                                         <select name="category" id="category" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Category">
@@ -33,15 +33,14 @@
                                          @endif
                                     </div>
                                     <div class="form-group" id="subcat-id">
-                                        <label><strong>{{trans('file.Sub Category')}}</strong></label>
+                                        <label><strong>{{trans('Sub Category')}}</strong></label>
                                         <input type="hidden" name="subcat_hidden" value="{{$commission_mst->sub_cat_id}}">
                                         <select name="subcat" id="subcat" class="selectpicker form-control" data-live-search="true" 
                                         data-live-search-style="begins" title="Select Sub Category...">
-                                                                               
                                         </select>
                                     </div>                                     
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Commssion')}} *</strong></label>
+                                        <label><strong>{{trans('Commssion')}} *</strong></label>
                                         <input type="text" value="{{ $commission_mst->commssion }}" name="commssion" id="commssion" placeholder="Commssion" required class="form-control">
                                         @if($errors->has('commssion'))
                                        <span>
@@ -50,7 +49,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Payment Fee')}} *</strong></label>
+                                        <label><strong>{{trans('Payment Fee')}} *</strong></label>
                                         <input type="text" value="{{ $commission_mst->payment_fee }}" name="payment_fee" id="payment_fee" placeholder="Payment Fee" required class="form-control">
                                         @if($errors->has('payment_fee'))
                                        <span>
@@ -59,7 +58,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>{{trans('file.Vat')}} *</strong></label>
+                                        <label><strong>{{trans('Vat')}} *</strong></label>
                                         <input type="text" value="{{ $commission_mst->vat }}" name="vat" id="vat" placeholder="Vat" required class="form-control">
                                         @if($errors->has('vat'))
                                        <span>
@@ -83,7 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                                       
                             </div>
                         </form>
                     </div>
@@ -119,34 +117,31 @@
                    }
                }
            });
-$('#category').on('change', function() {
-           var id = $(this).val();
+        $('#category').on('change', function() {
+            var id = $(this).val();
             var html_district = "";
-           $.ajax({
-               url: "{{ route('managecommission.getsubCat',['id'=>'']) }}/"+id,
-               type: "GET",
-               success: function(response) {
-                   if(response.length >= 1)
-                   {
-                    //console.log(response);
-                    $('#subcat').find('option').remove();
-                    //$("#chapter_id").remove();
-                    var html_option = "";                    
-                       for(var i=0; i<response.length; i++)
-                       {
+            $.ajax({
+                url: "{{ route('managecommission.getsubCat',['id'=>'']) }}/"+id,
+                type: "GET",
+                success: function(response) {
+                    if(response.length >= 1)
+                    {
+                        //console.log(response);
+                        $('#subcat').find('option').remove();
+                        //$("#chapter_id").remove();
+                        var html_option = "";
+                        for(var i=0; i<response.length; i++)
+                        {
                             var id = response[i].id;
                             var name = response[i].name;
-
                             html_option += '<option value="'+id+'">'+name+'</option>';
-                       }
-                       $("#subcat").append(html_option);
-                       $('.selectpicker').selectpicker('refresh');
-                   }
+                        }
+                        $("#subcat").append(html_option);
+                        $('.selectpicker').selectpicker('refresh');
+                    }
                }
            });
        });
-
-
 </script>
 
 @endsection
