@@ -655,9 +655,10 @@ class SaleController extends Controller
         //return dd($data);
         $data['user_id'] = Auth::id();
 
-        // echo "<pre>";
-        // print_r($data);
-        // die();
+        //dd($data);
+        //echo "<pre>";
+        //print_r($data);
+        //die();
 
         if($data['pos']){
             $data['reference_no'] = 'posr-' . date("Ymd") . '-'. date("his");
