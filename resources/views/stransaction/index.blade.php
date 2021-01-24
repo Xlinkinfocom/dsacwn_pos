@@ -30,15 +30,21 @@
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>
                         <div class="d-tc">
-                            <div class="input-group" style="float: left;">
-                                <input name="start_date" type="date" class="form-control" value="" required />                                
+                            <div class="input-group">
+                                <input name="start_date" type="date" class="form-control" value="" required />
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <div class="row">                        
+                        <div class="d-tc">
                             <div class="input-group">
                                 <input name="end_date" type="date" class="form-control" value="" required />
                             </div>
-                        </div>                       
+                        </div>
                     </div>
-                </div>                               
+                </div>                
                 <div class="col-md-4 mt-4">
                     <div class="form-group row">
                         <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
