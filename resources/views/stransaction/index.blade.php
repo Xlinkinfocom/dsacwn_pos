@@ -13,18 +13,16 @@
             {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row md-12" style="margin-left: 7px; !important;">
                 <div class="col-md-3 mt-4">
-                    <div class="form-group row">
-                        <label class="d-tc mt-2"><strong>{{  trans('Choose Seller') }}</strong> &nbsp;</label>
-                        <div class="d-tc">
-                            <input type="hidden" name="warehouse_id_hidden" value="" />
-                            <select id="seller_id" name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
-                                <option value="0">{{  trans('All Seller') }}</option>
-                                @foreach($sellers as $seller)
-                                    <option value="{{$seller->id}}">{{  $seller->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+
+                    <div class="form-group" id="state-id">                        
+                        <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
+                        <select name="seller_id" id="seller_id" class="selectpicker form-control" data-live-search="true" 
+                        data-live-search-style="begins" title="Choose Seller">                                       
+                        @foreach($sellers as $seller)
+                        <option value="{{$seller->id}}">{{  $seller->name }}</option>
+                    @endforeach                                          
+                        </select>
+                    </div>                    
                 </div>
                 <div class="col-md-3 mt-4">
                     <div class="row">
