@@ -1380,7 +1380,7 @@ class SaleController extends Controller
             }
             $lims_coupon_list = Coupon::where('is_active',true)->get();
             $flag = 0;
-            dd($lims_pos_setting_data);
+            //dd($lims_pos_setting_data);
             return view('sale.pos', compact('all_permission', 'lims_customer_list', 'lims_customer_group_all', 'lims_warehouse_list', 'lims_product_list', 'product_number', 'lims_tax_list', 'lims_biller_list', 'lims_pos_setting_data', 'lims_brand_list', 'lims_category_list', 'recent_sale', 'recent_draft', 'lims_coupon_list', 'flag'));
         }
         else

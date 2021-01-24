@@ -2034,7 +2034,7 @@
             }
             else if(!warehouse_id){
                 $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-                alert('Please select Warehouse!');
+                alert('Please select Warehouse1!');
             }
         });
     }
@@ -2050,7 +2050,7 @@
             }
             else if(!warehouse_id){
                 $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-                alert('Please select Warehouse!');
+                alert('Please select Warehouse2!');
             }
         });
     }
@@ -2241,7 +2241,7 @@
         if(!customer_id)
             alert('Please select Customer!');
         else if(!warehouse_id)
-            alert('Please select Warehouse!');
+            alert('Please select Warehouse3!');
         else{
             var data = $(this).data('product');
             data = data.split(" ");
