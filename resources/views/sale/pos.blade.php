@@ -1989,8 +1989,8 @@
     }
 
     if(role_id > 2){
-        $('#biller_id').addClass('d-none');
-        $('#warehouse_id').addClass('d-none');
+        //$('#biller_id').addClass('d-none');
+        //$('#warehouse_id').addClass('d-none');
         $('select[name=warehouse_id]').val(warehouse_id);
         $('select[name=biller_id]').val(biller_id);
     }
@@ -2026,7 +2026,7 @@
         $('#lims_productcodeSearch').bind('keyboardChange', function (e, keyboard, el) {
             var customer_id = $('#customer_id').val();
             var warehouse_id = $('select[name="warehouse_id"]').val();
-            alert(warehouse_id);
+            //alert(warehouse_id);
             temp_data = $('#lims_productcodeSearch').val();
 
             if(!customer_id){
@@ -2034,8 +2034,7 @@
                 alert('Please select Customer!');
             }
             else if(!warehouse_id){
-                $('select[name=warehouse_id]').val($("input[name='warehouse_id_hidden']").val());
-                $('select[name=biller_id]').val($("input[name='biller_id_hidden']").val());
+                
                 $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
                 alert('Please select Warehouse1!');
             }
