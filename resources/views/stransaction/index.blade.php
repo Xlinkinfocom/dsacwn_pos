@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-3 mt-4">
                     <div class="row">
-                        <label class="d-tc mt-2"><strong>{{  trans('Start Date') }}</strong> &nbsp;</label>
+                        <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <div class="input-group">
                                 <input name="start_date" type="date" class="form-control" value="" required />
@@ -35,8 +35,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 mt-4">
-                    <div class="row">
-                        <label class="d-tc mt-2"><strong>{{  trans('End Date') }}</strong> &nbsp;</label>
+                    <div class="row">                        
                         <div class="d-tc">
                             <div class="input-group">
                                 <input name="end_date" type="date" class="form-control" value="" required />
