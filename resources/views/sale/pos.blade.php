@@ -2026,6 +2026,7 @@
         $('#lims_productcodeSearch').bind('keyboardChange', function (e, keyboard, el) {
             var customer_id = $('#customer_id').val();
             var warehouse_id = $('select[name="warehouse_id"]').val();
+            alert(warehouse_id);
             temp_data = $('#lims_productcodeSearch').val();
 
             if(!customer_id){
