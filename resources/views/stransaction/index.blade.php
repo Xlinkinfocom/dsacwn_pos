@@ -13,32 +13,12 @@
             {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row md-3" style="margin-left: 7px; !important;">
                 <div class="col-md-4 mt-4">
-                    <div class="row">
-                        <label class="d-tc mt-2"><strong>{{  trans('Start Date') }}</strong> &nbsp;</label>
-                        <div class="d-tc">
-                            <div class="input-group">
-                                <input name="start_date" type="date" class="form-control" value="" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="row">
-                        <label class="d-tc mt-2"><strong>{{  trans('End Date') }}</strong> &nbsp;</label>
-                        <div class="d-tc">
-                            <div class="input-group">
-                                <input name="end_date" type="date" class="form-control" value="" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4">
                     <div class="form-group row">
-                        <label class="d-tc mt-2"><strong>{{  trans('Choose Seller') }}</strong> &nbsp;</label>
+                        <label class="d-tc mt-2"><strong>{{ trans('Choose Seller') }}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <input type="hidden" name="warehouse_id_hidden" value="" />
                             <select id="seller_id" name="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
-                                <option value="0">{{  trans('All Seller') }}</option>
+                                <option value="0">{{ trans('All Seller') }}</option>
                                 @foreach($sellers as $seller)
                                     <option value="{{$seller->id}}">{{  $seller->name }}</option>
                                 @endforeach
@@ -46,6 +26,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 mt-4">
+                    <div class="row">
+                        <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>
+                        <div class="d-tc">
+                            <div class="input-group">
+                                <input name="start_date" type="date" class="form-control" value="" required />
+                            </div>
+                        </div>
+                        <div class="d-tc">
+                            <div class="input-group">
+                                <input name="end_date" type="date" class="form-control" value="" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>                               
                 <div class="col-md-4 mt-4">
                     <div class="form-group row">
                         <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
