@@ -30,10 +30,12 @@
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>
                         <div class="d-tc">
+                            <div class="input-group" style="float: left;">
+                                <input name="start_date" type="date" class="form-control" value="" required />                                
+                            </div>
                             <div class="input-group">
-                                <input name="start_date" type="date" class="form-control" value="" required />
                                 <input name="end_date" type="date" class="form-control" value="" required />
-                            </div>                            
+                            </div>
                         </div>                       
                     </div>
                 </div>                               
