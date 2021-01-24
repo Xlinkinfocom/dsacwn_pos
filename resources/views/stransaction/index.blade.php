@@ -32,10 +32,8 @@
                         <div class="d-tc">
                             <div class="input-group">
                                 <input name="start_date" type="date" class="form-control" value="" required />
-                            </div>
-                            <div class="input-group">
                                 <input name="end_date" type="date" class="form-control" value="" required />
-                            </div>
+                            </div>                            
                         </div>                       
                     </div>
                 </div>                               
