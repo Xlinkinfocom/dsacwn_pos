@@ -2033,6 +2033,8 @@
                 alert('Please select Customer!');
             }
             else if(!warehouse_id){
+                $('select[name=warehouse_id]').val($("input[name='warehouse_id_hidden']").val());
+                $('select[name=biller_id]').val($("input[name='biller_id_hidden']").val());
                 $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
                 alert('Please select Warehouse1!');
             }
