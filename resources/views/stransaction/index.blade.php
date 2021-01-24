@@ -12,7 +12,7 @@
             </div>
             {!! Form::open(['route' => 'stransaction.store', 'method' => 'post']) !!}
             <div class="row md-12" style="margin-left: 7px; !important;">
-                <div class="col-md-4 mt-4">
+                <div class="col-md-3 mt-4">
                     <div class="form-group row">
                         <label class="d-tc mt-2"><strong>{{  trans('Choose Seller') }}</strong> &nbsp;</label>
                         <div class="d-tc">
@@ -26,18 +26,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4">
+                <div class="col-md-3 mt-4">
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{  trans('Start Date') }}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <div class="input-group">
-                                <input name="start_date" type="date" class="form-control" value="" required style="float: left;" />
-                                <input name="end_date" type="date" class="form-control" value="" required />
+                                <input name="start_date" type="date" class="form-control" value="" required />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4">
+                <div class="col-md-3 mt-4">
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{  trans('End Date') }}</strong> &nbsp;</label>
                         <div class="d-tc">
@@ -46,9 +45,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-md-4 mt-4">
+                </div> 
+                <div class="col-md-3 mt-4">
+                    <div class="form-group row">
+                        <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
+                    </div>
+                </div>               
+                <div class="col-md-3 mt-4">
                     <div class="form-group row">
                         <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
                     </div>
