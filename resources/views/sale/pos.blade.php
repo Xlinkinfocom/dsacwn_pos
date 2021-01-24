@@ -1830,12 +1830,6 @@
 </section>
 
 <script type="text/javascript">
-
-    // document.getElementById("lims_productcodeSearch").focus();
-    // window.onload = function() {
-    //   document.getElementById("lims_productcodeSearch").focus();
-    // };
-
     $('.product-list').html('');
 
     $(document).ready(function(){
@@ -1903,1692 +1897,1576 @@
         style: 'btn-link',
     });
 
-if(keyboard_active==1){
+    if(keyboard_active==1){
 
-    $("input.numkey:text").keyboard({
-        usePreview: false,
-        layout: 'custom',
-        display: {
-        'accept'  : '&#10004;',
-        'cancel'  : '&#10006;'
-        },
-        customLayout : {
-          'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']
-        },
-        restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in
-        preventPaste : true,  // prevent ctrl-v and right click
-        autoAccept : true,
-        css: {
-            // input & preview
-            // keyboard container
-            container: 'center-block dropdown-menu', // jumbotron
-            // default state
-            buttonDefault: 'btn btn-default',
-            // hovered button
-            buttonHover: 'btn-primary',
-            // Action keys (e.g. Accept, Cancel, Tab, etc);
-            // this replaces "actionClass" option
-            buttonAction: 'active'
-        },
-    });
-
-    $('input[type="text"]').keyboard({
-        usePreview: false,
-        autoAccept: true,
-        autoAcceptOnEsc: true,
-        css: {
-            // input & preview
-            // keyboard container
-            container: 'center-block dropdown-menu', // jumbotron
-            // default state
-            buttonDefault: 'btn btn-default',
-            // hovered button
-            buttonHover: 'btn-primary',
-            // Action keys (e.g. Accept, Cancel, Tab, etc);
-            // this replaces "actionClass" option
-            buttonAction: 'active',
-            // used when disabling the decimal button {dec}
-            // when a decimal exists in the input area
-            buttonDisabled: 'disabled'
-        },
-        change: function(e, keyboard) {
-            keyboard.$el.val(keyboard.$preview.val())
-            keyboard.$el.trigger('propertychange')
-        }
-    });
-
-    $('textarea').keyboard({
-        usePreview: false,
-        autoAccept: true,
-        autoAcceptOnEsc: true,
-        css: {
-            // input & preview
-            // keyboard container
-            container: 'center-block dropdown-menu', // jumbotron
-            // default state
-            buttonDefault: 'btn btn-default',
-            // hovered button
-            buttonHover: 'btn-primary',
-            // Action keys (e.g. Accept, Cancel, Tab, etc);
-            // this replaces "actionClass" option
-            buttonAction: 'active',
-            // used when disabling the decimal button {dec}
-            // when a decimal exists in the input area
-            buttonDisabled: 'disabled'
-        },
-        change: function(e, keyboard) {
-            keyboard.$el.val(keyboard.$preview.val())
-            keyboard.$el.trigger('propertychange')
-        }
-    });
-
-    $('#lims_productcodeSearch').keyboard().autocomplete().addAutocomplete({
-        // add autocomplete window positioning
-        // options here (using position utility)
-        position: {
-          of: '#lims_productcodeSearch',
-          my: 'top+18px',
-          at: 'center',
-          collision: 'flip'
-        }
-    });
-}
-
-if(role_id > 2){
-    $('#biller_id').addClass('d-none');
-    $('#warehouse_id').addClass('d-none');
-    $('select[name=warehouse_id]').val(warehouse_id);
-    $('select[name=biller_id]').val(biller_id);
-}
-else{
-    $('select[name=warehouse_id]').val($("input[name='warehouse_id_hidden']").val());
-    $('select[name=biller_id]').val($("input[name='biller_id_hidden']").val());
-}
-
-$('select[name=customer_id]').val($("input[name='customer_id_hidden']").val());
-$('.selectpicker').selectpicker('refresh');
-
-var id = $("#customer_id").val();
-$.get('sales/getcustomergroup/' + id, function(data) {
-    customer_group_rate = (data / 100);
-});
-
-var id = $("#warehouse_id").val();
-$.get('sales/getproduct/' + id, function(data) {
-    lims_product_array = [];
-    product_code = data[0];
-    product_name = data[1];
-    product_qty = data[2];
-    product_type = data[3];
-    product_id = data[4];
-    product_list = data[5];
-    qty_list = data[6];
-    $.each(product_code, function(index) {
-        lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
-    });
-});
-
-if(keyboard_active==1){
-    $('#lims_productcodeSearch').bind('keyboardChange', function (e, keyboard, el) {
-        var customer_id = $('#customer_id').val();
-        var warehouse_id = $('select[name="warehouse_id"]').val();
-        temp_data = $('#lims_productcodeSearch').val();
-        if(!customer_id){
-            $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-            alert('Please select Customer!');
-        }
-        else if(!warehouse_id){
-            $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-            alert('Please select Warehouse!');
-        }
-    });
-}
-else{
-    $('#lims_productcodeSearch').on('input', function(){
-        var customer_id = $('#customer_id').val();
-        var warehouse_id = $('#warehouse_id').val();
-        temp_data = $('#lims_productcodeSearch').val();
-        if(!customer_id){
-            $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-            alert('Please select Customer!');
-        }
-        else if(!warehouse_id){
-            $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-            alert('Please select Warehouse!');
-        }
-    });
-}
-
-$("#print-btn").on("click", function(){
-    var divToPrint=document.getElementById('sale-details');
-    var newWin=window.open('','Print-Window');
-    newWin.document.open();
-    newWin.document.write('<link rel="stylesheet" href="<?php echo asset('public/vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css"><style type="text/css">@media print {.modal-dialog { max-width: 1000px;} }</style><body onload="window.print()">'+divToPrint.innerHTML+'</body>');
-    newWin.document.close();
-    setTimeout(function(){newWin.close();},10);
-});
-
-$('body').on('click', function(e){
-    $('.filter-window').hide('slide', {direction: 'right'}, 'fast');
-});
-
-$('#category-filter').on('click', function(e){
-    e.stopPropagation();
-    $('.filter-window').show('slide', {direction: 'right'}, 'fast');
-    $('.category').show();
-    $('.brand').hide();
-});
-
-$('.category-img').on('click', function(){
-    var category_id = $(this).data('category');
-    var brand_id = 0;
-
-    $(".table-container").children().remove();
-    $.get('sales/getproduct/' + category_id + '/' + brand_id, function(data) {
-        populateProduct(data);
-    });
-});
-
-$('#brand-filter').on('click', function(e){
-    e.stopPropagation();
-    $('.filter-window').show('slide', {direction: 'right'}, 'fast');
-    $('.brand').show();
-    $('.category').hide();
-});
-
-$('.brand-img').on('click', function(){
-    var brand_id = $(this).data('brand');
-    var category_id = 0;
-
-    $(".table-container").children().remove();
-    $.get('sales/getproduct/' + category_id + '/' + brand_id, function(data) {
-        populateProduct(data);
-    });
-});
-
-$('#featured-filter').on('click', function(){
-    $(".table-container").children().remove();
-    $.get('sales/getfeatured', function(data) {
-        populateProduct(data);
-    });
-});
-
-function populateProduct(data) {
-    var tableData = '<table id="product-table" class="table no-shadow product-list"> <thead class="d-none"> <tr> <th></th> <th></th> <th></th> <th></th> <th></th> </tr></thead> <tbody><tr>';
-
-    if (Object.keys(data).length != 0) {
-        $.each(data['name'], function(index) {
-            var product_info = data['code'][index]+' (' + data['name'][index] + ')';
-            if(index % 5 == 0 && index != 0)
-                tableData += '</tr><tr><td class="product-img sound-btn" title="'+data['name'][index]+'" data-product = "'+product_info+'"><img  src="public/images/product/'+data['image'][index]+'" width="100%" /><p>'+data['name'][index]+'</p><span>'+data['code'][index]+'</span></td>';
-            else
-                tableData += '<td class="product-img sound-btn" title="'+data['name'][index]+'" data-product = "'+product_info+'"><img  src="public/images/product/'+data['image'][index]+'" width="100%" /><p>'+data['name'][index]+'</p><span>'+data['code'][index]+'</span></td>';
-        });
-
-        if(data['name'].length % 5){
-            var number = 5 - (data['name'].length % 5);
-            while(number > 0)
-            {
-                tableData += '<td style="border:none;"></td>';
-                number--;
-            }
-        }
-
-        tableData += '</tr></tbody></table>';
-        $(".table-container").html(tableData);
-        $('#product-table').DataTable( {
-            "order": [],
-            'pageLength': product_row_number,
-            'language': {
-                'paginate': {
-                    'previous': '<i class="fa fa-angle-left"></i>',
-                    'next': '<i class="fa fa-angle-right"></i>'
-                }
+        $("input.numkey:text").keyboard({
+            usePreview: false,
+            layout: 'custom',
+            display: {
+            'accept'  : '&#10004;',
+            'cancel'  : '&#10006;'
             },
-            dom: 'tp'
+            customLayout : {
+              'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']
+            },
+            restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in
+            preventPaste : true,  // prevent ctrl-v and right click
+            autoAccept : true,
+            css: {
+                // input & preview
+                // keyboard container
+                container: 'center-block dropdown-menu', // jumbotron
+                // default state
+                buttonDefault: 'btn btn-default',
+                // hovered button
+                buttonHover: 'btn-primary',
+                // Action keys (e.g. Accept, Cancel, Tab, etc);
+                // this replaces "actionClass" option
+                buttonAction: 'active'
+            },
         });
-        $('table.product-list').hide();
-        $('table.product-list').show(500);
+
+        $('input[type="text"]').keyboard({
+            usePreview: false,
+            autoAccept: true,
+            autoAcceptOnEsc: true,
+            css: {
+                // input & preview
+                // keyboard container
+                container: 'center-block dropdown-menu', // jumbotron
+                // default state
+                buttonDefault: 'btn btn-default',
+                // hovered button
+                buttonHover: 'btn-primary',
+                // Action keys (e.g. Accept, Cancel, Tab, etc);
+                // this replaces "actionClass" option
+                buttonAction: 'active',
+                // used when disabling the decimal button {dec}
+                // when a decimal exists in the input area
+                buttonDisabled: 'disabled'
+            },
+            change: function(e, keyboard) {
+                keyboard.$el.val(keyboard.$preview.val())
+                keyboard.$el.trigger('propertychange')
+            }
+        });
+
+        $('textarea').keyboard({
+            usePreview: false,
+            autoAccept: true,
+            autoAcceptOnEsc: true,
+            css: {
+                // input & preview
+                // keyboard container
+                container: 'center-block dropdown-menu', // jumbotron
+                // default state
+                buttonDefault: 'btn btn-default',
+                // hovered button
+                buttonHover: 'btn-primary',
+                // Action keys (e.g. Accept, Cancel, Tab, etc);
+                // this replaces "actionClass" option
+                buttonAction: 'active',
+                // used when disabling the decimal button {dec}
+                // when a decimal exists in the input area
+                buttonDisabled: 'disabled'
+            },
+            change: function(e, keyboard) {
+                keyboard.$el.val(keyboard.$preview.val())
+                keyboard.$el.trigger('propertychange')
+            }
+        });
+
+        $('#lims_productcodeSearch').keyboard().autocomplete().addAutocomplete({
+            // add autocomplete window positioning
+            // options here (using position utility)
+            position: {
+              of: '#lims_productcodeSearch',
+              my: 'top+18px',
+              at: 'center',
+              collision: 'flip'
+            }
+        });
+    }
+
+    if(role_id > 2){
+        $('#biller_id').addClass('d-none');
+        $('#warehouse_id').addClass('d-none');
+        $('select[name=warehouse_id]').val(warehouse_id);
+        $('select[name=biller_id]').val(biller_id);
     }
     else{
-        tableData += '<td class="text-center">No data avaialable</td></tr></tbody></table>'
-        $(".table-container").html(tableData);
+        $('select[name=warehouse_id]').val($("input[name='warehouse_id_hidden']").val());
+        $('select[name=biller_id]').val($("input[name='biller_id_hidden']").val());
     }
-}
 
-$('select[name="customer_id"]').on('change', function() {
-    var id = $(this).val();
+    $('select[name=customer_id]').val($("input[name='customer_id_hidden']").val());
+    $('.selectpicker').selectpicker('refresh');
+
+    var id = $("#customer_id").val();
     $.get('sales/getcustomergroup/' + id, function(data) {
         customer_group_rate = (data / 100);
     });
-});
 
-$('select[name="warehouse_id"]').on('change', function() {
-    var id = $(this).val();
+    var id = $("#warehouse_id").val();
     $.get('sales/getproduct/' + id, function(data) {
         lims_product_array = [];
         product_code = data[0];
         product_name = data[1];
         product_qty = data[2];
         product_type = data[3];
+        product_id = data[4];
+        product_list = data[5];
+        qty_list = data[6];
         $.each(product_code, function(index) {
             lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
         });
     });
-});
 
-var lims_productcodeSearch = $('#lims_productcodeSearch');
+    if(keyboard_active==1){
+        $('#lims_productcodeSearch').bind('keyboardChange', function (e, keyboard, el) {
+            var customer_id = $('#customer_id').val();
+            var warehouse_id = $('select[name="warehouse_id"]').val();
+            temp_data = $('#lims_productcodeSearch').val();
 
-lims_productcodeSearch.autocomplete({
-    source: function(request, response) {
-        var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(request.term), "i");
-        response($.grep(lims_product_array, function(item) {
-          // alert(item);
-            return matcher.test(item);
-        }));
-    },
-    response: function(event, ui) {
-        if (ui.content.length == 1) {
-            var data = ui.content[0].value;
-            $(this).autocomplete( "close" );
-            productSearch(data);
-        };
-    },
-    select: function(event, ui) {
-        var data = ui.item.value;
-        productSearch(data);
-    }
-});
-
-$('#myTable').keyboard({
-    accepted : function(event, keyboard, el) {
-        checkQuantity(el.value, true);
-    }
-});
-
-$("#myTable").on('click', '.plus', function() {
-    rowindex = $(this).closest('tr').index();
-    var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) + 1;
-    $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
-    checkQuantity(String(qty), true);
-});
-
-$("#myTable").on('click', '.minus', function() {
-    rowindex = $(this).closest('tr').index();
-    var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) - 1;
-    if (qty > 0) {
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
-    } else {
-        qty = 1;
-    }
-    checkQuantity(String(qty), true);
-});
-
-//Change quantity
-$("#myTable").on('input', '.qty', function() {
-    rowindex = $(this).closest('tr').index();
-    checkQuantity($(this).val(), true);
-});
-
-$("#myTable").on('click', '.qty', function() {
-    rowindex = $(this).closest('tr').index();
-});
-
-$(document).on('click', '.sound-btn', function() {
-    var audio = $("#mysoundclip1")[0];
-    audio.play();
-});
-
-$(document).on('click', '.product-img', function() {
-    var customer_id = $('#customer_id').val();
-    var warehouse_id = $('select[name="warehouse_id"]').val();
-    if(!customer_id)
-        alert('Please select Customer!');
-    else if(!warehouse_id)
-        alert('Please select Warehouse!');
-    else{
-        var data = $(this).data('product');
-        data = data.split(" ");
-        pos = product_code.indexOf(data[0]);
-        if(pos < 0)
-            alert('Product is not avaialable in the selected warehouse');
-        else{
-            productSearch(data[0]);
-        }
-    }
-});
-
-//Delete product
-$("table.order-list tbody").on("click", ".ibtnDel", function(event) {
-    var audio = $("#mysoundclip2")[0];
-    audio.play();
-    rowindex = $(this).closest('tr').index();
-    product_price.splice(rowindex, 1);
-    product_discount.splice(rowindex, 1);
-    tax_rate.splice(rowindex, 1);
-    tax_name.splice(rowindex, 1);
-    tax_method.splice(rowindex, 1);
-    unit_name.splice(rowindex, 1);
-    unit_operator.splice(rowindex, 1);
-    unit_operation_value.splice(rowindex, 1);
-    $(this).closest("tr").remove();
-    calculateTotal();
-});
-
-//Edit product
-$("table.order-list").on("click", ".edit-product", function() {
-    rowindex = $(this).closest('tr').index();
-    edit();
-});
-
-//Update product
-$('button[name="update_btn"]').on("click", function() {
-    var edit_discount = $('input[name="edit_discount"]').val();
-    var edit_qty = $('input[name="edit_qty"]').val();
-    var edit_unit_price = $('input[name="edit_unit_price"]').val();
-
-    if (parseFloat(edit_discount) > parseFloat(edit_unit_price)) {
-        alert('Invalid Discount Input!');
-        return;
-    }
-
-    var tax_rate_all = <?php echo json_encode($tax_rate_all) ?>;
-
-    tax_rate[rowindex] = parseFloat(tax_rate_all[$('select[name="edit_tax_rate"]').val()]);
-    tax_name[rowindex] = $('select[name="edit_tax_rate"] option:selected').text();
-
-    product_discount[rowindex] = $('input[name="edit_discount"]').val();
-    if(product_type[pos] == 'standard'){
-        var row_unit_operator = unit_operator[rowindex].slice(0, unit_operator[rowindex].indexOf(","));
-        var row_unit_operation_value = unit_operation_value[rowindex].slice(0, unit_operation_value[rowindex].indexOf(","));
-        if (row_unit_operator == '*') {
-            product_price[rowindex] = $('input[name="edit_unit_price"]').val() / row_unit_operation_value;
-        } else {
-            product_price[rowindex] = $('input[name="edit_unit_price"]').val() * row_unit_operation_value;
-        }
-        var position = $('select[name="edit_unit"]').val();
-        var temp_operator = temp_unit_operator[position];
-        var temp_operation_value = temp_unit_operation_value[position];
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.sale-unit').val(temp_unit_name[position]);
-        temp_unit_name.splice(position, 1);
-        temp_unit_operator.splice(position, 1);
-        temp_unit_operation_value.splice(position, 1);
-
-        temp_unit_name.unshift($('select[name="edit_unit"] option:selected').text());
-        temp_unit_operator.unshift(temp_operator);
-        temp_unit_operation_value.unshift(temp_operation_value);
-
-        unit_name[rowindex] = temp_unit_name.toString() + ',';
-        unit_operator[rowindex] = temp_unit_operator.toString() + ',';
-        unit_operation_value[rowindex] = temp_unit_operation_value.toString() + ',';
-    }
-    checkQuantity(edit_qty, false);
-});
-
-$('button[name="order_discount_btn"]').on("click", function() {
-    calculateGrandTotal();
-});
-
-$('button[name="shipping_cost_btn"]').on("click", function() {
-    calculateGrandTotal();
-});
-
-$('button[name="order_tax_btn"]').on("click", function() {
-    calculateGrandTotal();
-});
-
-$(".coupon-check").on("click",function() {
-    couponDiscount();
-});
-
-$(".payment-btn").on("click", function() {
-    var audio = $("#mysoundclip2")[0];
-    audio.play();
-    var btn_id = $(this).attr('id');
-    if (btn_id == 'cash-btn' || btn_id == 'cash-card-btn') {
-      $('input[name="paid_amount"]').val($("#grand-total").text());
-      $('input[name="paying_amount"]').val('');
-    }else{
-      $('input[name="paid_amount"]').val($("#grand-total").text());
-      $('input[name="paying_amount"]').val($("#grand-total").text());
-    }
-    $('.qc').data('initial', 1);
-});
-
-$("#draft-btn").on("click",function(){
-    var audio = $("#mysoundclip2")[0];
-    audio.play();
-    $('input[name="sale_status"]').val(3);
-    $('input[name="paying_amount"]').prop('required',false);
-    $('input[name="paid_amount"]').prop('required',false);
-    var rownumber = $('table.order-list tbody tr:last').index();
-    if (rownumber < 0) {
-        alert("Please insert product to order table!")
-    }
-    else
-        $('.payment-form').submit();
-});
-
-$("#gift-card-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(2);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').hide();
-    $('div.by_cc').hide();
-    giftCard();
-});
-
-$("#credit-card-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(3);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').hide();
-    $('div.by_cc').hide();
-    creditCard();
-});
-
-$("#cheque-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(4);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').hide();
-    $('div.by_cc').hide();
-    cheque();
-});
-
-$("#cash-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(1);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').show();
-    $('div.by_cc').hide();
-    hide();
-});
-
-$("#cash-card-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(7);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').show();
-    $('div.by_cc').show();
-    hide();
-});
-
-$("#paypal-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(5);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').hide();
-    $('div.by_cc').hide();
-    hide();
-});
-
-$("#deposit-btn").on("click",function() {
-    $('select[name="paid_by_id_select"]').val(6);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.qc').hide();
-    $('div.by_cc').hide();
-    hide();
-    deposits();
-});
-
-$('select[name="paid_by_id_select"]').on("change", function() {       
-    var id = $(this).val();
-    $(".payment-form").off("submit");
-    if(id == 2) {
-        $('div.qc').hide();
-        $('div.by_cc').hide();
-        giftCard();
-    }
-    else if (id == 3) {
-        $('div.qc').hide();
-        $('div.by_cc').hide();
-        creditCard();
-    } else if (id == 4) {
-        $('div.qc').hide();
-        $('div.by_cc').hide();
-        cheque();
-    } else {
-        hide();
-        if(id == 1){
-            $('div.qc').show();
-            $('div.by_cc').hide();
-        }else if(id == 7) {
-            $('div.qc').show();
-            $('div.by_cc').show();
-        }else if(id == 6) {
-            $('div.qc').hide();
-            $('div.by_cc').hide();
-            deposits();
-        }else{
-            $('div.qc').hide();
-            $('div.by_cc').hide();
-        }
-    }
-});
-
-$('#add-payment select[name="gift_card_id_select"]').on("change", function() {
-    var balance = gift_card_amount[$(this).val()] - gift_card_expense[$(this).val()];
-    $('#add-payment input[name="gift_card_id"]').val($(this).val());
-    if($('input[name="paid_amount"]').val() > balance){
-        alert('Amount exceeds card balance! Gift Card balance: '+ balance);
-    }
-});
-
-// $('#add-payment input[name="paying_amount"]').on("input", function() {
-//     change($(this).val(), $('input[name="paid_amount"]').val());
-// });
-
-$('#add-payment input[name="paying_amount"]').on("blur", function() {
-    change($(this).val(), $('input[name="paid_amount"]').val());
-});
-
-$('#by_card').on("change", function() {
-
-    // var paying_amount = parseFloat($('input[name="paying_amount"]').val());
-    var by_cash = parseFloat($('input[name="by_cash"]').val());
-    var by_card = parseFloat($('input[name="by_card"]').val());
-    if (isNaN(by_cash)) {
-      by_cash = 0;
-    }
-    if (isNaN(by_card)) {
-      by_card = 0;
-    }
-    // alert('by_cash '+by_cash+' by_card '+by_card);
-    $('input[name="paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
-
-    change($('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val());
-
-});
-
-$('#by_cash').on("change", function() {
-
-    // var paying_amount = parseFloat($('input[name="paying_amount"]').val());
-    var by_cash = parseFloat($('input[name="by_cash"]').val());
-    var by_card = parseFloat($('input[name="by_card"]').val());
-    if (isNaN(by_cash)) {
-      by_cash = 0;
-    }
-    if (isNaN(by_card)) {
-      by_card = 0;
-    }
-    // alert('by_cash '+by_cash+' by_card '+by_card);
-    $('input[name="paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
-
-    change($('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val());
-
-});
-
-$('input[name="paid_amount"]').on("input", function() {
-    if( $(this).val() > parseFloat($('input[name="paying_amount"]').val()) ) {
-        alert('Paying amount cannot be bigger than recieved amount');
-        $(this).val('');
-    }
-    else if( $(this).val() > parseFloat($('#grand-total').text()) ){
-        alert('Paying amount cannot be bigger than grand total');
-        $(this).val('');
-    }
-
-    change( $('input[name="paying_amount"]').val(), $(this).val() );
-    var id = $('select[name="paid_by_id_select"]').val();
-    if(id == 2){
-        var balance = gift_card_amount[$("#gift_card_id_select").val()] - gift_card_expense[$("#gift_card_id_select").val()];
-        if($(this).val() > balance)
-            alert('Amount exceeds card balance! Gift Card balance: '+ balance);
-    }
-    else if(id == 6){
-        if( $('input[name="paid_amount"]').val() > deposit[$('#customer_id').val()] )
-            alert('Amount exceeds customer deposit! Customer deposit : '+ deposit[$('#customer_id').val()]);
-    }
-});
-
-$('.transaction-btn-plus').on("click", function() {
-    $(this).addClass('d-none');
-    $('.transaction-btn-close').removeClass('d-none');
-});
-
-$('.transaction-btn-close').on("click", function() {
-    $(this).addClass('d-none');
-    $('.transaction-btn-plus').removeClass('d-none');
-});
-
-$('.coupon-btn-plus').on("click", function() {
-    $(this).addClass('d-none');
-    $('.coupon-btn-close').removeClass('d-none');
-});
-
-$('.coupon-btn-close').on("click", function() {
-    $(this).addClass('d-none');
-    $('.coupon-btn-plus').removeClass('d-none');
-});
-
-$(document).on('click', '.qc-btn', function(e) {
-    if($(this).data('amount')) {
-        if($('.qc').data('initial')) {
-            $('input[name="paying_amount"]').val( $(this).data('amount').toFixed(2) );
-            $('input[name="by_cash"]').val( $(this).data('amount').toFixed(2) );
-            $('.qc').data('initial', 0);
-        }
-        else {
-
-            var p_amt = $('input[name="paying_amount"]').val();
-            var c_amt = $('input[name="by_cash"]').val();
-            if (p_amt == '') {
-              p_amt = 0;
+            if(!customer_id){
+                $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
+                alert('Please select Customer!');
             }
-            if (c_amt == '') {
-              c_amt = 0;
+            else if(!warehouse_id){
+                $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
+                alert('Please select Warehouse!');
             }
-            $('input[name="paying_amount"]').val( (parseFloat(p_amt) + $(this).data('amount')).toFixed(2) );
-
-            $('input[name="by_cash"]').val( (parseFloat(c_amt) + $(this).data('amount')).toFixed(2) );
-        }
+        });
     }
     else{
-        $('input[name="paying_amount"]').val('');
-        $('input[name="by_cash"]').val('');
+        $('#lims_productcodeSearch').on('input', function(){
+            var customer_id = $('#customer_id').val();
+            var warehouse_id = $('#warehouse_id').val();
+            temp_data = $('#lims_productcodeSearch').val();
+
+            if(!customer_id){
+                $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
+                alert('Please select Customer!');
+            }
+            else if(!warehouse_id){
+                $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
+                alert('Please select Warehouse!');
+            }
+        });
     }
-    change( $('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val() );
-});
 
-function change(paying_amount, paid_amount) {
-    $("#change").text( parseFloat(paying_amount - paid_amount).toFixed(2) );
-}
+    $("#print-btn").on("click", function(){
+        var divToPrint = document.getElementById('sale-details');
+        var newWin = window.open('','Print-Window');
+        newWin.document.open();
+        newWin.document.write('<link rel="stylesheet" href="<?php echo asset('public/vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css"><style type="text/css">@media print {.modal-dialog { max-width: 1000px;} }</style><body onload="window.print()">'+divToPrint.innerHTML+'</body>');
+        newWin.document.close();
+        setTimeout(function(){newWin.close();},10);
+    });
 
-function confirmDelete() {
-    if (confirm("Are you sure want to delete?")) {
-        return true;
-    }
-    return false;
-}
+    $('body').on('click', function(e){
+        $('.filter-window').hide('slide', {direction: 'right'}, 'fast');
+    });
 
-function productSearch(data) {
-    $.ajax({
-        type: 'GET',
-        url: 'sales/lims_product_search',
-        data: {
-            data: data
-        },
-        success: function(data) {
-            // alert(data);
-            var flag = 1;
-            $(".product-code").each(function(i) {
-                if ($(this).val() == data[1]) {
-                    rowindex = i;
-                    var pre_qty = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val();
-                    if(pre_qty)
-                        var qty = parseFloat(pre_qty) + 1;
-                    else
-                        var qty = 1;
-                    $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
-                    flag = 0;
-                    checkQuantity(String(qty), true);
-                    flag = 0;
-                }
+    $('#category-filter').on('click', function(e){
+        e.stopPropagation();
+        $('.filter-window').show('slide', {direction: 'right'}, 'fast');
+        $('.category').show();
+        $('.brand').hide();
+    });
+
+    $('.category-img').on('click', function(){
+        var category_id = $(this).data('category');
+        var brand_id = 0;
+
+        $(".table-container").children().remove();
+        $.get('sales/getproduct/' + category_id + '/' + brand_id, function(data) {
+            populateProduct(data);
+        });
+    });
+
+    $('#brand-filter').on('click', function(e){
+        e.stopPropagation();
+        $('.filter-window').show('slide', {direction: 'right'}, 'fast');
+        $('.brand').show();
+        $('.category').hide();
+    });
+
+    $('.brand-img').on('click', function(){
+        var brand_id = $(this).data('brand');
+        var category_id = 0;
+
+        $(".table-container").children().remove();
+        $.get('sales/getproduct/' + category_id + '/' + brand_id, function(data) {
+            populateProduct(data);
+        });
+    });
+
+    $('#featured-filter').on('click', function(){
+        $(".table-container").children().remove();
+        $.get('sales/getfeatured', function(data) {
+            populateProduct(data);
+        });
+    });
+
+    function populateProduct(data) {
+        var tableData = '<table id="product-table" class="table no-shadow product-list"> <thead class="d-none"> <tr> <th></th> <th></th> <th></th> <th></th> <th></th> </tr></thead> <tbody><tr>';
+
+        if (Object.keys(data).length != 0) {
+            $.each(data['name'], function(index) {
+                var product_info = data['code'][index]+' (' + data['name'][index] + ')';
+                if(index % 5 == 0 && index != 0)
+                    tableData += '</tr><tr><td class="product-img sound-btn" title="'+data['name'][index]+'" data-product = "'+product_info+'"><img  src="public/images/product/'+data['image'][index]+'" width="100%" /><p>'+data['name'][index]+'</p><span>'+data['code'][index]+'</span></td>';
+                else
+                    tableData += '<td class="product-img sound-btn" title="'+data['name'][index]+'" data-product = "'+product_info+'"><img  src="public/images/product/'+data['image'][index]+'" width="100%" /><p>'+data['name'][index]+'</p><span>'+data['code'][index]+'</span></td>';
             });
-            $("input[name='product_code_name']").val('');
-            if(flag){
-                addNewProduct(data);
+
+            if(data['name'].length % 5){
+                var number = 5 - (data['name'].length % 5);
+                while(number > 0)
+                {
+                    tableData += '<td style="border:none;"></td>';
+                    number--;
+                }
+            }
+
+            tableData += '</tr></tbody></table>';
+            $(".table-container").html(tableData);
+            $('#product-table').DataTable( {
+                "order": [],
+                'pageLength': product_row_number,
+                'language': {
+                    'paginate': {
+                        'previous': '<i class="fa fa-angle-left"></i>',
+                        'next': '<i class="fa fa-angle-right"></i>'
+                    }
+                },
+                dom: 'tp'
+            });
+            $('table.product-list').hide();
+            $('table.product-list').show(500);
+        }
+        else{
+            tableData += '<td class="text-center">No data avaialable</td></tr></tbody></table>'
+            $(".table-container").html(tableData);
+        }
+    }
+
+    $('select[name="customer_id"]').on('change', function() {
+        var id = $(this).val();
+        $.get('sales/getcustomergroup/' + id, function(data) {
+            customer_group_rate = (data / 100);
+        });
+    });
+
+    $('select[name="warehouse_id"]').on('change', function() {
+        var id = $(this).val();
+        $.get('sales/getproduct/' + id, function(data) {
+            lims_product_array = [];
+            product_code = data[0];
+            product_name = data[1];
+            product_qty = data[2];
+            product_type = data[3];
+            $.each(product_code, function(index) {
+                lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
+            });
+        });
+    });
+
+    var lims_productcodeSearch = $('#lims_productcodeSearch');
+
+    lims_productcodeSearch.autocomplete({
+        source: function(request, response) {
+            var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(request.term), "i");
+            response($.grep(lims_product_array, function(item) {
+                //alert(item);
+                return matcher.test(item);
+            }));
+        },
+        response: function(event, ui) {
+            if (ui.content.length == 1) {
+                var data = ui.content[0].value;
+                $(this).autocomplete( "close" );
+                productSearch(data);
+            };
+        },
+        select: function(event, ui) {
+            var data = ui.item.value;
+            productSearch(data);
+        }
+    });
+
+    $('#myTable').keyboard({
+        accepted : function(event, keyboard, el) {
+            checkQuantity(el.value, true);
+        }
+    });
+
+    $("#myTable").on('click', '.plus', function() {
+        rowindex = $(this).closest('tr').index();
+        var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) + 1;
+        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
+        checkQuantity(String(qty), true);
+    });
+
+    $("#myTable").on('click', '.minus', function() {
+        rowindex = $(this).closest('tr').index();
+        var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) - 1;
+        if (qty > 0) {
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
+        } else {
+            qty = 1;
+        }
+        checkQuantity(String(qty), true);
+    });
+
+    //Change quantity
+    $("#myTable").on('input', '.qty', function() {
+        rowindex = $(this).closest('tr').index();
+        checkQuantity($(this).val(), true);
+    });
+
+    $("#myTable").on('click', '.qty', function() {
+        rowindex = $(this).closest('tr').index();
+    });
+
+    $(document).on('click', '.sound-btn', function() {
+        var audio = $("#mysoundclip1")[0];
+        audio.play();
+    });
+
+    $(document).on('click', '.product-img', function() {
+        var customer_id = $('#customer_id').val();
+        var warehouse_id = $('select[name="warehouse_id"]').val();
+        if(!customer_id)
+            alert('Please select Customer!');
+        else if(!warehouse_id)
+            alert('Please select Warehouse!');
+        else{
+            var data = $(this).data('product');
+            data = data.split(" ");
+            pos = product_code.indexOf(data[0]);
+            if(pos < 0)
+                alert('Product is not avaialable in the selected warehouse');
+            else{
+                productSearch(data[0]);
             }
         }
     });
-}
 
-function addNewProduct(data){
-    var newRow = $("<tr>");
-    var cols = '';
-    temp_unit_name = (data[6]).split(',');
-    cols += '<td class="col-sm-4 product-title"><button type="button" class="edit-product btn btn-link" data-toggle="modal" data-target="#editModal"><strong>' + data[0] + '</strong></button> [' + data[1] + '] </td>';
-    cols += '<td class="col-sm-2 product-price"></td>';
-    cols += '<td class="col-sm-3"><div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default minus"><span class="dripicons-minus"></span></button></span><input type="text" name="qty[]" class="form-control qty numkey input-number" value="1" step="any" required><span class="input-group-btn"><button type="button" class="btn btn-default plus"><span class="dripicons-plus"></span></button></span></div></td>';
-    cols += '<td class="col-sm-2 sub-total"></td>';
-    cols += '<td class="col-sm-1"><button type="button" class="ibtnDel btn btn-danger btn-sm"><i class="dripicons-cross"></i></button></td>';
-    cols += '<input type="hidden" class="product-code" name="product_code[]" value="' + data[1] + '"/>';
-    cols += '<input type="hidden" class="product-id" name="product_id[]" value="' + data[9] + '"/>';
-    cols += '<input type="hidden" class="sale-unit" name="sale_unit[]" value="' + temp_unit_name[0] + '"/>';
-    cols += '<input type="hidden" class="net_unit_price" name="net_unit_price[]" />';
-    cols += '<input type="hidden" class="discount-value" name="discount[]" />';
-    cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[3] + '"/>';
-    cols += '<input type="hidden" class="tax-value" name="tax[]" />';
-    cols += '<input type="hidden" class="subtotal-value" name="subtotal[]" />';
+    //Delete product
+    $("table.order-list tbody").on("click", ".ibtnDel", function(event) {
+        var audio = $("#mysoundclip2")[0];
+        audio.play();
+        rowindex = $(this).closest('tr').index();
+        product_price.splice(rowindex, 1);
+        product_discount.splice(rowindex, 1);
+        tax_rate.splice(rowindex, 1);
+        tax_name.splice(rowindex, 1);
+        tax_method.splice(rowindex, 1);
+        unit_name.splice(rowindex, 1);
+        unit_operator.splice(rowindex, 1);
+        unit_operation_value.splice(rowindex, 1);
+        $(this).closest("tr").remove();
+        calculateTotal();
+    });
 
-    newRow.append(cols);
-    if(keyboard_active==1){
-        $("table.order-list tbody").append(newRow).find('.qty').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
-          'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
+    //Edit product
+    $("table.order-list").on("click", ".edit-product", function() {
+        rowindex = $(this).closest('tr').index();
+        edit();
+    });
+
+    //Update product
+    $('button[name="update_btn"]').on("click", function() {
+        var edit_discount = $('input[name="edit_discount"]').val();
+        var edit_qty = $('input[name="edit_qty"]').val();
+        var edit_unit_price = $('input[name="edit_unit_price"]').val();
+
+        if (parseFloat(edit_discount) > parseFloat(edit_unit_price)) {
+            alert('Invalid Discount Input!');
+            return;
+        }
+
+        var tax_rate_all = <?php echo json_encode($tax_rate_all) ?>;
+
+        tax_rate[rowindex] = parseFloat(tax_rate_all[$('select[name="edit_tax_rate"]').val()]);
+        tax_name[rowindex] = $('select[name="edit_tax_rate"] option:selected').text();
+
+        product_discount[rowindex] = $('input[name="edit_discount"]').val();
+        if(product_type[pos] == 'standard'){
+            var row_unit_operator = unit_operator[rowindex].slice(0, unit_operator[rowindex].indexOf(","));
+            var row_unit_operation_value = unit_operation_value[rowindex].slice(0, unit_operation_value[rowindex].indexOf(","));
+            if (row_unit_operator == '*') {
+                product_price[rowindex] = $('input[name="edit_unit_price"]').val() / row_unit_operation_value;
+            } else {
+                product_price[rowindex] = $('input[name="edit_unit_price"]').val() * row_unit_operation_value;
+            }
+            var position = $('select[name="edit_unit"]').val();
+            var temp_operator = temp_unit_operator[position];
+            var temp_operation_value = temp_unit_operation_value[position];
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.sale-unit').val(temp_unit_name[position]);
+            temp_unit_name.splice(position, 1);
+            temp_unit_operator.splice(position, 1);
+            temp_unit_operation_value.splice(position, 1);
+
+            temp_unit_name.unshift($('select[name="edit_unit"] option:selected').text());
+            temp_unit_operator.unshift(temp_operator);
+            temp_unit_operation_value.unshift(temp_operation_value);
+
+            unit_name[rowindex] = temp_unit_name.toString() + ',';
+            unit_operator[rowindex] = temp_unit_operator.toString() + ',';
+            unit_operation_value[rowindex] = temp_unit_operation_value.toString() + ',';
+        }
+        checkQuantity(edit_qty, false);
+    });
+
+    $('button[name="order_discount_btn"]').on("click", function() {
+        calculateGrandTotal();
+    });
+
+    $('button[name="shipping_cost_btn"]').on("click", function() {
+        calculateGrandTotal();
+    });
+
+    $('button[name="order_tax_btn"]').on("click", function() {
+        calculateGrandTotal();
+    });
+
+    $(".coupon-check").on("click",function() {
+        couponDiscount();
+    });
+
+    $(".payment-btn").on("click", function() {
+        var audio = $("#mysoundclip2")[0];
+        audio.play();
+        var btn_id = $(this).attr('id');
+        if (btn_id == 'cash-btn' || btn_id == 'cash-card-btn') {
+          $('input[name="paid_amount"]').val($("#grand-total").text());
+          $('input[name="paying_amount"]').val('');
+        }else{
+          $('input[name="paid_amount"]').val($("#grand-total").text());
+          $('input[name="paying_amount"]').val($("#grand-total").text());
+        }
+        $('.qc').data('initial', 1);
+    });
+
+    $("#draft-btn").on("click",function(){
+        var audio = $("#mysoundclip2")[0];
+        audio.play();
+        $('input[name="sale_status"]').val(3);
+        $('input[name="paying_amount"]').prop('required',false);
+        $('input[name="paid_amount"]').prop('required',false);
+        var rownumber = $('table.order-list tbody tr:last').index();
+        if (rownumber < 0) {
+            alert("Please insert product to order table!")
+        }
+        else
+            $('.payment-form').submit();
+    });
+
+    $("#gift-card-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(2);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').hide();
+        $('div.by_cc').hide();
+        giftCard();
+    });
+
+    $("#credit-card-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(3);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').hide();
+        $('div.by_cc').hide();
+        creditCard();
+    });
+
+    $("#cheque-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(4);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').hide();
+        $('div.by_cc').hide();
+        cheque();
+    });
+
+    $("#cash-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(1);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').show();
+        $('div.by_cc').hide();
+        hide();
+    });
+
+    $("#cash-card-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(7);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').show();
+        $('div.by_cc').show();
+        hide();
+    });
+
+    $("#paypal-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(5);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').hide();
+        $('div.by_cc').hide();
+        hide();
+    });
+
+    $("#deposit-btn").on("click",function() {
+        $('select[name="paid_by_id_select"]').val(6);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.qc').hide();
+        $('div.by_cc').hide();
+        hide();
+        deposits();
+    });
+
+    $('select[name="paid_by_id_select"]').on("change", function() {
+        var id = $(this).val();
+        $(".payment-form").off("submit");
+        if(id == 2) {
+            $('div.qc').hide();
+            $('div.by_cc').hide();
+            giftCard();
+        }
+        else if (id == 3) {
+            $('div.qc').hide();
+            $('div.by_cc').hide();
+            creditCard();
+        } else if (id == 4) {
+            $('div.qc').hide();
+            $('div.by_cc').hide();
+            cheque();
+        } else {
+            hide();
+            if(id == 1){
+                $('div.qc').show();
+                $('div.by_cc').hide();
+            }else if(id == 7) {
+                $('div.qc').show();
+                $('div.by_cc').show();
+            }else if(id == 6) {
+                $('div.qc').hide();
+                $('div.by_cc').hide();
+                deposits();
+            }else{
+                $('div.qc').hide();
+                $('div.by_cc').hide();
+            }
+        }
+    });
+
+    $('#add-payment select[name="gift_card_id_select"]').on("change", function() {
+        var balance = gift_card_amount[$(this).val()] - gift_card_expense[$(this).val()];
+        $('#add-payment input[name="gift_card_id"]').val($(this).val());
+        if($('input[name="paid_amount"]').val() > balance){
+            alert('Amount exceeds card balance! Gift Card balance: '+ balance);
+        }
+    });
+
+    $('#add-payment input[name="paying_amount"]').on("blur", function() {
+        change($(this).val(), $('input[name="paid_amount"]').val());
+    });
+
+    $('#by_card').on("change", function() {
+
+        var by_cash = parseFloat($('input[name="by_cash"]').val());
+        var by_card = parseFloat($('input[name="by_card"]').val());
+
+        if (isNaN(by_cash)) {
+            by_cash = 0;
+        }
+        if (isNaN(by_card)) {
+            by_card = 0;
+        }
+
+        $('input[name="paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
+
+        change($('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val());
+    });
+
+    $('#by_cash').on("change", function() {
+
+        var by_cash = parseFloat($('input[name="by_cash"]').val());
+        var by_card = parseFloat($('input[name="by_card"]').val());
+
+        if (isNaN(by_cash)) {
+            by_cash = 0;
+        }
+        if (isNaN(by_card)) {
+            by_card = 0;
+        }
+
+        $('input[name="paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
+
+        change($('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val());
+    });
+
+    $('input[name="paid_amount"]').on("input", function() {
+        if( $(this).val() > parseFloat($('input[name="paying_amount"]').val()) ) {
+            alert('Paying amount cannot be bigger than recieved amount');
+            $(this).val('');
+        }
+        else if( $(this).val() > parseFloat($('#grand-total').text()) ){
+            alert('Paying amount cannot be bigger than grand total');
+            $(this).val('');
+        }
+
+        change( $('input[name="paying_amount"]').val(), $(this).val() );
+        var id = $('select[name="paid_by_id_select"]').val();
+        if(id == 2){
+            var balance = gift_card_amount[$("#gift_card_id_select").val()] - gift_card_expense[$("#gift_card_id_select").val()];
+            if($(this).val() > balance)
+                alert('Amount exceeds card balance! Gift Card balance: '+ balance);
+        }
+        else if(id == 6){
+            if( $('input[name="paid_amount"]').val() > deposit[$('#customer_id').val()] )
+                alert('Amount exceeds customer deposit! Customer deposit : '+ deposit[$('#customer_id').val()]);
+        }
+    });
+
+    $('.transaction-btn-plus').on("click", function() {
+        $(this).addClass('d-none');
+        $('.transaction-btn-close').removeClass('d-none');
+    });
+
+    $('.transaction-btn-close').on("click", function() {
+        $(this).addClass('d-none');
+        $('.transaction-btn-plus').removeClass('d-none');
+    });
+
+    $('.coupon-btn-plus').on("click", function() {
+        $(this).addClass('d-none');
+        $('.coupon-btn-close').removeClass('d-none');
+    });
+
+    $('.coupon-btn-close').on("click", function() {
+        $(this).addClass('d-none');
+        $('.coupon-btn-plus').removeClass('d-none');
+    });
+
+    $(document).on('click', '.qc-btn', function(e) {
+        if($(this).data('amount')) {
+            if($('.qc').data('initial')) {
+                $('input[name="paying_amount"]').val( $(this).data('amount').toFixed(2) );
+                $('input[name="by_cash"]').val( $(this).data('amount').toFixed(2) );
+                $('.qc').data('initial', 0);
+            }
+            else {
+                var p_amt = $('input[name="paying_amount"]').val();
+                var c_amt = $('input[name="by_cash"]').val();
+
+                if (p_amt == '') {
+                  p_amt = 0;
+                }
+                if (c_amt == '') {
+                  c_amt = 0;
+                }
+
+                $('input[name="paying_amount"]').val( (parseFloat(p_amt) + $(this).data('amount')).toFixed(2) );
+
+                $('input[name="by_cash"]').val( (parseFloat(c_amt) + $(this).data('amount')).toFixed(2) );
+            }
+        }
+        else{
+            $('input[name="paying_amount"]').val('');
+            $('input[name="by_cash"]').val('');
+        }
+        change( $('input[name="paying_amount"]').val(), $('input[name="paid_amount"]').val() );
+    });
+
+    function change(paying_amount, paid_amount) {
+        $("#change").text( parseFloat(paying_amount - paid_amount).toFixed(2) );
     }
-    else
-        $("table.order-list tbody").append(newRow);
 
-    product_price.push(parseFloat(data[2]) + parseFloat(data[2] * customer_group_rate));
-    product_discount.push('0.00');
-    tax_rate.push(parseFloat(data[3]));
-    tax_name.push(data[4]);
-    tax_method.push(data[5]);
-    unit_name.push(data[6]);
-    unit_operator.push(data[7]);
-    unit_operation_value.push(data[8]);
-    rowindex = newRow.index();
-    checkQuantity(1, true);
-}
+    function confirmDelete() {
+        if (confirm("Are you sure want to delete?")) {
+            return true;
+        }
+        return false;
+    }
 
-function edit(){
-    var row_product_name_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(1)').text();
-    $('#modal_header').text(row_product_name_code);
-
-    var qty = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val();
-    $('input[name="edit_qty"]').val(qty);
-
-    $('input[name="edit_discount"]').val(parseFloat(product_discount[rowindex]).toFixed(2));
-
-    var tax_name_all = <?php echo json_encode($tax_name_all) ?>;
-    pos = tax_name_all.indexOf(tax_name[rowindex]);
-    $('select[name="edit_tax_rate"]').val(pos);
-
-    var row_product_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.product-code').val();
-    pos = product_code.indexOf(row_product_code);
-    if(product_type[pos] == 'standard'){
-        unitConversion();
-        temp_unit_name = (unit_name[rowindex]).split(',');
-        temp_unit_name.pop();
-        temp_unit_operator = (unit_operator[rowindex]).split(',');
-        temp_unit_operator.pop();
-        temp_unit_operation_value = (unit_operation_value[rowindex]).split(',');
-        temp_unit_operation_value.pop();
-        $('select[name="edit_unit"]').empty();
-        $.each(temp_unit_name, function(key, value) {
-            $('select[name="edit_unit"]').append('<option value="' + key + '">' + value + '</option>');
+    function productSearch(data) {
+        $.ajax({
+            type: 'GET',
+            url: 'sales/lims_product_search',
+            data: {
+                data: data
+            },
+            success: function(data) {
+                //alert(data);
+                var flag = 1;
+                $(".product-code").each(function(i) {
+                    if ($(this).val() == data[1]) {
+                        rowindex = i;
+                        var pre_qty = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val();
+                        if(pre_qty)
+                            var qty = parseFloat(pre_qty) + 1;
+                        else
+                            var qty = 1;
+                        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
+                        flag = 0;
+                        checkQuantity(String(qty), true);
+                        flag = 0;
+                    }
+                });
+                $("input[name='product_code_name']").val('');
+                if(flag){
+                    addNewProduct(data);
+                }
+            }
         });
-        $("#edit_unit").show();
     }
-    else{
-        row_product_price = product_price[rowindex];
-        $("#edit_unit").hide();
-    }
-    $('input[name="edit_unit_price"]').val(row_product_price.toFixed(2));
-    $('.selectpicker').selectpicker('refresh');
-}
 
-function couponDiscount() {
-    var rownumber = $('table.order-list tbody tr:last').index();
-    if (rownumber < 0) {
-        alert("Please insert product to order table!")
+    function addNewProduct(data){
+        var newRow = $("<tr>");
+        var cols = '';
+        temp_unit_name = (data[6]).split(',');
+        cols += '<td class="col-sm-4 product-title"><button type="button" class="edit-product btn btn-link" data-toggle="modal" data-target="#editModal"><strong>' + data[0] + '</strong></button> [' + data[1] + '] </td>';
+        cols += '<td class="col-sm-2 product-price"></td>';
+        cols += '<td class="col-sm-3"><div class="input-group"><span class="input-group-btn"><button type="button" class="btn btn-default minus"><span class="dripicons-minus"></span></button></span><input type="text" name="qty[]" class="form-control qty numkey input-number" value="1" step="any" required><span class="input-group-btn"><button type="button" class="btn btn-default plus"><span class="dripicons-plus"></span></button></span></div></td>';
+        cols += '<td class="col-sm-2 sub-total"></td>';
+        cols += '<td class="col-sm-1"><button type="button" class="ibtnDel btn btn-danger btn-sm"><i class="dripicons-cross"></i></button></td>';
+        cols += '<input type="hidden" class="product-code" name="product_code[]" value="' + data[1] + '"/>';
+        cols += '<input type="hidden" class="product-id" name="product_id[]" value="' + data[9] + '"/>';
+        cols += '<input type="hidden" class="sale-unit" name="sale_unit[]" value="' + temp_unit_name[0] + '"/>';
+        cols += '<input type="hidden" class="net_unit_price" name="net_unit_price[]" />';
+        cols += '<input type="hidden" class="discount-value" name="discount[]" />';
+        cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[3] + '"/>';
+        cols += '<input type="hidden" class="tax-value" name="tax[]" />';
+        cols += '<input type="hidden" class="subtotal-value" name="subtotal[]" />';
+
+        newRow.append(cols);
+        if(keyboard_active==1){
+            $("table.order-list tbody").append(newRow).find('.qty').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
+                'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
+        }
+        else
+            $("table.order-list tbody").append(newRow);
+
+        product_price.push(parseFloat(data[2]) + parseFloat(data[2] * customer_group_rate));
+        product_discount.push('0.00');
+        tax_rate.push(parseFloat(data[3]));
+        tax_name.push(data[4]);
+        tax_method.push(data[5]);
+        unit_name.push(data[6]);
+        unit_operator.push(data[7]);
+        unit_operation_value.push(data[8]);
+        rowindex = newRow.index();
+        checkQuantity(1, true);
     }
-    else if($("#coupon-code").val() != ''){
-        valid = 0;
-        $.each(coupon_list, function(key, value) {
-            if($("#coupon-code").val() == value['code']){
-                valid = 1;
-                todyDate = <?php echo json_encode(date('Y-m-d'))?>;
-                if(parseFloat(value['quantity']) <= parseFloat(value['used']))
-                    alert('This Coupon is no longer available');
-                else if(todyDate > value['expired_date'])
-                    alert('This Coupon has expired!');
-                else if(value['type'] == 'fixed'){
-                    if(parseFloat($('input[name="grand_total"]').val()) >= value['minimum_amount']) {
-                        $('input[name="grand_total"]').val($('input[name="grand_total"]').val() - value['amount']);
-                        $('#grand-total').text(parseFloat($('input[name="grand_total"]').val()).toFixed(2));
+
+    function edit(){
+        var row_product_name_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(1)').text();
+        $('#modal_header').text(row_product_name_code);
+
+        var qty = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val();
+        $('input[name="edit_qty"]').val(qty);
+
+        $('input[name="edit_discount"]').val(parseFloat(product_discount[rowindex]).toFixed(2));
+
+        var tax_name_all = <?php echo json_encode($tax_name_all) ?>;
+        pos = tax_name_all.indexOf(tax_name[rowindex]);
+        $('select[name="edit_tax_rate"]').val(pos);
+
+        var row_product_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.product-code').val();
+        pos = product_code.indexOf(row_product_code);
+        if(product_type[pos] == 'standard'){
+            unitConversion();
+            temp_unit_name = (unit_name[rowindex]).split(',');
+            temp_unit_name.pop();
+            temp_unit_operator = (unit_operator[rowindex]).split(',');
+            temp_unit_operator.pop();
+            temp_unit_operation_value = (unit_operation_value[rowindex]).split(',');
+            temp_unit_operation_value.pop();
+            $('select[name="edit_unit"]').empty();
+            $.each(temp_unit_name, function(key, value) {
+                $('select[name="edit_unit"]').append('<option value="' + key + '">' + value + '</option>');
+            });
+            $("#edit_unit").show();
+        }
+        else{
+            row_product_price = product_price[rowindex];
+            $("#edit_unit").hide();
+        }
+        $('input[name="edit_unit_price"]').val(row_product_price.toFixed(2));
+        $('.selectpicker').selectpicker('refresh');
+    }
+
+    function couponDiscount() {
+        var rownumber = $('table.order-list tbody tr:last').index();
+        if (rownumber < 0) {
+            alert("Please insert product to order table!")
+        }
+        else if($("#coupon-code").val() != ''){
+            valid = 0;
+            $.each(coupon_list, function(key, value) {
+                if($("#coupon-code").val() == value['code']){
+                    valid = 1;
+                    todyDate = <?php echo json_encode(date('Y-m-d'))?>;
+                    if(parseFloat(value['quantity']) <= parseFloat(value['used']))
+                        alert('This Coupon is no longer available');
+                    else if(todyDate > value['expired_date'])
+                        alert('This Coupon has expired!');
+                    else if(value['type'] == 'fixed'){
+                        if(parseFloat($('input[name="grand_total"]').val()) >= value['minimum_amount']) {
+                            $('input[name="grand_total"]').val($('input[name="grand_total"]').val() - value['amount']);
+                            $('#grand-total').text(parseFloat($('input[name="grand_total"]').val()).toFixed(2));
+                            if(!$('input[name="coupon_active"]').val())
+                                alert('Congratulation! You got '+value['amount']+' '+currency+' discount');
+                            $(".coupon-check").prop("disabled",true);
+                            $("#coupon-code").prop("disabled",true);
+                            $('input[name="coupon_active"]').val(1);
+                            $("#coupon-modal").modal('hide');
+                            $('input[name="coupon_id"]').val(value['id']);
+                            $('input[name="coupon_discount"]').val(value['amount']);
+                            $('#coupon-text').text(parseFloat(value['amount']).toFixed(2));
+                        }
+                        else
+                            alert('Grand Total is not sufficient for discount! Required '+value['minimum_amount']+' '+currency);
+                    }
+                    else{
+                        var grand_total = $('input[name="grand_total"]').val();
+                        var coupon_discount = grand_total * (value['amount'] / 100);
+                        grand_total = grand_total - coupon_discount;
+                        $('input[name="grand_total"]').val(grand_total);
+                        $('#grand-total').text(parseFloat(grand_total).toFixed(2));
                         if(!$('input[name="coupon_active"]').val())
-                            alert('Congratulation! You got '+value['amount']+' '+currency+' discount');
+                            alert('Congratulation! You got '+value['amount']+'% discount');
                         $(".coupon-check").prop("disabled",true);
                         $("#coupon-code").prop("disabled",true);
                         $('input[name="coupon_active"]').val(1);
                         $("#coupon-modal").modal('hide');
                         $('input[name="coupon_id"]').val(value['id']);
-                        $('input[name="coupon_discount"]').val(value['amount']);
-                        $('#coupon-text').text(parseFloat(value['amount']).toFixed(2));
+                        $('input[name="coupon_discount"]').val(coupon_discount);
+                        $('#coupon-text').text(parseFloat(coupon_discount).toFixed(2));
                     }
-                    else
-                        alert('Grand Total is not sufficient for discount! Required '+value['minimum_amount']+' '+currency);
                 }
-                else{
-                    var grand_total = $('input[name="grand_total"]').val();
-                    var coupon_discount = grand_total * (value['amount'] / 100);
-                    grand_total = grand_total - coupon_discount;
-                    $('input[name="grand_total"]').val(grand_total);
-                    $('#grand-total').text(parseFloat(grand_total).toFixed(2));
-                    if(!$('input[name="coupon_active"]').val())
-                            alert('Congratulation! You got '+value['amount']+'% discount');
-                    $(".coupon-check").prop("disabled",true);
-                    $("#coupon-code").prop("disabled",true);
-                    $('input[name="coupon_active"]').val(1);
-                    $("#coupon-modal").modal('hide');
-                    $('input[name="coupon_id"]').val(value['id']);
-                    $('input[name="coupon_discount"]').val(coupon_discount);
-                    $('#coupon-text').text(parseFloat(coupon_discount).toFixed(2));
-                }
-            }
-        });
-        if(!valid)
-            alert('Invalid coupon code!');
-    }
-}
-
-function checkQuantity(sale_qty, flag) {
-    var row_product_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.product-code').val();
-    pos = product_code.indexOf(row_product_code);
-    if(product_type[pos] == 'standard'){
-        var operator = unit_operator[rowindex].split(',');
-        var operation_value = unit_operation_value[rowindex].split(',');
-        if(operator[0] == '*')
-            total_qty = sale_qty * operation_value[0];
-        else if(operator[0] == '/')
-            total_qty = sale_qty / operation_value[0];
-        if (total_qty > parseFloat(product_qty[pos])) {
-            alert('Quantity exceeds stock quantity!');
-            if (flag) {
-                sale_qty = sale_qty.substring(0, sale_qty.length - 1);
-                $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val(sale_qty);
-                checkQuantity(sale_qty, true);
-            } else {
-                edit();
-                return;
-            }
+            });
+            if(!valid)
+                alert('Invalid coupon code!');
         }
     }
-    else if(product_type[pos] == 'combo'){
-        child_id = product_list[pos].split(',');
-        child_qty = qty_list[pos].split(',');
-        $(child_id).each(function(index) {
-            var position = product_id.indexOf(parseInt(child_id[index]));
-            if( parseFloat(sale_qty * child_qty[index]) > product_qty[position] ) {
+
+    function checkQuantity(sale_qty, flag) {
+        var row_product_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.product-code').val();
+        pos = product_code.indexOf(row_product_code);
+        if(product_type[pos] == 'standard'){
+            var operator = unit_operator[rowindex].split(',');
+            var operation_value = unit_operation_value[rowindex].split(',');
+            if(operator[0] == '*')
+                total_qty = sale_qty * operation_value[0];
+            else if(operator[0] == '/')
+                total_qty = sale_qty / operation_value[0];
+            if (total_qty > parseFloat(product_qty[pos])) {
                 alert('Quantity exceeds stock quantity!');
                 if (flag) {
                     sale_qty = sale_qty.substring(0, sale_qty.length - 1);
                     $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val(sale_qty);
-                }
-                else {
+                    checkQuantity(sale_qty, true);
+                } else {
                     edit();
-                    flag = true;
-                    return false;
+                    return;
                 }
             }
-        });
-    }
-
-    if(!flag){
-        $('#editModal').modal('hide');
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val(sale_qty);
-    }
-    calculateRowProductData(sale_qty);
-
-}
-
-function calculateRowProductData(quantity) {
-    if(product_type[pos] == 'standard')
-        unitConversion();
-    else
-        row_product_price = product_price[rowindex];
-
-    $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.discount-value').val((product_discount[rowindex] * quantity).toFixed(2));
-    $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-rate').val(tax_rate[rowindex].toFixed(2));
-
-    if (tax_method[rowindex] == 1) {
-        var net_unit_price = row_product_price - product_discount[rowindex];
-        var tax = net_unit_price * quantity * (tax_rate[rowindex] / 100);
-        var sub_total = (net_unit_price * quantity) + tax;
-        
-        if(parseFloat(quantity))
-            var sub_total_unit = sub_total / quantity;
-        else
-            var sub_total_unit = sub_total;
-
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.net_unit_price').val(net_unit_price.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-value').val(tax.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(2)').text(sub_total_unit.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(4)').text(sub_total.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.subtotal-value').val(sub_total.toFixed(2));
-    } else {
-        var sub_total_unit = row_product_price - product_discount[rowindex];
-        var net_unit_price = (100 / (100 + tax_rate[rowindex])) * sub_total_unit;
-        var tax = (sub_total_unit - net_unit_price) * quantity;
-        var sub_total = sub_total_unit * quantity;
-
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.net_unit_price').val(net_unit_price.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-value').val(tax.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(2)').text(sub_total_unit.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(4)').text(sub_total.toFixed(2));
-        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.subtotal-value').val(sub_total.toFixed(2));
-    }
-
-    calculateTotal();
-}
-
-function unitConversion() {
-    var row_unit_operator = unit_operator[rowindex].slice(0, unit_operator[rowindex].indexOf(","));
-    var row_unit_operation_value = unit_operation_value[rowindex].slice(0, unit_operation_value[rowindex].indexOf(","));
-
-    if (row_unit_operator == '*') {
-        row_product_price = product_price[rowindex] * row_unit_operation_value;
-    } else {
-        row_product_price = product_price[rowindex] / row_unit_operation_value;
-    }
-}
-
-function calculateTotal() {
-    //Sum of quantity
-    var total_qty = 0;
-    $("table.order-list tbody .qty").each(function(index) {
-        if ($(this).val() == '') {
-            total_qty += 0;
-        } else {
-            total_qty += parseFloat($(this).val());
         }
-    });
-    $('input[name="total_qty"]').val(total_qty);
-
-    //Sum of discount
-    var total_discount = 0;
-    $("table.order-list tbody .discount-value").each(function() {
-        total_discount += parseFloat($(this).val());
-    });
-
-    $('input[name="total_discount"]').val(total_discount.toFixed(2));
-
-    //Sum of tax
-    var total_tax = 0;
-    $(".tax-value").each(function() {
-        total_tax += parseFloat($(this).val());
-    });
-
-    $('input[name="total_tax"]').val(total_tax.toFixed(2));
-
-    //Sum of subtotal
-    var total = 0;
-    $(".sub-total").each(function() {
-        total += parseFloat($(this).text());
-    });
-    $('input[name="total_price"]').val(total.toFixed(2));
-
-    calculateGrandTotal();
-}
-
-function calculateGrandTotal() {
-    var item = $('table.order-list tbody tr:last').index();
-    var total_qty = parseFloat($('input[name="total_qty"]').val());
-    var subtotal = parseFloat($('input[name="total_price"]').val());
-    var order_tax = parseFloat($('select[name="order_tax_rate_select"]').val());
-    var order_discount = parseFloat($('input[name="order_discount"]').val());
-    if (!order_discount)
-        order_discount = 0.00;
-    $("#discount").text(order_discount.toFixed(2));
-
-    var shipping_cost = parseFloat($('input[name="shipping_cost"]').val());
-    if (!shipping_cost)
-        shipping_cost = 0.00;
-
-    item = ++item + '(' + total_qty + ')';
-    order_tax = (subtotal - order_discount) * (order_tax / 100);
-    var grand_total = (subtotal + order_tax + shipping_cost) - order_discount;
-    $('input[name="grand_total"]').val(grand_total.toFixed(2));
-
-    couponDiscount();
-    var coupon_discount = parseFloat($('input[name="coupon_discount"]').val());
-    if (!coupon_discount)
-        coupon_discount = 0.00;
-    grand_total -= coupon_discount;
-
-    $('#item').text(item);
-    $('input[name="item"]').val($('table.order-list tbody tr:last').index() + 1);
-    $('#subtotal').text(subtotal.toFixed(2));
-    $('#tax').text(order_tax.toFixed(2));
-    $('input[name="order_tax"]').val(order_tax.toFixed(2));
-    $('#shipping-cost').text(shipping_cost.toFixed(2));
-    $('#grand-total').text(grand_total.toFixed(2));
-    $('input[name="grand_total"]').val(grand_total.toFixed(2));
-}
-
-function hide() {
-    $(".card-element").hide();
-    $(".card-errors").hide();
-    $(".cheque").hide();
-    $(".gift-card").hide();
-    $('input[name="cheque_no"]').attr('required', false);
-}
-
-function giftCard() {
-    $(".gift-card").show();
-    $.ajax({
-        url: 'sales/get_gift_card',
-        type: "GET",
-        dataType: "json",
-        success:function(data) {
-            $('#add-payment select[name="gift_card_id_select"]').empty();
-            $.each(data, function(index) {
-                gift_card_amount[data[index]['id']] = data[index]['amount'];
-                gift_card_expense[data[index]['id']] = data[index]['expense'];
-                $('#add-payment select[name="gift_card_id_select"]').append('<option value="'+ data[index]['id'] +'">'+ data[index]['card_no'] +'</option>');
+        else if(product_type[pos] == 'combo'){
+            child_id = product_list[pos].split(',');
+            child_qty = qty_list[pos].split(',');
+            $(child_id).each(function(index) {
+                var position = product_id.indexOf(parseInt(child_id[index]));
+                if( parseFloat(sale_qty * child_qty[index]) > product_qty[position] ) {
+                    alert('Quantity exceeds stock quantity!');
+                    if (flag) {
+                        sale_qty = sale_qty.substring(0, sale_qty.length - 1);
+                        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val(sale_qty);
+                    }
+                    else {
+                        edit();
+                        flag = true;
+                        return false;
+                    }
+                }
             });
-            $('.selectpicker').selectpicker('refresh');
-            $('.selectpicker').selectpicker();
         }
+
+        if(!flag){
+            $('#editModal').modal('hide');
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val(sale_qty);
+        }
+        calculateRowProductData(sale_qty);
+    }
+
+    function calculateRowProductData(quantity) {
+        if(product_type[pos] == 'standard')
+            unitConversion();
+        else
+            row_product_price = product_price[rowindex];
+
+        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.discount-value').val((product_discount[rowindex] * quantity).toFixed(2));
+        $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-rate').val(tax_rate[rowindex].toFixed(2));
+
+        if (tax_method[rowindex] == 1) {
+            var net_unit_price = row_product_price - product_discount[rowindex];
+            var tax = net_unit_price * quantity * (tax_rate[rowindex] / 100);
+            var sub_total = (net_unit_price * quantity) + tax;
+
+            if(parseFloat(quantity))
+                var sub_total_unit = sub_total / quantity;
+            else
+                var sub_total_unit = sub_total;
+
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.net_unit_price').val(net_unit_price.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-value').val(tax.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(2)').text(sub_total_unit.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(4)').text(sub_total.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.subtotal-value').val(sub_total.toFixed(2));
+        } else {
+            var sub_total_unit = row_product_price - product_discount[rowindex];
+            var net_unit_price = (100 / (100 + tax_rate[rowindex])) * sub_total_unit;
+            var tax = (sub_total_unit - net_unit_price) * quantity;
+            var sub_total = sub_total_unit * quantity;
+
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.net_unit_price').val(net_unit_price.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.tax-value').val(tax.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(2)').text(sub_total_unit.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(4)').text(sub_total.toFixed(2));
+            $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.subtotal-value').val(sub_total.toFixed(2));
+        }
+
+        calculateTotal();
+    }
+
+    function unitConversion() {
+        var row_unit_operator = unit_operator[rowindex].slice(0, unit_operator[rowindex].indexOf(","));
+        var row_unit_operation_value = unit_operation_value[rowindex].slice(0, unit_operation_value[rowindex].indexOf(","));
+
+        if (row_unit_operator == '*') {
+            row_product_price = product_price[rowindex] * row_unit_operation_value;
+        } else {
+            row_product_price = product_price[rowindex] / row_unit_operation_value;
+        }
+    }
+
+    function calculateTotal() {
+        //Sum of quantity
+        var total_qty = 0;
+        $("table.order-list tbody .qty").each(function(index) {
+            if ($(this).val() == '') {
+                total_qty += 0;
+            } else {
+                total_qty += parseFloat($(this).val());
+            }
+        });
+        $('input[name="total_qty"]').val(total_qty);
+
+        //Sum of discount
+        var total_discount = 0;
+        $("table.order-list tbody .discount-value").each(function() {
+            total_discount += parseFloat($(this).val());
+        });
+
+        $('input[name="total_discount"]').val(total_discount.toFixed(2));
+
+        //Sum of tax
+        var total_tax = 0;
+        $(".tax-value").each(function() {
+            total_tax += parseFloat($(this).val());
+        });
+
+        $('input[name="total_tax"]').val(total_tax.toFixed(2));
+
+        //Sum of subtotal
+        var total = 0;
+        $(".sub-total").each(function() {
+            total += parseFloat($(this).text());
+        });
+        $('input[name="total_price"]').val(total.toFixed(2));
+
+        calculateGrandTotal();
+    }
+
+    function calculateGrandTotal() {
+        var item = $('table.order-list tbody tr:last').index();
+        var total_qty = parseFloat($('input[name="total_qty"]').val());
+        var subtotal = parseFloat($('input[name="total_price"]').val());
+        var order_tax = parseFloat($('select[name="order_tax_rate_select"]').val());
+        var order_discount = parseFloat($('input[name="order_discount"]').val());
+        if (!order_discount)
+            order_discount = 0.00;
+        $("#discount").text(order_discount.toFixed(2));
+
+        var shipping_cost = parseFloat($('input[name="shipping_cost"]').val());
+        if (!shipping_cost)
+            shipping_cost = 0.00;
+
+        item = ++item + '(' + total_qty + ')';
+        order_tax = (subtotal - order_discount) * (order_tax / 100);
+        var grand_total = (subtotal + order_tax + shipping_cost) - order_discount;
+        $('input[name="grand_total"]').val(grand_total.toFixed(2));
+
+        couponDiscount();
+        var coupon_discount = parseFloat($('input[name="coupon_discount"]').val());
+        if (!coupon_discount)
+            coupon_discount = 0.00;
+        grand_total -= coupon_discount;
+
+        $('#item').text(item);
+        $('input[name="item"]').val($('table.order-list tbody tr:last').index() + 1);
+        $('#subtotal').text(subtotal.toFixed(2));
+        $('#tax').text(order_tax.toFixed(2));
+        $('input[name="order_tax"]').val(order_tax.toFixed(2));
+        $('#shipping-cost').text(shipping_cost.toFixed(2));
+        $('#grand-total').text(grand_total.toFixed(2));
+        $('input[name="grand_total"]').val(grand_total.toFixed(2));
+    }
+
+    function hide() {
+        $(".card-element").hide();
+        $(".card-errors").hide();
+        $(".cheque").hide();
+        $(".gift-card").hide();
+        $('input[name="cheque_no"]').attr('required', false);
+    }
+
+    function giftCard() {
+        $(".gift-card").show();
+        $.ajax({
+            url: 'sales/get_gift_card',
+            type: "GET",
+            dataType: "json",
+            success:function(data) {
+                $('#add-payment select[name="gift_card_id_select"]').empty();
+                $.each(data, function(index) {
+                    gift_card_amount[data[index]['id']] = data[index]['amount'];
+                    gift_card_expense[data[index]['id']] = data[index]['expense'];
+                    $('#add-payment select[name="gift_card_id_select"]').append('<option value="'+ data[index]['id'] +'">'+ data[index]['card_no'] +'</option>');
+                });
+                $('.selectpicker').selectpicker('refresh');
+                $('.selectpicker').selectpicker();
+            }
+        });
+        $(".card-element").hide();
+        $(".card-errors").hide();
+        $(".cheque").hide();
+        $('input[name="cheque_no"]').attr('required', false);
+    }
+
+    function cheque() {
+        $(".cheque").show();
+        $('input[name="cheque_no"]').attr('required', true);
+        $(".card-element").hide();
+        $(".card-errors").hide();
+        $(".gift-card").hide();
+    }
+
+    function creditCard() {
+        $(".card-element").hide();
+        $(".card-errors").hide();
+        $(".cheque").hide();
+        $(".gift-card").hide();
+        $('input[name="cheque_no"]').attr('required', false);
+    }
+
+    function deposits() {
+        if($('input[name="paid_amount"]').val() > deposit[$('#customer_id').val()]){
+            alert('Amount exceeds customer deposit! Customer deposit : '+ deposit[$('#customer_id').val()]);
+        }
+        $('input[name="cheque_no"]').attr('required', false);
+        $('#add-payment select[name="gift_card_id_select"]').attr('required', false);
+    }
+
+    function cancel(rownumber) {
+        while(rownumber >= 0) {
+            product_price.pop();
+            product_discount.pop();
+            tax_rate.pop();
+            tax_name.pop();
+            tax_method.pop();
+            unit_name.pop();
+            unit_operator.pop();
+            unit_operation_value.pop();
+            $('table.order-list tbody tr:last').remove();
+            rownumber--;
+        }
+        $('input[name="shipping_cost"]').val('');
+        $('input[name="order_discount"]').val('');
+        $('select[name="order_tax_rate_select"]').val(0);
+        calculateTotal();
+    }
+
+    function confirmCancel() {
+        var audio = $("#mysoundclip2")[0];
+        audio.play();
+        if (confirm("Are you sure want to cancel?")) {
+            cancel($('table.order-list tbody tr:last').index());
+        }
+        return false;
+    }
+
+    $(document).on('submit', '.payment-form', function(e) {
+        var rownumber = $('table.order-list tbody tr:last').index();
+        if (rownumber < 0) {
+            alert("Please insert product to order table!")
+            e.preventDefault();
+        }
+        else if( parseFloat( $('input[name="paying_amount"]').val() ) < parseFloat( $('input[name="paid_amount"]').val() ) ){
+            alert('Paying amount cannot be bigger than recieved amount');
+            e.preventDefault();
+        }
+        $('input[name="paid_by_id"]').val($('select[name="paid_by_id_select"]').val());
+        $('input[name="order_tax_rate"]').val($('select[name="order_tax_rate_select"]').val());
+
     });
-    $(".card-element").hide();
-    $(".card-errors").hide();
-    $(".cheque").hide();
-    $('input[name="cheque_no"]').attr('required', false);
-}
 
-function cheque() {
-    $(".cheque").show();
-    $('input[name="cheque_no"]').attr('required', true);
-    $(".card-element").hide();
-    $(".card-errors").hide();
-    $(".gift-card").hide();
-}
+    $('#product-table').DataTable( {
+        "order": [],
+        'pageLength': product_row_number,
+         'language': {
+            'paginate': {
+                'previous': '<i class="fa fa-angle-left"></i>',
+                'next': '<i class="fa fa-angle-right"></i>'
+            }
+        },
+        dom: 'tp'
+    });
 
-function creditCard() {
-    //$.getScript( "public/vendor/stripe/checkout.js" );
-    $(".card-element").hide();
-    $(".card-errors").hide();
-    $(".cheque").hide();
-    $(".gift-card").hide();
-    $('input[name="cheque_no"]').attr('required', false);
-}
+    // quick sale start shiv
+    $(document).ready(function(){
 
-function deposits() {
-    if($('input[name="paid_amount"]').val() > deposit[$('#customer_id').val()]){
-        alert('Amount exceeds customer deposit! Customer deposit : '+ deposit[$('#customer_id').val()]);
-    }
-    $('input[name="cheque_no"]').attr('required', false);
-    $('#add-payment select[name="gift_card_id_select"]').attr('required', false);
-}
+        var pro_count = 1;
 
-function cancel(rownumber) {
-    while(rownumber >= 0) {
-        product_price.pop();
-        product_discount.pop();
-        tax_rate.pop();
-        tax_name.pop();
-        tax_method.pop();
-        unit_name.pop();
-        unit_operator.pop();
-        unit_operation_value.pop();
-        $('table.order-list tbody tr:last').remove();
-        rownumber--;
-    }
-    $('input[name="shipping_cost"]').val('');
-    $('input[name="order_discount"]').val('');
-    $('select[name="order_tax_rate_select"]').val(0);
-    calculateTotal();
-}
+        $('#quick-sale-btn').on('click', function(){
 
-function confirmCancel() {
-    var audio = $("#mysoundclip2")[0];
-    audio.play();
-    if (confirm("Are you sure want to cancel?")) {
-        cancel($('table.order-list tbody tr:last').index());
-    }
-    return false;
-}
+            if(keyboard_active==1){
 
-$(document).on('submit', '.payment-form', function(e) {
-    var rownumber = $('table.order-list tbody tr:last').index();
-    if (rownumber < 0) {
-        alert("Please insert product to order table!")
-        e.preventDefault();
-    }
-    else if( parseFloat( $('input[name="paying_amount"]').val() ) < parseFloat( $('input[name="paid_amount"]').val() ) ){
-        alert('Paying amount cannot be bigger than recieved amount');
-        e.preventDefault();
-    }
-    $('input[name="paid_by_id"]').val($('select[name="paid_by_id_select"]').val());
-    $('input[name="order_tax_rate"]').val($('select[name="order_tax_rate_select"]').val());
+                $('#quick_table').append('<tbody id="quick_pro_body" style="margin-bottom: 200px;"><tr id="pro_row_1"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_1" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, 1)"><div id="pro_search_name_1"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_1" class="form-control pro_p numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,1)"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_1" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_1" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_1" onblur="pro_calculate_subtotal(this.value,1)" class="form-control pro_q numkey" required step="any"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_1" class="form-control qnumkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="1"><i class="dripicons-cross"></i></button></td></tr></tbody>').find('.qnumkey').keyboard({usePreview: false,
+                autoAccept: true,
+                autoAcceptOnEsc: true,
+                css: {
+                    // input & preview
+                    // keyboard container
+                    container: 'center-block dropdown-menu', // jumbotron
+                    // default state
+                    buttonDefault: 'btn btn-default',
+                    // hovered button
+                    buttonHover: 'btn-primary',
+                    // Action keys (e.g. Accept, Cancel, Tab, etc);
+                    // this replaces "actionClass" option
+                    buttonAction: 'active',
+                    // used when disabling the decimal button {dec}
+                    // when a decimal exists in the input area
+                    buttonDisabled: 'disabled'
+                },
+                change: function(e, keyboard) {
+                    keyboard.$el.val(keyboard.$preview.val())
+                    keyboard.$el.trigger('propertychange')
+                }});
 
-});
+                $('#quick_table').find('.numkey').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
+                    'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
 
-$('#product-table').DataTable( {
-    "order": [],
-    'pageLength': product_row_number,
-     'language': {
-        'paginate': {
-            'previous': '<i class="fa fa-angle-left"></i>',
-            'next': '<i class="fa fa-angle-right"></i>'
+            }else{
+
+                $('#quick_table').append('<tbody id="quick_pro_body" style="margin-bottom: 200px;"><tr id="pro_row_1"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_1" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, 1)"><div id="pro_search_name_1"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_1" class="form-control pro_p qnumkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,1)"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_1" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_1" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_1" onblur="pro_calculate_subtotal(this.value,1)" class="form-control pro_q qnumkey" required step="any"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_1" class="form-control qnumkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="1"><i class="dripicons-cross"></i></button></td></tr></tbody>');
+
+            }
+
+        });
+
+
+        $(document).on('click', '.remove_pro_item', function(){
+            var id = $(this).attr('id');
+            $('#pro_row_'+id).remove();
+            //Get Grand Total
+            var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
+            var newAmtWith = [];
+
+            for(key=0; key < amtWith.length; key++)  {
+                if(amtWith[key].value != ''){
+                    newAmtWith.push(parseFloat(amtWith[key].value));
+                }
+            }
+
+            var amtWithoutTax = newAmtWith.reduce(getSum);
+            $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
+            $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
+        });
+
+
+        $(document).on('click', '.add_pro_item', function(){
+            pro_count += 1;
+
+            if(keyboard_active==1){
+                $('#quick_pro_body').append('<tr id="pro_row_'+pro_count+'"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_'+pro_count+'" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, '+pro_count+')"><div id="pro_search_name_'+pro_count+'"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_'+pro_count+'" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_'+pro_count+'" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_'+pro_count+'" class="form-control numkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="'+pro_count+'"><i class="dripicons-cross"></i></button></td></tr>').find('.qnumkey').keyboard({usePreview: false,
+                autoAccept: true,
+                autoAcceptOnEsc: true,
+                css: {
+                    // input & preview
+                    // keyboard container
+                    container: 'center-block dropdown-menu', // jumbotron
+                    // default state
+                    buttonDefault: 'btn btn-default',
+                    // hovered button
+                    buttonHover: 'btn-primary',
+                    // Action keys (e.g. Accept, Cancel, Tab, etc);
+                    // this replaces "actionClass" option
+                    buttonAction: 'active',
+                    // used when disabling the decimal button {dec}
+                    // when a decimal exists in the input area
+                    buttonDisabled: 'disabled'
+                },
+                change: function(e, keyboard) {
+                    keyboard.$el.val(keyboard.$preview.val())
+                    keyboard.$el.trigger('propertychange')
+                }});
+
+                $('#quick_pro_body').find('.numkey').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
+                    'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
+
+            }else{
+
+                $('#quick_pro_body').append('<tr id="pro_row_'+pro_count+'"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_'+pro_count+'" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, '+pro_count+')"><div id="pro_search_name_'+pro_count+'"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_'+pro_count+'" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_'+pro_count+'" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_'+pro_count+'" class="form-control numkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="'+pro_count+'"><i class="dripicons-cross"></i></button></td></tr>');
+
+            }
+        });
+
+
+        $(document).on('change', '.unit_measure', function(){
+            var id = $(this).attr('id');
+            var p_val = $(this).val();
+            // alert('id '+id+' p_val '+p_val);
+            $('#pro_unit_'+id).val(p_val);
+        });
+
+        $(document).on('change', '.pro_tax_list', function(){
+            var id = $(this).attr('id');
+            var p_val = $(this).val();
+            // alert('id '+id+' p_val '+p_val);
+            $('#pro_tax_'+id).val(p_val);
+
+            var n=id;
+            var pro_price = $('#pro_price_'+n).val();
+            var pro_qty = $('#pro_qty_'+n).val();
+
+            if (pro_price == '') {
+                pro_price = 0;
+            }
+            if (pro_qty == '') {
+                pro_qty = 0;
+            }
+
+            var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
+            var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
+            $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
+
+            //Get Grand Total
+            var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
+            var newAmtWith = [];
+
+            for(key=0; key < amtWith.length; key++)  {
+                if(amtWith[key].value != ''){
+                    newAmtWith.push(parseFloat(amtWith[key].value));
+                }
+            }
+
+            var amtWithoutTax = newAmtWith.reduce(getSum);
+            $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
+            $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
+        });
+
+        $(document).on('click', '#close_quick_sale_modal', function(){
+            $('#quick_pro_body').remove();
+        });
+    });
+
+    function pro_calculate_subtotal(q,n){
+        var pro_price = $('#pro_price_'+n).val();
+        var p_val = $('#pro_tax_'+n).val();
+
+        if (pro_price == '') {
+            pro_price = 0;
         }
-    },
-    dom: 'tp'
-});
+        if (q == '') {
+            q = 0
+        }
 
+        if (p_val == '') {
+            p_val = 0
+        }
 
+        var pro_qty = q;
+        if (pro_price == '') {
+            pro_price = 0;
+        }
+        if (pro_qty == '') {
+            pro_qty = 0;
+        }
 
+        var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
+        var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
+        $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
 
+        //Get Grand Total
+        var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
+        var newAmtWith = [];
 
+        for(key=0; key < amtWith.length; key++)  {
+            if(amtWith[key].value != ''){
+                newAmtWith.push(parseFloat(amtWith[key].value));
+            }
+        }
 
-// quick sale start shiv
-
-
-
-
-
-
-
-$(document).ready(function(){
-
-  var pro_count = 1;
-
-// <?php
-//                         $tax_name_all[] = 'No Tax';
-//                         $tax_rate_all[] = 0;
-//                         foreach($lims_tax_list as $tax) {
-//                             $tax_name_all[] = $tax->name;
-//                             $tax_rate_all[] = $tax->rate;
-//                         }
-//                     ?>
-
-  $('#quick-sale-btn').on('click', function(){
-    if(keyboard_active==1){
-
-
-
-    $('#quick_table').append('<tbody id="quick_pro_body" style="margin-bottom: 200px;"><tr id="pro_row_1"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_1" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, 1)"><div id="pro_search_name_1"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_1" class="form-control pro_p numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,1)"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_1" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_1" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_1" onblur="pro_calculate_subtotal(this.value,1)" class="form-control pro_q numkey" required step="any"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_1" class="form-control qnumkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="1"><i class="dripicons-cross"></i></button></td></tr></tbody>').find('.qnumkey').keyboard({usePreview: false,
-        autoAccept: true,
-        autoAcceptOnEsc: true,
-        css: {
-            // input & preview
-            // keyboard container
-            container: 'center-block dropdown-menu', // jumbotron
-            // default state
-            buttonDefault: 'btn btn-default',
-            // hovered button
-            buttonHover: 'btn-primary',
-            // Action keys (e.g. Accept, Cancel, Tab, etc);
-            // this replaces "actionClass" option
-            buttonAction: 'active',
-            // used when disabling the decimal button {dec}
-            // when a decimal exists in the input area
-            buttonDisabled: 'disabled'
-        },
-        change: function(e, keyboard) {
-                keyboard.$el.val(keyboard.$preview.val())
-                keyboard.$el.trigger('propertychange')        
-              }});
-
-        $('#quick_table').find('.numkey').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
-          'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
-
-
-
-      }else{
-
-        $('#quick_table').append('<tbody id="quick_pro_body" style="margin-bottom: 200px;"><tr id="pro_row_1"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_1" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, 1)"><div id="pro_search_name_1"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_1" class="form-control pro_p qnumkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,1)"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_1" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="1" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_1" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_1" onblur="pro_calculate_subtotal(this.value,1)" class="form-control pro_q qnumkey" required step="any"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_1" class="form-control qnumkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="1"><i class="dripicons-cross"></i></button></td></tr></tbody>');
-
-      }
-
-
-
-  });
-
-
-  $(document).on('click', '.remove_pro_item', function(){
-    var id = $(this).attr('id');
-    $('#pro_row_'+id).remove();
-    //Get Grand Total
-    var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
-    var newAmtWith = [];
-    for(key=0; key < amtWith.length; key++)  {
-      if(amtWith[key].value != ''){
-        newAmtWith.push(parseFloat(amtWith[key].value));
-      }
-    }
-    var amtWithoutTax = newAmtWith.reduce(getSum);
-    $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
-    $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
-  });
-
-
-
-
-
-
-  $(document).on('click', '.add_pro_item', function(){
-    pro_count += 1;
-
-    if(keyboard_active==1){
-    $('#quick_pro_body').append('<tr id="pro_row_'+pro_count+'"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_'+pro_count+'" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, '+pro_count+')"><div id="pro_search_name_'+pro_count+'"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_'+pro_count+'" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_'+pro_count+'" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_'+pro_count+'" class="form-control numkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="'+pro_count+'"><i class="dripicons-cross"></i></button></td></tr>').find('.qnumkey').keyboard({usePreview: false,
-        autoAccept: true,
-        autoAcceptOnEsc: true,
-        css: {
-            // input & preview
-            // keyboard container
-            container: 'center-block dropdown-menu', // jumbotron
-            // default state
-            buttonDefault: 'btn btn-default',
-            // hovered button
-            buttonHover: 'btn-primary',
-            // Action keys (e.g. Accept, Cancel, Tab, etc);
-            // this replaces "actionClass" option
-            buttonAction: 'active',
-            // used when disabling the decimal button {dec}
-            // when a decimal exists in the input area
-            buttonDisabled: 'disabled'
-        },
-        change: function(e, keyboard) {
-                keyboard.$el.val(keyboard.$preview.val())
-                keyboard.$el.trigger('propertychange')        
-              }});
-
-        $('#quick_pro_body').find('.numkey').keyboard({usePreview: false, layout: 'custom', display: { 'accept'  : '&#10004;', 'cancel'  : '&#10006;' }, customLayout : {
-          'normal' : ['1 2 3', '4 5 6', '7 8 9','0 {dec} {bksp}','{clear} {cancel} {accept}']}, restrictInput : true, preventPaste : true, autoAccept : true, css: { container: 'center-block dropdown-menu', buttonDefault: 'btn btn-default', buttonHover: 'btn-primary',buttonAction: 'active', buttonDisabled: 'disabled'},});
-
-
-      }else{
-
-        $('#quick_pro_body').append('<tr id="pro_row_'+pro_count+'"><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_name[]" id="pro_name_'+pro_count+'" class="form-control qnumkey" required onkeyup="fetch_product_data(this.value, '+pro_count+')"><div id="pro_search_name_'+pro_count+'"></div></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_price[]" id="pro_price_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_price_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><select class="unit_measure" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="Piece">Piece</option><option value="Meter">Meter</option><option value="Grams">Grams</option><option value="KG">KG</option></select><input type="hidden" name="pro_unit[]" id="pro_unit_'+pro_count+'" class="form-control" value="Piece"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><div class="form-group"><select name="" class="pro_tax_list" id="'+pro_count+'" style="width: 100%;padding: 7px 4px;border: 1px solid #e9ecef;border-radius: 5px;"><option value="0">No Tax</option>@foreach($lims_tax_list as $tax)<option value="{{$tax->rate}}">{{$tax->name}}</option>@endforeach</select><input type="hidden" name="pro_tax[]" id="pro_tax_'+pro_count+'" class="form-control"></div></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_qty[]" id="pro_qty_'+pro_count+'" class="form-control numkey" required step="any" onblur="pro_calculate_subtotal(this.value,'+pro_count+')"></td><td class="col-sm-2" style="padding: 4px;padding-bottom: 0px;"><input type="text" name="pro_subtotal[]" id="pro_subtotal_'+pro_count+'" class="form-control numkey" required step="any" readonly></td><td class="col-sm-1" style="padding: 4px;padding-bottom: 0px;"><button type="button" class="btn btn-danger remove_pro_item" id="'+pro_count+'"><i class="dripicons-cross"></i></button></td></tr>');
-
-      }
-  });
-
-
-  $(document).on('change', '.unit_measure', function(){
-    var id = $(this).attr('id');
-    var p_val = $(this).val();
-    // alert('id '+id+' p_val '+p_val);
-    $('#pro_unit_'+id).val(p_val);
-  });
-
-  $(document).on('change', '.pro_tax_list', function(){
-    var id = $(this).attr('id');
-    var p_val = $(this).val();
-    // alert('id '+id+' p_val '+p_val);
-    $('#pro_tax_'+id).val(p_val);
-
-    var n=id;
-    var pro_price = $('#pro_price_'+n).val();
-    var pro_qty = $('#pro_qty_'+n).val();
-    if (pro_price == '') {
-      pro_price = 0;
-    }
-    if (pro_qty == '') {
-      pro_qty = 0;
+        var amtWithoutTax = newAmtWith.reduce(getSum);
+        $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
+        $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
     }
 
-    var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
-    var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
-    $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
+    function pro_calculate_price_subtotal(p,n){
+        var pro_qty = $('#pro_qty_'+n).val();
+        var p_val = $('#pro_tax_'+n).val();
 
-    //Get Grand Total
-    var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
-    var newAmtWith = [];
-    for(key=0; key < amtWith.length; key++)  {
-      if(amtWith[key].value != ''){
-        newAmtWith.push(parseFloat(amtWith[key].value));
-      }
+        if (pro_qty == '') {
+            pro_qty = 0;
+        }
+        if (p == '') {
+            p = 0
+        }
+        if (p_val == '') {
+            p_val = 0
+        }
+
+        var pro_price = p;
+        if (pro_price == '') {
+            pro_price = 0;
+        }
+        if (pro_qty == '') {
+            pro_qty = 0;
+        }
+
+        var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
+        var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
+        $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
+
+        //Get Grand Total
+        var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
+        var newAmtWith = [];
+
+        for(key=0; key < amtWith.length; key++)  {
+            if(amtWith[key].value != ''){
+                newAmtWith.push(parseFloat(amtWith[key].value));
+            }
+        }
+
+        var amtWithoutTax = newAmtWith.reduce(getSum);
+        $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
+        $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
     }
-    var amtWithoutTax = newAmtWith.reduce(getSum);
-    $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
-    $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
 
-  });
-
-  $(document).on('click', '#close_quick_sale_modal', function(){
-    $('#quick_pro_body').remove();
-  });
-
-
-});
-
-function pro_calculate_subtotal(q,n){
-  var pro_price = $('#pro_price_'+n).val();
-  var p_val = $('#pro_tax_'+n).val();
-  if (pro_price == '') {
-    pro_price = 0;
-  }
-  if (q == '') {
-    q = 0
-  }
-
-  if (p_val == '') {
-    p_val = 0
-  }
-
-  // var subtotal = (parseFloat(pro_price)*parseFloat(q)).toFixed(2);
-  // $('#pro_subtotal_'+n).val(subtotal);
-
-    var pro_qty = q;
-    if (pro_price == '') {
-      pro_price = 0;
+    function getSum(total, num) {
+        return parseFloat(total + num);
     }
-    if (pro_qty == '') {
-      pro_qty = 0;
+
+    function fetch_product_data(query = '', n)
+    {
+        $.ajax({
+            url:"{{ route('sale.action') }}",
+            method:'GET',
+            data:{query:query,n:n},
+            dataType:'json',
+            success:function(data)
+            {
+                $('#pro_search_name_'+data.n).html(data.table_data);
+            }
+        })
     }
-    var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
-    var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
-    $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
 
-
-
-  //Get Grand Total
-  var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
-  var newAmtWith = [];
-  for(key=0; key < amtWith.length; key++)  {
-    if(amtWith[key].value != ''){
-      newAmtWith.push(parseFloat(amtWith[key].value));
-    }
-  }
-  var amtWithoutTax = newAmtWith.reduce(getSum);
-  $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
-  $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
-}
-
-function pro_calculate_price_subtotal(p,n){
-  var pro_qty = $('#pro_qty_'+n).val();
-  var p_val = $('#pro_tax_'+n).val();
-  if (pro_qty == '') {
-    pro_qty = 0;
-  }
-  if (p == '') {
-    p = 0
-  }
-  if (p_val == '') {
-    p_val = 0
-  }
-  // var subtotal = (parseFloat(pro_qty)*parseFloat(p)).toFixed(2);
-  // $('#pro_subtotal_'+n).val(subtotal);
-
-    var pro_price = p;
-    if (pro_price == '') {
-      pro_price = 0;
-    }
-    if (pro_qty == '') {
-      pro_qty = 0;
-    }
-    var subtotal = (parseFloat(pro_qty)*parseFloat(pro_price)).toFixed(2);
-    var tax = ((parseFloat(subtotal)*parseFloat(p_val))/100).toFixed(2);
-    $('#pro_subtotal_'+n).val(parseFloat(subtotal)+parseFloat(tax));
-
-
-  //Get Grand Total
-  var amtWith = document.querySelectorAll("input[name='pro_subtotal[]']");
-  var newAmtWith = [];
-  for(key=0; key < amtWith.length; key++)  {
-    if(amtWith[key].value != ''){
-      newAmtWith.push(parseFloat(amtWith[key].value));
-    }
-  }
-  var amtWithoutTax = newAmtWith.reduce(getSum);
-  $('#pro_grand_total').val(parseFloat(amtWithoutTax).toFixed(2));
-  $('#pro_grand_total_span').html(parseFloat(amtWithoutTax).toFixed(2));
-}
-
-function getSum(total, num) {
-  return parseFloat(total + num);
-}
-
-
-
-function fetch_product_data(query = '', n)
-{
-    $.ajax({
-      url:"{{ route('sale.action') }}",
-      method:'GET',
-      data:{query:query,n:n},
-      dataType:'json',
-      success:function(data)
-      {
-        // var data = $.parseJSON(data);
-        // alert(data.table_data);
-        $('#pro_search_name_'+data.n).html(data.table_data);
-        // $('tbody').html(data.table_data);
-        // $('#total_records').text(data.total_data);
-      }
-    })
-}
-
-
-$(document).ready(function(){
-  $(document).on('click','#srch_ul li', function(){
-    var pro_name = $(this).html();
-    var id = $(this).attr('id');
-    $("#pro_name_"+id).val(pro_name);
-    $('#pro_search_name_'+id).html('');
-  }); 
-});
-
-// function clear_pro_search(n){
-//   $('#pro_search_name_'+n).html('');
-// }
-
-// quick sale end shiv
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// quick sale payment popup start shiv
-
-$(".quick-payment-btn").on("click", function() {
-    var audio = $("#mysoundclip2")[0];
-    audio.play();
-    var btn_id = $(this).attr('id');
-    if (btn_id == 'quick-cash-btn' || btn_id == 'quick-cash-card-btn') {
-      $('input[name="quick_paid_amount"]').val($("#pro_grand_total_span").text());
-      $('input[name="quick_paying_amount"]').val('');
-    }else{
-      $('input[name="quick_paid_amount"]').val($("#pro_grand_total_span").text());
-      $('input[name="quick_paying_amount"]').val($("#pro_grand_total_span").text());
-    }
-    $('.quick_qc').data('initial', 1);
-});
-
-$("#quick-credit-card-btn").on("click",function() {
-    $('select[name="quick_paid_by_id_select"]').val(3);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.quick_qc').hide();
-    $('div.quick_by_cc').hide();
-    $('input[name="quick_by_cash"]').val('');
-    $('input[name="quick_by_card"]').val('');
-    // creditCard();
-});
-
-
-$("#quick-cash-btn").on("click",function() {
-    $('select[name="quick_paid_by_id_select"]').val(1);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.quick_qc').show();
-    $('div.quick_by_cc').hide();
-    $('input[name="quick_by_cash"]').val('');
-    $('input[name="quick_by_card"]').val('');
-    hide();
-});
-
-$("#quick-cash-card-btn").on("click",function() {
-    $('select[name="quick_paid_by_id_select"]').val(7);
-    $('.selectpicker').selectpicker('refresh');
-    $('div.quick_qc').show();
-    $('div.quick_by_cc').show();
-    $('input[name="quick_by_cash"]').val('');
-    $('input[name="quick_by_card"]').val('');
-    hide();
-});
-
-$('select[name="quick_paid_by_id_select"]').on("change", function() {       
-    var id = $(this).val();
-    $(".payment-form").off("submit");
-    if(id == 2) {
-        $('div.quick_qc').hide();
-        $('div.quick_by_cc').hide();
-        giftCard();
-    }
-    else if (id == 3) {
+    $(document).ready(function(){
+        $(document).on('click','#srch_ul li', function(){
+            var pro_name = $(this).html();
+            var id = $(this).attr('id');
+            $("#pro_name_"+id).val(pro_name);
+            $('#pro_search_name_'+id).html('');
+        });
+    });
+    // quick sale end shiv
+
+
+    // quick sale payment popup start shiv
+    $(".quick-payment-btn").on("click", function() {
+        var audio = $("#mysoundclip2")[0];
+        audio.play();
+        var btn_id = $(this).attr('id');
+
+        if (btn_id == 'quick-cash-btn' || btn_id == 'quick-cash-card-btn') {
+            $('input[name="quick_paid_amount"]').val($("#pro_grand_total_span").text());
+            $('input[name="quick_paying_amount"]').val('');
+        }else{
+            $('input[name="quick_paid_amount"]').val($("#pro_grand_total_span").text());
+            $('input[name="quick_paying_amount"]').val($("#pro_grand_total_span").text());
+        }
+
+        $('.quick_qc').data('initial', 1);
+    });
+
+    $("#quick-credit-card-btn").on("click",function() {
+        $('select[name="quick_paid_by_id_select"]').val(3);
+        $('.selectpicker').selectpicker('refresh');
         $('div.quick_qc').hide();
         $('div.quick_by_cc').hide();
         $('input[name="quick_by_cash"]').val('');
         $('input[name="quick_by_card"]').val('');
-        creditCard();
-    } else {
+    });
+
+    $("#quick-cash-btn").on("click",function() {
+        $('select[name="quick_paid_by_id_select"]').val(1);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.quick_qc').show();
+        $('div.quick_by_cc').hide();
+        $('input[name="quick_by_cash"]').val('');
+        $('input[name="quick_by_card"]').val('');
         hide();
-        if(id == 1){
-            $('div.quick_qc').show();
+    });
+
+    $("#quick-cash-card-btn").on("click",function() {
+        $('select[name="quick_paid_by_id_select"]').val(7);
+        $('.selectpicker').selectpicker('refresh');
+        $('div.quick_qc').show();
+        $('div.quick_by_cc').show();
+        $('input[name="quick_by_cash"]').val('');
+        $('input[name="quick_by_card"]').val('');
+        hide();
+    });
+
+    $('select[name="quick_paid_by_id_select"]').on("change", function() {
+        var id = $(this).val();
+        $(".payment-form").off("submit");
+
+        if(id == 2) {
+            $('div.quick_qc').hide();
             $('div.quick_by_cc').hide();
-            $('input[name="quick_by_cash"]').val('');
-            $('input[name="quick_by_card"]').val('');
-        }else if(id == 7) {
-            $('div.quick_qc').show();
-            $('div.quick_by_cc').show();
-            $('input[name="quick_by_cash"]').val('');
-            $('input[name="quick_by_card"]').val('');
-        }else{
+            giftCard();
+        }
+        else if (id == 3) {
             $('div.quick_qc').hide();
             $('div.quick_by_cc').hide();
             $('input[name="quick_by_cash"]').val('');
             $('input[name="quick_by_card"]').val('');
-        }
-    }
-});
-
-
-// $('#quick-add-payment input[name="quick_paying_amount"]').on("input", function() {
-//     quick_change($(this).val(), $('input[name="quick_paid_amount"]').val());
-// });
-
-$('#quick-add-payment input[name="quick_paying_amount"]').on("blur", function() {
-    quick_change($(this).val(), $('input[name="quick_paid_amount"]').val());
-});
-
-$('#quick_by_card').on("change", function() {
-
-    // var paying_amount = parseFloat($('input[name="paying_amount"]').val());
-    var by_cash = parseFloat($('input[name="quick_by_cash"]').val());
-    var by_card = parseFloat($('input[name="quick_by_card"]').val());
-    if (isNaN(by_cash)) {
-      by_cash = 0;
-    }
-    if (isNaN(by_card)) {
-      by_card = 0;
-    }
-    // alert('by_cash '+by_cash+' by_card '+by_card);
-    $('input[name="quick_paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
-
-    quick_change($('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val());
-
-});
-
-$('#quick_by_cash').on("change", function() {
-
-    // var paying_amount = parseFloat($('input[name="paying_amount"]').val());
-    var by_cash = parseFloat($('input[name="quick_by_cash"]').val());
-    var by_card = parseFloat($('input[name="quick_by_card"]').val());
-    if (isNaN(by_cash)) {
-      by_cash = 0;
-    }
-    if (isNaN(by_card)) {
-      by_card = 0;
-    }
-    // alert('by_cash '+by_cash+' by_card '+by_card);
-    $('input[name="quick_paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
-
-    quick_change($('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val());
-
-});
-
-$('input[name="quick_paid_amount"]').on("input", function() {
-    if( $(this).val() > parseFloat($('input[name="quick_paying_amount"]').val()) ) {
-        alert('Paying amount cannot be bigger than recieved amount');
-        $(this).val('');
-    }
-    else if( $(this).val() > parseFloat($('#pro_grand_total_span').text()) ){
-        alert('Paying amount cannot be bigger than grand total');
-        $(this).val('');
-    }
-
-    quick_change( $('input[name="quick_paying_amount"]').val(), $(this).val() );
-    var id = $('select[name="quick_paid_by_id_select"]').val();
-    // if(id == 2){
-    //     var balance = gift_card_amount[$("#gift_card_id_select").val()] - gift_card_expense[$("#gift_card_id_select").val()];
-    //     if($(this).val() > balance)
-    //         alert('Amount exceeds card balance! Gift Card balance: '+ balance);
-    // }
-    // else if(id == 6){
-    //     if( $('input[name="quick_paid_amount"]').val() > deposit[$('#customer_id').val()] )
-    //         alert('Amount exceeds customer deposit! Customer deposit : '+ deposit[$('#customer_id').val()]);
-    // }
-});
-
-
-
-$(document).on('click', '.quick_qc-btn', function(e) {
-    if($(this).data('amount')) {
-        if($('.quick_qc').data('initial')) {
-            $('input[name="quick_paying_amount"]').val( $(this).data('amount').toFixed(2) );
-            $('input[name="quick_by_cash"]').val( $(this).data('amount').toFixed(2) );
-            $('.quick_qc').data('initial', 0);
-        }
-        else {
-
-            var p_amt = $('input[name="quick_paying_amount"]').val();
-            var c_amt = $('input[name="quick_by_cash"]').val();
-            if (p_amt == '') {
-              p_amt = 0;
+            creditCard();
+        } else {
+            hide();
+            if(id == 1){
+                $('div.quick_qc').show();
+                $('div.quick_by_cc').hide();
+                $('input[name="quick_by_cash"]').val('');
+                $('input[name="quick_by_card"]').val('');
+            }else if(id == 7) {
+                $('div.quick_qc').show();
+                $('div.quick_by_cc').show();
+                $('input[name="quick_by_cash"]').val('');
+                $('input[name="quick_by_card"]').val('');
+            }else{
+                $('div.quick_qc').hide();
+                $('div.quick_by_cc').hide();
+                $('input[name="quick_by_cash"]').val('');
+                $('input[name="quick_by_card"]').val('');
             }
-            if (c_amt == '') {
-              c_amt = 0;
-            }
-
-            $('input[name="quick_paying_amount"]').val( (parseFloat(p_amt) + $(this).data('amount')).toFixed(2) );
-
-            $('input[name="quick_by_cash"]').val( (parseFloat(c_amt) + $(this).data('amount')).toFixed(2) );
         }
+    });
+
+    $('#quick-add-payment input[name="quick_paying_amount"]').on("blur", function() {
+        quick_change($(this).val(), $('input[name="quick_paid_amount"]').val());
+    });
+
+    $('#quick_by_card').on("change", function() {
+
+        var by_cash = parseFloat($('input[name="quick_by_cash"]').val());
+        var by_card = parseFloat($('input[name="quick_by_card"]').val());
+
+        if (isNaN(by_cash)) {
+            by_cash = 0;
+        }
+        if (isNaN(by_card)) {
+            by_card = 0;
+        }
+
+        $('input[name="quick_paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
+
+        quick_change($('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val());
+    });
+
+    $('#quick_by_cash').on("change", function() {
+
+        var by_cash = parseFloat($('input[name="quick_by_cash"]').val());
+        var by_card = parseFloat($('input[name="quick_by_card"]').val());
+
+        if (isNaN(by_cash)) {
+            by_cash = 0;
+        }
+        if (isNaN(by_card)) {
+            by_card = 0;
+        }
+
+        $('input[name="quick_paying_amount"]').val(parseFloat(by_cash+by_card).toFixed(2));
+
+        quick_change($('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val());
+    });
+
+    $('input[name="quick_paid_amount"]').on("input", function() {
+
+        if( $(this).val() > parseFloat($('input[name="quick_paying_amount"]').val()) ) {
+            alert('Paying amount cannot be bigger than recieved amount');
+            $(this).val('');
+        }
+        else if( $(this).val() > parseFloat($('#pro_grand_total_span').text()) ){
+            alert('Paying amount cannot be bigger than grand total');
+            $(this).val('');
+        }
+
+        quick_change( $('input[name="quick_paying_amount"]').val(), $(this).val() );
+        var id = $('select[name="quick_paid_by_id_select"]').val();
+    });
+
+    $(document).on('click', '.quick_qc-btn', function(e) {
+
+        if($(this).data('amount')) {
+
+            if($('.quick_qc').data('initial')) {
+                $('input[name="quick_paying_amount"]').val( $(this).data('amount').toFixed(2) );
+                $('input[name="quick_by_cash"]').val( $(this).data('amount').toFixed(2) );
+                $('.quick_qc').data('initial', 0);
+            }
+            else {
+                var p_amt = $('input[name="quick_paying_amount"]').val();
+                var c_amt = $('input[name="quick_by_cash"]').val();
+
+                if (p_amt == '') {
+                    p_amt = 0;
+                }
+                if (c_amt == '') {
+                    c_amt = 0;
+                }
+
+                $('input[name="quick_paying_amount"]').val( (parseFloat(p_amt) + $(this).data('amount')).toFixed(2) );
+
+                $('input[name="quick_by_cash"]').val( (parseFloat(c_amt) + $(this).data('amount')).toFixed(2) );
+            }
+        }
+        else{
+            $('input[name="quick_paying_amount"]').val('');
+            $('input[name="quick_by_cash"]').val('');
+        }
+        quick_change( $('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val() );
+    });
+
+    function quick_change(paying_amount, paid_amount) {
+        $("#quick_change").text( parseFloat(paying_amount - paid_amount).toFixed(2) );
     }
-    else{
-        $('input[name="quick_paying_amount"]').val('');
-        $('input[name="quick_by_cash"]').val('');
-    }
-    quick_change( $('input[name="quick_paying_amount"]').val(), $('input[name="quick_paid_amount"]').val() );
-});
-
-function quick_change(paying_amount, paid_amount) {
-    $("#quick_change").text( parseFloat(paying_amount - paid_amount).toFixed(2) );
-}
-
-// quick sale payment popup end shiv
-
-
-
-
-
-
-
-
+    //quick sale payment popup end shiv
 </script>
 @endsection
 @section('scripts')
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-
 @endsection
 
