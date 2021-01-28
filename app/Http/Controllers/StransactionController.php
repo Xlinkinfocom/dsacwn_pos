@@ -466,8 +466,9 @@ class StransactionController extends Controller
                 {
                     foreach($sellers as $seller)
                     {
-                        
-                        $payments = DB::table('payments')
+                        if( $conditions != "")
+                        {
+                            $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
                             ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)
@@ -475,6 +476,18 @@ class StransactionController extends Controller
                             ->whereIn('payments.paying_method', $paying_methods)
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
+                        }
+                        else
+                        {
+                            $payments = DB::table('payments')
+                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->where('payments.user_id', $seller->id)                            
+                            ->whereIn('payments.paying_method', $paying_methods)
+                            ->orderBy('payments.created_at', 'DESC')
+                            ->get();
+                        }
+                       
 
                         if(!empty($payments))
                         {
