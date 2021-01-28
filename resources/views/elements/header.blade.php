@@ -71,7 +71,12 @@
                                 </li>
                             @endif
                             <li>
-                                <a href="{{ route('stransaction.index') }}"><i class="dripicons-swap"></i>{{ trans('Seller Transaction') }}</a>
+{{--                                <a href="{{ route('stransaction.index') }}"><i class="dripicons-swap"></i>{{ trans('Seller Transaction') }}</a>--}}
+                                @if(!empty($seller_id) && !empty($start_date) && !empty($end_date))
+                                    <a href="{{ route('seller_transaction/' . $seller_id .'/'. $start_date .'/'. $end_date) }}"><i class="dripicons-swap"></i>{{ trans('Seller Transaction') }}</a>
+                                @else
+                                    <a href="{{ route('seller_transaction') }}"><i class="dripicons-swap"></i>{{ trans('Seller Transaction') }}</a>
+                                @endif
                             </li>
                             <li>
                                 <a href="{{ url('holidays/my-holiday/'.date('Y').'/'.date('m')) }}"><i class="dripicons-vibrate"></i> {{ trans('My Holiday') }}</a>
