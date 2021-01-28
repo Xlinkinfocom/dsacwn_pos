@@ -729,7 +729,8 @@ class StransactionController extends Controller
                 ->where('is_active', '1')
                 ->orderBy('name', 'ASC')
                 ->get();
-            dd($sellers);
+            //dd($sellers);
+
             if(!empty($sellers)) {
 
                 foreach($sellers as $seller) {
@@ -741,7 +742,7 @@ class StransactionController extends Controller
                         ->whereIn('payments.paying_method', $paying_methods)
                         ->orderBy('payments.created_at', 'DESC')
                         ->get();
-
+                    //dd($payments);
                     if(!empty($payments)) {
 
                         foreach($payments as $payment) {
@@ -752,7 +753,7 @@ class StransactionController extends Controller
                                 ->select('products.category_id')
                                 ->where('product_sales.sale_id', $payment->sale_id)
                                 ->get();
-                            
+                            //dd($products);
                             if(!empty($products)) {
 
                                 $duplicate_categories = array();
