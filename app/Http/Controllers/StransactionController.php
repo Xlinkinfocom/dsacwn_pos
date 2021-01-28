@@ -321,6 +321,7 @@ class StransactionController extends Controller
        
             $sellers        = array();
             $transactions   = array();
+            $payment_type = NULL;
            
 
             if($role_id != '7')
@@ -341,7 +342,7 @@ class StransactionController extends Controller
                 ->get();
             }           
 
-            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date);
+            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date, $payment_type);
             
             return view('stransaction.index', compact('sellers', 'transactions', 'role_id', 'seller_id', 'start_date', 'end_date'));
        
@@ -360,7 +361,7 @@ class StransactionController extends Controller
             $seller_id = $request->seller_id;
             $start_date = "";
             $end_date = "";
-            $payment_type = "";
+            $payment_type = $request->payment_type;
            
 
             if($role_id != '7')
@@ -381,7 +382,7 @@ class StransactionController extends Controller
                 ->get();
             }           
 
-            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date);
+            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date, $payment_type);
 
        
 
@@ -392,12 +393,54 @@ class StransactionController extends Controller
     {
             $sellers        = array();
             $transactions   = array();
+            $conditions = "";
             $paying_methods = array(
                
                 '0' => 'Mix Payment',
                 '1' => 'Credit Card',
                 '2' => 'Debit Card'
             );
+
+            if($payment_type != "")
+                {
+                    if($conditions != "")
+                    {
+                        $conditions += ",['payments.paying_method', '=', ".$payment_type."]";
+                    }
+                    else
+                    {
+                        $conditions += "['payments.paying_method', '=', ".$payment_type."]";
+                    }
+                    
+                }                
+
+                if($start_date != "")
+                {
+                    $start_date = date('Y-m-d', strtotime($start_date));
+
+                    if($conditions != "")
+                    {
+                        $conditions += ",['payments.created_at', '=>', ".$start_date."]";
+                    }
+                    else
+                    {
+                        $conditions += "['payments.created_at', '=>', ".$start_date."]";
+                    }
+                }
+
+                if($end_date != "")
+                {
+                    $end_date = date('Y-m-d', strtotime($end_date));
+
+                    if($conditions != "")
+                    {
+                        $conditions += ",['payments.created_at', '<=', ".$end_date."]";
+                    }
+                    else
+                    {
+                        $conditions += "['payments.created_at', '<=', ".$end_date."]";
+                    }
+                }
 
             if($role_id != '7')
             {
@@ -417,17 +460,18 @@ class StransactionController extends Controller
                     ->where('is_active', '1')
                     ->orderBy('name', 'ASC')
                     ->get();
-                }
-                
+                }               
 
                 if(!empty($sellers))
                 {
                     foreach($sellers as $seller)
                     {
+                        
                         $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
                             ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)
+                            ->where( $conditions )
                             ->whereIn('payments.paying_method', $paying_methods)
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
