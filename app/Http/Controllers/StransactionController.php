@@ -409,7 +409,7 @@ class StransactionController extends Controller
                     }
                     else
                     {
-                        $conditions += "['payments.paying_method', '=', 'Mix Payment']";
+                        $conditions += "['payments.paying_method', 'LIKE', '%Mix Payment%']";
                     }
                     
                 }                
