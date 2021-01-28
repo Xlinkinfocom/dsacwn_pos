@@ -413,7 +413,8 @@ class StransactionController extends Controller
            
                 if($start_date != "")
                 {
-                    $start_date = date('Y-m-d', strtotime($start_date));                    
+                    $start_date = date('Y-m-d', strtotime($start_date));     
+                    dd($start_date);               
                 }
 
                 if($end_date != "")
@@ -421,7 +422,7 @@ class StransactionController extends Controller
                     $end_date = date('Y-m-d', strtotime($end_date));                    
                 }
 
-                dd($start_date);
+                
 
             if($role_id != '7')
             {
