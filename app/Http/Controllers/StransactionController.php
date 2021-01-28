@@ -388,6 +388,15 @@ class StransactionController extends Controller
 
         return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
     }
+    public function checkEmpty($start_Date, $empty)
+    {
+        if($start_Date != $empty)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public function transactions($role_id=null, $seller_id = NULL, $start_date = NULL, $end_date = NULL, $payment_type=NULL)
     {
@@ -443,7 +452,7 @@ class StransactionController extends Controller
                         ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
                             return $query->where('payments.paying_method', $payment_type);
                        })
-                       ->when(!empty($start_date), function ($query) use ($payment_type) {
+                       ->when(checkEmpty($start_date, ""), function ($query) use ($payment_type) {
                         return $query->where('payments.paying_method', $payment_type);
                    })                        
                         ->orderBy('payments.created_at', 'DESC')
