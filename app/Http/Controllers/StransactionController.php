@@ -321,12 +321,7 @@ class StransactionController extends Controller
         if($role->hasPermissionTo('sales-index')) {
             $sellers        = array();
             $transactions   = array();
-            $paying_methods = array(
-               
-                '0' => 'Mix Payment',
-                '1' => 'Credit Card',
-                '2' => 'Debit Card'
-            );
+           
 
             if($role_id != '7')
             {
@@ -344,11 +339,9 @@ class StransactionController extends Controller
                 ->where('is_active', '1')                        
                 ->orderBy('name', 'ASC')
                 ->get();
-            }
-           
+            }           
 
-            $transactions   = $this->transactions($role->id);
-
+            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date);
             
             return view('stransaction.index', compact('sellers', 'transactions', 'role_id', 'seller_id', 'start_date', 'end_date'));
         }
@@ -360,24 +353,44 @@ class StransactionController extends Controller
 
     public function store(Request $request) {
 
-        //dd($request->all());
+        dd($request->all());
         $role = Role::find(Auth::user()->role_id);
-        $role_id = $role->id;
-        //dd($role); exit;
+        $role_id = $role->id;       
+            $sellers        = array();
+            $transactions   = array();
+
+            $seller_id = "";
+            $start_date = "";
+            $end_date = "";
+            $payment_type = "";
+           
+
+            if($role_id != '7')
+            {
+                $sellers = User::select('id', 'name')
+                ->where('role_id', '7')
+                ->where('is_active', '1')                        
+                ->orderBy('name', 'ASC')
+                ->get();
+            }
+            else
+            {
+                $sellers = User::select('id', 'name')
+                ->where('role_id', '7')
+                ->where('id', Auth::user()->id)
+                ->where('is_active', '1')                        
+                ->orderBy('name', 'ASC')
+                ->get();
+            }           
+
+            $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date);
+
        
-        $sellers        = array();
-        $transactions   = array();
-        $paying_methods = array(
-            '0' => 'Cash',
-            '1' => 'Mix Payment',
-            '2' => 'Credit Card',
-            '3' => 'Debit Card'
-        );        
 
         return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
     }
 
-    public function transactions($role_id=null)
+    public function transactions($role_id=null, $seller_id = NULL, $start_date = NULL, $end_date = NULL, $payment_type=NULL)
     {
             $sellers        = array();
             $transactions   = array();
@@ -392,6 +405,7 @@ class StransactionController extends Controller
             {
                 $sellers = User::select('id', 'name')
                     ->where('role_id', '7')
+                    ->where('id', $seller_id)
                     ->where('is_active', '1')
                     ->orderBy('name', 'ASC')
                     ->get();
@@ -533,12 +547,25 @@ class StransactionController extends Controller
             else
             {
                 //dd(Auth::user()->id);
-                $sellers = User::select('id', 'name')
+                if($seller_id == "")
+                {
+                    $sellers = User::select('id', 'name')
                     ->where('role_id', '7')
                     ->where('id', Auth::user()->id)
                     ->where('is_active', '1')
                     ->orderBy('name', 'ASC')
                     ->get();
+                }
+                else
+                {
+                    $sellers = User::select('id', 'name')
+                    ->where('role_id', '7')
+                    ->where('id', $seller_id)
+                    ->where('is_active', '1')
+                    ->orderBy('name', 'ASC')
+                    ->get();
+                }
+                
 
                 if(!empty($sellers))
                 {
