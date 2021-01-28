@@ -25,6 +25,7 @@
                         </select>
                     </div>                    
                 </div>
+            </div>
                 <div class="col-md-3 mt-4">
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>                        
