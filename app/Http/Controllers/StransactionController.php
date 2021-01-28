@@ -357,7 +357,7 @@ class StransactionController extends Controller
             $sellers        = array();
             $transactions   = array();
 
-            $seller_id = "";
+            $seller_id = $request->seller_id;
             $start_date = "";
             $end_date = "";
             $payment_type = "";
@@ -401,11 +401,24 @@ class StransactionController extends Controller
 
             if($role_id != '7')
             {
-                $sellers = User::select('id', 'name')
-                    ->where('role_id', '7')                    
+                if($seller_id != "")
+                {
+                    $sellers = User::select('id', 'name')
+                    ->where('role_id', '7')
+                    ->where('id', $seller_id)
                     ->where('is_active', '1')
                     ->orderBy('name', 'ASC')
                     ->get();
+                }
+                else
+                {
+                    $sellers = User::select('id', 'name')
+                    ->where('role_id', '7')                   
+                    ->where('is_active', '1')
+                    ->orderBy('name', 'ASC')
+                    ->get();
+                }
+                
 
                 if(!empty($sellers))
                 {
