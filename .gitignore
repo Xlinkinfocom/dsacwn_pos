@@ -5,6 +5,8 @@
 /.idea
 /storage/*.log
 /storage/logs/*.log
+.env
+
 
 
 
