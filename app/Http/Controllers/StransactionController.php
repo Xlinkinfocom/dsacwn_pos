@@ -347,9 +347,7 @@ class StransactionController extends Controller
             '1' => 'Mix Payment',
             '2' => 'Credit Card',
             '3' => 'Debit Card'
-        );
-
-        
+        );        
 
         return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
     }

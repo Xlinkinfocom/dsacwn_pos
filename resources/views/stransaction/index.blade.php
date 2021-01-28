@@ -36,7 +36,11 @@
                     <div class="row">                        
                         <div class="d-tc">
                             <div class="input-group">
-                                <input name="end_date" type="date" class="form-control" value=""  />
+                                <select name="payment_type" id="payment_type" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Choose Payment type">
+                                    <option value="Debit Card">Debit Card</option>
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="Mix Payment">Mix Payment</option>
+                                </select>
                             </div>
                         </div>
                     </div>
