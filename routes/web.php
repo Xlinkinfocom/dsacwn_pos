@@ -255,12 +255,14 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('coupons/gencode', 'CouponController@generateCode');
 	Route::post('coupons/deletebyselection', 'CouponController@deleteBySelection');
 	Route::resource('coupons', 'CouponController');
+
 	//accounting routes
 	Route::get('accounts/make-default/{id}', 'AccountsController@makeDefault');
 	Route::get('accounts/balancesheet', 'AccountsController@balanceSheet')->name('accounts.balancesheet');
 	Route::post('accounts/account-statement', 'AccountsController@accountStatement')->name('accounts.statement');
 	Route::resource('accounts', 'AccountsController');
 	Route::resource('money-transfers', 'MoneyTransferController');
+
 	//HRM routes
 	Route::post('departments/deletebyselection', 'DepartmentController@deleteBySelection');
 	Route::resource('departments', 'DepartmentController');
@@ -314,7 +316,6 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('managecommission/create', 'ManagecommissionController@store')->name('managecommission.create');
 	Route::delete('managecommission/{id}', 'ManagecommissionController@destory')->name('managecommission.destroy');
 	Route::get('managecommission/getsubcategory/{id}','ManagecommissionController@getsubCat')->name('managecommission.getsubCat');
-
 	
 
 	Route::resource('sellerpackage', 'SellerPackageController');
@@ -332,8 +333,12 @@ Route::group(['middleware' => ['auth', 'active']], function() {
     Route::get('cancel-return', ['as' => 'cancel_return', 'uses' => 'SellerPackageController@paypal_cancel']);
     //Paypal END Here
 
-	Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
+    //Stransaction Modification Starts Here
+	//Route::get('seller-transaction', 'StransactionController@index')->name('stransaction.index');
+    //Route::get('seller-transaction/{seller_id}/{start_date}/{end_date}', ['as' => 'seller_transaction', 'uses' => 'StransactionController@sellerTransaction']);
+    Route::get('seller-transaction', ['as' => 'seller_transaction', 'uses' => 'StransactionController@sellerTransaction']);
 	Route::post('seller-store', 'StransactionController@store')->name('stransaction.store');
+    //Stransaction Modification Ends Here
 
 });
 

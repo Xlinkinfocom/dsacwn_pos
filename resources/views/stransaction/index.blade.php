@@ -17,37 +17,37 @@
                         <input type="hidden" name="state_hidden" value="{{--{{$lims_user_data->biller_id}}--}}">
                         <select name="seller_id" id="seller_id" class="selectpicker form-control" data-live-search="true" 
                         data-live-search-style="begins" title="Choose Seller">                                       
+                    <div class="form-group">
+                        <select name="seller_id" id="seller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Choose Seller">
                         @foreach($sellers as $seller)
-                        <option value="{{$seller->id}}">{{  $seller->name }}</option>
-                    @endforeach                                          
+                            <option value="{{ $seller->id }}">{{  $seller->name }}</option>
+                        @endforeach
                         </select>
                     </div>                    
                 </div>
                 <div class="col-md-3 mt-4">
                     <div class="row">
                         <label class="d-tc mt-2"><strong>{{ trans('Date') }}</strong> &nbsp;</label>                        
-                        <input name="start_date" type="date" class="form-control" value="" required />
-                        <input name="end_date" type="date" class="form-control" value="" required />                          
+                        <input name="start_date" type="date" class="form-control" value=""  />
+                        <input name="end_date" type="date" class="form-control" value=""  />                          
                     </div>
                 </div>
-                <div class="col-md-3 mt-4">
+                {{-- <div class="col-md-3 mt-4">
                     <div class="row">                        
                         <div class="d-tc">
                             <div class="input-group">
-                                <input name="end_date" type="date" class="form-control" value="" required />
+                                <input name="end_date" type="date" class="form-control" value=""  />
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>  --}}
                 <div class="col-md-3 mt-4">
                     <div class="form-group row">
                         <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
                     </div>
-                </div>               
+                </div>
                 <div class="col-md-3 mt-4">
-                    <div class="form-group row">
-                        <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
-                    </div>
+
                 </div>
             </div>
             {!! Form::close() !!}

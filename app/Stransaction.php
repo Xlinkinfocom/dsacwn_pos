@@ -9,11 +9,11 @@ class Stransaction extends Model
     public $timestamps = true;
 
     protected $attributes = [
-        'seller_id'                 => true, 
-        'invoice_id'                => true,
-        'invoice_date'              => true,
-        'sale_value'                => true,
-        'seller_payable_amount'    => true,       
+        'seller_id'             => true,
+        'invoice_id'            => true,
+        'invoice_date'          => true,
+        'sale_value'            => true,
+        'seller_payable_amount' => true,
     ];
 
     public function seller()
