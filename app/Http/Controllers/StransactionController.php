@@ -409,7 +409,7 @@ class StransactionController extends Controller
                     }
                     else
                     {
-                        $conditions[]= ['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
+                        $conditions= ['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
                     }
                     
                 }                
@@ -472,7 +472,7 @@ class StransactionController extends Controller
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
                             ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)
-                            ->where( $conditions )
+                            ->where([ $conditions ])
                             ->whereIn('payments.paying_method', $paying_methods)
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
