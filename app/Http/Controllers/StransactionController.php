@@ -436,7 +436,7 @@ class StransactionController extends Controller
                                     'invoice_date'   => $payment->created_at,
                                     'sale_amount'    => $payment->amount,
                                     'by_cash'        => $payment->by_cash,
-                                    'by_cash'        => $payment->by_card,
+                                    'by_card'        => $payment->by_card,
                                     'commission'     => $commission,
                                     'commission_amt' => $commission_amt,
                                     'payable_amount' => $payable_amount,
