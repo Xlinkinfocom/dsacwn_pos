@@ -423,7 +423,7 @@ class StransactionController extends Controller
                                     $payable_amount = ($payment->amount - $commission_amt);
                                 }                                
 
-                                $get_payment_status = DB::table('Sales')->select('is_seller_paid')
+                                $get_payment_status = DB::table('sales')->select('is_seller_paid')
                                     ->where('id', $payment->sale_id)
                                     ->first();
 
