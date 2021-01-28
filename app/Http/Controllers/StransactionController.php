@@ -39,11 +39,10 @@ class StransactionController extends Controller
 
             $sellers = array();
             $transactions = array();
-            $paying_methods = array(
-                '0' => 'Cash',
-                '1' => 'Mix Payment',
-                '2' => 'Credit Card',
-                '3' => 'Debit Card'
+            $paying_methods = array(               
+                '0' => 'Mix Payment',
+                '1' => 'Credit Card',
+                '2' => 'Debit Card'
             );
 
             if($role->id != '7')
