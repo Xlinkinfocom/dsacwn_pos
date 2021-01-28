@@ -722,14 +722,14 @@ class StransactionController extends Controller
         }
         else
         {
-            dd($request->all());
+            //dd($request->all());
             $sellers = User::select('id', 'name')
                 ->where('role_id', '7')
                 ->where('id', $request->seller_id)
                 ->where('is_active', '1')
                 ->orderBy('name', 'ASC')
                 ->get();
-            
+            dd($sellers);
             if(!empty($sellers)) {
 
                 foreach($sellers as $seller) {
