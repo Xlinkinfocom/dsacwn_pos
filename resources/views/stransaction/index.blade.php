@@ -62,6 +62,8 @@
                     <th>{{ trans('Invoice Id') }}</th>
                     <th>{{ trans('Invoice Date') }}</th>
                     <th>{{ trans('Sale Amount') }}</th>
+                    <th>{{ trans('By Cash') }}</th>
+                    <th>{{ trans('By Card') }}</th>
                     <th>{{ trans('Commision') }}</th>
                     <th>{{ trans('Commision Amount') }}</th>
                     <th>{{ trans('Payable Amount') }}</th>
@@ -80,6 +82,8 @@
                         <td>{{ $transaction['invoice_id'] }}</td>
                         <td>{{ date('d-m-Y', strtotime($transaction['invoice_date'])) }}</td>
                         <td>{{ number_format($transaction['sale_amount'], 2) }}</td>
+                        <td>{{ number_format($transaction['by_cash'], 2) }}</td>
+                        <td>{{ number_format($transaction['by_card'], 2) }}</td>
                         <td>{{ $transaction['commission'] }}</td>
                         <td>{{ number_format($transaction['commission_amt'], 2) }}</td>
                         <td>{{ number_format($transaction['payable_amount'], 2) }}</td>
