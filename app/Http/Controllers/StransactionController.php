@@ -318,7 +318,7 @@ class StransactionController extends Controller
         $role = Role::find(Auth::user()->role_id);
         $role_id = $role->id;
 
-        if($role->hasPermissionTo('sales-index')) {
+       
             $sellers        = array();
             $transactions   = array();
            
@@ -344,9 +344,7 @@ class StransactionController extends Controller
             $transactions   = $this->transactions($role->id, $seller_id, $start_date, $end_date);
             
             return view('stransaction.index', compact('sellers', 'transactions', 'role_id', 'seller_id', 'start_date', 'end_date'));
-        }
-        else
-            return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
+       
     }
     ////////// Modification Ends //////////
 
