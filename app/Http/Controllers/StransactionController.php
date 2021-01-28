@@ -405,11 +405,11 @@ class StransactionController extends Controller
                 {
                     if($conditions != "")
                     {
-                        $conditions += ",['payments.paying_method', '=', ".$payment_type."]";
+                        $conditions += ",['payments.paying_method', 'LIKE', '%'".$payment_type."'%']";
                     }
                     else
                     {
-                        $conditions += "['payments.paying_method', '=', ".$payment_type."]";
+                        $conditions += "['payments.paying_method', 'LIKE', '%'".$payment_type."'%']";
                     }
                     
                 }                
