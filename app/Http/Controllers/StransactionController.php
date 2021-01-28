@@ -401,45 +401,15 @@ class StransactionController extends Controller
                 '2' => 'Debit Card'
             );
 
-            if($payment_type != "")
-                {
-                    if($conditions != "")
-                    {
-                        $conditions[]=['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
-                    }
-                    else
-                    {
-                        $conditions= ['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
-                    }
-                    
-                }                
-
+           
                 if($start_date != "")
                 {
-                    $start_date = date('Y-m-d', strtotime($start_date));
-
-                    if($conditions != "")
-                    {
-                        $conditions += ",['payments.created_at', '=>', ".$start_date."]";
-                    }
-                    else
-                    {
-                        $conditions += "['payments.created_at', '=>', ".$start_date."]";
-                    }
+                    $start_date = date('Y-m-d', strtotime($start_date));                    
                 }
 
                 if($end_date != "")
                 {
-                    $end_date = date('Y-m-d', strtotime($end_date));
-
-                    if($conditions != "")
-                    {
-                        $conditions += ",['payments.created_at', '<=', ".$end_date."]";
-                    }
-                    else
-                    {
-                        $conditions += "['payments.created_at', '<=', ".$end_date."]";
-                    }
+                    $end_date = date('Y-m-d', strtotime($end_date));                    
                 }
 
             if($role_id != '7')
@@ -466,27 +436,18 @@ class StransactionController extends Controller
                 {
                     foreach($sellers as $seller)
                     {
-                        if( $conditions != "")
+                        $payments = DB::table('payments')
+                        ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                        ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                        ->where('payments.user_id', $seller->id)                        
+                        ->orderBy('payments.created_at', 'DESC')
+                        ->get();
+
+                        if($payment_type != "")
                         {
-                            $payments = DB::table('payments')
-                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
-                            ->where('payments.user_id', $seller->id)
-                            ->where([ $conditions ])
-                            ->whereIn('payments.paying_method', $paying_methods)
-                            ->orderBy('payments.created_at', 'DESC')
-                            ->get();
+                            $payments =  $payments->where('payments.paying_method', $payment_type);
                         }
-                        else
-                        {
-                            $payments = DB::table('payments')
-                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
-                            ->where('payments.user_id', $seller->id)                            
-                            ->whereIn('payments.paying_method', $paying_methods)
-                            ->orderBy('payments.created_at', 'DESC')
-                            ->get();
-                        }
+                        
                        
 
                         if(!empty($payments))
