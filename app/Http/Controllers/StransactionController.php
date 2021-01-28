@@ -423,17 +423,25 @@ class StransactionController extends Controller
                                     $payable_amount = ($payment->amount - $commission_amt);
                                 }                                
 
-                                $get_payment_status = DB::table('stransaction')->select('seller_pay_status')
-                                    ->where('invoice_id', $payment->sale_id)
+                                $get_payment_status = DB::table('Sales')->select('is_seller_paid')
+                                    ->where('id', $payment->sale_id)
                                     ->first();
 
                                 if(!empty($get_payment_status))
                                 {
-                                    $payable_status = "Unpaid";
+                                    if($get_payment_status->is_seller_paid == '1')
+                                    {
+                                        $payable_status = "Paid";
+                                    }
+                                    else
+                                    {
+                                        $payable_status = "Unpaid";
+                                    }
+                                    
                                 }
                                 else
                                 {
-                                    $payable_status = "Paid";
+                                    $payable_status = "Unpaid";
                                 }
 
                                 $transactions[] = array(
