@@ -352,7 +352,7 @@ class StransactionController extends Controller
 
     public function store(Request $request) {
 
-        dd($request->all());
+        //dd($request->all());
         $role = Role::find(Auth::user()->role_id);
         $role_id = $role->id;       
             $sellers        = array();
