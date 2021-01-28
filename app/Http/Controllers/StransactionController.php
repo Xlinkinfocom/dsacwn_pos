@@ -412,8 +412,16 @@ class StransactionController extends Controller
                                 $commission_amt = 0;
                                 $payable_status = "";
 
-                                $commission_amt = ($payment->by_card * $commission) / 100;
-                                $payable_amount = ($payment->by_card - $commission_amt);
+                                if($payment->paying_method == $paying_methods[0])
+                                {
+                                    $commission_amt = ($payment->by_card * $commission) / 100;
+                                    $payable_amount = ($payment->by_card - $commission_amt);
+                                }
+                                else{
+
+                                    $commission_amt = ($payment->amount * $commission) / 100;
+                                    $payable_amount = ($payment->amount - $commission_amt);
+                                }                                
 
                                 $get_payment_status = DB::table('stransaction')->select('seller_pay_status')
                                     ->where('invoice_id', $payment->sale_id)
