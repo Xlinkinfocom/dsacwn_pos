@@ -38,6 +38,7 @@ class StransactionController extends Controller
         if($role->hasPermissionTo('sales-index')) {
 
             $sellers = array();
+            $seller_arr = array();
             $transactions = array();
             $paying_methods = array(               
                 '0' => 'Mix Payment',
@@ -46,12 +47,17 @@ class StransactionController extends Controller
             );
 
             if($role->id != '7')
-            {
+            {                
+
+                
+
                 $sellers = User::select('id', 'name')
                         ->where('role_id', '7')
                         ->where('is_active', '1')
                         ->orderBy('name', 'ASC')
                         ->get();
+
+                
                 
                 if(!empty($sellers))
                 {   
@@ -321,6 +327,25 @@ class StransactionController extends Controller
                 '1' => 'Credit Card',
                 '2' => 'Debit Card'
             );
+
+            if($role_id != '7')
+            {
+                $sellers = User::select('id', 'name')
+                ->where('role_id', '7')
+                ->where('is_active', '1')                        
+                ->orderBy('name', 'ASC')
+                ->get();
+            }
+            else
+            {
+                $sellers = User::select('id', 'name')
+                ->where('role_id', '7')
+                ->where('id', Auth::user()->id)
+                ->where('is_active', '1')                        
+                ->orderBy('name', 'ASC')
+                ->get();
+            }
+           
 
             $transactions   = $this->transactions($role->id);
 
