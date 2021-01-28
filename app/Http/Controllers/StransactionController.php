@@ -59,7 +59,7 @@ class StransactionController extends Controller
                     {
                         $payments = DB::table('payments')
                                     ->join('sales', 'payments.sale_id', '=', 'sales.id')                                    
-                                    ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.paying_method', 'payments.created_at')                                            
+                                    ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')                                            
                                     ->where('payments.user_id', $seller->id)
                                     ->whereIn('payments.paying_method', $paying_methods)
                                     ->orderBy('payments.created_at', 'DESC')
@@ -69,7 +69,7 @@ class StransactionController extends Controller
                         {                            
 
                             foreach($payments as $payment)
-                            {                              
+                            {       
 
                                 $products = DB::table('products')
                                         ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
@@ -135,8 +135,8 @@ class StransactionController extends Controller
                                 $commission_amt = 0;
                                 $payable_status = "";
 
-                                $commission_amt = ($payment->amount * $commission) / 100;
-                                $payable_amount = ($payment->amount - $commission_amt);
+                                $commission_amt = ($payment->by_card * $commission) / 100;
+                                $payable_amount = ($payment->by_card - $commission_amt);
 
                                 $get_payment_status = DB::table('stransaction')->select('seller_pay_status')
                                                     ->where('invoice_id', $payment->sale_id)
