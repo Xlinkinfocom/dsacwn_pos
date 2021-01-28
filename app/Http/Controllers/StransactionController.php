@@ -393,7 +393,7 @@ class StransactionController extends Controller
     {
             $sellers        = array();
             $transactions   = array();
-            $conditions = "";
+            $conditions = array();
             $paying_methods = array(
                
                 '0' => 'Mix Payment',
@@ -405,11 +405,11 @@ class StransactionController extends Controller
                 {
                     if($conditions != "")
                     {
-                        $conditions += ",['payments.paying_method', 'LIKE', '%'".$payment_type."'%']";
+                        $conditions[]=['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
                     }
                     else
                     {
-                        $conditions += "['payments.paying_method', 'LIKE', '%Mix Payment%']";
+                        $conditions[]= ['payments.paying_method', 'LIKE', '%'.$payment_type.'%'];
                     }
                     
                 }                
