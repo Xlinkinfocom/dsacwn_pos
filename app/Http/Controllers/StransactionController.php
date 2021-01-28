@@ -352,14 +352,14 @@ class StransactionController extends Controller
 
     public function store(Request $request) {
 
-        dd($request->all());
+        //dd($request->all());
         $role = Role::find(Auth::user()->role_id);
         $role_id = $role->id;       
             $sellers        = array();
             $transactions   = array();
 
             $seller_id = $request->seller_id;
-            $start_date = "";
+            $start_date = $request->start_date;
             $end_date = "";
             $payment_type = $request->payment_type;
            
@@ -414,7 +414,7 @@ class StransactionController extends Controller
                 if($start_date != "")
                 {
                     $start_date = date('Y-m-d', strtotime($start_date));     
-                    dd($start_date);               
+                    //dd($start_date);               
                 }
 
                 if($end_date != "")
