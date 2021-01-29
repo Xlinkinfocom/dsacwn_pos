@@ -549,7 +549,7 @@ class StransactionController extends Controller
 
                             } else {
 
-                                $payments = DB::table('payments')
+                            $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
                             ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)                            
