@@ -557,6 +557,8 @@ class StransactionController extends Controller
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
 
+                            dd($payments);
+
                             }
                             
                         }
