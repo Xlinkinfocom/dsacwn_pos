@@ -338,6 +338,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
     //Route::get('seller-transaction/{seller_id}/{start_date}/{end_date}', ['as' => 'seller_transaction', 'uses' => 'StransactionController@sellerTransaction']);
     Route::get('seller-transaction', ['as' => 'seller_transaction', 'uses' => 'StransactionController@sellerTransaction']);
 	Route::post('seller-store', 'StransactionController@store')->name('stransaction.store');
+	Route::get('/paid-status//{id}/{status}', ['uses'=> 'StransactionController@statusChange', 'as' => 'paid-status']);
     //Stransaction Modification Ends Here
 
 });

@@ -454,7 +454,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)
                                 ->whereDate('payments.created_at', '<=',  $end_date)   
@@ -468,7 +468,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)
                                 ->whereDate('payments.created_at', '<=',  $end_date)   
@@ -484,7 +484,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)  
                                 ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
@@ -497,7 +497,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)  
                                 ->whereIn('payments.paying_method', $paying_methods)                                                       
@@ -512,7 +512,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '<=',  $end_date)  
                                 ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
@@ -523,7 +523,7 @@ class StransactionController extends Controller
                             } else {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '<=',  $end_date)  
                                 ->whereIn('payments.paying_method', $paying_methods)                                                       
@@ -539,7 +539,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)                            
                             ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
                                 return $query->where('payments.paying_method', $payment_type);
@@ -551,7 +551,7 @@ class StransactionController extends Controller
 
                             $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)                            
                             ->whereIn('payments.paying_method', $paying_methods)                                                       
                             ->orderBy('payments.created_at', 'DESC')
@@ -642,7 +642,7 @@ class StransactionController extends Controller
                                     $payable_amount = ($payment->amount - $commission_amt);
                                 }                                
 
-                                $get_payment_status = DB::table('sales')->select('is_seller_paid')
+                                /* $get_payment_status = DB::table('sales')->select('is_seller_paid')
                                     ->where('id', $payment->sale_id)
                                     ->first();
 
@@ -660,7 +660,7 @@ class StransactionController extends Controller
                                 else
                                 {
                                     $payable_status = "Unpaid";
-                                }
+                                } */
 
                                 $transactions[] = array(
                                     'seller_id'      => $seller->id,
@@ -675,7 +675,7 @@ class StransactionController extends Controller
                                     'commission_amt' => $commission_amt,
                                     'payable_amount' => $payable_amount,
                                     'paid_mode'      => $payment->paying_method,
-                                    'payable_status' => $payable_status
+                                    'payable_status' => $payment->is_seller_paid
                                 );
                             }
                         }
@@ -716,7 +716,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)
                                 ->whereDate('payments.created_at', '<=',  $end_date)   
@@ -730,7 +730,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)
                                 ->whereDate('payments.created_at', '<=',  $end_date)   
@@ -746,7 +746,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)  
                                 ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
@@ -759,7 +759,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '>=',  $start_date)  
                                 ->whereIn('payments.paying_method', $paying_methods)                                                       
@@ -774,7 +774,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '<=',  $end_date)  
                                 ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
@@ -785,7 +785,7 @@ class StransactionController extends Controller
                             } else {
                                 $payments = DB::table('payments')
                                 ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                                ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                                ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                                 ->where('payments.user_id', $seller->id)
                                 ->whereDate('payments.created_at', '<=',  $end_date)  
                                 ->whereIn('payments.paying_method', $paying_methods)                                                       
@@ -801,7 +801,7 @@ class StransactionController extends Controller
                             {
                                 $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)                            
                             ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
                                 return $query->where('payments.paying_method', $payment_type);
@@ -813,7 +813,7 @@ class StransactionController extends Controller
 
                                 $payments = DB::table('payments')
                             ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->select('sales.reference_no', 'Sales.is_seller_paid', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
                             ->where('payments.user_id', $seller->id)                            
                             ->whereIn('payments.paying_method', $paying_methods)                                                       
                             ->orderBy('payments.created_at', 'DESC')
@@ -903,7 +903,7 @@ class StransactionController extends Controller
                                     $payable_amount = ($payment->amount - $commission_amt);
                                 }                                
 
-                                $get_payment_status = DB::table('sales')->select('is_seller_paid')
+                                /* $get_payment_status = DB::table('sales')->select('is_seller_paid')
                                     ->where('id', $payment->sale_id)
                                     ->first();
 
@@ -921,7 +921,7 @@ class StransactionController extends Controller
                                 else
                                 {
                                     $payable_status = "Unpaid";
-                                }
+                                } */
 
                                 $transactions[] = array(
                                     'seller_id'      => $seller->id,
@@ -936,7 +936,7 @@ class StransactionController extends Controller
                                     'commission_amt' => $commission_amt,
                                     'payable_amount' => $payable_amount,
                                     'paid_mode'      => $payment->paying_method,
-                                    'payable_status' => $payable_status
+                                    'payable_status' => $payment->is_seller_paid
                                 );
 
                             }
