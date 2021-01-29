@@ -398,7 +398,7 @@ class StransactionController extends Controller
         return false;
     }
 
-    public function transactions($role_id, $seller_id, $start_date, $end_date, $payment_type)
+    public function transactions($role_id=null, $seller_id=null, $start_date=null, $end_date=null, $payment_type=null)
     {
             $sellers        = array();
             $transactions   = array();
@@ -419,7 +419,7 @@ class StransactionController extends Controller
                 if($end_date != "")
                 {
                     $end_date = date('Y-m-d', strtotime($end_date));  
-                    dd($end_date);                  
+                    //dd($end_date);                  
                 }
 
                 
@@ -502,10 +502,7 @@ class StransactionController extends Controller
                             })                                                       
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
-                        } 
-                        
-                        
-
+                        }
 
                         if(!empty($payments))
                         {
