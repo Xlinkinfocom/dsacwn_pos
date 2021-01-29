@@ -398,6 +398,52 @@ class StransactionController extends Controller
         return false;
     }
 
+    public function statusChange($id=null, $status=null)
+    {
+        $role = Role::find(Auth::user()->role_id);
+        $role_id = $role->id; 
+
+        $seller_id = "";
+        $start_date = "";
+        $end_date = "";
+        $payment_type = "";
+
+        if($role_id != '7')
+        {
+            $sellers = User::select('id', 'name')
+            ->where('role_id', '7')
+            ->where('is_active', '1')                        
+            ->orderBy('name', 'ASC')
+            ->get();
+        }
+        else
+        {
+            $sellers = User::select('id', 'name')
+            ->where('role_id', '7')
+            ->where('id', Auth::user()->id)
+            ->where('is_active', '1')                        
+            ->orderBy('name', 'ASC')
+            ->get();
+        }           
+
+
+        if($status == '1')
+        {
+            $result = DB::update('update sales set is_seller_paid = ? where id = ?', ['0', $id]);
+        }
+        else {
+            $result = DB::update('update sales set is_seller_paid = ? where id = ?', ['1', $id]);
+        }
+
+        $transactions   = $this->transactions($role_id, $seller_id, $start_date, $end_date, $payment_type);
+
+       
+
+        return view('stransaction.index', compact('sellers', 'transactions', 'role_id'));
+        
+        
+    }
+
     public function transactions($role_id=null, $seller_id=null, $start_date=null, $end_date=null, $payment_type=null)
     {
             $sellers        = array();
@@ -419,9 +465,7 @@ class StransactionController extends Controller
                 {
                     $end_date = date('Y-m-d', strtotime($end_date));  
                     //dd($end_date);                  
-                }
-
-                
+                }               
                 
 
             if($role_id != '7')
