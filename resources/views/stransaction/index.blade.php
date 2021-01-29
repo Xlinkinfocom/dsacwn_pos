@@ -94,10 +94,10 @@
                         <td>{{ $transaction['paid_mode'] }}</td>
                         <td>
                             <a href="{{ route('paid-status', ['id' => $transaction['sale_id'], 'status' => $transaction['payable_status'] ]) }}" onclick="return confirm('Are you sure want to change status of this record?')" >
-                                @if ($transaction['payable_status'] == '0')
-                                        {{ 'Unpaid' }}
+                                @if ( $transaction['payable_status'] == '0' )
+                                        <span>Unpaid</span>
                                 @else
-                                        {{ 'Paid' }}
+                                        <span>Paid</span>
                                 @endif
                             </a>
                         </td>
@@ -139,10 +139,10 @@
                         <td>{{ number_format($transaction['payable_amount'], 2) }}</td>
                         <td>{{ $transaction['paid_mode'] }}</td>
                         <td>                            
-                                @if {{ $transaction['payable_status'] == '0' }}
-                                        {{ 'Unpaid' }}
+                            @if ( $transaction['payable_status'] == '0' )
+                                        <span>Unpaid</span>
                                 @else
-                                        {{ 'Paid' }}
+                                        <span>Paid</span>
                                 @endif                            
                         </td>
                     </tr>
