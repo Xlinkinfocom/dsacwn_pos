@@ -108,7 +108,10 @@
                     <th>{{ trans('Invoice Id') }}</th>
                     <th>{{ trans('Invoice Date') }}</th>
                     <th>{{ trans('Sale Amount') }}</th>
+                    <th>{{ trans('By Cash') }}</th>
+                    <th>{{ trans('By Card') }}</th>
                     <th>{{ trans('Payable Amount') }}</th>
+                    <th>{{ trans('Paid Mode') }}</th>
                     <th>{{ trans('Seller Pay Status') }}</th>
                 </tr>
             </thead>
@@ -123,7 +126,10 @@
                         <td>{{ $transaction['invoice_id'] }}</td>
                         <td>{{ date('d-m-Y', strtotime($transaction['invoice_date'])) }}</td>
                         <td>{{ number_format($transaction['sale_amount'], 2) }}</td>
+                        <td>{{ number_format($transaction['by_cash'], 2) }}</td>
+                        <td>{{ number_format($transaction['by_card'], 2) }}</td>
                         <td>{{ number_format($transaction['payable_amount'], 2) }}</td>
+                        <td>{{ $transaction['paid_mode'] }}</td>
                         <td>{{ $transaction['payable_status'] }}</td>
                     </tr>
                     @endforeach
