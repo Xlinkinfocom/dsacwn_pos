@@ -360,7 +360,7 @@ class StransactionController extends Controller
 
             $seller_id = $request->seller_id;
             $start_date = $request->start_date;
-            $end_date = "";
+            $end_date = $request->end_date;
             $payment_type = $request->payment_type;
            
 
