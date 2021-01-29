@@ -418,10 +418,11 @@ class StransactionController extends Controller
 
                 if($end_date != "")
                 {
-                    $end_date = date('Y-m-d', strtotime($end_date));                    
+                    $end_date = date('Y-m-d', strtotime($end_date));  
+                    dd($end_date);                  
                 }
 
-                dd($end_date);
+                
                 
 
             if($role_id != '7')
