@@ -398,7 +398,7 @@ class StransactionController extends Controller
         return false;
     }
 
-    public function transactions($role_id=null, $seller_id=NULL, $start_date=NULL, $end_date=NULL, $payment_type=NULL)
+    public function transactions($role_id, $seller_id, $start_date, $end_date, $payment_type)
     {
             $sellers        = array();
             $transactions   = array();
