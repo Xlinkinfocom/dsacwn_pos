@@ -459,6 +459,14 @@ class StransactionController extends Controller
                             ->whereDate('payments.created_at', '<=',  $end_date)   
                             ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
                                 return $query->where('payments.paying_method', $payment_type);
+                            }, function($query) {
+                                $paying_methods = array(
+               
+                                    '0' => 'Mix Payment',
+                                    '1' => 'Credit Card',
+                                    '2' => 'Debit Card'
+                                );
+                                return $query->where('payments.paying_method', $paying_methods);
                             })                                                       
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
