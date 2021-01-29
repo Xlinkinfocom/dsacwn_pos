@@ -409,7 +409,6 @@ class StransactionController extends Controller
                 '1' => 'Credit Card',
                 '2' => 'Debit Card'
             );
-
            
                 if($start_date != "")
                 {
@@ -421,7 +420,6 @@ class StransactionController extends Controller
                 {
                     $end_date = date('Y-m-d', strtotime($end_date));                    
                 }
-
                 
 
             if($role_id != '7')
@@ -448,23 +446,64 @@ class StransactionController extends Controller
                 {
                     foreach($sellers as $seller)
                     {
-                        $payments = DB::table('payments')
-                        ->join('sales', 'payments.sale_id', '=', 'sales.id')
-                        ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
-                        ->where('payments.user_id', $seller->id)
-                        ->whereDate('payments.created_at', '<=',  $start_date)  
-                        ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
-                            return $query->where('payments.paying_method', $payment_type);
-                       })                                                       
-                        ->orderBy('payments.created_at', 'DESC')
-                        ->get();                  
+                        if($start_date != "" && $end_date != "")
+                        {
+                            $payments = DB::table('payments')
+                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->where('payments.user_id', $seller->id)
+                            ->whereDate('payments.created_at', '>=',  $start_date)
+                            ->whereDate('payments.created_at', '<=',  $end_date)   
+                            ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
+                                return $query->where('payments.paying_method', $payment_type);
+                            })                                                       
+                            ->orderBy('payments.created_at', 'DESC')
+                            ->get();
+                        }
+                        else if($start_date != "" && $end_date == "")
+                        {
+                            $payments = DB::table('payments')
+                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->where('payments.user_id', $seller->id)
+                            ->whereDate('payments.created_at', '>=',  $start_date)  
+                            ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
+                                return $query->where('payments.paying_method', $payment_type);
+                            })                                                       
+                            ->orderBy('payments.created_at', 'DESC')
+                            ->get();
+                        }
+                        else if($start_date == "" && $end_date != "")
+                        {
+                            $payments = DB::table('payments')
+                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->where('payments.user_id', $seller->id)
+                            ->whereDate('payments.created_at', '<=',  $end_date)  
+                            ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
+                                return $query->where('payments.paying_method', $payment_type);
+                            })                                                       
+                            ->orderBy('payments.created_at', 'DESC')
+                            ->get();
+                        }
+                        else if($start_date == "" && $end_date == "")
+                        {
+                            $payments = DB::table('payments')
+                            ->join('sales', 'payments.sale_id', '=', 'sales.id')
+                            ->select('sales.reference_no', 'payments.sale_id', 'payments.amount', 'payments.by_cash', 'payments.by_card', 'payments.paying_method', 'payments.created_at')
+                            ->where('payments.user_id', $seller->id)                            
+                            ->when(in_array($payment_type, $paying_methods), function ($query) use ($payment_type) {
+                                return $query->where('payments.paying_method', $payment_type);
+                            })                                                       
+                            ->orderBy('payments.created_at', 'DESC')
+                            ->get();
+                        }
+                                          
 
                         if(!empty($payments))
                         {
-
                             foreach($payments as $payment)
                             {
-
                                 $products = DB::table('products')
                                     ->join('product_sales', 'product_sales.product_id', '=', 'products.id')
                                     //->join('categories', 'categories.id', '=','products.category_id')
