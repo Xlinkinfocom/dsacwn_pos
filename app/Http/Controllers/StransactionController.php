@@ -420,6 +420,8 @@ class StransactionController extends Controller
                 {
                     $end_date = date('Y-m-d', strtotime($end_date));                    
                 }
+
+                dd($end_date);
                 
 
             if($role_id != '7')
