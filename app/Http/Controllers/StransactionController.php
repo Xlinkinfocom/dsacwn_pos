@@ -489,7 +489,7 @@ class StransactionController extends Controller
                             ->orderBy('payments.created_at', 'DESC')
                             ->get();
 
-                            dd($payments);
+                            //dd($payments);
                         }
                         else if($start_date == "" && $end_date == "")
                         {
