@@ -49,10 +49,7 @@
                     <div class="form-group row">
                         <button class="btn btn-primary" type="submit">{{  trans('submit') }}</button>
                     </div>
-                </div>
-                <div class="col-md-3 mt-4">
-
-                </div>
+                </div>               
             </div>
             {!! Form::close() !!}
         </div>
