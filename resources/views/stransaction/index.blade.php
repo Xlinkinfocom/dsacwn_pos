@@ -38,7 +38,7 @@
                                 <select name="payment_type" id="payment_type" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Choose Payment type">
                                     <option value="Debit Card">Debit Card</option>
                                     <option value="Credit Card">Credit Card</option>
-                                    <option value="Credit Card">Gift Card</option>
+                                    <option value="Gift Card">Gift Card</option>
                                     <option value="Cash">Cash</option>
                                     <option value="Mix Payment">Mix Payment</option>
                                 </select>
