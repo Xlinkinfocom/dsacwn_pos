@@ -43,7 +43,9 @@ class StransactionController extends Controller
             $paying_methods = array(               
                 '0' => 'Mix Payment',
                 '1' => 'Credit Card',
-                '2' => 'Debit Card'
+                '2' => 'Debit Card',
+                '3' => 'Cash',
+                '4' => 'Gift Card'
             );
 
             if($role->id != '7')
@@ -452,7 +454,9 @@ class StransactionController extends Controller
             $paying_methods = array(               
                 '0' => 'Mix Payment',
                 '1' => 'Credit Card',
-                '2' => 'Debit Card'
+                '2' => 'Debit Card',
+                '3' => 'Cash',
+                '4' => 'Gift Card'
             );
            
                 if($start_date != "")
@@ -680,8 +684,14 @@ class StransactionController extends Controller
                                     $commission_amt = ($payment->by_card * $commission) / 100;
                                     $payable_amount = ($payment->by_card - $commission_amt);
                                 }
-                                else{
+                                else if($payment->paying_method == $paying_methods[3])
+                                {
 
+                                    $commission_amt = 0;
+                                    $payable_amount = ($payment->amount - $commission_amt);
+                                }
+                                else
+                                {
                                     $commission_amt = ($payment->amount * $commission) / 100;
                                     $payable_amount = ($payment->amount - $commission_amt);
                                 }                                
@@ -941,11 +951,17 @@ class StransactionController extends Controller
                                     $commission_amt = ($payment->by_card * $commission) / 100;
                                     $payable_amount = ($payment->by_card - $commission_amt);
                                 }
-                                else{
+                                else if($payment->paying_method == $paying_methods[3])
+                                {
 
+                                    $commission_amt = 0;
+                                    $payable_amount = ($payment->amount - $commission_amt);
+                                }
+                                else
+                                {
                                     $commission_amt = ($payment->amount * $commission) / 100;
                                     $payable_amount = ($payment->amount - $commission_amt);
-                                }                                
+                                }                                  
 
                                 /* $get_payment_status = DB::table('sales')->select('is_seller_paid')
                                     ->where('id', $payment->sale_id)
