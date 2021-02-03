@@ -94,6 +94,8 @@
                             <a href="{{ route('paid-status', ['id' => $transaction['sale_id'], 'status' => $transaction['payable_status'] ]) }}" onclick="return confirm('Are you sure want to change status of this record?')" >
                                 @if ( $transaction['payable_status'] == '0' )
                                         <span>Unpaid</span>
+                                @elseif($transaction['payable_status'] == '1' && $transaction['paid_mode'] == 'Cash')
+                                        <span>Cash Payment</span>
                                 @else
                                         <span>Paid</span>
                                 @endif
