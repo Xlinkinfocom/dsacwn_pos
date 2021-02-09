@@ -21,9 +21,24 @@ class GiftCardController extends Controller
     {
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('unit')) {
-            $lims_customer_list = Customer::where('is_active', true)->get();
-            $lims_user_list = User::where('is_active', true)->get();
-            $lims_gift_card_all = GiftCard::where('is_active', true)->orderBy('id', 'desc')->get();
+
+            if($role == '8')
+            {
+                $lims_customer_list = Customer::where('is_active', true)->get();
+                $lims_user_list = User::where('is_active', true)->get();
+                $lims_gift_card_all = GiftCard::where('is_active', true)->orderBy('id', 'desc')->get();
+
+            } else {
+
+                $lims_customer_list = Customer::where('is_active', true)->get();
+                $lims_user_list = User::where('is_active', true)->get();
+                $lims_gift_card_all = GiftCard::where('is_active', true)
+                ->where('created_by', Auth::id())
+                ->orderBy('id', 'desc')
+                ->get();
+
+            }
+            
 
             return view('gift_card.index', compact('lims_customer_list', 'lims_user_list', 'lims_gift_card_all'));
         }
