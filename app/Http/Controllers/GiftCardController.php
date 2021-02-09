@@ -22,6 +22,12 @@ class GiftCardController extends Controller
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('unit')) {
 
+            $lims_customer_list = Customer::where('is_active', true)->get();
+            $lims_user_list = User::where('is_active', true)->get();
+            $lims_gift_card_all = GiftCard::where('is_active', true)->orderBy('id', 'desc')->get();
+
+            dd( $lims_gift_card_all );
+
             if($role->role_id == '8')
             {
                 $lims_customer_list = Customer::where('is_active', true)->get();
