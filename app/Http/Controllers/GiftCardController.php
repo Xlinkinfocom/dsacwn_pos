@@ -21,6 +21,8 @@ class GiftCardController extends Controller
     {
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('unit')) { 
+
+                $lims_gift_card_all = array();
             
                 $lims_customer_list = Customer::where('is_active', true)->get();
                 $lims_user_list = User::where('is_active', true)->get();
@@ -37,7 +39,7 @@ class GiftCardController extends Controller
 
             } 
 
-            dd($lims_gift_card_all);
+            //dd($lims_gift_card_all);
             
 
             return view('gift_card.index', compact('lims_customer_list', 'lims_user_list', 'lims_gift_card_all'));
