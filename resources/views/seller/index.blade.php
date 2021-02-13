@@ -61,7 +61,7 @@
                                 @endif
                                
                                 <li>
-                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{ trans('Login') }}</a>
+                                	<a href="{{ route('seller.login', ['id' => $user->id]) }}" target="_blank" class="btn btn-link"><i class="dripicons-document-edit"></i> {{ trans('Login') }}</a>
                                 </li>
 
                                 <span id="status{{ $user->id }}">
