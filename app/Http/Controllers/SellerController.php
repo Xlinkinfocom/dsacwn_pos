@@ -676,6 +676,7 @@ class SellerController extends Controller
                             ->select('id')
                             ->where('user_id', $id)->first();
             //$seller = array();
+            dd($seller_id);
             $lims_customer_data = Seller::find($seller_id->id);
 
         //$lims_customer_data = Seller::find($id);
