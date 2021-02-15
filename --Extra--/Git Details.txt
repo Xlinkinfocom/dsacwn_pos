@@ -1,0 +1,28 @@
+GitHub Credential =>
+====================
+
+Username :- info@xlinkinfocom.com
+Password :- Reset#@!321
+
+
+
+URL :- https://github.com/Xlinkinfocom/dsacwn_pos.git/
+
+
+
+
+GIT Syntax =>
+=============
+git add .
+
+git commit -m "m c"
+
+git pull
+
+git push
+
+
+
+
+
+
